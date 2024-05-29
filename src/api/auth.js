@@ -4,7 +4,7 @@ const VITE_PORT = import.meta.env.VITE_PORT;
 
 
 const axxios = axios.create({
-  baseURL: "https://mis-historias-back-end.vercel.app" ,
+  baseURL: "https://mis-historias-back-end.vercel.app/:1" ,
   withCredentials: true,
 });
 
@@ -12,8 +12,8 @@ export const getBook = async (bookId) =>   await axxios.get(`/api/getBook/${book
 export const registerUser = async (values) =>
   await axxios.post("/api/registerUser", values);
 export const createBook = async (values) =>
-  await axxios.post("/api/createBook", values);
-export const editUser = async (id,values) =>
+  await axxios.post("/api/createBook", values); 
+export const editUser = async (id,values) => 
   await axxios.put(`/api/editUser/${id}`,values);
 export const loginUser = async (user) =>
   await axxios.post("/api/loginUser", user);
