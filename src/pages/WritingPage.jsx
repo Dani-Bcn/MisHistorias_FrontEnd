@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { getBook, editBook } from "../api/auth";
+import { useNavigate } from "react-router-dom";
 
 export default function WritingPage() {
+
+
+  const navigate = useNavigate()
   const [verifyField, setVerifyField] = useState(true);
   const [getBookLocal, setgetBookLocal] = useState(
     localStorage.getItem("bookId")
@@ -29,11 +33,15 @@ export default function WritingPage() {
     if (e.target[0].value === "") {
       setVerifyField(true);
     }
+
+    console.log(title)
     book.chapters[numberChapter - 1] = {
+      
       title: title,
       text: text,
     };
     book ? editBook(book._id, book) : null;
+    navigate("/editBook")
   };
 
   setTimeout(() => {
@@ -78,8 +86,10 @@ export default function WritingPage() {
             onChange={(e) => handleChangeText(e)}
           />
           <button
+        
             type="submit"
             className="px-5 py-3 my-5 bg-orange-400 hover:bg-slate-900 text-slate-900 hover:text-orange-400 rounded-md transition-all"
+          
           >
             Guardar
           </button>

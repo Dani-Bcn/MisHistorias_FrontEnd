@@ -54,8 +54,7 @@ export default function CreateBook() {
             )
           })
         }
-      </select>   
-    
+      </select>       
         </div>
         <input
             type="file"

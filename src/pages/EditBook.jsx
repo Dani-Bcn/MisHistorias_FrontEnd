@@ -11,15 +11,14 @@ export default function EditBook() {
     const res = await getBook(localStorage.getItem("bookId"));
     res ? setBook(res.data) : null;
   };
-
+  
+  console.log(book)
 
   useEffect(() => {
     handleBooks();
   }, []);
 
   const handleAddChapter = (e) => {
-    console.log(e);
-
     book.chapters.push({
       title: "",
       text: "",
@@ -32,12 +31,16 @@ export default function EditBook() {
   return (
     <main className="w-screen h-screen relative ">
       {book ? (
-        <img src={book.imageUrl} alt="" className="w-screen h-[100%] object-cover blur-md -mt-40 absolute z-[-1]" />
+        <img
+          src={book.imageUrl}
+          alt=""
+          className="w-screen brightness-[0.2] h-[100%] object-cover blur-md -mt-40 absolute z-[-1]"
+        />
       ) : null}
 
-    <div>
-        {book ? <h2 className="text-white text-4xl">{book.title}</h2> : null}
-       
+      <table>
+        <tbody>
+          {book ? <h2 className="text-white text-4xl">{book.title}</h2> : null}
           {book ? (
             <button
               onClick={() => handleAddChapter(book.chapters.length + 1)}
@@ -50,24 +53,18 @@ export default function EditBook() {
             <th className="text-center  flex justify-center items-center w-24 mx-5">
               Capítulo
             </th>
-            <th className="text-center   ">
-              Título
-            </th>
-            <th className=" w-96 " >Contenido</th>
+            <th className="text-center   ">Título</th>
+            <th className=" w-96 ">Contenido</th>
             <th className="  w-96  ">Última actulización </th>
           </tr>
           {book
-            ? book.chapters.map((e, i) => {
-                console.log(e);
+            ? book.chapters.map((e, i) => {ro
                 return (
                   <tbody key={i}>
-                    <tr
-                      key={i}
-                      className=" flex gap-10 h-32   "
-                    >
-                      <th className={`flex  text-black my-1 bg-indigo-400   justify-center items-center w-32`}>{`#${
-                        i + 1
-                      }`}</th>
+                    <tr key={i} className=" flex gap-10 h-32   ">
+                      <th
+                        className={`flex  text-black my-1 bg-indigo-400   justify-center items-center w-32`}
+                      >{`#${i + 1}`}</th>
                       <th
                         onClick={() => {
                           localStorage.setItem("numChapter", i + 1),
@@ -77,7 +74,7 @@ export default function EditBook() {
                       >
                         {e.title}
                       </th>
-                      <th                       
+                      <th
                         onClick={() => {
                           localStorage.setItem("numChapter", i + 1),
                             navigate("/writingPage");
@@ -98,8 +95,8 @@ export default function EditBook() {
                 );
               })
             : null}
-        
-        </div>
+        </tbody>
+      </table>
     </main>
   );
 }
