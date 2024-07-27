@@ -15,8 +15,8 @@ export default function Navbar() {
     <main className="fixed w-screen h-20  items-center bg-slate-500/[0] backdrop-blur-50 opacity-[0.9] flex z-[100]">
       <ul 
 
-      className=" w-full flex justify-around items-center text-xl text-slate-200">
-        <div className="w-full flex justify-around">
+      className=" w-screen flex justify-center  items-center text-xl text-slate-200">
+        <div className="w-[90vw] flex gap-10 justify-end">
           <li onClick={() => navigate("/")}>Home</li>
           <li onClick={() => navigate("/AllBooks")}>Todas las historias</li>
 

@@ -3,23 +3,22 @@ import { getBook, editBook } from "../api/auth";
 import { useNavigate } from "react-router-dom";
 
 export default function WritingPage() {
-
-
-  const navigate = useNavigate()
-  const [verifyField, setVerifyField] = useState(true);
+  window.scrollTo(0, 0);
+  const navigate = useNavigate();
+  const [verifyField, setVerifyField] = useState(false);
   const [getBookLocal, setgetBookLocal] = useState(
     localStorage.getItem("bookId")
   );
   const [numberChapter, setNumberChapter] = useState(
     localStorage.getItem("numChapter")
   );
-  const [book, setBook] = useState();
+  const [book, setBook] = useState(getBookLocal);
   const [title, setTitle] = useState();
   const [text, setText] = useState();
   const [stateEdit, setStateEdit] = useState(false);
 
   const handleBook = async () => {
-    console.log(numberChapter);
+    window.scrollTo(0, 0);
     const res = await getBook(getBookLocal);
     setBook(res.data);
     if (book) {
@@ -27,23 +26,6 @@ export default function WritingPage() {
       setText(book.chapters[numberChapter - 1].text);
     }
   };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (e.target[0].value === "") {
-      setVerifyField(true);
-    }
-
-    console.log(title)
-    book.chapters[numberChapter - 1] = {
-      
-      title: title,
-      text: text,
-    };
-    book ? editBook(book._id, book) : null;
-    navigate("/editBook")
-  };
-
   setTimeout(() => {
     setStateEdit(true);
   }, 100);
@@ -61,38 +43,61 @@ export default function WritingPage() {
     setText((prev) => (prev = e.target.value));
     book.chapters.text = text;
   };
+  const handleSubmit = (e) => { 
+
+    if (title === "") {
+      setVerifyField(true)
+    } else if (title != "")  {
+   
+      console.log(title);
+      book.chapters[numberChapter - 1] = {
+        title: title,
+        text: text,
+      };
+      book ? editBook(book._id, book) : null;
+      navigate("/editBook");
+      location.reload()
+    }
+  };
 
   return (
     <main>
-      <section className="w-[90vw] h-[40vh] m-20 mt-20">
+      <section className=" w-[80vw] h-[60vh] m-20 mt-20 ">
         <form
           className="w-full h-[40vh] text-xl text-slate-300"
           onSubmit={handleSubmit}
-        >
+        >           
           <input
-            placeholder="Título del capítuilo"
-            className=" w-96 my-10 h-10 bg-slate-800"
+            placeholder="Título del capítulo"
+            className=" w-96 my-5 h-10 bg-slate-800"
             name="title"
             id="title"
             type="text"
             onChange={(e) => handleChangeTitle(e)}
             value={title}
           />
+          {
+            verifyField?
+            <h3 className="text-red-600">
+              Debe escrbir un título
+            </h3>            
+            :null
+          }
           <textarea
-            className="w-full h-[600px] bg-slate-800"
+            className="w-full p-5 my-10 h-[300px] text-[15px] bg-slate-800"
+
             id="text"
             name="text"
+            placeholder="Texto"
             value={text}
             onChange={(e) => handleChangeText(e)}
           />
           <button
-        
             type="submit"
-            className="px-5 py-3 my-5 bg-orange-400 hover:bg-slate-900 text-slate-900 hover:text-orange-400 rounded-md transition-all"
-          
+           className="btn"
           >
-            Guardar
-          </button>
+            Guardar cápitulo
+          </button>         
         </form>
       </section>
     </main>

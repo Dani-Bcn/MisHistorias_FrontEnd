@@ -2,68 +2,46 @@
 @tailwind components;
 @tailwind utilities;
 
-*{
+* {
   padding: 0;
   margin: 0;
   list-style: none;
 }
-table{
-  font-family: "Teachers", sans-serif;
-  color: rgb(104, 104, 104);
-}
-
-html{
-  background-color: rgba(13, 19, 29, 0.795);
+html {
+   --tw-bg-opacity: 1;
+   background-color: rgb(2 6 23 / var(--tw-bg-opacity)) /* #020617 */;
 }
 #editBook::placeholder {
-  color: rgb(190, 190, 190); 
+  color: rgb(190, 190, 190);
 }
-input,select,textarea{
+
+input,
+select,
+textarea {
   background-color: gray;
   padding: 5px;
   padding-left: 15px;
   border-radius: 30px;
 }
-h1 {
-  font-family: "Sigmar One", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-  
-}
-h2 {
-  font-family: "Sigmar One", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-  
-}
-th{
-width: 250px;
-}
 
 
 
-li:hover{
-  color:orange;
+li:hover {
+  color: orange;
   cursor: pointer;
-  animation-duration: 3s;
-
+  transition: all;
+  transition-duration: 0.5s;
 }
-
-html{
-  font-family: "Poetsen One", sans-serif;
-  font-weight: 100;
-  font-style:normal;
-}
-h4{
+h4 {
   font-family: "Teachers", sans-serif;
   font-weight: 100;
-  font-style:normal;
+  font-style: normal;
 }
 
-p{
+p {
   font-family: "Teachers", sans-serif;
   font-weight: 100;
-  font-style:normal;
+  font-style: normal;
 }
 
 #pre {
@@ -74,5 +52,59 @@ p{
   white-space: pre-wrap; /* Mantener saltos de línea y espacios */
   word-wrap: break-word; /* Ajustar el texto al contenedor */
 }
+.input-file {
+  width: 250px;
+  height: 40px;
+  background-color: rgb(133, 133, 133);
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: transparent;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
+input::file-selector-button {
+  width: 100%;
+  height: 100%;
+  color: rgb(226, 226, 226);
+  background-color: transparent;
+  cursor: pointer;
+  border: thin solid grey;
+  border-radius: 3px;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
+button {
+ 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  font-size: 18px;
+  font-weight: 600;
+  color: rgb(221, 221, 221);
+  transition: all;
+}
+
+button:hover { 
+  transition: all;
+  transition-duration: 1s;
+  color: rgb(255, 94, 0); border-bottom: 1px solid rgb(0, 17, 255);
+}
+
+span {
+  color: rgb(255, 123, 0);
+}
+
+.titles{
+  font-family: "Teachers", sans-serif;
+  font-weight: 600;
+}
+.clipy{
+  clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);
+}

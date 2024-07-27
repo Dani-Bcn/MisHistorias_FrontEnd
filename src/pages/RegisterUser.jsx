@@ -12,8 +12,9 @@ export default function RegisterUser() {
   const [imageUrl, setImageUrl] = useState();
 
   const verifyUser = async () => {
+    window.scrollTo(0, 0);
     const isMatch = await profile();
-    console.log(isMatch.data.message);
+   
     isMatch.data.message !== "No autorizado" ? navigate("/") : null;
   };
   useEffect(() => {
@@ -28,10 +29,10 @@ export default function RegisterUser() {
     setImageUrl(res.data.fileUrl);
   };
 
-  imageUrl ? console.log(imageUrl) : null;
+  
 
   const onSubmit = handleSubmit(async (values) => {
-    console.log(values);
+  
 
     const dataValues = {
       values: values,
@@ -39,7 +40,7 @@ export default function RegisterUser() {
     };
 
     const res = await registerUser(dataValues);
-    console.log(res.data.message);
+   
     setResponse(res.data);
     if (!res.data.message) {
       navigate("/Profile"), location.reload();
@@ -50,44 +51,48 @@ export default function RegisterUser() {
 
   return (
     <main className="w-screen h-screen flex justify-center  items-center flex-col">
+      <img
+        className="absolute w-screen h-screen opacity-[0.2] z-[-1]"
+        src="/images/sky-books.jpeg"
+      ></img> 
       <form
-        className=" flex flex-col mt-40  justify-start items-center border-2 border-orange-400 p-10 rounded-xl bg-gradient-to-b from-indigo-400/[0.5] hover:shadow-[0_35px_60px_-15px_rgb(0,0,0)] transition-all "
+        className=" flex flex-col mt-20  justify-start items-center transition-all "
         onSubmit={onSubmit}
       >
-        <h2 className="text-xl ">Registro</h2>
+        <h2 className="text-3xl ">Registro</h2>        
         <input
           type="file"
           id="file-upload-button"
-          className="w-40 my-5 text-[0.8rem] text-transparent cursor-pointer "
           onChange={(e) => handleImage(e)}
+          className="input-file "
         />
-        <div className="flex flex-col text-xl gap-2 justify-between  ">
+        <div className="flex flex-col text-xl gap-5 justify-between  ">
           <input
             type="text "
             placeholder="Nombre"
-            className="bg-slate-300  h-5 text-[0.8rem]"
+        
             {...register("userName", { required: true })}
           />
           <input
             type="text"
             placeholder="Apellido"
-            className="bg-slate-300  h-5 text-[0.8rem]"
+            
             {...register("lastName", { required: true })}
           />
           <input
             type="email"
             placeholder="Correo electrónico"
-            className="bg-slate-300  h-5 text-[0.8rem]"
+           
             {...register("email", { required: true })}
           />
           <input
             type="password"
             placeholder="contraseña"
-            className="bg-slate-300  h-5 text-[0.8rem]"
+            
             {...register("password", { required: true })}
           />
 
-          <button className="w-40 p-2 text-xl m-auto mt-5" type="submit">
+          <button className="btn w-40 p-2 text-xl m-auto mt-5" type="submit">
             Registrarse
           </button>
         </div>
@@ -97,7 +102,7 @@ export default function RegisterUser() {
             <p>Ya tienes cuenta ?</p>
             <button
               type="button"
-              className="w-40 h-10 text-2xl mt-5 text-black"
+              className="btn w-40 h-10 text-2xl mt-5 text-black"
               onClick={() => navigate("/login")}
             >
               Acceder

@@ -3,6 +3,7 @@ import gsap from "gsap";
 import img from "/images/libro.png"
 
 export default function Home() {
+  window.scrollTo(0, 0);
   var tl = gsap.timeline();
 
  
@@ -20,8 +21,8 @@ useEffect(()=>{
 },[])
  
   return ( 
-    <main className="w-screen h-screen bg-gradient flex flex-col justify-center items-center">
-    <img src={img} alt="" className="absolute brightness-[0.3] object-cover" />
+    <main className="absolute w-screen h-screen flex flex-col justify-center items-center overflow-hidden">
+    <img src={img} alt="img-back-home" className="absolute brightness-[0.3] object-cover" />
       <div 
         className= " z-[50] w-screen -mt-72 h-screen flex justify-center items-center text-white"      
       >
