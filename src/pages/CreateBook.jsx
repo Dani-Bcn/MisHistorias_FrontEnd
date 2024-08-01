@@ -15,7 +15,6 @@ export default function CreateBook() {
     const formData = await new FormData();
     formData.append("imageUrl", e.target.files[0]);
     const res = await uploadImg(formData);
-
     setImageUrl(res.data.fileUrl);
   };
 
@@ -33,16 +32,17 @@ export default function CreateBook() {
   return (
     <main className="w-screen h-screen text-white  flex flex-col items-center">
       <section className="relative flex flex-col items-center mt-28">
-      <div className="absolute bg-indigo-700/25 blur-3xl w-96 h-96 "></div>
-        <form className="relative w-72 flex flex-col gap-5 text-xl" onSubmit={onSubmit}>        
-          <input
-            type="file"
-            className=" h-10  bg-transparent flex items-center justify-center text-center"
-            onChange={(e) => handleImage(e)}
-          />
-          <div  className=" flex flex-col ">
+        <div className="absolute bg-indigo-700/25 blur-3xl w-96 h-96 "></div>
+        <form
+          className="relative w-72 flex flex-col gap-5 text-xl"
+          onSubmit={onSubmit}
+        >
+          <div className=" flex flex-col ">
             <label className="p-2">Título</label>
-            <input className="h-7 rounded-md" {...register("title", { required: true })} />
+            <input
+              className="h-7 rounded-md"
+              {...register("title", { required: true })}
+            />
           </div>
           <div className="flex flex-col">
             <label className="p-2">Descripción</label>
@@ -53,7 +53,10 @@ export default function CreateBook() {
           </div>
           <div className="flex flex-col justify-center">
             <label className="p-2">Género</label>
-            <select {...register("genre")} className="h-10 rounded-md text-[18px]">
+            <select
+              {...register("genre")}
+              className="h-10 rounded-md text-[18px]"
+            >
               {arrayGenres.map((e, i) => {
                 return (
                   <option key={i} value={e.genre}>
@@ -63,10 +66,16 @@ export default function CreateBook() {
               })}
             </select>
           </div>
-
-          <button className="btn" type="submit">
-            Crear libro
-          </button>
+          <input
+            type="file"
+            className="my-10  h-10  bg-transparent flex items-center justify-center text-center"
+            onChange={(e) => handleImage(e)}
+          />
+          {imageUrl ? (
+            <button className="btn" type="submit">
+              Crear libro
+            </button>
+          ) : null}
         </form>
       </section>
     </main>

@@ -17,6 +17,7 @@ export default function WritingPage() {
   const [text, setText] = useState();
   const [stateEdit, setStateEdit] = useState(false);
 
+
   const handleBook = async () => {
     window.scrollTo(0, 0);
     const res = await getBook(getBookLocal);
@@ -43,12 +44,10 @@ export default function WritingPage() {
     setText((prev) => (prev = e.target.value));
     book.chapters.text = text;
   };
-  const handleSubmit = (e) => { 
-
+  const handleSubmit = (e) => {
     if (title === "") {
-      setVerifyField(true)
-    } else if (title != "")  {
-   
+      setVerifyField(true);
+    } else if (title != "") {
       console.log(title);
       book.chapters[numberChapter - 1] = {
         title: title,
@@ -56,7 +55,7 @@ export default function WritingPage() {
       };
       book ? editBook(book._id, book) : null;
       navigate("/editBook");
-      location.reload()
+      location.reload();
     }
   };
 
@@ -66,38 +65,30 @@ export default function WritingPage() {
         <form
           className="w-full h-[40vh] text-xl text-slate-300"
           onSubmit={handleSubmit}
-        >           
+        >
           <input
             placeholder="Título del capítulo"
-            className=" w-96 my-5 h-10 bg-slate-800"
+            className=" w-96 my-1 h-10 bg-slate-800"
             name="title"
             id="title"
             type="text"
             onChange={(e) => handleChangeTitle(e)}
             value={title}
           />
-          {
-            verifyField?
-            <h3 className="text-red-600">
-              Debe escrbir un título
-            </h3>            
-            :null
-          }
+          {verifyField ? (
+            <h3 className="text-red-600">Debe escrbir un título</h3>
+          ) : null}
           <textarea
-            className="w-full p-5 my-10 h-[300px] text-[15px] bg-slate-800"
-
+            className="w-full p-5 my-5 h-[300px] text-[15px] bg-slate-800"
             id="text"
             name="text"
             placeholder="Texto"
             value={text}
             onChange={(e) => handleChangeText(e)}
           />
-          <button
-            type="submit"
-           className="btn"
-          >
+          <button type="submit" className="btn">
             Guardar cápitulo
-          </button>         
+          </button>
         </form>
       </section>
     </main>

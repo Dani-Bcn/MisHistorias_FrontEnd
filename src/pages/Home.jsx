@@ -44,7 +44,7 @@ useEffect(()=>{
           <h3 id="text1" className=" opacity-0">Comparte</h3>
           <h3 id="text2" className=" opacity-0">Lee</h3>
           <h3 id="text3" className="opacity-0">Opina</h3>
-          <h3 id="text4" className=" opacity-0">Valora</h3>
+          <h3 id="text4" className=" opacity-0">Puntua</h3>
         </div>
     </main>
   );

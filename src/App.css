@@ -79,8 +79,7 @@ input::file-selector-button {
   align-items: center;
 }
 
-button {
- 
+button { 
   display: flex;
   align-items: center;
   justify-content: center;
@@ -89,12 +88,14 @@ button {
   font-weight: 600;
   color: rgb(221, 221, 221);
   transition: all;
+  transition-duration: .5s;
+  margin-left: 0px;
 }
 
 button:hover { 
   transition: all;
-  transition-duration: 1s;
-  color: rgb(255, 94, 0); border-bottom: 1px solid rgb(0, 17, 255);
+  transition-duration: .5s;
+  color: rgb(255, 94, 0);
 }
 
 span {
@@ -107,4 +108,8 @@ span {
 }
 .clipy{
   clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);
+}
+
+.star{
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
 }

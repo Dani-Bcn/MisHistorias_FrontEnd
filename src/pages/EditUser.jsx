@@ -36,7 +36,7 @@ export default function EditUser() {
       const values = {
         userName: e.target.form[0].value,
       };
-      const res = await editUser(user._id, values);
+       await editUser(user._id, values);
       setActiveEditName(false);
     }
   };

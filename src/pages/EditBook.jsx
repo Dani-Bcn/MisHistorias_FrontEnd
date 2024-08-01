@@ -1,17 +1,36 @@
 import React, { useEffect, useState } from "react";
-import { savePage, getBook, editBook } from "../api/auth";
-import { Navigate, useNavigate } from "react-router-dom";
+import { getBook, editBook } from "../api/auth";
+import { useNavigate } from "react-router-dom";
+import { profile } from "../api/auth";
 
 export default function EditBook() {
+  const [booksUser, setBooksUser] = useState();
+  const [verifyDelete, setVerifyDelete] = useState({verify:false,num:0});
+
   window.scrollTo(0, 0);
   const navigate = useNavigate();
   const [book, setBook] = useState();
-  const [verifyField, setVerifyField] = useState(false);
 
+  const coco = async () => {
+    const res = await profile();
+    setBooksUser(res.data.userFound.books);
+  };
+  useEffect(() => {
+    coco();
+  }, []);
+
+  console.log();
   const handleBooks = async () => {
     const res = await getBook(localStorage.getItem("bookId"));
     res ? setBook(res.data) : null;
   };
+
+  // Sin acceso a editar desde la barra de direcciones
+  if (book && booksUser) {
+    if (book.dataUser.userName !== booksUser[0].dataUser.userName) {
+      navigate("/profile");
+    }
+  }
 
   useEffect(() => {
     handleBooks();
@@ -19,7 +38,6 @@ export default function EditBook() {
 
   book && book.chapters
     ? book.chapters.map((e, i) => {
-        console.log(e.title);
         e.title === "" ? navigate("/writingPage") : null;
       })
     : null;
@@ -34,12 +52,18 @@ export default function EditBook() {
     navigate("/writingPage");
   };
 
+  const handleDelete = (e) => {
+    book.chapters.splice(e, 1);
+    book ? editBook(book._id, book) : null;
+    location.reload();
+  };
+  console.log(book);
   return (
     <main className="absolute overflow-x-hidden w-[98.5vw] h-screen ">
       <section className="relative w-full h-fulll px-20 mt-20">
-      <div className="fixed w-[300px] h-[300px] ml-[500px] rounded-full  bg-blue-600/5 mt-[70px] blur-xl"></div>
-      <div className="fixed w-[300px] h-[300px] mt-20 ml-60 rounded-full  bg-red-600/10 ]  blur-xl"></div>
-      <div className="fixed w-[350px] h-[450px] mt-20 -ml-20 bg-gradient-to-b from-green-600/15 blur-xl"></div>
+        <div className="fixed w-[300px] h-[300px] ml-[500px] rounded-full  bg-blue-600/5 mt-[70px] blur-xl"></div>
+        <div className="fixed w-[300px] h-[300px] mt-20 ml-60 rounded-full  bg-red-600/10 ]  blur-xl"></div>
+        <div className="fixed w-[350px] h-[450px] mt-20 -ml-20 bg-gradient-to-b from-green-600/15 blur-xl"></div>
         {book && book.title ? (
           <h2 className="relative h-16 text-white text-5xl">
             <span>{book.title[0]}</span>
@@ -84,7 +108,35 @@ export default function EditBook() {
                     >
                       Editar
                     </button>
+                    <button
+                      onClick={() => {
+                        setVerifyDelete({verify:true,num :i});
+                      }}
+                      className="btn w-20"
+                    >
+                      Eliminar
+                    </button>
+                    {verifyDelete.verify && verifyDelete.num === i ? (
+                    <div className="absolute w-96 text-red-600 flex gap-5 ml-[800px] z-[100] ">
+                      <h3>Confirma que deseas eliminar el capítulo</h3>
+                      <p
+                        onClick={() => handleDelete(i)}
+                        className="text-green-400 cursor-pointer"
+                      >
+                        V
+                      </p>
+                      <p
+                        onClick={() => {
+                          setVerifyDelete({verify:false});
+                        }}
+                        className="text-red-400 cursor-pointer"
+                      >
+                        X
+                      </p>
+                    </div>
+                  ) : null}
                   </div>
+                
                 </section>
               );
             })

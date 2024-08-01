@@ -12,7 +12,7 @@ export default function Navbar() {
   }, []);
 
   return (
-    <main className="fixed w-screen h-20  items-center bg-slate-500/[0] backdrop-blur-50 opacity-[0.9] flex z-[100]">
+    <main className="fixed w-screen h-12 bg-slate-600/15  items-center  backdrop-blur-[5px] flex z-[100]">
       <ul 
 
       className=" w-screen flex justify-center  items-center text-xl text-slate-200">

@@ -11,45 +11,8 @@ export default function AllBooks() {
   const [books, setBooks] = useState();
   const [userId, setUserId] = useState();
 
-  const handleOver = (i) => {
-    gsap.to(`#img${i}`, {
-      scale: 1.05,
-      marginLeft:5,
-      ease: "back.out",
-    });
-
-    gsap.to(`#card${i}`, {
-      scale: 3,
-      ease: "back.out",
-    });
-    gsap.to(`#card2${i}`, {
-      scale: 3,
-      ease: "back.out",
-    });
-    gsap.to(`#card3${i}`, {
-      scale: 7,
-      ease: "back.out",
-    });
+ 
   
-  };
-  const handleOut = (i) => {
-    gsap.to(`#img${i}`, {
-      scale: 1,
-      ease: "back.out",
-    });
-    gsap.to(`#card${i}`, {
-      ease: "back.out",
-      scale: 1,
-    });
-    gsap.to(`#card2${i}`, {
-      scale: 1,
-      ease: "back.out",
-    });
-    gsap.to(`#card3${i}`, {
-      scale: 1,
-      ease: "back.out",
-    });
-  };
 
   const searchBooks = async () => {
     const res = await getAllBooks();
@@ -97,12 +60,13 @@ export default function AllBooks() {
                     id={`card3${i}`}
                     className="absolute blur-xl w-20 h-20 ml-10 mt-40  bg-orange-600/[0.2] z-0 rounded-full rotate-[35deg] shadow-[0px_0px_10px] shadow-black"
                   ></div>
-                  <div>
+                  <div >
                     <span>
                       <h3 className="absolute text-3xl font-bold z-10">
                         {e.title[0].toUpperCase()}
                       </h3>
                     </span>
+                   
                     <h3 className="absolute text-3xl font-bold mx-4 z-10">
                       {e.title.slice(1)}
                     </h3>
@@ -118,10 +82,11 @@ export default function AllBooks() {
                       alt="imageUrl"
                       className="relative w-40 h-72 object-cover mt-10 rounded-br-[15px] rounded-tr-[15px]  shadow-[0px_0px_10px] shadow-black border border-blue-400 z-10"
                     />
+                       <p className="absolute w-16 h-16 flex justify-center items-center -mt-10  -ml-5 text-4xl text-orange-400 z-[100] border-[3px] border-blue-600 rounded-full bg-black/75">{e.rating}</p>
                   </div>
                   <div
                     key={i}
-                    className="w-52 mt-5 items-start p-5 flex flex-col gap-2 z-10"
+                    className="w-52 mt-10 items-start  flex flex-col gap-2 z-10"
                   >
                     <div className="flex gap-2 text-3xl">
                       <span>
@@ -129,6 +94,7 @@ export default function AllBooks() {
                       </span>
                       <p>{e.dataUser.lastName}</p>
                     </div>
+                 
                     <h3 className="text-2xl">{e.genre}</h3>
                     <button
                       className="btn   flex justify-start"

@@ -25,14 +25,10 @@ export default function RegisterUser() {
     const formData = new FormData();
     formData.append("imageUrl", e.target.files[0]);
     const res = await uploadImg(formData); // subir la imagen a cloudinary
-
     setImageUrl(res.data.fileUrl);
-  };
+  };  
 
-  
-
-  const onSubmit = handleSubmit(async (values) => {
-  
+  const onSubmit = handleSubmit(async (values) => {  
 
     const dataValues = {
       values: values,
@@ -59,7 +55,7 @@ export default function RegisterUser() {
         className=" flex flex-col mt-20  justify-start items-center transition-all "
         onSubmit={onSubmit}
       >
-        <h2 className="text-3xl ">Registro</h2>        
+        <h2 className="text-3xl text-white ">Registro</h2>        
         <input
           type="file"
           id="file-upload-button"
