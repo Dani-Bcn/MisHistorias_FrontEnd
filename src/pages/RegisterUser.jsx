@@ -52,10 +52,10 @@ export default function RegisterUser() {
         src="/images/sky-books.jpeg"
       ></img> 
       <form
-        className=" flex flex-col mt-20  justify-start items-center transition-all "
+        className=" flex flex-col   justify-start items-center transition-all "
         onSubmit={onSubmit}
       >
-        <h2 className="text-3xl text-white ">Registro</h2>        
+        <h2 className="text-5xl text-white my-10 "><span>R</span>egistro</h2>        
         <input
           type="file"
           id="file-upload-button"

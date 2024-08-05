@@ -3,6 +3,7 @@ import { getAllBooks, profile } from "../api/auth";
 import { useNavigate } from "react-router-dom";
 import { addBook } from "../api/auth";
 import { arrayGenres } from "../components/Images_Genres";
+import Cookies from "js-cookie";
 import gsap from "gsap";
 
 export default function AllBooks() {
@@ -10,9 +11,8 @@ export default function AllBooks() {
   const navigate = useNavigate();
   const [books, setBooks] = useState();
   const [userId, setUserId] = useState();
-
- 
-  
+  const [activeDescription, setActiveDescription] = useState(false);
+  const [acces, setAcces] = useState(false);
 
   const searchBooks = async () => {
     const res = await getAllBooks();
@@ -27,107 +27,165 @@ export default function AllBooks() {
     searchBooks();
   }, []);
 
+  useEffect(() => {
+    setAcces(Cookies.get("token"));
+  }, [acces]);
+
   const getBook = async (bookId) => {
     const objectsId = {
       bookId: bookId,
       userId: userId,
     };
     const res = await addBook(objectsId);
-   
   };
   return (
     <main className="w-screen flex  justify-center text-white">
-      <section className="w-full   my-32 mx-10 flex flex-wrap justify-between">
-        {books
-          ? books.map((e, i) => {
-              const imagesFound = arrayGenres.find(
-                (element) => element.genre === e.genre
-              );
-              return (
+      <section className="w-full my-32 mx-10 flex flex-wrap justify-between">
+        {books ? (
+          books.map((e, i) => {
+            console.log(books._id);
+            const imagesFound = arrayGenres.find(
+              (element) => element.genre === e.genre
+            );
+            return (
+              <div
+                key={i}
+                className="relative w-[425px] p-5  text-xl flex justify-between"
+              >
+                <div
+                  id={`card${i}`}
+                  className="absolute blur-xl w-20 h-20 mt-40 ml-80  bg-green-400/[0.2] z-0 rounded-full rotate-[35deg] shadow-[0px_0px_10px] shadow-black "
+                ></div>
+                <div
+                  id={`card2${i}`}
+                  className="absolute blur-xl w-20 h-20 mt-40 ml-40  bg-blue-600/[0.2] z-0 rounded-full rotate-[35deg] shadow-[0px_0px_10px] shadow-black"
+                ></div>
+                <div
+                  id={`card3${i}`}
+                  className="absolute blur-xl w-20 h-20 ml-10 mt-40  bg-orange-600/[0.2] z-0 rounded-full rotate-[35deg] shadow-[0px_0px_10px] shadow-black"
+                ></div>
+                <div>
+                  <span>
+                    <h3 className="absolute text-3xl font-bold z-10">
+                      {e.title[0].toUpperCase()}
+                    </h3>
+                  </span>
+                  <h3 className="absolute text-3xl font-bold mx-4 z-10">
+                    {e.title.slice(1)}
+                  </h3>
+                  <img
+                    src={e.imageUrl}
+                    alt="imageUrl"
+                    className="relative w-40 h-72 object-cover mt-10 rounded-br-[15px] rounded-tr-[15px]  shadow-[0px_0px_10px] shadow-black border border-blue-400 z-10"
+                  />
+                  <p className="absolute w-16 h-16 flex justify-center items-center -mt-12  -ml-5 text-4xl text-orange-400 z-[100] border-[3px] border-blue-600 rounded-full bg-black">
+                    {e.rating}
+                  </p>
+                </div>
                 <div
                   key={i}
-                  className="relative w-[425px] p-5  text-xl flex justify-between"
+                  className="w-52 mt-10 items-start gap-2 flex flex-col  z-10"
                 >
-                  <div
-                    id={`card${i}`}
-                    className="absolute blur-xl w-20 h-20 mt-40 ml-80  bg-green-400/[0.2] z-0 rounded-full rotate-[35deg] shadow-[0px_0px_10px] shadow-black "
-                  ></div>
-                  <div
-                    id={`card2${i}`}
-                    className="absolute blur-xl w-20 h-20 mt-40 ml-40  bg-blue-600/[0.2] z-0 rounded-full rotate-[35deg] shadow-[0px_0px_10px] shadow-black"
-                  ></div>
-                   <div
-                    id={`card3${i}`}
-                    className="absolute blur-xl w-20 h-20 ml-10 mt-40  bg-orange-600/[0.2] z-0 rounded-full rotate-[35deg] shadow-[0px_0px_10px] shadow-black"
-                  ></div>
-                  <div >
+                  <div className="flex gap-2 text-3xl">
                     <span>
-                      <h3 className="absolute text-3xl font-bold z-10">
-                        {e.title[0].toUpperCase()}
-                      </h3>
+                      <p className="font-bold">{e.dataUser.userName}</p>
                     </span>
-                   
-                    <h3 className="absolute text-3xl font-bold mx-4 z-10">
-                      {e.title.slice(1)}
-                    </h3>
-                    <img
-                      id={`img${i}`}
-                      onPointerOver={() => {
-                        handleOver(i);
-                      }}
-                      onPointerOut={() => {
-                        handleOut(i);
-                      }}
-                      src={e.imageUrl}
-                      alt="imageUrl"
-                      className="relative w-40 h-72 object-cover mt-10 rounded-br-[15px] rounded-tr-[15px]  shadow-[0px_0px_10px] shadow-black border border-blue-400 z-10"
-                    />
-                       <p className="absolute w-16 h-16 flex justify-center items-center -mt-10  -ml-5 text-4xl text-orange-400 z-[100] border-[3px] border-blue-600 rounded-full bg-black/75">{e.rating}</p>
+                    <p>{e.dataUser.lastName}</p>
                   </div>
-                  <div
-                    key={i}
-                    className="w-52 mt-10 items-start  flex flex-col gap-2 z-10"
-                  >
-                    <div className="flex gap-2 text-3xl">
-                      <span>
-                        <p className="font-bold">{e.dataUser.userName}</p>
-                      </span>
-                      <p>{e.dataUser.lastName}</p>
+                  <h3 className="text-2xl">
+                    <span>{e.genre[0]}</span>
+                    {e.genre.slice(1)}
+                  </h3>
+                  <button
+                    className="btn flex justify-start"
+                    onClick={() => {
+                      setActiveDescription(!activeDescription)
+                    }}
+                  >                   
+                      <span>D</span>escripción                 
+                  </button>
+                  {
+                    activeDescription?
+                    <div className="absolute w-96 bg-slate-700 p-5 rounded-xl text-[14px] ml-40 mt-20">
+                      {e.description}
                     </div>
-                 
-                    <h3 className="text-2xl">{e.genre}</h3>
-                    <button
-                      className="btn   flex justify-start"
-                      onClick={() => {
-                        localStorage.setItem("bookId", e._id);
-                        navigate("/PageBook");
-                      }}
-                    >
-                      Ver
-                    </button>
-                    <button
-                      className="btn flex justify-start"
-                      onClick={() => {
-                        localStorage.setItem("bookId", e._id),
-                          navigate("/readBook");
-                      }}
-                    >
-                      Leer
-                    </button>
-                    {userId ? (
-                      <div className="flex flex-col items-start gap-2">
-                        <button className="btn   flex justify-start" onClick={() => getBook(e._id)}>
-                          Añadir Biblioteca
-                        </button>
-                        <button className="btn   flex justify-start">Valorar</button>
-                        <button className="btn   flex justify-start">Comentario</button>
-                      </div>
-                    ) : null}
-                  </div>
+                    :null
+                  }
+                  <button
+                    className="btn flex justify-start"
+                    onClick={() => {
+                      localStorage.setItem("bookId", e._id);
+                      navigate("/PageBook");
+                    }}
+                  >                   
+                      <span>I</span>nfo                  
+                  </button>
+                  <button
+                    className="btn flex justify-start"
+                    onClick={() => {
+                      localStorage.setItem("bookId", e._id),
+                        navigate("/readBook");
+                    }}
+                  >
+                    <span>L</span>eer
+                  </button>
+                  {userId ? (
+                    <div className="flex flex-col items-start gap-2">
+                      <button
+                        className="btn flex justify-start"
+                        onClick={() => getBook(e._id)}
+                      >
+                        <span>A</span>ñadir Biblioteca
+                      </button>
+                      <button
+                        onClick={() => {
+                          localStorage.setItem("bookId", e._id),
+                            navigate("/readComments");
+                        }}
+                        className="btn flex justify-start "
+                      >
+                        <span>C</span>omentarios &nbsp;{e.comments.length}
+                      </button>
+                      <h3>
+                        <span>V</span>aloraciones {e.numVotes}
+                      </h3>
+                    </div>
+                  ) : null}
                 </div>
-              );
-            })
-          : null}
+              </div>
+            );
+          })
+        ) : (
+          <div className="w-[95vw]  flex flex-col gap-40 items-center justify-center text-4xl font-bold">
+            <h2>Aún no se han creado historias</h2>
+            {acces ? (
+              <button
+                onClick={() => navigate("/createBook")}
+                className="text-4xl"
+              >
+                Crear historia
+              </button>
+            ) : (
+              <section className="w-full flex justify-center items-center flex-col text-xl gap-40">
+                <h3>Para poder crear una historia deberás estar registrad@</h3>
+                <div className="flex gap-20 ">
+                  <button
+                    onClick={() => navigate("/register")}
+                    className="text-2xl"
+                  >
+                    Regístrate
+                  </button>
+                  <button
+                    onClick={() => navigate("/login")}
+                    className="text-2xl"
+                  >
+                    Accede
+                  </button>
+                </div>
+              </section>
+            )}
+          </div>
+        )}
       </section>
     </main>
   );

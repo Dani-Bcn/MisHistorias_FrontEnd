@@ -26,10 +26,10 @@ export default function EditBook() {
   };
 
   // Sin acceso a editar desde la barra de direcciones
-  if (book && booksUser) {
-    if (book.dataUser.userName !== booksUser[0].dataUser.userName) {
+  if (book && booksUser &&  book.dataUser.userName && book.dataUser.userName !== booksUser[0].dataUser.userName) {
+    
       navigate("/profile");
-    }
+    
   }
 
   useEffect(() => {
@@ -65,17 +65,17 @@ export default function EditBook() {
         <div className="fixed w-[300px] h-[300px] mt-20 ml-60 rounded-full  bg-red-600/10 ]  blur-xl"></div>
         <div className="fixed w-[350px] h-[450px] mt-20 -ml-20 bg-gradient-to-b from-green-600/15 blur-xl"></div>
         {book && book.title ? (
-          <h2 className="relative h-16 text-white text-5xl">
+          <h2 className="relative h-16 text-white text-5xl mb-10">
             <span>{book.title[0]}</span>
             {book.title.slice(1)}
           </h2>
         ) : null}
 
-        {book && book.chapters.length !== 0 ? (
-          <div className=" relative w-[44vw] h-14 flex justify-between items-center text-white bg-gradient-to-r p-5 rounded-3xl from-orange-600/[0.5]">
-            <h3 className="w-20   border-r border-orange-500">Capítulos</h3>
-            <h3 className="w-72  border-r border-orange-500 ">Títulos</h3>
-            <h3>Última actulización </h3>
+        {book && book.chapters && book.chapters.length !== 0 ? (
+          <div className=" relative w-[850px] h-14 flex justify-between items-center text-white bg-gradient-to-r p-5 rounded-3xl from-orange-600/[0.5]">
+            <h3 className="w-20 border-r border-orange-500">Nº</h3>
+            <h3 className="w-96 border-r border-orange-500 ">Capítulo</h3>
+            <h3 className="w-40">Última actulización </h3>
           </div>
         ) : null}
         {book
@@ -84,27 +84,27 @@ export default function EditBook() {
                 <section key={i}>
                   <div
                     key={i}
-                    className="relative w-[60vw] h-14 flex  justify-between items-center text-white bg-gradient-to-r px-5  my-5 rounded-3xl from-slate-600/[0.5]"
+                    className="relative w-[80vw] h-14 flex  justify-between items-center text-white bg-gradient-to-r px-5 my-5 rounded-3xl from-slate-600/[0.5]"
                   >
                     <h3 className="w-20  border-r border-orange-500">{`#${
                       i + 1
                     }`}</h3>
-                    <h3 className="w-72 flex  justify-start items-start text-center  border-r border-orange-500">
+                    <h3 className="w-96 flex   justify-start items-start text-center  border-r border-orange-500">
                       {e.title}
                     </h3>
-                    <h3 className="w-52">
-                      {book.updatedAt
+                    <h3 className="w-52 border-r border-r-orange-600">                  
+                    {book.updatedAt
                         .slice(0, 10)
                         .split("-")
                         .reverse()
-                        .join("/")}
+                        .join("/")} 
                     </h3>
                     <button
                       onClick={() => {
                         localStorage.setItem("numChapter", i + 1),
                           navigate("/writingPage");
                       }}
-                      className="btn w-20"
+                      className="btn"
                     >
                       Editar
                     </button>
@@ -117,11 +117,11 @@ export default function EditBook() {
                       Eliminar
                     </button>
                     {verifyDelete.verify && verifyDelete.num === i ? (
-                    <div className="absolute w-96 text-red-600 flex gap-5 ml-[800px] z-[100] ">
-                      <h3>Confirma que deseas eliminar el capítulo</h3>
+                    <div className="absolute w-96 text-red-400 font-bold flex text-center gap-5 ml-[900px] z-[100] bg-slate-700 p-2  rounded-full">
+                      <h3 className="">Confirma que deseas eliminar el capítulo</h3>
                       <p
                         onClick={() => handleDelete(i)}
-                        className="text-green-400 cursor-pointer"
+                        className="text-green-400 cursor-pointer font-bold"
                       >
                         V
                       </p>
@@ -129,7 +129,7 @@ export default function EditBook() {
                         onClick={() => {
                           setVerifyDelete({verify:false});
                         }}
-                        className="text-red-400 cursor-pointer"
+                        className="text-red-400 cursor-pointer font-bold"
                       >
                         X
                       </p>

@@ -20,6 +20,8 @@ import WritingPage from "./pages/WritingPage";
 import EditBook from "./pages/EditBook";
 import ReadBook from "./pages/ReadBook";
 import EditUser from "./pages/EditUser";
+import WritingComments from "./pages/WritingComments";
+import ReadComments from "./pages/ReadComments";
 
 function App() {
   const [acces, setAcces] = useState();
@@ -29,24 +31,22 @@ function App() {
 
   return (
     <main className="absolute">
-
-      
-          <Navbar />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/register" element={<RegisterUser />} />
-            <Route path="/login" element={<LoginUser />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/createBook" element={<CreateBook />} />
-            <Route path="/AllBooks" element={<AllBooks />} />
-            <Route path="/PageBook" element={<PageBook />} />
-            <Route path="/editBook" element={<EditBook />} />
-            <Route path="/writingPage" element={<WritingPage />} />
-            <Route path="/readBook" element={<ReadBook />} />
-            <Route path="/editUser" element={<EditUser />} />
-          </Routes>
-       
-     
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/register" element={<RegisterUser />} />
+        <Route path="/login" element={<LoginUser />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/createBook" element={<CreateBook />} />
+        <Route path="/AllBooks" element={<AllBooks />} />
+        <Route path="/PageBook" element={<PageBook />} />
+        <Route path="/editBook" element={<EditBook />} />
+        <Route path="/writingPage" element={<WritingPage />} />
+        <Route path="/readBook" element={<ReadBook />} />
+        <Route path="/editUser" element={<EditUser />} />
+        <Route path="writingComments" element={<WritingComments />} />
+        <Route path="readComments" element={<ReadComments />} />
+      </Routes>
     </main>
   );
 }

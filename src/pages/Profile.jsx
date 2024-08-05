@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import {
   profile,
   deleteBooks,
-  editUser,
+  deleteImg,
   removeBookLibrary,
-  booksUser,
 } from "../api/auth";
 import { useNavigate } from "react-router-dom";
 
@@ -13,13 +12,8 @@ export default function Profile() {
 
   const navigate = useNavigate();
   const [user, setUser] = useState();
-  const [getBook, setGetBook] = useState();
   const [handleDelete, setHandeDelete] = useState(false);
-  const [numDeleteBook, setNumDeleteBook] = useState();
-  const [verifyDelete, setVerifyDelete] = useState({
-    state: false,
-    idBook: "",
-  });
+  const [numDeleteBook, setNumDeleteBook] = useState(); 
 
   const getUser = async () => {
     const res = await profile();
@@ -30,8 +24,14 @@ export default function Profile() {
     getUser();
   }, []);
 
+  const removeImg = async (values) => {
+    console.log(values)
+   await deleteImg({coco:values});     
+  };
+
   const removeBook = (book) => {
     user.books.map((books, i) => {
+     
       if (books._id === books) {
         user.books.splice(i, 1);
         location.reload();
@@ -48,6 +48,7 @@ export default function Profile() {
     const res = await removeBookLibrary(objectsId);
     location.reload();
   };
+
   user ? console.log(user) : null;
   return (
     <main className="w-screen flex flex-col gap-10 justify-center items-center">
@@ -69,32 +70,33 @@ export default function Profile() {
 
           <div className="relative flex  gap-72 justify-center items-center  text-white z-10">
             <button
-              className="btn px-[38px!important] "
+              className="btn text-3xl px-[38px!important] "
               onClick={() => navigate("/editUser")}
             >
-              Editar perfil
+              <span>E</span>ditar perfil
             </button>
             <button
-              className="btn px-[16px!important] "
+              className="btn text-3xl px-[16px!important] "
               onClick={() => navigate("/createBook")}
             >
-              Crea una historia
+              <span>C</span>rea una historia
             </button>
           </div>
+         
         </section>
       ) : null}
       {user && user.books.length > 0 ? (
-        <section className="w-full pr-40 pl-20 mb-32 items-center">
+        <section className="w-full pr-40 pl-20 mb-32 mt-20 items-center">
           <h2 className="text-3xl font-bold text-white my-5">
             <span>Mis</span> Historias
           </h2>
-          <div className="flex gap-48 flex-wrap">
+          <div className="flex gap-64 flex-wrap py-10">
             {user
               ? user.books.map((book, i) => {
                   return (
                     <div
                       key={i}
-                      className="w-60 h-32 flex flex-col text-white border-l border-t border-orange-600 rounded-l-xl rounded-bl-none  px-5 "
+                      className="w-60 h-40 flex flex-col text-white border-l border-t border-orange-600 rounded-l-xl rounded-bl-none  px-5 "
                     >
                       <div className="w-full relative">
                         <h2 className="text-2xl w-96 py-3 font-semibold">
@@ -107,6 +109,7 @@ export default function Profile() {
                             alt={book.title}
                             className="w-32 h-52 object-cover"
                           />
+                            <p className="absolute w-16 h-16 flex justify-center items-center mt-36 -ml-5 text-4xl text-orange-400 z-[100] border-[3px] border-blue-600 rounded-full bg-black">{book.rating}</p>
                           <div className="m-5 flex flex-col gap-2 border-b border-r rounded-l-none rounded-b-xl border-orange-600 p-5">
                             <button
                               className="w-16 btn flex justify-start"
@@ -144,14 +147,15 @@ export default function Profile() {
                             >
                               <span>E</span>liminar libro
                             </button>
+                         
                             {handleDelete && numDeleteBook === i ? (
                               <div className="text-red-600">
                                 <h3>Confirma que quieres eliminar el libro</h3>
                                 <div className="w-full flex gap-10">
                                   <p
                                     className="text-xl text-green-600 cursor-pointer font-black"
-                                    onClick={() => {
-                                      removeBook(book._id), location.reload();
+                                    onClick={() => {       //Elimina la imagen de Cloudinary
+                                      removeBook(book._id),removeImg(book.imageUrl), location.reload() 
                                     }}
                                   >
                                     V
@@ -165,6 +169,7 @@ export default function Profile() {
                                 </div>
                               </div>
                             ) : null}
+                          
                           </div>
                         </div>
                       </div>
@@ -180,13 +185,13 @@ export default function Profile() {
           <h2 className="text-3xl font-bold text-white my-5">
             <span>Mi</span> Biblioteca
           </h2>
-          <div className="flex gap-40 flex-wrap">
+          <div className="flex gap-64 py-10 flex-wrap ">
             {user
               ? user.booksLibrary.map((book, i) => {
                   return (
                     <div
                       key={i}
-                      className="w-60 h-32 flex flex-col text-white border-l border-t border-orange-600 rounded-l-xl rounded-bl-none px-5 "
+                      className="w-60 h-40 flex flex-col text-white border-l border-t border-orange-600 rounded-l-xl rounded-bl-none px-5 "
                     >
                       <div className="w-full relative">
                         <h2 className="text-2xl w-96 py-3 font-semibold">
@@ -199,6 +204,7 @@ export default function Profile() {
                             alt={book.title}
                             className="w-32 h-52 object-cover"
                           />
+                            <p className="absolute w-16 h-16 flex justify-center items-center mt-36  -ml-5 text-4xl text-orange-400 z-[100] border-[3px] border-blue-600 rounded-full bg-black">{book.rating}</p>
                           <div className="m-5 h-48 flex flex-col gap-2 border-b border-r rounded-l-none rounded-b-xl border-orange-600 px-5 ">
                             <button
                               className="btn w-12 flex justify-start"

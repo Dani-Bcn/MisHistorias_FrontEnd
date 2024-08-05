@@ -15,10 +15,8 @@ import  terror from "/images/Caratula-terror.jpeg"
      {genre:"Infantil", image:infantil},
      {genre:"Terror", image:terror},
      {genre:"Clásico", image:clasico},
-     {genre:"Terror", image:terror},
      {genre:"Thriller", image:thriller},
      {genre:"Policial", image:policial,},
      {genre:"Romántico", image:romantico},
-     {genre:"Comedia", image:comedia,}
-    
+     {genre:"Comedia", image:comedia,}    
     ]

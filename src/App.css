@@ -44,14 +44,12 @@ p {
   font-style: normal;
 }
 
-#pre {
-  text-align: left;
-  background-color: #f0f0f0;
-  padding: 10px;
+#pre { 
   border-radius: 5px;
   white-space: pre-wrap; /* Mantener saltos de línea y espacios */
   word-wrap: break-word; /* Ajustar el texto al contenedor */
 }
+
 .input-file {
   width: 250px;
   height: 40px;
@@ -112,4 +110,8 @@ span {
 
 .star{
   clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+}
+pre{
+  font-weight: 100;
+  font-family:'Gill Sans', 'Trebuchet MS';
 }

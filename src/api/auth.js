@@ -37,10 +37,13 @@ export const editBook = async (id, values) =>
   await axxios.put(`/api/editBook/${id}`, values);
 export const addBook = async (objectIds) =>
   await axxios.put(`/api/addBook/${objectIds.userId}/${objectIds.bookId}`);
-export const addImg = async (formData) =>
-  await axxios.post(`/api/addImg/`, formData);
+
 export const uploadImg = async (values, imageUrl) =>
   await axxios.post(`/api/uploadImg`, values, imageUrl);
+
+export const deleteImg = async (url) =>{
+  console.log(url)
+  await axxios.post(`/api/deleteImg`, url )}
 
 export const removeChapter = async (values) =>
   await axxios.delete(`/api/removeChapter/${values}`);

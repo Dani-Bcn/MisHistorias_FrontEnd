@@ -5,16 +5,21 @@ import { useForm } from "react-hook-form";
 import { arrayGenres } from "../components/Images_Genres";
 import { uploadImg } from "../api/auth";
 
+
 export default function CreateBook() {
   window.scrollTo(0, 0);
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
   const [imageUrl, setImageUrl] = useState();
+  const [acces, setAcces] = useState(false)
+
+
 
   const handleImage = async (e) => {
     const formData = await new FormData();
     formData.append("imageUrl", e.target.files[0]);
     const res = await uploadImg(formData);
+    console.log(res)
     setImageUrl(res.data.fileUrl);
   };
 
@@ -26,7 +31,7 @@ export default function CreateBook() {
 
     const res = await createBook(dataValues);
     localStorage.setItem("bookId", res.data.newBook._id);
-    navigate("/editBook");
+    navigate("/profile");
   });
 
   return (
@@ -77,6 +82,10 @@ export default function CreateBook() {
             </button>
           ) : null}
         </form>
+        {acces?        
+        <section></section>
+        :null}
+        
       </section>
     </main>
   );
