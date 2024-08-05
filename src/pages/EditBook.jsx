@@ -10,9 +10,13 @@ export default function EditBook() {
   window.scrollTo(0, 0);
   const navigate = useNavigate();
   const [book, setBook] = useState();
+  const [user,setUser] = useState()
 
   const coco = async () => {
     const res = await profile();
+    setUser(res)
+    console.log(res)
+   res.data.message === "No autorizado"? navigate("/"):null
     setBooksUser(res.data.userFound.books);
   };
   useEffect(() => {
@@ -57,7 +61,7 @@ export default function EditBook() {
     book ? editBook(book._id, book) : null;
     location.reload();
   };
-  console.log(book);
+  book?console.log(book):null
   return (
     <main className="absolute overflow-x-hidden w-[98.5vw] h-screen ">
       <section className="relative w-full h-fulll px-20 mt-20">

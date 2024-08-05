@@ -8,6 +8,7 @@ export default function Home() {
 
  
 
+
 useEffect(()=>{
   tl.to("#box", { y:-300,  fontSize:"5em", opacity: 1 ,ease: "expo.in",})
   tl.to("#box1", { y:200,  fontSize:"5em", opacity: 1,delay:-0.5,duration:0.5})

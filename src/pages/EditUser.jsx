@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { editUser, profile } from "../api/auth";
 import imageEdit from "/public/images/editar-lapiz.png";
 import { uploadImg } from "../api/auth";
+import { useNavigate } from "react-router-dom";
 
 export default function EditUser() {
   const [user, setUser] = useState();
@@ -13,15 +14,18 @@ export default function EditUser() {
   const [email, setEmail] = useState();
   const [emptyFields, setEmptyFields] = useState(false);
   const [messageError, setMessageError] = useState();
-  const [imageUrl, setImageUrl] = useState();
+  const navigate = useNavigate()
 
   const getUser = async () => {
     window.scrollTo(0, 0);
     const res = await profile();
-    res ? setUser(res.data.userFound) : null;
+    res ? setUser(res.data.userFound) :  null;
+    console.log(res.data)
+    res.data.message === "No autorizado"?navigate("/") :null
   };
 
   useEffect(() => {
+   
     getUser();
   }, []);
 

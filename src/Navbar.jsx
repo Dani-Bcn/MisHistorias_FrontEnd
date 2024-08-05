@@ -21,7 +21,6 @@ export default function Navbar() {
   useEffect(() => {
     getUser();
   }, []);
-  console.log(user);
 
   return (
     <main className="fixed w-screen h-12 bg-slate-600/15  items-center  backdrop-blur-[5px] flex z-[100]">
