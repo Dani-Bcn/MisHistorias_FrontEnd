@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { getBook } from "../api/auth";
-import { editBook } from "../api/auth";
 import { editUser, profile } from "../api/auth";
+import { useNavigate } from "react-router-dom";
 
 export default function ReadComments() {
   const [book, setBook] = useState();
   const [user, setUser] = useState();
-
+  const navigate = useNavigate()
   const getUser = async () => {
     const res = await profile();
     res ? setUser(res.data.userFound) : null;
@@ -26,14 +26,14 @@ export default function ReadComments() {
   console.log(user);
 
   return (
-    <main className="w-screen flex justify-center">
+    <main className="w-screen flex">
+      <nav className="fixed  z-[100] w-40 h-12 flex justify-center items-center text-white"><button className="text-xl" onClick={()=> navigate(-1)}><span>V</span>olver</button></nav>
       <section className=" w-full flex flex-col flex-wrap items-center mt-20 text-white text-4xl">
         {book ? (
           <h2 className="text-6xl mb-10">
             <span>{book.title[0]}</span>
             {book.title.slice(1)}
-          </h2>
-         
+          </h2>         
         ) : null}
          <h3><span>C</span>omentarios</h3>
         <div className="w-full flex flex-wrap p-20 gap-20 ">

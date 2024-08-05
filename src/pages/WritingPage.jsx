@@ -16,6 +16,7 @@ export default function WritingPage() {
   const [title, setTitle] = useState();
   const [text, setText] = useState();
   const [stateEdit, setStateEdit] = useState(false);
+  const [verifyTitle, setVerifyTitle] = useState(false)
 
 
   const handleBook = async () => {
@@ -45,19 +46,25 @@ export default function WritingPage() {
     book.chapters.text = text;
   };
   const handleSubmit = (e) => {
-    if (title === "") {
-      setVerifyField(true);
-    } else if (title != "") {
-      console.log(title);
-      book.chapters[numberChapter - 1] = {
-        title: title,
-        text: text,
-      };
-      book ? editBook(book._id, book) : null;
-      navigate("/editBook");
-      location.reload();
-    }
+    if (title !== "") {
+     saveChapter()
+    } else if(title === "") {
+      setVerifyTitle(true)
+     
   };
+}
+
+    const saveChapter =(()=>{
+    console.log(title);
+    book.chapters[numberChapter - 1] = {
+      title: title,
+      text: text,
+    };
+    book ? editBook(book._id, book) : null;
+    navigate("/editBook");
+    location.reload();
+  
+  })  
 
   return (
     <main>
@@ -75,9 +82,10 @@ export default function WritingPage() {
             onChange={(e) => handleChangeTitle(e)}
             value={title}
           />
-          {verifyField ? (
-            <h3 className="text-red-600">Debe escrbir un título</h3>
-          ) : null}
+          {
+            verifyTitle? <h3 className="text-red-600">Debe escribir un título</h3>:null
+          }
+        
           <textarea
             className="w-full p-5 my-5 h-[300px] text-[15px] bg-slate-800"
             id="text"

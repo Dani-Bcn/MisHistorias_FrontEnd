@@ -11,7 +11,7 @@ export default function AllBooks() {
   const navigate = useNavigate();
   const [books, setBooks] = useState();
   const [userId, setUserId] = useState();
-  const [activeDescription, setActiveDescription] = useState(false);
+  const [activeDescription, setActiveDescription] = useState(true);
   const [acces, setAcces] = useState(false);
 
   const searchBooks = async () => {
@@ -25,9 +25,6 @@ export default function AllBooks() {
 
   useEffect(() => {
     searchBooks();
-  }, []);
-
-  useEffect(() => {
     setAcces(Cookies.get("token"));
   }, [acces]);
 
@@ -38,12 +35,33 @@ export default function AllBooks() {
     };
     const res = await addBook(objectsId);
   };
+
+  const handleDescription = (e, i) => {
+     gsap.to(`#${e.replaceAll(" ", "")}`, {
+
+      visibility: "visible",
+      opacity:1,
+      marginTop:40
+     
+        
+        })
+      }
+      
+      const quitDescription = (e, i) => {
+        
+    gsap.to(`#${e.replaceAll(" ", "")}`, {
+
+      visibility: "hidden",
+      opacity:0,
+      marginTop:0
+        });
+  };
+
   return (
     <main className="w-screen flex  justify-center text-white">
       <section className="w-full my-32 mx-10 flex flex-wrap justify-between">
         {books ? (
           books.map((e, i) => {
-            console.log(books._id);
             const imagesFound = arrayGenres.find(
               (element) => element.genre === e.genre
             );
@@ -76,15 +94,15 @@ export default function AllBooks() {
                   <img
                     src={e.imageUrl}
                     alt="imageUrl"
-                    className="relative w-40 h-72 object-cover mt-10 rounded-br-[15px] rounded-tr-[15px]  shadow-[0px_0px_10px] shadow-black border border-blue-400 z-10"
+                    className=" w-40 h-72 object-cover mt-10 rounded-br-[15px] rounded-tr-[15px]  shadow-[0px_0px_10px] shadow-black border border-blue-400 z-10"
                   />
-                  <p className="absolute w-16 h-16 flex justify-center items-center -mt-12  -ml-5 text-4xl text-orange-400 z-[100] border-[3px] border-blue-600 rounded-full bg-black">
+                  <p className="absolute w-16 h-16 flex justify-center items-center -mt-12  -ml-5 text-4xl text-orange-400 z-[1] border-[3px] border-blue-600 rounded-full bg-black">
                     {e.rating}
                   </p>
                 </div>
                 <div
                   key={i}
-                  className="w-52 mt-10 items-start gap-2 flex flex-col  z-10"
+                  className="w-52 mt-10 items-start gap-2 flex flex-col  z-1"
                 >
                   <div className="flex gap-2 text-3xl">
                     <span>
@@ -99,29 +117,29 @@ export default function AllBooks() {
                   <button
                     className="btn flex justify-start"
                     onClick={() => {
-                      setActiveDescription(!activeDescription)
+                      handleDescription(e.title);
                     }}
-                  >                   
-                      <span>D</span>escripción                 
+                  >
+                    <span>D</span>escripción
                   </button>
-                  {
-                    activeDescription?
-                    <div className="absolute w-96 bg-slate-700 p-5 rounded-xl text-[14px] ml-40 mt-20">
-                      {e.description}
-                    </div>
-                    :null
-                  }
+                  <div
+                    id={e.title.replaceAll(" ", "")}
+                    onClick={()=>quitDescription(e.title)}
+                    className="absolute invisible opacity-0	z-[50]  -mt-10 -ml-40  cursor-pointer  w-96 bg-slate-700 p-5 rounded-xl text-[14px]"
+                  >
+                    {e.description}
+                  </div> 
                   <button
-                    className="btn flex justify-start"
+                    className="btn relative flex justify-start z-[1]"
                     onClick={() => {
                       localStorage.setItem("bookId", e._id);
                       navigate("/PageBook");
                     }}
-                  >                   
-                      <span>I</span>nfo                  
+                  >
+                    <span>I</span>nfo
                   </button>
                   <button
-                    className="btn flex justify-start"
+                    className="btn relative flex justify-start"
                     onClick={() => {
                       localStorage.setItem("bookId", e._id),
                         navigate("/readBook");

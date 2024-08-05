@@ -52,7 +52,7 @@ export default function WritingComments() {
     <main className="w-screen flex justify-center">
       <section className=" w-full flex  flex-col items-center mt-40 text-white text-4xl">
         <h2>
-          <span>P</span>age comments
+          <span>E</span>scribe tu comentario
         </h2>
         <textarea
           id="cooc"

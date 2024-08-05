@@ -40,13 +40,8 @@ export default function EditBook() {
     handleBooks();
   }, []);
 
-  book && book.chapters
-    ? book.chapters.map((e, i) => {
-        e.title === "" ? navigate("/writingPage") : null;
-      })
-    : null;
-
-  const handleAddChapter = (e) => {
+ 
+ const handleAddChapter = (e) => {
     book.chapters.push({
       title: "",
       text: "",
@@ -54,7 +49,7 @@ export default function EditBook() {
     book ? editBook(book._id, book) : null;
     localStorage.setItem("numChapter", e);
     navigate("/writingPage");
-  };
+  }; 
 
   const handleDelete = (e) => {
     book.chapters.splice(e, 1);
