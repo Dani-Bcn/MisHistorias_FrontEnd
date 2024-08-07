@@ -37,25 +37,22 @@ export default function AllBooks() {
   };
 
   const handleDescription = (e, i) => {
-     gsap.to(`#${e.replaceAll(" ", "")}`, {
-
-      visibility: "visible",
-      opacity:1,
-      marginTop:40
-     
-        
-        })
-      }
-      
-      const quitDescription = (e, i) => {
-        
     gsap.to(`#${e.replaceAll(" ", "")}`, {
-
-      visibility: "hidden",
-      opacity:0,
-      marginTop:0
-        });
+      visibility: "visible",
+      opacity: 1,
+      marginTop: 40,
+    });
   };
+
+  const quitDescription = (e, i) => {
+    gsap.to(`#${e.replaceAll(" ", "")}`, {
+      visibility: "hidden",
+      opacity: 0,
+      marginTop: 0,
+    });
+  };
+
+  console.log(books);
 
   return (
     <main className="w-screen flex  justify-center text-white">
@@ -124,11 +121,11 @@ export default function AllBooks() {
                   </button>
                   <div
                     id={e.title.replaceAll(" ", "")}
-                    onClick={()=>quitDescription(e.title)}
+                    onClick={() => quitDescription(e.title)}
                     className="absolute invisible opacity-0	z-[50]  -mt-10 -ml-40  cursor-pointer  w-96 bg-slate-700 p-5 rounded-xl text-[14px]"
                   >
                     {e.description}
-                  </div> 
+                  </div>
                   <button
                     className="btn relative flex justify-start z-[1]"
                     onClick={() => {
@@ -147,6 +144,7 @@ export default function AllBooks() {
                   >
                     <span>L</span>eer
                   </button>
+
                   {userId ? (
                     <div className="flex flex-col items-start gap-2">
                       <button
@@ -160,9 +158,8 @@ export default function AllBooks() {
                           localStorage.setItem("bookId", e._id),
                             navigate("/readComments");
                         }}
-                        className="btn flex justify-start "
                       >
-                        <span>C</span>omentarios &nbsp;{e.comments.length}
+                        <span>C</span>omentarios {e.comments.length}
                       </button>
                       <h3>
                         <span>V</span>aloraciones {e.numVotes}

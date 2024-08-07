@@ -1,8 +1,8 @@
 import axios from "axios";
-const VITE_PORT = import.meta.env.VITE_PORT;
+
 
 const axxios = axios.create({
-  baseURL: "https://mis-historias-back-end.vercel.app/",
+  baseURL: "https://mis-historias-back-end.vercel.app",
   withCredentials: true,
 });
 
