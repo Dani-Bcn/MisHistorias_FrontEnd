@@ -2,7 +2,7 @@ import axios from "axios";
 
 
 const axxios = axios.create({
-  baseURL: "http://localhost:8000/",
+  baseURL: "https://mis-historias-back-end.vercel.app",
   withCredentials: true,
 });
 
