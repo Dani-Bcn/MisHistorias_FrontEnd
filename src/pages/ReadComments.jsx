@@ -6,10 +6,12 @@ import { useNavigate } from "react-router-dom";
 export default function ReadComments() {
   const [book, setBook] = useState();
   const [user, setUser] = useState();
-  const navigate = useNavigate()
+  const [activeButtonEdit, setActiveButtonEdit] = useState(false);
+  const [activeEdit, setActiveEdit] = useState(false);
+  const navigate = useNavigate();
   const getUser = async () => {
     const res = await profile();
-    res ? setUser(res.data.userFound) : null;
+    setUser(res.data.userFound);
   };
 
   const searchBook = async () => {
@@ -22,24 +24,26 @@ export default function ReadComments() {
     searchBook();
   }, []);
 
-  console.log(book);
-  console.log(user);
-
   return (
     <main className="w-screen flex">
-      <nav className="fixed  z-[100] w-40 h-12 flex justify-center items-center text-white"><button className="text-xl" onClick={()=> navigate(-1)}><span>V</span>olver</button></nav>
+      <nav className="fixed  z-[100] w-40 h-12 flex justify-center items-center text-white">
+        <button className="text-xl" onClick={() => navigate(-1)}>
+          <span>V</span>olver
+        </button>
+      </nav>
       <section className=" w-full flex flex-col flex-wrap items-center mt-20 text-white text-4xl">
         {book ? (
           <h2 className="text-6xl mb-10">
             <span>{book.title[0]}</span>
             {book.title.slice(1)}
-          </h2>         
+          </h2>
         ) : null}
-         <h3><span>C</span>omentarios</h3>
+        <h3>
+          <span>C</span>omentarios
+        </h3>
         <div className="w-full flex flex-wrap p-20 gap-20 ">
           {book
             ? book.comments.map((e, i) => {
-                
                 return (
                   <div
                     key={i}
@@ -49,9 +53,25 @@ export default function ReadComments() {
                     <p className="w-80 leading-5 text-[18px] flex flex-wrap overflow-auto bg-slate-600/50 rounded-md p-5">
                       {e.text}
                     </p>
-                    <div className="flex gap-1 text-xl">
+                    <div className="flex gap-1 text-xl items-center">
                       <p>{e.update.month} /</p>
                       <p>{e.update.year}</p>
+                      {user ? (
+                        book.idUserComments[i] === user._id ? (
+                          <div className="flex w-96 bg-red-300">
+                            <button
+                              onClick={() => setActiveEdit(true)}
+                              className="btn text-xl mx-20 bg-slate-600 rounded-md px-5"
+                            >
+                              <span>E</span>ditar
+                            </button>   <button>X</button>
+                            <div>
+                           
+                              {activeEdit ? <input type="text" /> : null}
+                            </div>
+                          </div>
+                        ) : null
+                      ) : null}
                     </div>
                   </div>
                 );

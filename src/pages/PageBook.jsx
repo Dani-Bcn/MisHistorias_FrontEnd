@@ -49,7 +49,6 @@ export default function PageBook() {
     book
       ? book.chapters.map((e, i) => {
           setNumLetters(numLetters + e.text.length);
-          console.log(numLetters);
         })
       : null;
   }, []);
@@ -90,17 +89,14 @@ export default function PageBook() {
       book
         ? (book.rating = (book.reCountVotes / book.numVotes).toFixed(1))
         : null; // La calificación del libro es la suma de todas las calificaciones dividida por el número de votaciones.
-      console.log(book.reCountVotes, book.numVotes);
+     
       book ? editBook(book._id, book) : null;
       location.reload();
     } else {
       setMessageVote(true);
     }
   };
-  user ? console.log(user) : null;
-  book ? console.log(book) : null;
 
-  console.log(verifyComments);
   return (
     <main className="w-screen flex justify-center">
       {book ? (

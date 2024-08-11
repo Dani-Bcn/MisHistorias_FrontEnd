@@ -1,8 +1,7 @@
 import axios from "axios";
 
-
 const axxios = axios.create({
-  baseURL: "https://mis-historias-back-end.vercel.app",
+  baseURL: "https://mishistorias-backend.onrender.com",
   withCredentials: true,
 });
 
@@ -37,13 +36,10 @@ export const editBook = async (id, values) =>
   await axxios.put(`/api/editBook/${id}`, values);
 export const addBook = async (objectIds) =>
   await axxios.put(`/api/addBook/${objectIds.userId}/${objectIds.bookId}`);
-
 export const uploadImg = async (values, imageUrl) =>
   await axxios.post(`/api/uploadImg`, values, imageUrl);
-
-export const deleteImg = async (url) =>{
-  console.log(url)
-  await axxios.post(`/api/deleteImg`, url )}
-
+export const deleteImg = async (url) => {
+  await axxios.post(`/api/deleteImg`, url);
+};
 export const removeChapter = async (values) =>
   await axxios.delete(`/api/removeChapter/${values}`);

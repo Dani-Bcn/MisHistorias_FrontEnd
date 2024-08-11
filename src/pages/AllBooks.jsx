@@ -52,7 +52,7 @@ export default function AllBooks() {
     });
   };
 
-  console.log(books);
+
 
   return (
     <main className="w-screen flex  justify-center text-white">

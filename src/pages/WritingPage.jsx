@@ -54,8 +54,7 @@ export default function WritingPage() {
   };
 }
 
-    const saveChapter =(()=>{
-    console.log(title);
+    const saveChapter =(()=>{rea
     book.chapters[numberChapter - 1] = {
       title: title,
       text: text,

@@ -32,7 +32,6 @@ export default function WritingComments() {
   }, []);
 
   const handleClick = (e) => {
-    console.log(getText.length);
     if (getText.length < 10) {
       setVerifyText(true);
     } else {

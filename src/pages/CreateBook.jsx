@@ -19,7 +19,6 @@ export default function CreateBook() {
     const formData = await new FormData();
     formData.append("imageUrl", e.target.files[0]);
     const res = await uploadImg(formData);
-    console.log(res)
     setImageUrl(res.data.fileUrl);
   };
 

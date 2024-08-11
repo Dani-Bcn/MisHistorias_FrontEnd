@@ -25,7 +25,6 @@ export default function Profile() {
   }, []);
 
   const removeImg = async (values) => {
-    console.log(values)
    await deleteImg({coco:values});     
   };
 
@@ -49,7 +48,6 @@ export default function Profile() {
     location.reload();
   };
 
-  user ? console.log(user) : null;
   return (
     <main className="w-screen flex flex-col gap-10 justify-center items-center">
       {user ? (
@@ -81,8 +79,7 @@ export default function Profile() {
             >
               <span>C</span>rea una historia
             </button>
-          </div>
-         
+          </div>         
         </section>
       ) : null}
       {user && user.books.length > 0 ? (

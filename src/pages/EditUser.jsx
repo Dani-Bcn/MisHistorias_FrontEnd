@@ -20,7 +20,6 @@ export default function EditUser() {
     window.scrollTo(0, 0);
     const res = await profile();
     res ? setUser(res.data.userFound) :  null;
-    console.log(res.data)
     res.data.message === "No autorizado"?navigate("/") :null
   };
 

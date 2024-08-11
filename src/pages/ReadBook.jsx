@@ -27,8 +27,6 @@ export default function ReadBook() {
     getUser()
   }, []);
 
-  console.log(user)
-  console.log(book)
 
   return book ? (
     <main className="relative text-white w-screen">
