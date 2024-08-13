@@ -67,17 +67,12 @@ export default function Profile() {
           />
 
           <div className="relative flex  gap-72 justify-center items-center  text-white z-10">
+           
             <button
-              className="btn text-3xl px-[38px!important] "
-              onClick={() => navigate("/editUser")}
-            >
-              <span>E</span>ditar perfil
-            </button>
-            <button
-              className="btn text-3xl px-[16px!important] "
+              className="btn text-3xl"
               onClick={() => navigate("/createBook")}
             >
-              <span>C</span>rea una historia
+             <h3 className="mt-5"> <span>C</span>rear una nueva historia</h3>
             </button>
           </div>         
         </section>

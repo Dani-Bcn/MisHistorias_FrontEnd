@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { getBook } from "../api/auth";
-import { editUser, profile } from "../api/auth";
+import { editUser, profile, editBook } from "../api/auth";
 import { useNavigate } from "react-router-dom";
 
 export default function ReadComments() {
   const [book, setBook] = useState();
   const [user, setUser] = useState();
-  const [activeButtonEdit, setActiveButtonEdit] = useState(false);
   const [activeEdit, setActiveEdit] = useState(false);
   const navigate = useNavigate();
+
   const getUser = async () => {
     const res = await profile();
     setUser(res.data.userFound);
@@ -19,10 +19,29 @@ export default function ReadComments() {
     res ? setBook(res.data) : null;
   };
 
+  console.log(book);
   useEffect(() => {
     getUser();
     searchBook();
   }, []);
+
+  let editText;
+
+  const [activeButton, setActiveButton] = useState();
+
+  const handleChange = (e) => {
+    editText = e.target.value;
+    editText.length > 5 ? setActiveButton(true) : null;
+  };
+
+  const handleSubmit = (i) => {
+    console.log(i);
+    console.log(editText);
+    book.comments[i].text = editText;
+    editBook(book._id, book);
+    console.log(book.comments[i].text);
+    location.reload();
+  };
 
   return (
     <main className="w-screen flex">
@@ -53,21 +72,52 @@ export default function ReadComments() {
                     <p className="w-80 leading-5 text-[18px] flex flex-wrap overflow-auto bg-slate-600/50 rounded-md p-5">
                       {e.text}
                     </p>
-                    <div className="flex gap-1 text-xl items-center">
-                      <p>{e.update.month} /</p>
+                    <div className="flex text-xl gap-2">
+                      <p>{e.update.day} </p>
+                      <p>/</p>
+                      <p>{e.update.month} </p>
+                      <p>/</p>
                       <p>{e.update.year}</p>
                       {user ? (
                         book.idUserComments[i] === user._id ? (
-                          <div className="flex w-96 bg-red-300">
+                          <div type="submit" className="flex w-96">
                             <button
                               onClick={() => setActiveEdit(true)}
                               className="btn text-xl mx-20 bg-slate-600 rounded-md px-5"
                             >
                               <span>E</span>ditar
-                            </button>   <button>X</button>
+                            </button>
                             <div>
-                           
-                              {activeEdit ? <input type="text" /> : null}
+                              {activeEdit ? (
+                                <div className="absolute w-[450px] h-60 bg-slate-800 mx-20 rounded-md -mt-44 flex flex-col items-center gap-5">
+                                  <textarea
+                                    placeholder="Escribe aquí tu comentario."
+                                    className="rounded-md h-40 w-[95%] mt-5 "
+                                    type="text"
+                                    onChange={(e) => handleChange(e)}
+                                  />
+                                  <div className="flex w-[80%] justify-center gap-10">
+                                    <div
+                                      className=" text-3xl font-black hover:text-red-600 transition-all cursor-pointer"
+                                      onClick={() => {
+                                        setActiveEdit(false), location.reload();
+                                      }}
+                                    >
+                                      X
+                                    </div>
+                                    {activeButton ? (
+                                      <div
+                                        className="text-3xl font-black hover:text-green-600 transition-all cursor-pointer"
+                                        onClick={() => {
+                                          handleSubmit(i), location.reload();
+                                        }}
+                                      >
+                                        V
+                                      </div>
+                                    ) : null}
+                                  </div>
+                                </div>
+                              ) : null}
                             </div>
                           </div>
                         ) : null

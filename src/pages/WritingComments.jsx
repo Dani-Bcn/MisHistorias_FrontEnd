@@ -9,6 +9,7 @@ export default function WritingComments() {
   const [book, setBook] = useState();
   const [user, setUser] = useState();
   const date = new Date();
+  const day = date.getDay()
   const month = date.getMonth();
   const year = date.getFullYear();
   const [verifyText, setVerifyText] = useState(false);
@@ -40,7 +41,7 @@ export default function WritingComments() {
         text: getText,
         user: user.userName,
         userId:user._id,
-        update: { month: month + 1, year: year },
+        update: { month: month + 1, year: year , day: day},
       });
       book ? editBook(book._id, book) : null;
       navigate("/allBooks");

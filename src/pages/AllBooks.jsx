@@ -11,17 +11,21 @@ export default function AllBooks() {
   const navigate = useNavigate();
   const [books, setBooks] = useState();
   const [userId, setUserId] = useState();
+  const [user, setUser] = useState();
   const [activeDescription, setActiveDescription] = useState(true);
   const [acces, setAcces] = useState(false);
 
   const searchBooks = async () => {
     const res = await getAllBooks();
     const resUser = await profile();
-    resUser.data.message !== "No autorizado"
-      ? setUserId(resUser.data.userFound._id)
-      : null;
+    if(resUser.data.message !== "No autorizado"){
+    setUserId(resUser.data.userFound._id)
+    setUser(resUser.data.userFound)
     setBooks(res.data.booksFound);
+    }
   };
+
+  user?console.log(user):null
 
   useEffect(() => {
     searchBooks();
@@ -51,8 +55,6 @@ export default function AllBooks() {
       marginTop: 0,
     });
   };
-
-
 
   return (
     <main className="w-screen flex  justify-center text-white">
@@ -161,7 +163,7 @@ export default function AllBooks() {
                       >
                         <span>C</span>omentarios {e.comments.length}
                       </button>
-                      <h3>
+                      <h3 className="text-[18px]">
                         <span>V</span>aloraciones {e.numVotes}
                       </h3>
                     </div>
