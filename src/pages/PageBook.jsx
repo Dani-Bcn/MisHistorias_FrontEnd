@@ -37,7 +37,7 @@ export default function PageBook() {
     searchBook();
   }, []);
   let readingTime = 0;
-  book 
+  book
     ? book.chapters.map((e, i) => {
         readingTime = readingTime + e.text.split(" ").length / 300;
       })
@@ -89,7 +89,7 @@ export default function PageBook() {
       book
         ? (book.rating = (book.reCountVotes / book.numVotes).toFixed(1))
         : null; // La calificación del libro es la suma de todas las calificaciones dividida por el número de votaciones.
-     
+
       book ? editBook(book._id, book) : null;
       location.reload();
     } else {
@@ -152,13 +152,14 @@ export default function PageBook() {
               >
                 <span>L</span>eer
               </button>
-              <button
-                onClick={() => navigate("/readComments")}
-                className="text-2xl  w-40"
-              >
-                <span>C</span>omentarios {book.comments.length}
-              </button>
-
+              {book.comments.length > 0 ? (
+                <button
+                  onClick={() => navigate("/readComments")}
+                  className="text-2xl  w-40"
+                >
+                  <span>C</span>omentarios {book.comments.length}
+                </button>
+              ) : null}
               {user &&
               book &&
               !book.idUserComments.includes(user._id) && // Evalua si el usuario ya ha hecho un cometario

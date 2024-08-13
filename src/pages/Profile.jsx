@@ -4,6 +4,7 @@ import {
   deleteBooks,
   deleteImg,
   removeBookLibrary,
+  editBook,
 } from "../api/auth";
 import { useNavigate } from "react-router-dom";
 
@@ -13,24 +14,32 @@ export default function Profile() {
   const navigate = useNavigate();
   const [user, setUser] = useState();
   const [handleDelete, setHandeDelete] = useState(false);
-  const [numDeleteBook, setNumDeleteBook] = useState(); 
+  const [numDeleteBook, setNumDeleteBook] = useState();
 
   const getUser = async () => {
     const res = await profile();
     res ? setUser(res.data.userFound) : null;
   };
 
+  user ? console.log(user) : null;
+
   useEffect(() => {
     getUser();
   }, []);
 
   const removeImg = async (values) => {
-   await deleteImg({coco:values});     
+    await deleteImg({ coco: values });
+  };
+
+  const handlePublish = (book) => {
+    book.published = true;
+    console.log(book);
+    editBook(book._id, book);
+    location.reload()
   };
 
   const removeBook = (book) => {
     user.books.map((books, i) => {
-     
       if (books._id === books) {
         user.books.splice(i, 1);
         location.reload();
@@ -65,16 +74,17 @@ export default function Profile() {
             alt={user.userName}
             className="relative w-60 h-60 border-8 object-cover object-top border-orange-400 rounded-full "
           />
-
           <div className="relative flex  gap-72 justify-center items-center  text-white z-10">
-           
             <button
               className="btn text-3xl"
               onClick={() => navigate("/createBook")}
             >
-             <h3 className="mt-5"> <span>C</span>rear una nueva historia</h3>
+              <h3 className="mt-5">
+                {" "}
+                <span>C</span>rear una nueva historia
+              </h3>
             </button>
-          </div>         
+          </div>
         </section>
       ) : null}
       {user && user.books.length > 0 ? (
@@ -101,8 +111,10 @@ export default function Profile() {
                             alt={book.title}
                             className="w-32 h-52 object-cover"
                           />
-                            <p className="absolute w-16 h-16 flex justify-center items-center mt-36 -ml-5 text-4xl text-orange-400 z-[100] border-[3px] border-blue-600 rounded-full bg-black">{book.rating}</p>
-                          <div className="m-5 flex flex-col gap-2 border-b border-r rounded-l-none rounded-b-xl border-orange-600 p-5">
+                          <p className="absolute w-16 h-16 flex justify-center items-center mt-36 -ml-5 text-4xl text-orange-400 z-[100] border-[3px] border-blue-600 rounded-full bg-black">
+                            {book.rating}
+                          </p>
+                          <div className=" flex flex-col gap-2 border-b border-r rounded-l-none rounded-b-xl border-orange-600 p-5">
                             <button
                               className="w-16 btn flex justify-start"
                               onClick={() => {
@@ -130,6 +142,15 @@ export default function Profile() {
                             >
                               <span>I</span>nfo
                             </button>
+
+                            {book.published !== true ? (
+                              <button
+                                className="btn  w-10 flex justify-start"
+                                onClick={() => handlePublish(book)}
+                              >
+                                <span>P</span>ublicar
+                              </button>
+                            ) : null}
                             <button
                               type="button"
                               onClick={() => {
@@ -139,15 +160,18 @@ export default function Profile() {
                             >
                               <span>E</span>liminar libro
                             </button>
-                         
+
                             {handleDelete && numDeleteBook === i ? (
                               <div className="text-red-600">
                                 <h3>Confirma que quieres eliminar el libro</h3>
                                 <div className="w-full flex gap-10">
                                   <p
                                     className="text-xl text-green-600 cursor-pointer font-black"
-                                    onClick={() => {       //Elimina la imagen de Cloudinary
-                                      removeBook(book._id),removeImg(book.imageUrl), location.reload() 
+                                    onClick={() => {
+                                      //Elimina la imagen de Cloudinary
+                                      removeBook(book._id),
+                                        removeImg(book.imageUrl),
+                                        location.reload();
                                     }}
                                   >
                                     V
@@ -161,7 +185,6 @@ export default function Profile() {
                                 </div>
                               </div>
                             ) : null}
-                          
                           </div>
                         </div>
                       </div>
@@ -196,7 +219,9 @@ export default function Profile() {
                             alt={book.title}
                             className="w-32 h-52 object-cover"
                           />
-                            <p className="absolute w-16 h-16 flex justify-center items-center mt-36  -ml-5 text-4xl text-orange-400 z-[100] border-[3px] border-blue-600 rounded-full bg-black">{book.rating}</p>
+                          <p className="absolute w-16 h-16 flex justify-center items-center mt-36  -ml-5 text-4xl text-orange-400 z-[100] border-[3px] border-blue-600 rounded-full bg-black">
+                            {book.rating}
+                          </p>
                           <div className="m-5 h-48 flex flex-col gap-2 border-b border-r rounded-l-none rounded-b-xl border-orange-600 px-5 ">
                             <button
                               className="btn w-12 flex justify-start"

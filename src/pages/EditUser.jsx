@@ -15,8 +15,6 @@ export default function EditUser() {
     getUser();
   }, []);
 
-  user ? console.log(user) : null;
-
   return (
     <main className="w-screen h-96 mt-20 items-center flex">
       {user ? (

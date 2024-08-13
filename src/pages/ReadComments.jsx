@@ -19,7 +19,7 @@ export default function ReadComments() {
     res ? setBook(res.data) : null;
   };
 
-  console.log(book);
+ 
   useEffect(() => {
     getUser();
     searchBook();
@@ -35,11 +35,10 @@ export default function ReadComments() {
   };
 
   const handleSubmit = (i) => {
-    console.log(i);
-    console.log(editText);
+    
+   
     book.comments[i].text = editText;
     editBook(book._id, book);
-    console.log(book.comments[i].text);
     location.reload();
   };
 

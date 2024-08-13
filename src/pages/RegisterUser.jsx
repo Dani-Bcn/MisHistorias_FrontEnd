@@ -14,8 +14,6 @@ export default function RegisterUser() {
   const verifyUser = async () => {
     window.scrollTo(0, 0);
     const isMatch = await profile();
-   
-    isMatch.data.message !== "No autorizado" ? navigate("/") : null;
   };
   useEffect(() => {
     verifyUser();
