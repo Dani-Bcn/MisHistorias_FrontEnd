@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { logout } from "./api/auth";
 import { profile } from "./api/auth";
 import Cookies from "js-cookie";
 
 export default function Navbar() {
   const navigate = useNavigate();
+  const locationPath = useLocation();
   const [user, setUser] = useState();
   const [acces, setAcces] = useState();
 
@@ -24,13 +25,24 @@ export default function Navbar() {
 
   return (
     <main className="fixed w-screen h-12 bg-slate-600/15  items-center  backdrop-blur-[5px] flex z-[100]">
-      <ul className=" w-screen flex justify-center  items-center text-xl text-slate-200">
-        <div className="w-[90vw] flex gap-10 justify-end items-center">          
-          <li onClick={() => navigate("/AllBooks")}>Todas las historias</li>
+      <div className=" w-screen  flex justify-center  items-center text-xl text-slate-200">
+        {locationPath.pathname !== "/" ? (
+          <button className="absolute text-xl" onClick={() => navigate(-1)}>
+            <span className="font-bold">V</span>olver
+          </button>
+        ) : null}
+        <ul className="w-[90vw] flex gap-10 justify-end items-center">
+          <li onClick={() => navigate("/AllBooks")}>
+            <span className="font-bold">T</span>odas las historias
+          </li>
           {!acces ? (
             <div className="flex gap-5 items-start justify-center">
-              <li onClick={() => navigate("/register")}>Registro</li>
-              <li onClick={() => navigate("/login")}>Acceder</li>
+              <li onClick={() => navigate("/register")}>
+                <span className="font-bold">R</span>egistro
+              </li>
+              <li onClick={() => navigate("/login")}>
+                <span className="font-bold">A</span>cceder
+              </li>
             </div>
           ) : (
             <div className="flex gap-5 justify-center items-center">
@@ -40,7 +52,7 @@ export default function Navbar() {
                     onClick={() => navigate("/profile")}
                     src={user.imageUserUrl}
                     alt={user.userName}
-                    className=" w-10 h-10  rounded-full border-4 border-white hover:border-orange-400 object-cover transition-all duration-300"
+                    className=" w-10 h-10  rounded-full border-4 border-white hover:border-orange-600 object-cover transition-all duration-300"
                   />
                 </li>
               ) : null}
@@ -53,8 +65,8 @@ export default function Navbar() {
               </li>
             </div>
           )}
-        </div>
-      </ul>
+        </ul>
+      </div>
     </main>
   );
 }

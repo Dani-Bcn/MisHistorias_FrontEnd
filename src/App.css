@@ -27,7 +27,7 @@ textarea {
 
 
 li:hover {
-  color: orange;
+  color: rgb(255, 115, 0);
   cursor: pointer;
   transition: all;
   transition-duration: 0.5s;

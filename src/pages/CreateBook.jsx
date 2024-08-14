@@ -5,15 +5,12 @@ import { useForm } from "react-hook-form";
 import { arrayGenres } from "../components/Images_Genres";
 import { uploadImg } from "../api/auth";
 
-
 export default function CreateBook() {
   window.scrollTo(0, 0);
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
   const [imageUrl, setImageUrl] = useState();
   const [acces, setAcces] = useState(false)
-
-
 
   const handleImage = async (e) => {
     const formData = await new FormData();
@@ -76,8 +73,8 @@ export default function CreateBook() {
             onChange={(e) => handleImage(e)}
           />
           {imageUrl ? (
-            <button className="btn" type="submit">
-              Crear libro
+            <button className="btn text-2xl" type="submit">
+              <span>C</span>rear libro
             </button>
           ) : null}
         </form>

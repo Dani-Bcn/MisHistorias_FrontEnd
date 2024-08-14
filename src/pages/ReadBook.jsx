@@ -31,14 +31,10 @@ export default function ReadBook() {
   return book ? (
     <main className="relative text-white w-screen">
       <nav className="fixed w-96 -mt-12 ml-10 z-[100] ">
-        <ul className="flex gap-5 text-xl">
-        <li onClick={() => navigate(-1)}>
-            <span className="font-bold">V</span>olver
-          </li>
+        <ul className="flex gap-5 text-xl">       
           <li onClick={() => navigate("/pageBook")}>
             <span className="font-bold">I</span>nfo
           </li>
-
           { user && book && user._id === book.dataUser.userId ? (
             <li onClick={() => navigate("/editBook")}>
               <span className="font-bold">E</span>ditar

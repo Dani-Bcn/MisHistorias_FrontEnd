@@ -19,12 +19,12 @@ export default function LoginUser() {
   });
 
   return (
-    <main className=" overflow-hidden relative w-screen  text-white  flex justify-start  items-center flex-col">
+    <main className=" overflow-hidden relative w-screen h-[100vh]  text-white  flex justify-start  items-center flex-col">
       <div className="absolute w-[900px] h-[900px] rounded-full  bg-blue-600/5 -mt-[400px] -ml-[1200px]  blur-xl"></div>
       <div className="absolute w-[900px] h-[900px] rounded-full  bg-red-600/10 mt-[400px] ml-[1200px]  blur-xl"></div>
       <div className="absolute w-[350px] h-[450px] mt-20 bg-gradient-to-b from-green-600/15 blur-xl"></div>
       <form
-        className=" backdrop-blur-100 mt-20  gap-5 z-[50] flex flex-col justify-around items-center rounded-xl  transition-all "
+        className=" backdrop-blur-100 mt-40 z-[50] flex flex-col justify-around items-center rounded-xl  transition-all "
         onSubmit={handleSubmit(async (values) => {
           const res = await loginUser(values);
           setResponse(res.data);
@@ -40,22 +40,28 @@ export default function LoginUser() {
           }
         })}
       >
-        <section className="h-96 flex flex-col items-center justify-around gap-3">
+        <section className=" flex flex-col items-center justify-around gap-20">
         <h2 className="text-5xl">
           <span>A</span>cceder
         </h2>
-        <div className="flex flex-col gap-2 justify-between text-xl ">
-          <p><span>E</span>mail</p>
-          <input type="email" {...register("email", { required: true })} />
-          <p><span>P</span>assword</p>
+        <div className="flex flex-col gap-10 justify-between text-xl ">
+         
+          <input 
+            className=" bg-black/0 border-2 border-orange-400"
+          type="email" {...register("email", { required: true })}
+          placeholder="Correo electrónico"
+          />
+         
           <input
+            className="bg-black/0 border-2 border-orange-400"
             type="password"
             {...register("password", { required: true })}
+            placeholder="Contraseña"
           />
         </div>
 
-        <button className="btn" type="submit">
-          Acceder
+        <button className="btn text-2xl" type="submit">
+          <span>E</span>nviar
         </button>
         </section>
         <section className="h-40 flex flex-col items-center gap-3">

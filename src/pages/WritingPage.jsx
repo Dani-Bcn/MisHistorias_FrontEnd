@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 export default function WritingPage() {
   window.scrollTo(0, 0);
   const navigate = useNavigate();
-  const [verifyField, setVerifyField] = useState(false);
+
   const [getBookLocal, setgetBookLocal] = useState(
     localStorage.getItem("bookId")
   );
@@ -16,14 +16,14 @@ export default function WritingPage() {
   const [title, setTitle] = useState();
   const [text, setText] = useState();
   const [stateEdit, setStateEdit] = useState(false);
-  const [verifyTitle, setVerifyTitle] = useState(false)
-
+  const [verifyTitle, setVerifyTitle] = useState(false);
 
   const handleBook = async () => {
     window.scrollTo(0, 0);
     const res = await getBook(getBookLocal);
+
     setBook(res.data);
-    if (book) {
+    if (book && book.chapters) {
       setTitle(book.chapters[numberChapter - 1].title);
       setText(book.chapters[numberChapter - 1].text);
     }
@@ -45,16 +45,12 @@ export default function WritingPage() {
     setText((prev) => (prev = e.target.value));
     book.chapters.text = text;
   };
-  const handleSubmit = (e) => {
-    if (title !== "") {
-     saveChapter()
-    } else if(title === "") {
-      setVerifyTitle(true)
-     
-  };
-}
 
-    const saveChapter =(()=>{
+  const handleSubmit = (e) => {
+    saveChapter();
+  };
+
+  const saveChapter = () => {
     book.chapters[numberChapter - 1] = {
       title: title,
       text: text,
@@ -62,8 +58,7 @@ export default function WritingPage() {
     book ? editBook(book._id, book) : null;
     navigate("/editBook");
     location.reload();
-  
-  })  
+  };
 
   return (
     <main>
@@ -81,10 +76,7 @@ export default function WritingPage() {
             onChange={(e) => handleChangeTitle(e)}
             value={title}
           />
-          {
-            verifyTitle? <h3 className="text-red-600">Debe escribir un título</h3>:null
-          }
-        
+
           <textarea
             className="w-full p-5 my-5 h-[300px] text-[15px] bg-slate-800"
             id="text"
@@ -93,9 +85,12 @@ export default function WritingPage() {
             value={text}
             onChange={(e) => handleChangeText(e)}
           />
-          <button type="submit" className="btn">
-            Guardar cápitulo
-          </button>
+          {title && title.length > 0 ? (
+            <button type="submit" className="btn">
+              Guardar cápitulo
+            </button>
+          ) : <h3 className="text-red-600">Debe escribir un título</h3>
+          }
         </form>
       </section>
     </main>

@@ -2,19 +2,21 @@ import React, { useEffect, useState } from "react";
 import { getBook, editBook } from "../api/auth";
 import { useNavigate } from "react-router-dom";
 import { profile } from "../api/auth";
+import { Button } from "react-scroll";
 
 export default function EditBook() {
   const [booksUser, setBooksUser] = useState();
-  const [verifyDelete, setVerifyDelete] = useState({verify:false,num:0});
+  const [verifyDelete, setVerifyDelete] = useState({ verify: false, num: 0 });
+  const [activeDescription, setActiveDescription] = useState(false);
 
   window.scrollTo(0, 0);
   const navigate = useNavigate();
   const [book, setBook] = useState();
-  const [user,setUser] = useState()
+  const [user, setUser] = useState();
 
   const coco = async () => {
     const res = await profile();
-   res.data.message === "No autorizado"? navigate("/"):null
+    res.data.message === "No autorizado" ? navigate("/") : null;
     setBooksUser(res.data.userFound.books);
   };
   useEffect(() => {
@@ -27,18 +29,20 @@ export default function EditBook() {
   };
 
   // Sin acceso a editar desde la barra de direcciones
-  if (book && booksUser &&  book.dataUser.userName && book.dataUser.userName !== booksUser[0].dataUser.userName) {
-    
-      navigate("/profile");
-    
+  if (
+    book &&
+    booksUser &&
+    book.dataUser.userName &&
+    book.dataUser.userName !== booksUser[0].dataUser.userName
+  ) {
+    navigate("/profile");
   }
 
   useEffect(() => {
     handleBooks();
   }, []);
 
- 
- const handleAddChapter = (e) => {
+  const handleAddChapter = (e) => {
     book.chapters.push({
       title: "",
       text: "",
@@ -46,14 +50,22 @@ export default function EditBook() {
     book ? editBook(book._id, book) : null;
     localStorage.setItem("numChapter", e);
     navigate("/writingPage");
-  }; 
+  };
 
   const handleDelete = (e) => {
     book.chapters.splice(e, 1);
     book ? editBook(book._id, book) : null;
     location.reload();
   };
-  
+
+  const handleDescription = (e) => {
+    e.preventDefault();
+    console.log(e.target[0].value);
+    book.description = e.target[0].value;
+    editBook(book._id, book);
+    setActiveDescription(false)
+  };
+
   return (
     <main className="absolute overflow-x-hidden w-[98.5vw] h-screen ">
       <section className="relative w-full h-fulll px-20 mt-20">
@@ -88,12 +100,12 @@ export default function EditBook() {
                     <h3 className="w-96 flex   justify-start items-start text-center  border-r border-orange-500">
                       {e.title}
                     </h3>
-                    <h3 className="w-52 border-r border-r-orange-600">                  
-                    {book.updatedAt
+                    <h3 className="w-52 border-r border-r-orange-600">
+                      {book.updatedAt
                         .slice(0, 10)
                         .split("-")
                         .reverse()
-                        .join("/")} 
+                        .join("/")}
                     </h3>
                     <button
                       onClick={() => {
@@ -106,33 +118,34 @@ export default function EditBook() {
                     </button>
                     <button
                       onClick={() => {
-                        setVerifyDelete({verify:true,num :i});
+                        setVerifyDelete({ verify: true, num: i });
                       }}
                       className="btn w-20"
                     >
                       Eliminar
                     </button>
                     {verifyDelete.verify && verifyDelete.num === i ? (
-                    <div className="absolute w-96 text-red-400 font-bold flex text-center gap-5 ml-[900px] z-[100] bg-slate-700 p-2  rounded-full">
-                      <h3 className="">Confirma que deseas eliminar el capítulo</h3>
-                      <p
-                        onClick={() => handleDelete(i)}
-                        className="text-green-400 cursor-pointer font-bold"
-                      >
-                        V
-                      </p>
-                      <p
-                        onClick={() => {
-                          setVerifyDelete({verify:false});
-                        }}
-                        className="text-red-400 cursor-pointer font-bold"
-                      >
-                        X
-                      </p>
-                    </div>
-                  ) : null}
+                      <div className="absolute w-96 text-red-400 font-bold flex text-center gap-5 ml-[900px] z-[100] bg-slate-700 p-2  rounded-full">
+                        <h3 className="">
+                          Confirma que deseas eliminar el capítulo
+                        </h3>
+                        <p
+                          onClick={() => handleDelete(i)}
+                          className="text-green-400 cursor-pointer font-bold"
+                        >
+                          V
+                        </p>
+                        <p
+                          onClick={() => {
+                            setVerifyDelete({ verify: false });
+                          }}
+                          className="text-red-400 cursor-pointer font-bold"
+                        >
+                          X
+                        </p>
+                      </div>
+                    ) : null}
                   </div>
-                
                 </section>
               );
             })
@@ -143,7 +156,7 @@ export default function EditBook() {
               onClick={() => handleAddChapter(book.chapters.length + 1)}
               className="btn"
             >
-              Añadir Capitulo
+              <span>A</span>ñadir Capitulo
             </button>
             <button
               onClick={() => {
@@ -151,7 +164,7 @@ export default function EditBook() {
               }}
               className="btn"
             >
-              Ver libro
+              <span>V</span>er libro
             </button>
             <button
               onClick={() => {
@@ -159,8 +172,40 @@ export default function EditBook() {
               }}
               className="btn"
             >
-              Leer libro
+              <span>L</span>eer libro
             </button>
+            <button onClick={() => setActiveDescription(true)} className="btn">
+              <span>E</span>ditar descripción
+            </button>
+            {activeDescription ? (
+              <form
+                type="submit"
+                onSubmit={(e) => handleDescription(e)}
+                className="mt-52 w-96 h-60 text-white"
+              >
+                <textarea
+                  className="w-full rounded-md bg-slate-800"
+                  type="text"
+                  placeholder="Nueva descripción"
+                />
+                <div className=" w-full justify-center gap-5 flex">
+                  <button
+                    className="text-red-600 text-2xl font-bold"
+                    onClick={() => setActiveDescription(false)}
+                  >
+                    X
+                  </button>
+
+                 
+                  <button
+                    type="submit"
+                    className="text-green-600 text-2xl font-bold"
+                  >
+                    V
+                  </button>
+                </div>
+              </form>
+            ) : null}
           </div>
         ) : null}
       </section>
