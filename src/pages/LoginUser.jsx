@@ -40,7 +40,7 @@ export default function LoginUser() {
             setErrorEmail(true);
             setErrorPassword(false);
           } else {
-           /*  navigate("/profile"), location.reload(); */
+             navigate("/profile"), location.reload(); 
           }
         })}
       >
