@@ -44,11 +44,6 @@ export default function ReadComments() {
 
   return (
     <main className="w-screen flex">
-      <nav className="fixed  z-[100] w-40 h-12 flex justify-center items-center text-white">
-        <button className="text-xl" onClick={() => navigate(-1)}>
-          <span>V</span>olver
-        </button>
-      </nav>
       <section className=" w-full flex flex-col flex-wrap items-center mt-20 text-white text-4xl">
         {book ? (
           <h2 className="text-6xl mb-10">
