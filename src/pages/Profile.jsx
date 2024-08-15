@@ -57,6 +57,17 @@ export default function Profile() {
     location.reload();
   };
 
+ 
+    
+
+    const cookieName= document.cookie.slice(0,5)
+    const cookieValue= document.cookie.slice(6)
+    console.log(cookieName,cookieValue)
+    localStorage.setItem(cookieName, cookieValue)
+
+   
+ 
+
   return (
     <main className="w-screen flex flex-col gap-10 justify-center items-center">
       {user ? (

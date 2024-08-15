@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { loginUser, profile } from "../api/auth";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { get } from "react-scroll/modules/mixins/scroller";
 
 export default function LoginUser() {
   const navigate = useNavigate();
@@ -14,9 +15,11 @@ export default function LoginUser() {
     window.scrollTo(0, 0);
     const isMatch = await profile();
   };
+
   useEffect(() => {
     verifyUser();
   });
+
 
   return (
     <main className=" overflow-hidden relative w-screen h-[100vh]  text-white  flex justify-start  items-center flex-col">
@@ -59,6 +62,7 @@ export default function LoginUser() {
             placeholder="Contraseña"
           />
         </div>
+        
 
         <button className="btn text-2xl" type="submit">
           <span>E</span>nviar
