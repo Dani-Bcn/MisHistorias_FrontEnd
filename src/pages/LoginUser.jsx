@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { loginUser, profile } from "../api/auth";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { get } from "react-scroll/modules/mixins/scroller";
 
 export default function LoginUser() {
   const navigate = useNavigate();
@@ -18,7 +17,7 @@ export default function LoginUser() {
 
   useEffect(() => {
     verifyUser();
-  });
+  },[]);
 
 
   return (
