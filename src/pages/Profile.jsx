@@ -21,7 +21,7 @@ export default function Profile() {
     res ? setUser(res.data.userFound) : null;
   };
 
-  user ? console.log(user) : null;
+
 
   useEffect(() => {
     getUser();
@@ -33,7 +33,6 @@ export default function Profile() {
 
   const handlePublish = (book) => {
     book.published = true;
-    console.log(book);
     editBook(book._id, book);
     location.reload()
   };

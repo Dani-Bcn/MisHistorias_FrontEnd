@@ -29,7 +29,9 @@ export default function LoginUser() {
         className=" backdrop-blur-100 mt-40 z-[50] flex flex-col justify-around items-center rounded-xl  transition-all "
         onSubmit={handleSubmit(async (values) => {
           const res = await loginUser(values);
-          setResponse(res.data);
+           setResponse(res.data); 
+          
+           localStorage.setItem("token", res.data)
 
           if (res.data.message && res.data.message == "Contraseña no valida") {
             setErrorPassword(true);
@@ -38,7 +40,7 @@ export default function LoginUser() {
             setErrorEmail(true);
             setErrorPassword(false);
           } else {
-            navigate("/profile"), location.reload();
+           /*  navigate("/profile"), location.reload(); */
           }
         })}
       >

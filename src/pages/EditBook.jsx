@@ -60,7 +60,6 @@ export default function EditBook() {
 
   const handleDescription = (e) => {
     e.preventDefault();
-    console.log(e.target[0].value);
     book.description = e.target[0].value;
     editBook(book._id, book);
     setActiveDescription(false)

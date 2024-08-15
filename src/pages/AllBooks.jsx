@@ -31,7 +31,6 @@ export default function AllBooks() {
   }, [acces]);
 
   const getBook = async (bookId) => {
-    console.log(userId)
     const objectsId =  {
       bookId: bookId,
       userId: userId,
