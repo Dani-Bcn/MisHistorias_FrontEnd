@@ -13,7 +13,7 @@ export default function AllBooks() {
   const [userId, setUserId] = useState();
   const [user, setUser] = useState();
   const [activeDescription, setActiveDescription] = useState(true);
-  const [acces, setAcces] = useState(true);
+  const [acces, setAcces] = useState(false);
 
   const searchBooks = async () => {
     const res = await getAllBooks();
@@ -27,8 +27,8 @@ export default function AllBooks() {
 
   useEffect(() => {
     searchBooks();
-    setAcces(Cookies.get("token"));
-  }, [acces]);
+   
+  }, []);
 
   const getBook = async (bookId) => {
     const objectsId =  {

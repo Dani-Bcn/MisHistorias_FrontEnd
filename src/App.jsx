@@ -26,7 +26,7 @@ import ReadComments from "./pages/ReadComments";
 function App() {
   const [acces, setAcces] = useState();
   useEffect(() => {
-    setAcces(Cookies.get("token"));
+    setAcces(localStorage.getItem("token"));
   }, []);
 
   return (
