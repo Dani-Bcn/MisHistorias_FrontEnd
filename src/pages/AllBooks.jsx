@@ -13,7 +13,7 @@ export default function AllBooks() {
   const [userId, setUserId] = useState();
   const [user, setUser] = useState();
   const [activeDescription, setActiveDescription] = useState(true);
-  const [acces, setAcces] = useState(false);
+  const [acces, setAcces] = useState(true);
 
   const searchBooks = async () => {
     const res = await getAllBooks();
