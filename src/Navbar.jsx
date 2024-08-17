@@ -11,7 +11,7 @@ export default function Navbar() {
   const [acces, setAcces] = useState();
 
   useEffect(() => {
-    setAcces(localStorage.getItem("token"));
+    setAcces(Cookies.get("token"));
   }, []);
 
   const getUser = async () => {
@@ -59,7 +59,7 @@ export default function Navbar() {
               <li
                 onClick={() => {
                   localStorage.removeItem("token");
-                  logout(), navigate("/"),location.reload()
+                  logout(), navigate("/"),location.reload();
                 }}
               >
                 Salir

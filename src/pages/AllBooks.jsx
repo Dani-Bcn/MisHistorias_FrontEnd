@@ -17,21 +17,21 @@ export default function AllBooks() {
 
   const searchBooks = async () => {
     const res = await getAllBooks();
-    if(acces){
-    const resUser = await profile();
-      setUserId(resUser.data.userFound._id)
-      setUser(resUser.data.userFound); }
-      setBooks(res.data.booksFound);      
-   
-  }; 
+    if (acces) {
+      const resUser = await profile();
+      setUserId(resUser.data.userFound._id);
+      setUser(resUser.data.userFound);
+    }
+    setBooks(res.data.booksFound);
+  };
 
   useEffect(() => {
     searchBooks();
-   
-  }, []);
+    setAcces(Cookies.get("token"));
+  }, [acces]);
 
   const getBook = async (bookId) => {
-    const objectsId =  {
+    const objectsId = {
       bookId: bookId,
       userId: userId,
     };
@@ -53,6 +53,7 @@ export default function AllBooks() {
       marginTop: 0,
     });
   };
+  books ? console.log(books) : null;
 
   return (
     <main className="w-screen flex  justify-center text-white">
@@ -144,35 +145,33 @@ export default function AllBooks() {
                     >
                       <span>L</span>eer
                     </button>
-                    {user  ? (
+                    {user ? (
                       <div className="flex flex-col items-start gap-2">
                         <button
                           className="btn flex justify-start"
                           onClick={() => getBook(e._id)}
                         >
-
-                       
                           <span>A</span>ñadir Biblioteca
-                        </button>    </div>    ) : null}
-                        {e.comments.length > 0 ? (
-                          <button
-                            onClick={() => {
-                              localStorage.setItem("bookId", e._id),
-                                navigate("/readComments");
-                            }}
-                          >
-                            <span>C</span>omentarios {e.comments.length}
-                          </button>
-                        ) : null}
-
-{e.numVotes.length > 0 ? 
-                        <h3 className="text-[18px]">
-                          <span>V</span>aloraciones {e.numVotes}
-                        </h3>
-                        :null}
+                        </button>{" "}
                       </div>
-               
-               
+                    ) : null}
+                    {e.comments.length > 0 ? (
+                      <button
+                        onClick={() => {
+                          localStorage.setItem("bookId", e._id),
+                            navigate("/readComments");
+                        }}
+                      >
+                        <span>C</span>omentarios {e.comments.length}
+                      </button>
+                    ) : null}
+
+                    {e.numVotes.length > 0 ? (
+                      <h3 className="text-[18px]">
+                        <span>V</span>aloraciones {e.numVotes}
+                      </h3>
+                    ) : null}
+                  </div>
                 </div>
               );
             }
