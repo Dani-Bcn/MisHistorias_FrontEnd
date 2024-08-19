@@ -27,7 +27,6 @@ export const loginUser = async (user) =>
     },   
   });
 export const logout = async (user) =>
-  Cookies.remove('token')
   await axxios.post("/api/logoutUser", user, {
     credentials: "include",
     withCredentials: true, 
