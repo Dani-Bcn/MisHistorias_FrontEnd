@@ -19,7 +19,12 @@ export const createBook = async (values) =>
 export const editUser = async (id, values) =>
   await axxios.put(`/api/editUser/${id}`, values);
 export const loginUser = async (user) =>
-  await axxios.post("/api/loginUser", user);
+  await axxios.post("/api/loginUser", user, {
+    withCredentials: true, // Esto asegura que la cookie se envíe con la solicitud
+    headers: {
+      'Content-Type': 'application/json'}
+      // Otros headers si es necesario
+    });
 export const logout = async (user) =>
   await axxios.post("/api/logoutUser", user);
 export const profile = async () => await axxios.get("/api/profile");
