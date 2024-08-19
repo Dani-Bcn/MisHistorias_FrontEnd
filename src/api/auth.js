@@ -24,24 +24,23 @@ export const loginUser = async (user) =>
     withCredentials: true, // Esto asegura que la cookie se envíe con la solicitud
     headers: {
       "Content-Type": "application/json",
-    },
-    // Otros headers si es necesario
+    },   
   });
 export const logout = async (user) =>
   await axxios.post("/api/logoutUser", user, {
     credentials: "include",
-    withCredentials: true, // Esto asegura que la cookie se envíe con la solicitud
+    withCredentials: true, 
     headers: {
       "Content-Type": "application/json",
     },
   });
 export const profile = async () =>
   await axxios.get("/api/profile", {
-    withCredentials: true, // Esto asegura que la cookie se envíe con la solicitud
+    credentials: "include",
+    withCredentials: true,
     headers: {
       "Content-Type": "application/json",
     },
-    // Otros headers si es necesario
   });
 export const getIdUser = async () => await axxios.post("/api/getIdUser");
 export const booksUser = async (idUser) =>
