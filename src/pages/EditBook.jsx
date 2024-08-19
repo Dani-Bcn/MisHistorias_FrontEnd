@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { getBook, editBook } from "../api/auth";
 import { useNavigate } from "react-router-dom";
 import { profile } from "../api/auth";
-import { Button } from "react-scroll";
 
 export default function EditBook() {
   const [booksUser, setBooksUser] = useState();
