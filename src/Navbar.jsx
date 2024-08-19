@@ -12,7 +12,7 @@ export default function Navbar() {
 
   useEffect(() => {
     setAcces(Cookies.get("token"));
-  }, [user]);
+  }, []);
 
   const getUser = async () => {
     const res = await profile();
