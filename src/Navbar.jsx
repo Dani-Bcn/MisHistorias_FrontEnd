@@ -11,6 +11,7 @@ export default function Navbar() {
   const [acces, setAcces] = useState();
 
   useEffect(() => {
+    console.log(Cookies.get("token"))
     setAcces(Cookies.get("token"));
   }, []);
 
@@ -35,7 +36,7 @@ export default function Navbar() {
           <li onClick={() => navigate("/AllBooks")}>
             <span className="font-bold">T</span>odas las historias
           </li>
-          {!acces ? (
+          {!user ? (
             <div className="flex gap-5 items-start justify-center">
               <li onClick={() => navigate("/register")}>
                 <span className="font-bold">R</span>egistro
