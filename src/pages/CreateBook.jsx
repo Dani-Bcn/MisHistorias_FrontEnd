@@ -27,7 +27,7 @@ export default function CreateBook() {
 
     const res = await createBook(dataValues);
     localStorage.setItem("bookId", res.data.newBook._id);
-    navigate("/profile");
+    navigate("/profile"),location.reload();
   });
 
   return (
