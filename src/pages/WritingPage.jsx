@@ -28,11 +28,10 @@ export default function WritingPage() {
       setText(book.chapters[numberChapter - 1].text);
     }
   };
-  setTimeout(() => {
-    setStateEdit(true);
-  }, 50);
+
 
   useEffect(() => {
+    setStateEdit(true);
     handleBook();
   }, [stateEdit]);
 
