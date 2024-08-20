@@ -36,6 +36,7 @@ export default function WritingPage() {
   }, [stateEdit]);
 
   const handleChangeTitle = (e) => {
+    setTitle(title + e)
     setTitle((prev) => (prev = e.target.value));
     book.chapters.title = title;
   };
@@ -77,7 +78,7 @@ export default function WritingPage() {
             id="title"
             type="text"
             onChange={(e) => handleChangeTitle(e)}
-            value={book.chapters[numberChapter-1].title}
+            value={title}
           />
 
           <textarea
