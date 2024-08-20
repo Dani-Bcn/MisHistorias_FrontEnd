@@ -3,7 +3,7 @@ import { getBook, editBook } from "../api/auth";
 import { useNavigate } from "react-router-dom";
 
 export default function WritingPage() {
-  
+
   window.scrollTo(0, 0);
   const navigate = useNavigate();
   const [getBookLocal, setgetBookLocal] = useState(
@@ -17,6 +17,7 @@ export default function WritingPage() {
   const [text, setText] = useState();
   const [stateEdit, setStateEdit] = useState(false);
   const [verifyTitle, setVerifyTitle] = useState(false);
+  console.log(getBookLocal, numberChapter)
 
   const handleBook = async () => {
     window.scrollTo(0, 0);
