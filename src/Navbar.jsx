@@ -27,11 +27,7 @@ export default function Navbar() {
   return (
     <main className="fixed w-screen h-12 bg-slate-600/15  items-center  backdrop-blur-[5px] flex z-[100]">
       <div className=" w-screen  flex justify-center  items-center text-xl text-slate-200">
-        {locationPath.pathname !== "/" ? (
-          <button className="absolute text-xl" onClick={() => navigate(-1)}>
-            <span className="font-bold">V</span>olver
-          </button>
-        ) : null}
+       
         <ul className="w-[90vw] flex gap-10 justify-end items-center">
           <li onClick={() => navigate("/AllBooks")}>
             <span className="font-bold">T</span>odas las historias
