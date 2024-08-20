@@ -86,7 +86,7 @@ export default function WritingPage() {
             id="text"
             name="text"
             placeholder="Texto"
-            value={book.chapters[numberChapter-1].text}
+            value={text}
             onChange={(e) => handleChangeText(e)}
           />
           {title && title.length > 0 ? (
