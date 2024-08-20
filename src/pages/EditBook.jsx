@@ -108,8 +108,8 @@ export default function EditBook() {
                     <button
                       onClick={() => {
                         console.log(i),
-                     localStorage.setItem("numChapter", i + 1)
-                          /*    navigate("/writingPage"); */
+                     localStorage.setItem("numChapter", i + 1),
+                           navigate("/writingPage"); 
                       }}
                       className="btn"
                     >
