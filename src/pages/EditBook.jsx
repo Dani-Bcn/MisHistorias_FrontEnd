@@ -42,7 +42,7 @@ export default function EditBook() {
   }, []);
 
   const handleAddChapter = (e) => {
-  /*   book.chapters.push({
+    /*   book.chapters.push({
       title: "",
       text: "",
     }); */
@@ -54,14 +54,14 @@ export default function EditBook() {
   const handleDelete = (e) => {
     book.chapters.splice(e, 1);
     book ? editBook(book._id, book) : null;
-   res.send(book)
+    res.send(book);
   };
 
   const handleDescription = (e) => {
     e.preventDefault();
     book.description = e.target[0].value;
     editBook(book._id, book);
-    setActiveDescription(false)
+    setActiveDescription(false);
   };
 
   return (
@@ -107,9 +107,8 @@ export default function EditBook() {
                     </h3>
                     <button
                       onClick={() => {
-                        console.log(i),
-                     localStorage.setItem("numChapter", i + 1),
-                           navigate("/writingPage"); 
+                          localStorage.setItem("numChapter", i + 1)
+                          navigate("/writingPage");
                       }}
                       className="btn"
                     >
@@ -195,7 +194,6 @@ export default function EditBook() {
                     X
                   </button>
 
-                 
                   <button
                     type="submit"
                     className="text-green-600 text-2xl font-bold"
