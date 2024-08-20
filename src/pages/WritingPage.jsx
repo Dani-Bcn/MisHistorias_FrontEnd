@@ -29,7 +29,6 @@ export default function WritingPage() {
     }
   };
 
-
   useEffect(() => {
     setStateEdit(true);
     handleBook();
@@ -55,8 +54,10 @@ export default function WritingPage() {
       text: text,
     };
     book ? editBook(book._id, book) : null;
-    navigate("/editBook"),location.reload()
-    ;
+    navigate("/editBook"),
+      setTimeout(() => {
+        location.reload();
+      }, 250);
   };
 
   return (
@@ -88,8 +89,9 @@ export default function WritingPage() {
             <button type="submit" className="btn">
               Guardar cápitulo
             </button>
-          ) : <h3 className="text-red-600">Debe escribir un título</h3>
-          }
+          ) : (
+            <h3 className="text-red-600">Debe escribir un título</h3>
+          )}
         </form>
       </section>
     </main>
