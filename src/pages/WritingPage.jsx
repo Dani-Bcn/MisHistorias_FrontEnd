@@ -3,9 +3,9 @@ import { getBook, editBook } from "../api/auth";
 import { useNavigate } from "react-router-dom";
 
 export default function WritingPage() {
+  
   window.scrollTo(0, 0);
   const navigate = useNavigate();
-
   const [getBookLocal, setgetBookLocal] = useState(
     localStorage.getItem("bookId")
   );
