@@ -36,7 +36,7 @@ export default function WritingPage() {
   }, [stateEdit]);
 
   const handleChangeTitle = (e) => {
-    setTitle(title + e)
+ 
     setTitle((prev) => (prev = e.target.value));
     book.chapters.title = title;
   };
