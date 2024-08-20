@@ -64,6 +64,8 @@ export default function WritingPage() {
   return (
     <main>
       <section className=" w-[80vw] h-[60vh] m-20 mt-20 ">
+
+      {book ?
         <form
           className="w-full h-[40vh] text-xl text-slate-300"
           onSubmit={handleSubmit}
@@ -94,6 +96,7 @@ export default function WritingPage() {
             <h3 className="text-red-600">Debe escribir un título</h3>
           )}
         </form>
+        :null}
       </section>
     </main>
   );
