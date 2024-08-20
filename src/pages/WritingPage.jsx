@@ -75,7 +75,7 @@ export default function WritingPage() {
             id="title"
             type="text"
             onChange={(e) => handleChangeTitle(e)}
-            value={title}
+            value={book.chapters[numberChapter-1].title}
           />
 
           <textarea
@@ -83,7 +83,7 @@ export default function WritingPage() {
             id="text"
             name="text"
             placeholder="Texto"
-            value={text}
+            value={book.chapters[numberChapter-1].text}
             onChange={(e) => handleChangeText(e)}
           />
           {title && title.length > 0 ? (
