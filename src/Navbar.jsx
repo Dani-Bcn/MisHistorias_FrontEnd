@@ -59,8 +59,8 @@ export default function Navbar() {
               ) : null}
               <li
                 onClick={() => {
-                  localStorage.removeItem("token");
-                  logout(), navigate("/"),location.reload();
+                 
+                  logout()
                 }}
               >
                 Salir
