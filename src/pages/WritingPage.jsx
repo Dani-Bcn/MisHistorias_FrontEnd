@@ -65,7 +65,7 @@ export default function WritingPage() {
     <main>
       <section className=" w-[80vw] h-[60vh] m-20 mt-20 ">
 
-      {book ?
+      {book && book.chapters ?
         <form
           className="w-full h-[40vh] text-xl text-slate-300"
           onSubmit={handleSubmit}
