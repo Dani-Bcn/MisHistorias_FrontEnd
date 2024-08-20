@@ -17,11 +17,11 @@ export default function WritingPage() {
   const [text, setText] = useState();
   const [stateEdit, setStateEdit] = useState(false);
   const [verifyTitle, setVerifyTitle] = useState(false);
-  book?console.log(book):null
+  book?console.log(title,text):null
 
   const handleBook = async () => {
     window.scrollTo(0, 0);
-    const res = await getBook(getBookLocal);
+    const res = await getBook(getBookLocal);//getBook busca el libri por su id
 
     setBook(res.data);
     if (book && book.chapters) {
