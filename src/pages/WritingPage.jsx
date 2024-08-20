@@ -17,7 +17,7 @@ export default function WritingPage() {
   const [text, setText] = useState();
   const [stateEdit, setStateEdit] = useState(false);
   const [verifyTitle, setVerifyTitle] = useState(false);
-  book?console.log(title,text):null
+
 
   const handleBook = async () => {
     window.scrollTo(0, 0);
@@ -61,7 +61,7 @@ export default function WritingPage() {
         location.reload();
       }, 100);
   };
-
+ console.log(title,text)
   return (
     <main>
       <section className=" w-[80vw] h-[60vh] m-20 mt-20 ">
