@@ -56,7 +56,7 @@ export default function Navbar() {
               <li
                 onClick={() => {
                  
-                  logout()
+                  logout(), navigate("/"),location.reload()
                 }}
               >
                 Salir

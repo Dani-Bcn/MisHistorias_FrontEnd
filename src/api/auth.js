@@ -27,13 +27,7 @@ export const loginUser = async (user) =>
     },   
   });
 export const logout = async (user) =>
-  await axxios.post("/api/logoutUser", user, {
-    credentials: "include",
-    withCredentials: true, 
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
+  await axxios.post("/api/logoutUser", user);
 export const profile = async () =>
   await axxios.get("/api/profile", {
     credentials: "include",
