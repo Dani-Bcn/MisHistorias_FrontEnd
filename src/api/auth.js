@@ -67,13 +67,9 @@ export const searchBooks = async (values) =>
 export const getAllBooks = async () => await axxios.get(`/api/getAllBooks`);
 
 //Eliminar libro
-
- export const deleteBooks = async () =>
-  await axxios.delete(`/api/deleteBook`);
- 
-/* export const deleteBooks = async (id) =>
+export const deleteBooks = async (id) =>
   await axxios.delete(`/api/deleteBook/${id}`);
- */
+
 //Editar libro
 export const editBook = async (id, values) =>
   await axxios.put(`/api/editBook/${id}`, values);
