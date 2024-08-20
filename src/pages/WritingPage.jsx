@@ -30,7 +30,7 @@ export default function WritingPage() {
   };
   setTimeout(() => {
     setStateEdit(true);
-  }, 250);
+  }, 50);
 
   useEffect(() => {
     handleBook();
@@ -56,7 +56,11 @@ export default function WritingPage() {
       text: text,
     };
     book ? editBook(book._id, book) : null;
-    navigate("/editBook");
+    navigate("/editBook")
+    setTimeout(()=>{
+      location.reload()
+    },100)
+    ;
   };
 
   return (
