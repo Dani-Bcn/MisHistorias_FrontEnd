@@ -45,6 +45,7 @@ export default function WritingComments() {
       });
       book ? editBook(book._id, book) : null;
       navigate("/pageBook");
+      location.reload()
     }
   };
 
