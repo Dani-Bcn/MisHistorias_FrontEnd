@@ -46,26 +46,26 @@ export default function EditBook() {
       title: "",
       text: "",
     });
-    book ? editBook(book._id, book) : null;
+    handleEditBook();
     localStorage.setItem("numChapter", e);
     navigate("/writingPage");
   };
 
   const handleDelete = (e) => {
     book.chapters.splice(e, 1);
-
-  
-      editBook(book._id, book);
-        setTimeout(() => {
-      location.reload();
-    },100);
+    handleEditBook();
   };
 
   const handleDescription = (e) => {
     e.preventDefault();
     book.description = e.target[0].value;
-    editBook(book._id, book);
+    handleEditBook();
     setActiveDescription(false);
+  };
+
+  const handleEditBook = () => {
+    editBook(book._id, book);
+    location.reload()
   };
 
   return (
