@@ -42,10 +42,10 @@ export default function EditBook() {
   }, []);
 
   const handleAddChapter = (e) => {
-    /*   book.chapters.push({
+       book.chapters.push({
       title: "",
       text: "",
-    }); */
+    }); 
     book ? editBook(book._id, book) : null;
     localStorage.setItem("numChapter", e);
     navigate("/writingPage");
