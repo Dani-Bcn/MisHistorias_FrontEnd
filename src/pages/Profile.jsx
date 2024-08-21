@@ -44,10 +44,11 @@ export default function Profile() {
     user.books.map((books, i) => {
       if (books._id === books) {
         user.books.splice(i, 1);
-        location.reload();
+       
       }
     });
-    deleteBooks(book);
+    deleteBooks(book); 
+    location.reload();
   };
 
   const deleteBookLibrary = async (bookId) => {
