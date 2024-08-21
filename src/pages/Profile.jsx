@@ -175,7 +175,7 @@ export default function Profile() {
                                       //Elimina la imagen de Cloudinary
                                       removeBook(book._id),
                                         removeImg(book.imageUrl),
-                                        location.reload();
+                                        
                                     }}
                                   >
                                     V
