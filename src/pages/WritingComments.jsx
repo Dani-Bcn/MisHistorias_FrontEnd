@@ -26,18 +26,17 @@ export default function WritingComments() {
   };
 
   useEffect(() => {
-    
-    book.idUserComments.map((e)=>{
-      e.include(user._id)
-      navigate(
-        "/AllBooks"
-      )
-    })
-
     getUser();
     searchBook();
   }, []);
- book && user ?console.log(book,user):null
+  book && user
+    ? book.idUserComments.map((e) => {
+        e.include(user._id);
+        navigate("/AllBooks");
+      })
+    : null;
+
+  book && user ? console.log(book, user) : null;
   const handleClick = (e) => {
     if (getText.length < 10) {
       setVerifyText(true);
