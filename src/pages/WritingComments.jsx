@@ -26,7 +26,14 @@ export default function WritingComments() {
   };
 
   useEffect(() => {
-   
+    
+    book.idUserComments.map((e)=>{
+      e.include(user._id)
+      navigate(
+        "/AllBooks"
+      )
+    })
+
     getUser();
     searchBook();
   }, []);
