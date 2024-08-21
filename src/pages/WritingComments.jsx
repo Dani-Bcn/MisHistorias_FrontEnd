@@ -31,7 +31,7 @@ export default function WritingComments() {
   }, []);
   book && user
     ? book.idUserComments.includes(user._id)?
-     console.log(user._id)
+     navigate("/Allbooks")
      :null
     : null;
 
