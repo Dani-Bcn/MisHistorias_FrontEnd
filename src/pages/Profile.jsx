@@ -36,8 +36,7 @@ export default function Profile() {
     book && book.published === true?editBook(book._id, book):nulll
     setTimeout(() => {
       location.reload()  
-    }, 150);
-    
+    }, 150);    
   };
 
   const removeBook = (book) => {
@@ -48,7 +47,9 @@ export default function Profile() {
       }
     });
     deleteBooks(book); 
+    setTimeout(()=>{
     location.reload()
+  },150)
   };
 
   const deleteBookLibrary = async (bookId) => {
