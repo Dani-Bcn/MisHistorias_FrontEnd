@@ -63,7 +63,7 @@ export default function WritingPage() {
       {book && book.chapters ?
         <form
           className="w-full h-[40vh] text-xl text-slate-300"
-          onSubmit={saveChapter()}
+          onSubmit={saveChapter}
         >
           <input
             placeholder="Título del capítulo"
