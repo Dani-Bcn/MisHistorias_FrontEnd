@@ -26,11 +26,11 @@ export default function WritingComments() {
   };
 
   useEffect(() => {
-    console.log(book,user)
+   
     getUser();
     searchBook();
   }, []);
-
+ console.log(book,user)
   const handleClick = (e) => {
     if (getText.length < 10) {
       setVerifyText(true);
