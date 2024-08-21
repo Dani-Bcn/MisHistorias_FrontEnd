@@ -19,7 +19,6 @@ export default function ReadComments() {
     res ? setBook(res.data) : null;
   };
 
- 
   useEffect(() => {
     getUser();
     searchBook();
@@ -34,10 +33,12 @@ export default function ReadComments() {
     editText.length > 5 ? setActiveButton(true) : null;
   };
 
-  const handleSubmit = (i) => {   
+  const handleSubmit = (i) => {
     book.comments[i].text = editText;
-    book && book.comments ?editBook(book._id, book):null
-    location.reload();
+    book ? editBook(book._id, book) : null;
+    setTimeout(() => {
+      location.reload();
+    }, 100);
   };
 
   return (
@@ -101,7 +102,7 @@ export default function ReadComments() {
                                       <div
                                         className="text-3xl font-black hover:text-green-600 transition-all cursor-pointer"
                                         onClick={() => {
-                                          handleSubmit(i)
+                                          handleSubmit(i);
                                         }}
                                       >
                                         V
