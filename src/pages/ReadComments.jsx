@@ -36,7 +36,7 @@ export default function ReadComments() {
 
   const handleSubmit = (i) => {   
     book.comments[i].text = editText;
-    editBook(book._id, book);
+    book && book.comments ?editBook(book._id, book):null
     location.reload();
   };
 
