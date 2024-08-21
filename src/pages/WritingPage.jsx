@@ -87,7 +87,7 @@ export default function WritingPage() {
             value={text}
             onChange={(e) => handleChangeText(e)}
           />
-          {title && title.length > 0 ? (
+          {title && title.length > 0 && text && text.length > 0 ? (
             <button type="submit" className="btn">
               Guardar cápitulo
             </button>
