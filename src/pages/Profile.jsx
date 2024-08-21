@@ -56,7 +56,7 @@ export default function Profile() {
     location.reload();
   };
 
-  console.log(user.books)
+  user?console.log(user.books):null
 
   return (
     <main className="w-screen flex flex-col gap-10 justify-center items-center">
