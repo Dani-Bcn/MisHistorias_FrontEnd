@@ -31,9 +31,11 @@ export default function WritingComments() {
   }, []);
   book && user
     ? book.idUserComments.map((e) => {
-        e.include(user._id);
-        navigate("/AllBooks");
-      })
+
+      console.log(e)
+      /*   e.include(user._id);
+        navigate("/AllBooks");*/
+      }) 
     : null;
 
   book && user ? console.log(book, user) : null;
