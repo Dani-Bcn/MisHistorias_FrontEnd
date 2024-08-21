@@ -48,17 +48,18 @@ export default function WritingPage() {
   
 
   const saveChapter = () => {
-    book.chapters[numberChapter - 1] = {
+    console.log("cooc")
+   /*  book.chapters[numberChapter - 1] = {
       title: title,
       text: text,
     };
     console.log(book.chapters)
  editBook(book._id, book)
     navigate("/editBook")
-    location.reload()
+    location.reload() */
     
   };
- console.log(title,text)
+
   return (
     <main>
       <section className=" w-[80vw] h-[60vh] m-20 mt-20 ">
