@@ -53,7 +53,7 @@ export default function EditBook() {
 
   const handleDelete = (e) => {
     book.chapters.splice(e, 1);
-  editBook(book._id, book) 
+  book && book.chapters ?editBook(book._id, book) :null
     location.reload()
    
   };
