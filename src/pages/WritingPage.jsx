@@ -54,6 +54,7 @@ export default function WritingPage() {
     };
     book ? editBook(book._id, book) : null;
     navigate("/editBook")
+    location.reload()
   };
  console.log(title,text)
   return (
