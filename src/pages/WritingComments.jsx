@@ -30,7 +30,7 @@ export default function WritingComments() {
     getUser();
     searchBook();
   }, []);
- console.log(book,user)
+ book && user ?console.log(book,user):null
   const handleClick = (e) => {
     if (getText.length < 10) {
       setVerifyText(true);
