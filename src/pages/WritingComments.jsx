@@ -20,15 +20,14 @@ export default function WritingComments() {
     res ? setUser(res.data.userFound) : null;
   };
 
-  useEffect(() => {
-    getUser();
-  }, []);
   const searchBook = async () => {
     const res = await getBook(localStorage.getItem("bookId"));
     res ? setBook(res.data) : null;
   };
 
   useEffect(() => {
+    console.log(book,user)
+    getUser();
     searchBook();
   }, []);
 
