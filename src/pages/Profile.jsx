@@ -33,8 +33,11 @@ export default function Profile() {
 
   const handlePublish = (book) => {
     book.published = true;
-    editBook(book._id, book);
-    location.reload()
+    book?editBook(book._id, book):nulll
+    setTimeout(() => {
+      location.reload()  
+    }, 150);
+    
   };
 
   const removeBook = (book) => {
@@ -143,7 +146,6 @@ export default function Profile() {
                             >
                               <span>I</span>nfo
                             </button>
-
                             {book.published !== true ? (
                               <button
                                 className="btn  w-10 flex justify-start"
@@ -161,7 +163,6 @@ export default function Profile() {
                             >
                               <span>E</span>liminar libro
                             </button>
-
                             {handleDelete && numDeleteBook === i ? (
                               <div className="text-red-600">
                                 <h3>Confirma que quieres eliminar el libro</h3>
