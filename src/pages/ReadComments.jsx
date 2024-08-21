@@ -31,7 +31,7 @@ export default function ReadComments() {
   const handleChange = (e) => {
     editText = e.target.value;
     editText.length > 5 ? setActiveButton(true) : null;
-    location.reload()
+   
   };
 
   const handleSubmit = (i) => {
