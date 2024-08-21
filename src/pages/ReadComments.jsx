@@ -34,9 +34,7 @@ export default function ReadComments() {
     editText.length > 5 ? setActiveButton(true) : null;
   };
 
-  const handleSubmit = (i) => {
-    
-   
+  const handleSubmit = (i) => {   
     book.comments[i].text = editText;
     editBook(book._id, book);
     location.reload();
@@ -103,7 +101,7 @@ export default function ReadComments() {
                                       <div
                                         className="text-3xl font-black hover:text-green-600 transition-all cursor-pointer"
                                         onClick={() => {
-                                          handleSubmit(i), location.reload();
+                                          handleSubmit(i)
                                         }}
                                       >
                                         V
