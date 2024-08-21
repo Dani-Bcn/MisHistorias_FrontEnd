@@ -16,7 +16,6 @@ export default function WritingPage() {
   const [title, setTitle] = useState();
   const [text, setText] = useState();
   const [stateEdit, setStateEdit] = useState(false);
-  const [verifyTitle, setVerifyTitle] = useState(false);
 
 
   const handleBook = async () => {
