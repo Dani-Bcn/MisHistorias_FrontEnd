@@ -9,12 +9,12 @@ import {
 import { useNavigate } from "react-router-dom";
 
 export default function Profile() {
+  /*  window.scrollTo(0, 0) */
 
   const navigate = useNavigate();
   const [user, setUser] = useState();
   const [handleDelete, setHandeDelete] = useState(false);
   const [numDeleteBook, setNumDeleteBook] = useState();
-  const [detectedBook, setDetectedBook] = useState(false)
 
   const getUser = async () => {
     const res = await profile();
@@ -25,7 +25,7 @@ export default function Profile() {
 
   useEffect(() => {
     getUser();
-  },[detectedBook]);
+  }, []);
 
   const removeImg = async (values) => {
     await deleteImg({ coco: values });
@@ -36,21 +36,18 @@ export default function Profile() {
     book && book.published === true?editBook(book._id, book):nulll
     setTimeout(() => {
       location.reload()  
-    }, 150);    
+    }, 150);
+    
   };
 
   const removeBook = (book) => {
-    console.log(book)
-    setDetectedBook(!detectedBook)
-     user.books.map((books, i) => {
+    user.books.map((books, i) => {
       if (books._id === books) {
-        user.books.splice(i, 1);       
+        user.books.splice(i, 1);
+        location.reload();
       }
     });
-    deleteBooks(book); 
-    setTimeout(()=>{
-    location.reload()
-  },100)
+    deleteBooks(book);
   };
 
   const deleteBookLibrary = async (bookId) => {
@@ -175,8 +172,8 @@ export default function Profile() {
                                     onClick={() => {
                                       //Elimina la imagen de Cloudinary
                                       removeBook(book._id),
-                                        removeImg(book.imageUrl)
-                                        
+                                        removeImg(book.imageUrl),
+                                        location.reload();
                                     }}
                                   >
                                     V
