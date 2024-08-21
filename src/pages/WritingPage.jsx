@@ -45,9 +45,7 @@ export default function WritingPage() {
     book.chapters.text = text;
   };
 
-  const handleSubmit = (e) => {
-    saveChapter();
-  };
+  
 
   const saveChapter = () => {
     book.chapters[numberChapter - 1] = {
@@ -68,7 +66,7 @@ export default function WritingPage() {
       {book && book.chapters ?
         <form
           className="w-full h-[40vh] text-xl text-slate-300"
-          onSubmit={handleSubmit}
+          onSubmit={saveChapter()}
         >
           <input
             placeholder="Título del capítulo"
