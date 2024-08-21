@@ -123,7 +123,7 @@ export default function EditBook() {
                     >
                       Eliminar
                     </button>
-                    {verifyDelete.num === i ? (
+                    {verifyDelete.verify && verifyDelete.num === i ? (
                       <div className="absolute w-96 text-red-400 font-bold flex text-center gap-5 ml-[900px] z-[100] bg-slate-700 p-2  rounded-full">
                         <h3 className="">
                           Confirma que deseas eliminar el capítulo
