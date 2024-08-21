@@ -174,7 +174,7 @@ export default function Profile() {
                                     onClick={() => {
                                       //Elimina la imagen de Cloudinary
                                       removeBook(book._id),
-                                        removeImg(book.imageUrl),
+                                        removeImg(book.imageUrl)
                                         
                                     }}
                                   >
