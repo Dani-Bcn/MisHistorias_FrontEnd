@@ -14,6 +14,7 @@ export default function Profile() {
   const [user, setUser] = useState();
   const [handleDelete, setHandeDelete] = useState(false);
   const [numDeleteBook, setNumDeleteBook] = useState();
+  const [detectedBook, setDetectedBook] = useState(false)
 
   const getUser = async () => {
     const res = await profile();
@@ -24,7 +25,7 @@ export default function Profile() {
 
   useEffect(() => {
     getUser();
-  },[user]);
+  },[detectedBook]);
 
   const removeImg = async (values) => {
     await deleteImg({ coco: values });
@@ -40,6 +41,7 @@ export default function Profile() {
 
   const removeBook = (book) => {
     console.log(book)
+    setDetectedBook(!detectedBook)
      user.books.map((books, i) => {
       if (books._id === books) {
         user.books.splice(i, 1);       
