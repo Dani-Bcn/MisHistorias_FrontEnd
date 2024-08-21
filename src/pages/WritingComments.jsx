@@ -32,7 +32,7 @@ export default function WritingComments() {
   book && user
     ? book.idUserComments.map((e) => {
 
-      console.log(e)
+      console.log(e,user._id)
       /*   e.include(user._id);
         navigate("/AllBooks");*/
       }) 
