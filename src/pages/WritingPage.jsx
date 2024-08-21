@@ -56,7 +56,7 @@ export default function WritingPage() {
     navigate("/editBook")
     setTimeout(()=>{
     location.reload() 
-  },100)
+  },150)
     
   };
 
