@@ -24,7 +24,7 @@ export default function Profile() {
 
   useEffect(() => {
     getUser();
-  },[user.books]);
+  },[user]);
 
   const removeImg = async (values) => {
     await deleteImg({ coco: values });
