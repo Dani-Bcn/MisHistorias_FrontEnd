@@ -50,7 +50,7 @@ export default function Profile() {
     deleteBooks(book); 
     setTimeout(()=>{
     location.reload()
-  },150)
+  },100)
   };
 
   const deleteBookLibrary = async (bookId) => {
