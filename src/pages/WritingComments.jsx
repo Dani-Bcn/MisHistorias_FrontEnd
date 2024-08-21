@@ -44,7 +44,7 @@ export default function WritingComments() {
         update: { month: month + 1, year: year , day: day},
       });
       book ? editBook(book._id, book) : null;
-      navigate("/allBooks");
+      navigate("/pageBook");
     }
   };
 
