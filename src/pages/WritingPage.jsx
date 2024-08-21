@@ -53,7 +53,7 @@ export default function WritingPage() {
       text: text,
     };
     book ? editBook(book._id, book) : null;
-    navigate("/editBook"),
+    navigate("/editBook")
   };
  console.log(title,text)
   return (
