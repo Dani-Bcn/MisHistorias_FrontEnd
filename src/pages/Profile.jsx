@@ -48,6 +48,7 @@ export default function Profile() {
       }
     });
     deleteBooks(book); 
+    location.reload()
   };
 
   const deleteBookLibrary = async (bookId) => {
