@@ -127,7 +127,7 @@ export default function PageBook() {
                 onClick={() => setHandleChapters(!handleCahpters)}
                 className="w-26 text-2xl cursor-pointer hover:text-orange-600 transiton-all duration-[.5s] "
               >
-                <span className="font-semibold ">C</span>apítulos{" "}
+                <span className="font-semibold ">C</span>apítulos
                 {book.chapters.length}
               </p>
               {handleCahpters ? (
