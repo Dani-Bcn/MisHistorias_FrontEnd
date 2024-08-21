@@ -34,8 +34,7 @@ export default function WritingPage() {
     handleBook();
   }, [stateEdit]);
 
-  const handleChangeTitle = (e) => {
- 
+  const handleChangeTitle = (e) => { 
     setTitle((prev) => (prev = e.target.value));
     book.chapters.title = title;
   };
@@ -53,9 +52,9 @@ export default function WritingPage() {
       text: text,
     };
     console.log(book.chapters)
-/*  editBook(book._id, book)
+  editBook(book._id, book)
     navigate("/editBook")
-    location.reload() */
+    location.reload() 
     
   };
 
