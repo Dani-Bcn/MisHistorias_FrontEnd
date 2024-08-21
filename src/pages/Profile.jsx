@@ -33,7 +33,7 @@ export default function Profile() {
 
   const handlePublish = (book) => {
     book.published = true;
-    book?editBook(book._id, book):nulll
+    book && book.published !== true?editBook(book._id, book):nulll
     setTimeout(() => {
       location.reload()  
     }, 150);
