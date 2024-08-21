@@ -9,7 +9,7 @@ export default function WritingComments() {
   const [book, setBook] = useState();
   const [user, setUser] = useState();
   const date = new Date();
-  const day = date.getDay()
+  const day = date.getDay();
   const month = date.getMonth();
   const year = date.getFullYear();
   const [verifyText, setVerifyText] = useState(false);
@@ -36,16 +36,18 @@ export default function WritingComments() {
     if (getText.length < 10) {
       setVerifyText(true);
     } else {
-      book.idUserComments.push(user._id)
+      book.idUserComments.push(user._id);
       book.comments.push({
         text: getText,
         user: user.userName,
-        userId:user._id,
-        update: { month: month + 1, year: year , day: day},
+        userId: user._id,
+        update: { month: month + 1, year: year, day: day },
       });
       book ? editBook(book._id, book) : null;
       navigate("/pageBook");
-      location.reload()
+      setTimeout(() => {
+        location.reload();
+      }, 150);
     }
   };
 
@@ -65,7 +67,7 @@ export default function WritingComments() {
         <button onClick={() => handleClick(getText)} className="text-xl">
           Guardar comentario
         </button>
-        {verifyText? (
+        {verifyText ? (
           <h3
             onClick={() => setVerifyText(false)}
             className="text-red-600 text-xl my-5 cursor-pointer"
