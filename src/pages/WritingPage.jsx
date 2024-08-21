@@ -52,9 +52,11 @@ export default function WritingPage() {
       title: title,
       text: text,
     };
+    console.log(book.chapters)
     book ? editBook(book._id, book) : null;
     navigate("/editBook")
     location.reload()
+    
   };
  console.log(title,text)
   return (
