@@ -42,14 +42,14 @@ export default function Profile() {
 
   const removeBook = (book) => {
     console.log(book)
-   /*  user.books.map((books, i) => {
+     user.books.map((books, i) => {
       if (books._id === books) {
         user.books.splice(i, 1);
        
       }
     });
     deleteBooks(book); 
-    location.reload(); */
+    location.reload(); 
   };
 
   const deleteBookLibrary = async (bookId) => {
