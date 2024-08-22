@@ -14,15 +14,16 @@ export default function Navbar() {
 
   const getUser = async () => {
     const res = await profile();
-   setUser(res.data.userFound) 
-  
+   res?setUser(res.data.userFound) :null
+   res?setAcces(Cookies.get("token")):null
+
   };
- setAcces(Cookies.get("token"))
+
   console.log(Cookies.get("token"))
 
   useEffect(() => {  
     getUser();
-  }, []);
+  }, [user]);
 
   return (
     <main className="fixed w-screen h-12 bg-slate-600/15  items-center  backdrop-blur-[5px] flex z-[100]">
@@ -43,7 +44,7 @@ export default function Navbar() {
             </div>
           ) : (
             <div className="flex gap-5 justify-center items-center">
-              {acces ? (
+            
                 <li>
                   <img
                     onClick={() => navigate("/profile")}
@@ -52,7 +53,7 @@ export default function Navbar() {
                     className=" w-10 h-10  rounded-full border-4 border-white hover:border-orange-600 object-cover transition-all duration-300"
                   />
                 </li>
-              ) : null}
+         
               <li
                 onClick={() => {                 
                   logout(), navigate("/"),location.reload()
