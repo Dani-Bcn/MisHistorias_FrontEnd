@@ -54,6 +54,7 @@ export default function EditBook() {
   const handleDelete = (e) => {
     console.log(book.chapters)
     book.chapters.splice(e,1)
+    editBook(book._id,book)
     console.log(book.chapters)
   };
 
