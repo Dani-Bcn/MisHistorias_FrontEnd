@@ -53,7 +53,6 @@ export default function AllBooks() {
       marginTop: 0,
     });
   };
-  books ? console.log(books) : null;
 
   return (
     <main className="w-screen flex  justify-center text-white">

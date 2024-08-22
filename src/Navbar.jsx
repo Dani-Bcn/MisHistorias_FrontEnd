@@ -6,21 +6,20 @@ import Cookies from "js-cookie";
 
 export default function Navbar() {
   const navigate = useNavigate();
-  const locationPath = useLocation();
   const [user, setUser] = useState();
   const [acces, setAcces] = useState();
 
-
+  useEffect(() => {
+    console.log(Cookies.get("token"))
+    setAcces(Cookies.get("token"));
+  }, []);
 
   const getUser = async () => {
     const res = await profile();
-   res?setUser(res.data.userFound) :null
-
-
+    res ? setUser(res.data.userFound) : null;
   };
 
-  useEffect(() => {  
-    setAcces(Cookies.get("token"))
+  useEffect(() => {
     getUser();
   }, []);
 
@@ -43,7 +42,7 @@ export default function Navbar() {
             </div>
           ) : (
             <div className="flex gap-5 justify-center items-center">
-            
+              {user ? (
                 <li>
                   <img
                     onClick={() => navigate("/profile")}
@@ -52,7 +51,7 @@ export default function Navbar() {
                     className=" w-10 h-10  rounded-full border-4 border-white hover:border-orange-600 object-cover transition-all duration-300"
                   />
                 </li>
-         
+              ) : null}
               <li
                 onClick={() => {                 
                   logout(), navigate("/"),location.reload()
