@@ -19,8 +19,6 @@ export default function Navbar() {
 
   };
 
-  console.log(Cookies.get("token"))
-  acces?console.log("Cookies"):null
   useEffect(() => {  
     setAcces(Cookies.get("token"))
     getUser();
@@ -34,7 +32,7 @@ export default function Navbar() {
           <li onClick={() => navigate("/AllBooks")}>
             <span className="font-bold">T</span>odas las historias
           </li>
-          {!user ? (
+          {!acces ? (
             <div className="flex gap-5 items-start justify-center">
               <li onClick={() => navigate("/register")}>
                 <span className="font-bold">R</span>egistro
