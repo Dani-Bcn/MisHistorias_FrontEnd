@@ -39,7 +39,7 @@ export default function EditBook() {
 
   useEffect(() => {
     handleBooks();
-  }, []);
+  }, [book.chapters]);
 
   const handleAddChapter = (e) => {
        book.chapters.push({
@@ -53,12 +53,8 @@ export default function EditBook() {
 
   const handleDelete = (e) => {
     console.log(book.chapters)
-
     book.chapters.splice(e,1)
     console.log(book.chapters)
-
-
-   
   };
 
   const handleDescription = (e) => {
