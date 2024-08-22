@@ -37,7 +37,7 @@ export default function WritingComments() {
 
   book && user ? console.log(book, user) : null;
   const handleClick = (e) => {
-    if (getText.length < 10) {
+    if (getText.length < 5) {
       setVerifyText(true);
     } else {
       book.idUserComments.push(user._id);
@@ -76,7 +76,7 @@ export default function WritingComments() {
             onClick={() => setVerifyText(false)}
             className="text-red-600 text-xl my-5 cursor-pointer"
           >
-            El comentario debe tener un mínimo de 10 carácteres
+            El comentario debe tener un mínimo de 5 carácteres
           </h3>
         ) : null}
       </section>
