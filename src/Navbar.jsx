@@ -15,7 +15,7 @@ export default function Navbar() {
 
   useEffect(() => {
     getUser();
-    setAcces(localStorage.setItem("token"));
+    setAcces(localStorage.getItem("token"));
   }, []);
   console.log("Cookies")
 
