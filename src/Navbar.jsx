@@ -20,7 +20,7 @@ export default function Navbar() {
   };
 
   console.log(Cookies.get("token"))
-  console.log("Cookies")
+  acces?console.log("Cookies"):null
   useEffect(() => {  
     getUser();
   }, []);
