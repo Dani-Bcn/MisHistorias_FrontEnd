@@ -7,13 +7,7 @@ export default function Navbar() {
   const navigate = useNavigate();
   const [user, setUser] = useState();
   const [acces, setAcces] = useState();
-
-  useEffect(() => {
-    const token = Cookies.get("token")
-token?console.log(token):null
-    setAcces(Cookies.get("token"));
-  }, []);
-
+ 
   const getUser = async () => {
     const res = await profile();
     res ? setUser(res.data.userFound) : null;
@@ -21,6 +15,7 @@ token?console.log(token):null
 
   useEffect(() => {
     getUser();
+    setAcces(localStorage.setItem("token"));
   }, []);
   console.log("Cookies")
 
@@ -31,7 +26,7 @@ token?console.log(token):null
           <li onClick={() => navigate("/AllBooks")}>
             <span className="font-bold">T</span>odas las historias
           </li>
-          {!user ? (
+          {!acces ? (
             <div className="flex gap-5 items-start justify-center">
               <li onClick={() => navigate("/register")}>
                 <span className="font-bold">R</span>egistro
