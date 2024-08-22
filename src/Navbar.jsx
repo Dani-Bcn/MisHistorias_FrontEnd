@@ -15,13 +15,14 @@ export default function Navbar() {
   const getUser = async () => {
     const res = await profile();
    res?setUser(res.data.userFound) :null
-   res?setAcces(Cookies.get("token")):null
+
 
   };
 
   console.log(Cookies.get("token"))
   acces?console.log("Cookies"):null
   useEffect(() => {  
+    setAcces(Cookies.get("token"))
     getUser();
   }, []);
 
