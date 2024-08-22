@@ -18,8 +18,9 @@ export default function Navbar() {
     setAcces(Cookies.get("token"));
   };
 
-  useEffect(() => {
-  
+  console.log(Cookies.get("token"))
+
+  useEffect(() => {  
     getUser();
   }, []);
 
