@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
-import { logout } from "./api/auth";
-import { profile } from "./api/auth";
+import { useNavigate } from "react-router-dom";
+import { logout, profile} from "./api/auth";
 import Cookies from "js-cookie";
+
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -22,11 +22,11 @@ export default function Navbar() {
   useEffect(() => {
     getUser();
   }, []);
+  console.log("Cookies")
 
   return (
     <main className="fixed w-screen h-12 bg-slate-600/15  items-center  backdrop-blur-[5px] flex z-[100]">
-      <div className=" w-screen  flex justify-center  items-center text-xl text-slate-200">
-       
+      <div className=" w-screen  flex justify-center  items-center text-xl text-slate-200">       
         <ul className="w-[90vw] flex gap-10 justify-end items-center">
           <li onClick={() => navigate("/AllBooks")}>
             <span className="font-bold">T</span>odas las historias
