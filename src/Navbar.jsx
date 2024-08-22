@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { logout } from "./api/auth";
 import { profile } from "./api/auth";
-import Cookies from "js-cookie";
+
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -15,11 +15,11 @@ export default function Navbar() {
   const getUser = async () => {
     const res = await profile();
    res?setUser(res.data.userFound) :null
-   res?setAcces(Cookies.get("token")):null
+   res?setAcces(browser.cookies.get("token")):null
 
   };
 
-  console.log(Cookies.get("token"))
+  console.log(browser.cookies.get("token"))
   acces?console.log("Cookies"):null
   useEffect(() => {  
     getUser();
