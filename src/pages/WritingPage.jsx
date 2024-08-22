@@ -42,9 +42,7 @@ export default function WritingPage() {
   const handleChangeText = (e) => {
     setText((prev) => (prev = e.target.value));
     book.chapters.text = text;
-  };
-
-  
+  }; 
 
   const saveChapter = () => {
     book.chapters[numberChapter - 1] = {

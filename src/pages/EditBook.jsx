@@ -52,10 +52,7 @@ export default function EditBook() {
   };
 
   const handleDelete = (e) => {
-    book.chapters.splice(e, 1);
-  book && book.chapters ?editBook(book._id, book) :null
-
-  location.reload()
+    console.log(e)
 
    
   };
