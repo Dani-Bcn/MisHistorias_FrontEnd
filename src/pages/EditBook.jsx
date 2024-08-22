@@ -52,7 +52,11 @@ export default function EditBook() {
   };
 
   const handleDelete = (e) => {
-    console.log(e)
+    console.log(book.chapters)
+
+    book.chapters.splice(e,1)
+    console.log(book.chapters)
+
 
    
   };
