@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { logout, profile} from "./api/auth";
 import Cookies from "js-cookie";
 
-
 export default function Navbar() {
   const navigate = useNavigate();
   const [user, setUser] = useState();
@@ -51,14 +50,7 @@ export default function Navbar() {
                     className=" w-10 h-10  rounded-full border-4 border-white hover:border-orange-600 object-cover transition-all duration-300"
                   />
                 </li>
-              ) : null}
-              <li
-                onClick={() => {                 
-                  logout(), navigate("/"),location.reload()
-                }}
-              >
-                Salir
-              </li>
+              ) : null}             
             </div>
           )}
         </ul>
