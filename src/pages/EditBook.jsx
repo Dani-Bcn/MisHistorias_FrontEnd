@@ -54,9 +54,6 @@ export default function EditBook() {
   const handleDelete = (e) => {
     book.chapters.splice(e, 1);
   book && book.chapters ?editBook(book._id, book) :null
-setTimeout(()=>{
-  location.reload()
-},100)
    
   };
 

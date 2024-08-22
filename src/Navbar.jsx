@@ -13,11 +13,12 @@ export default function Navbar() {
     res ? setUser(res.data.userFound) : null;
   };
 
+  
+
   useEffect(() => {
     getUser();
     setAcces(localStorage.getItem("token"));
   }, []);
-  console.log("Cookies")
 
   return (
     <main className="fixed w-screen h-12 bg-slate-600/15  items-center  backdrop-blur-[5px] flex z-[100]">

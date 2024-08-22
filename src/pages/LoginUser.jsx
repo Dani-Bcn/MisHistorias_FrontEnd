@@ -10,14 +10,6 @@ export default function LoginUser() {
   const [errorEmail, setErrorEmail] = useState(false);
   const [response, setResponse] = useState();
 
-  const verifyUser = async () => {
-    window.scrollTo(0, 0);
-    const isMatch = await profile();
-  };
-
-  useEffect(() => {
-    verifyUser();
-  },[]);
 
 
   return (
@@ -40,7 +32,9 @@ export default function LoginUser() {
             setErrorEmail(true);
             setErrorPassword(false);
           } else {
-             navigate("/profile"), location.reload(); 
+             navigate("/profile"),
+              location.reload()
+          
           }
         })}
       >

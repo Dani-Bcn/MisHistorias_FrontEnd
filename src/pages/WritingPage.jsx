@@ -53,11 +53,7 @@ export default function WritingPage() {
     };
     console.log(book.chapters)
   editBook(book._id, book)
-    navigate("/editBook")
-    setTimeout(()=>{
-    location.reload() 
-  },150)
-    
+    navigate("/editBook")    
   };
 
   return (
