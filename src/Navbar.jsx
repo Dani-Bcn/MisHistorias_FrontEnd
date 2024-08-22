@@ -10,10 +10,7 @@ export default function Navbar() {
   const [user, setUser] = useState();
   const [acces, setAcces] = useState();
 
-  useEffect(() => {
-    console.log(Cookies.get("token"))
-    setAcces(Cookies.get("token"));
-  }, []);
+
 
   const getUser = async () => {
     const res = await profile();
@@ -21,6 +18,7 @@ export default function Navbar() {
   };
 
   useEffect(() => {
+    setAcces(Cookies.get("token"));
     getUser();
   }, []);
 
@@ -43,7 +41,7 @@ export default function Navbar() {
             </div>
           ) : (
             <div className="flex gap-5 justify-center items-center">
-              {user ? (
+              {acces ? (
                 <li>
                   <img
                     onClick={() => navigate("/profile")}
@@ -54,8 +52,7 @@ export default function Navbar() {
                 </li>
               ) : null}
               <li
-                onClick={() => {
-                 
+                onClick={() => {                 
                   logout(), navigate("/"),location.reload()
                 }}
               >
