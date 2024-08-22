@@ -21,8 +21,6 @@ export default function Profile() {
     res ? setUser(res.data.userFound) : null;
   };
 
-
-
   useEffect(() => {
     getUser();
   }, []);
@@ -33,11 +31,10 @@ export default function Profile() {
 
   const handlePublish = (book) => {
     book.published = true;
-    book && book.published === true?editBook(book._id, book):nulll
+    book && book.published === true ? editBook(book._id, book) : nulll;
     setTimeout(() => {
-      location.reload()  
+      location.reload();
     }, 150);
-    
   };
 
   const removeBook = (book) => {
@@ -59,7 +56,7 @@ export default function Profile() {
     location.reload();
   };
 
-  user?console.log(user.books):null
+  user ? console.log(user.books) : null;
 
   return (
     <main className="w-screen flex flex-col gap-10 justify-center items-center">
@@ -153,7 +150,11 @@ export default function Profile() {
                               >
                                 <span>P</span>ublicar
                               </button>
-                            ) : null}
+                            ) : (
+                              <h3>
+                                <span>P</span>ublicado
+                              </h3>
+                            )}
                             <button
                               type="button"
                               onClick={() => {
