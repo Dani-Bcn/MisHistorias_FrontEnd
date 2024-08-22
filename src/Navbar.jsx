@@ -7,9 +7,10 @@ export default function Navbar() {
   const navigate = useNavigate();
   const [user, setUser] = useState();
   const [acces, setAcces] = useState();
-
+const token = Cookies.get("token")
+console.log(token)
   useEffect(() => {
-    console.log(document.cookie)
+    
     setAcces(Cookies.get("token"));
   }, []);
 
