@@ -13,29 +13,12 @@ export default function EditBook() {
   const [book, setBook] = useState();
   const [user, setUser] = useState();
 
-  const coco = async () => {
-    const res = await profile();
-    res.data.message === "No autorizado" ? navigate("/") : null;
-    setBooksUser(res.data.userFound.books);
-  };
-  useEffect(() => {
-    coco();
-  }, []);
+ 
 
   const handleBooks = async () => {
     const res = await getBook(localStorage.getItem("bookId"));
     res ? setBook(res.data) : null;
   };
-
-  // Sin acceso a editar desde la barra de direcciones
-  if (
-    book &&
-    booksUser &&
-    book.dataUser.userName &&
-    book.dataUser.userName !== booksUser[0].dataUser.userName
-  ) {
-    navigate("/profile");
-  }
 
   useEffect(() => {
     handleBooks();
