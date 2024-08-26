@@ -50,12 +50,10 @@ export default function WritingPage() {
       text: text,
     };
     console.log(book.chapters)
-  book ?editBook(book._id, book):null
- 
-    navigate("/editBook")   
-    
-   
+  book ?editBook(book._id, book):null   
   };
+
+  
 
   return (
     <main>
