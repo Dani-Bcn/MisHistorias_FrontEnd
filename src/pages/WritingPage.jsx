@@ -30,7 +30,7 @@ export default function WritingPage() {
   useEffect(() => {
     setStateEdit(true);
     handleBook();
-  }, []);
+  }, [book.chapters]);
 
   const handleChangeTitle = (e) => {
     setTitle((prev) => (prev = e.target.value));
