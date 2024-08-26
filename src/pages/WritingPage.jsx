@@ -15,6 +15,7 @@ export default function WritingPage() {
   const [title, setTitle] = useState();
   const [text, setText] = useState();
   const [stateEdit, setStateEdit] = useState(false);
+  const [chapters, setChapters] = useState()
 
   const handleBook = async () => {
     window.scrollTo(0, 0);
