@@ -3,6 +3,7 @@ import { getBook, editBook } from "../api/auth";
 import { useNavigate } from "react-router-dom";
 
 export default function WritingPage() {
+
   window.scrollTo(0, 0);
   const navigate = useNavigate();
   const [getBookLocal, setgetBookLocal] = useState(
@@ -15,11 +16,11 @@ export default function WritingPage() {
   const [title, setTitle] = useState();
   const [text, setText] = useState();
   const [stateEdit, setStateEdit] = useState(false);
-  const [chapters, setChapters] = useState()
+
 
   const handleBook = async () => {
     window.scrollTo(0, 0);
-    const res = await getBook(getBookLocal); //getBook busca el libri por su id
+    const res = await getBook(getBookLocal);//getBook busca el libri por su id
 
     setBook(res.data);
     if (book && book.chapters) {
@@ -31,9 +32,9 @@ export default function WritingPage() {
   useEffect(() => {
     setStateEdit(true);
     handleBook();
-  }, [book.chapters]);
+  }, []);
 
-  const handleChangeTitle = (e) => {
+  const handleChangeTitle = (e) => { 
     setTitle((prev) => (prev = e.target.value));
     book.chapters.title = title;
   };
@@ -41,58 +42,55 @@ export default function WritingPage() {
   const handleChangeText = (e) => {
     setText((prev) => (prev = e.target.value));
     book.chapters.text = text;
-  };
+  }; 
 
   const saveChapter = () => {
     book.chapters[numberChapter - 1] = {
       title: title,
       text: text,
     };
-    console.log(book.chapters);
-    book ? editBook(book._id, book) : null;
-  
-      navigate("/editBook")
-  
+    console.log(book.chapters)
+  book ?editBook(book._id, book):null
+    navigate("/editBook")    
+    location.reload()
   };
 
   return (
     <main>
       <section className=" w-[80vw] h-[60vh] m-20 mt-20 ">
-        {book && book.chapters ? (
-          <form
-            className="w-full h-[40vh] text-xl text-slate-300"
-            onSubmit={saveChapter}
-          >
-            <input
-              placeholder="Título del capítulo"
-              className=" w-96 my-1 h-10 bg-slate-800"
-              name="title"
-              id="title"
-              type="text"
-              onChange={(e) => handleChangeTitle(e)}
-              value={title}
-            />
 
-            <textarea
-              className="w-full p-5 my-5 h-[300px] text-[15px] bg-slate-800"
-              id="text"
-              name="text"
-              placeholder="Texto"
-              value={text}
-              onChange={(e) => handleChangeText(e)}
-            />
-            {title && title.length > 0 && text && text.length > 0 ? (
-              <div>
-             
-                <button type="submit" className="btn">
-                Guardar cápitulo
-                </button>
-              </div>
-            ) : (
-              <h3 className="text-red-600">Debe escribir un título</h3>
-            )}
-          </form>
-        ) : null}
+      {book && book.chapters ?
+        <form
+          className="w-full h-[40vh] text-xl text-slate-300"
+          onSubmit={saveChapter}
+        >
+          <input
+            placeholder="Título del capítulo"
+            className=" w-96 my-1 h-10 bg-slate-800"
+            name="title"
+            id="title"
+            type="text"
+            onChange={(e) => handleChangeTitle(e)}
+            value={title}
+          />
+
+          <textarea
+            className="w-full p-5 my-5 h-[300px] text-[15px] bg-slate-800"
+            id="text"
+            name="text"
+            placeholder="Texto"
+            value={text}
+            onChange={(e) => handleChangeText(e)}
+          />
+          {title && title.length > 0 && text && text.length > 0 ? (
+            <button type="submit" className="btn">
+              Guardar cápitulo
+            </button>
+          ) : (
+            <h3 className="text-red-600">Debe escribir un título</h3>
+          )}
+        </form>
+        :null}
       </section>
     </main>
   );
