@@ -39,7 +39,7 @@ export default function EditBook() {
 
   useEffect(() => {
     handleBooks();
-  }, [book]);
+  }, []);
 
   const handleAddChapter = (e) => {
        book.chapters.push({
