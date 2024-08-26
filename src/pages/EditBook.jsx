@@ -12,6 +12,7 @@ export default function EditBook() {
   const navigate = useNavigate();
   const [book, setBook] = useState();
   const [user, setUser] = useState();
+  const [chapters, setChapters] = useState()
 
   const coco = async () => {
     const res = await profile();
@@ -26,7 +27,8 @@ export default function EditBook() {
   const handleBooks = async () => {
     const res = await getBook(localStorage.getItem("bookId"));
     res ? setBook(res.data) : null;
-    
+    book ? setChapters(book.chapters):null
+
   };
 
   // Sin acceso a editar desde la barra de direcciones
@@ -58,7 +60,7 @@ export default function EditBook() {
     console.log(book.chapters)
     book.chapters.splice(e,1)
     editBook(book._id,book)
-    console.log(book.chapters)
+    console.log(chapters)
   };
 
   const handleDescription = (e) => {
