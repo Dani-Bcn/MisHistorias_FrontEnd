@@ -50,8 +50,8 @@ export default function WritingPage() {
       text: text,
     };
     console.log(book.chapters)
-  book ?editBook(book._id, book):null
-    navigate("/editBook")    
+  if (book){editBook(book._id, book)
+    navigate("/editBook")    }
    
   };
 
