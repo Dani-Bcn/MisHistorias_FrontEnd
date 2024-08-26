@@ -49,6 +49,9 @@ export default function WritingPage() {
     };
     console.log(book.chapters);
     book ? editBook(book._id, book) : null;
+    setTimeout(()=>{
+      navigate("/editBook")
+    },250)
   };
 
   return (
@@ -79,11 +82,9 @@ export default function WritingPage() {
             />
             {title && title.length > 0 && text && text.length > 0 ? (
               <div>
-                <button onClick={() => navigate("/editBook")}>
-                  Guardar cápitulo, ver capítulos
-                </button>
+             
                 <button type="submit" className="btn">
-                  Guardar cápitulo pasar al siguiente
+                Guardar cápitulo
                 </button>
               </div>
             ) : (
