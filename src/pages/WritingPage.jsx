@@ -49,9 +49,9 @@ export default function WritingPage() {
     };
     console.log(book.chapters);
     book ? editBook(book._id, book) : null;
-    setTimeout(()=>{
+  
       navigate("/editBook")
-    },250)
+  
   };
 
   return (
