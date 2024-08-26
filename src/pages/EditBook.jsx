@@ -18,6 +18,7 @@ export default function EditBook() {
     res.data.message === "No autorizado" ? navigate("/") : null;
     setBooksUser(res.data.userFound.books);
   };
+
   useEffect(() => {
     coco();
   }, []);
@@ -25,9 +26,11 @@ export default function EditBook() {
   const handleBooks = async () => {
     const res = await getBook(localStorage.getItem("bookId"));
     res ? setBook(res.data) : null;
+    
   };
 
   // Sin acceso a editar desde la barra de direcciones
+
   if (
     book &&
     booksUser &&
@@ -129,7 +132,7 @@ export default function EditBook() {
                           Confirma que deseas eliminar el capítulo
                         </h3>
                         <p
-                          onClick={() => {handleDelete(i), location.reload()}}
+                          onClick={() => handleDelete(i)}
                           className="text-green-400 cursor-pointer font-bold"
                         >
                           V

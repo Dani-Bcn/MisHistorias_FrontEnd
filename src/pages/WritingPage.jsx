@@ -82,16 +82,17 @@ export default function WritingPage() {
           />
           {title && title.length > 0 && text && text.length > 0 ? (
             <button type="submit" className="btn">
-              Guardar cápitulo
+              Guardar cápitulo pasar al siguiente 
             </button>
           ) : (
             <h3 className="text-red-600">Debe escribir un título</h3>
           )}
+           <button onClick={()=> navigate("/editBook")}>Guardar cápitulo, ver capítulos</button>
         </form>
         :null}
        
       </section>
-      <button onClick={()=> navigate("/editBook")}>Ver capítulos</button>
+     
     </main>
   );
 }
