@@ -52,7 +52,7 @@ export default function WritingPage() {
     console.log(book.chapters)
   book ?editBook(book._id, book):null
     navigate("/editBook")    
-    location.reload()
+   
   };
 
   return (

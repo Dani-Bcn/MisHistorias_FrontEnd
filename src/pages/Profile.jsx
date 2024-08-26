@@ -30,11 +30,11 @@ export default function Profile() {
   };
 
   const handlePublish = (book) => {
+    
     book.published = true;
-    book && book.published === true ? editBook(book._id, book) : nulll;
-    setTimeout(() => {
-      location.reload();
-    }, 150);
+  book && book.published === true ? editBook(book._id, book) : nulll;
+   
+      location.reload()
   };
 
   const removeBook = (book) => {
