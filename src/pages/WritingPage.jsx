@@ -53,8 +53,6 @@ export default function WritingPage() {
   book ?editBook(book._id, book):null   
   };
 
-  
-
   return (
     <main>
       <section className=" w-[80vw] h-[60vh] m-20 mt-20 ">
@@ -91,6 +89,7 @@ export default function WritingPage() {
           )}
         </form>
         :null}
+        <button onClick={()=> navigate("/editBook")}>Ver capítulos</button>
       </section>
     </main>
   );
