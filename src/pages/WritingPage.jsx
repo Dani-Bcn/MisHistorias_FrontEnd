@@ -89,8 +89,9 @@ export default function WritingPage() {
           )}
         </form>
         :null}
-        <button onClick={()=> navigate("/editBook")}>Ver capítulos</button>
+       
       </section>
+      <button onClick={()=> navigate("/editBook")}>Ver capítulos</button>
     </main>
   );
 }
