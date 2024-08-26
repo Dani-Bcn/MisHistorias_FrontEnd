@@ -42,7 +42,7 @@ export default function EditBook() {
   useEffect(() => {
     handleBooks();
     coco();
-  }, [chapters]);
+  }, []);
 
   const handleAddChapter = (e) => {
        book.chapters.push({
