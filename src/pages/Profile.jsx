@@ -29,11 +29,9 @@ export default function Profile() {
     await deleteImg({ coco: values });
   };
 
-  const handlePublish = (book) => {
-    
+  const handlePublish = (book) => {    
     book.published = true;
-  book && book.published === true ? editBook(book._id, book) : nulll;
-   
+  book && book.published === true ? editBook(book._id, book) : null;   
       location.reload()
   };
 
@@ -81,7 +79,6 @@ export default function Profile() {
               onClick={() => navigate("/createBook")}
             >
               <h3 className="mt-5">
-                {" "}
                 <span>C</span>rear una nueva historia
               </h3>
             </button>
