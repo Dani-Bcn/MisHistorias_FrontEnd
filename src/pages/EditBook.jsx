@@ -20,10 +20,7 @@ export default function EditBook() {
     setBooksUser(res.data.userFound.books);
   };
 
-  useEffect(() => {
-    coco();
-  }, []);
-
+ 
   const handleBooks = async () => {
     const res = await getBook(localStorage.getItem("bookId"));
     res ? setBook(res.data) : null;
@@ -44,7 +41,8 @@ export default function EditBook() {
 
   useEffect(() => {
     handleBooks();
-  }, []);
+    coco();
+  }, [chapters]);
 
   const handleAddChapter = (e) => {
        book.chapters.push({
