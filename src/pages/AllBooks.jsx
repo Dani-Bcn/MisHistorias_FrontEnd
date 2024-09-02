@@ -54,6 +54,8 @@ export default function AllBooks() {
     });
   };
 
+  console.log(books)
+
   return (
     <main className="w-screen flex  justify-center text-white">
       <section className="w-full my-32 mx-10 flex flex-wrap justify-between">
