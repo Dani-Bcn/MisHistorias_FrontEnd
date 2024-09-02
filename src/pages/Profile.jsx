@@ -29,10 +29,10 @@ export default function Profile() {
     await deleteImg({ coco: values });
   };
 
-  const handlePublish = (book) => {    
+  const handlePublish = (book) => {
     book.published = true;
-  book && book.published === true ? editBook(book._id, book) : null;   
-      location.reload()
+   editBook(book._id, book) 
+   
   };
 
   const removeBook = (book) => {

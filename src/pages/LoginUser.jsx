@@ -33,8 +33,7 @@ export default function LoginUser() {
             setErrorPassword(false);
           } else {
              navigate("/profile"),
-              location.reload()
-          
+              location.reload()          
           }
         })}
       >
