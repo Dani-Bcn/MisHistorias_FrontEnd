@@ -92,6 +92,7 @@ export default function PageBook() {
         : null; // La calificación del libro es la suma de todas las calificaciones dividida por el número de votaciones.
 
       book ? editBook(book._id, book) : null;
+      location.reload()
     } else {
       setMessageVote(true);
     }
