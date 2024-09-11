@@ -19,10 +19,10 @@ export default function Navbar() {
 
   useEffect(() => {
     getUser();
-  }, []);
+  }, [cookie]);
 
   useEffect(() => {
-    
+    cookie
   }, [state]);
   return (
     <main className="fixed w-screen h-12 bg-slate-600/15  items-center  backdrop-blur-[5px] flex z-[100]">
