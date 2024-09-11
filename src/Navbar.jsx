@@ -13,13 +13,12 @@ export default function Navbar() {
 
   const getUser = async () => {
     const res = await profile();
-    res ? setUser(res.data.userFound) : setUser(undefined);
-    setState(!state)
+    res ? setUser(res.data.userFound) : null;
   };
 
   useEffect(() => {
     getUser();
-  },[]);
+  },[state]);
   return (
     <main className="fixed w-screen h-12 bg-slate-600/15  items-center  backdrop-blur-[5px] flex z-[100]">
       <div className=" w-screen  flex justify-center  items-center text-xl text-slate-200">
@@ -27,7 +26,7 @@ export default function Navbar() {
           <li onClick={() => navigate("/allBooks")}>
             <span className="font-bold">T</span>odas las historias
           </li>
-          {!user? (
+          {!cookie.token ? (
             <div className="flex gap-5 items-start justify-center">
               <li onClick={() => navigate("/register")}>
                 <span className="font-bold">R</span>egistro
@@ -38,7 +37,7 @@ export default function Navbar() {
             </div>
           ) : (
             <div className="flex gap-5 justify-center items-center">
-              {user ? (
+              {cookie.token && user ? (
                 <ul className="flex justify-center items-center gap-x-5">
                   <li>
                     <img
