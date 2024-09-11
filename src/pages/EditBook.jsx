@@ -16,6 +16,14 @@ export default function EditBook() {
   const [state, setState] = useState(false)
 
   const coco = async () => {
+    if (
+      book &&
+      booksUser &&
+      book.dataUser.userName &&
+      book.dataUser.userName !== booksUser[0].dataUser.userName
+    ) {
+      navigate("/profile");
+    }
     const res = await profile();
     res.data.message === "No autorizado" ? navigate("/") : null;
     setBooksUser(res.data.userFound.books);
@@ -31,14 +39,7 @@ export default function EditBook() {
 
   // Sin acceso a editar desde la barra de direcciones
 
-  if (
-    book &&
-    booksUser &&
-    book.dataUser.userName &&
-    book.dataUser.userName !== booksUser[0].dataUser.userName
-  ) {
-    navigate("/profile");
-  }
+ 
 
   useEffect(() => {
     handleBooks();
