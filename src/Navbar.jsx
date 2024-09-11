@@ -42,7 +42,7 @@ export default function Navbar() {
             </div>
           ) : (
             <div className="flex gap-5 justify-center items-center">
-              {cookie.token && user ? (
+              {user ? (
                 <ul className="flex justify-center items-center gap-x-5">
                   <li>
                     <img
