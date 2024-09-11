@@ -14,6 +14,7 @@ export default function Navbar() {
   const getUser = async () => {
     const res = await profile();
     res ? setUser(res.data.userFound) : null;
+    localStorage.set("User",user)
     setState(!state);
   };
 
@@ -51,7 +52,7 @@ export default function Navbar() {
                     </li>
                     <li
                       onClick={() => {
-                        logout(), setState(!state), navigate("/allBooks");
+                        logout(), setState(!state), localStorage.removeItem("User") navigate("/allBooks");
                       }}
                     >
                       Logout
