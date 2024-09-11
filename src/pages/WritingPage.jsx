@@ -14,7 +14,7 @@ export default function WritingPage() {
   const [book, setBook] = useState(getBookLocal);
   const [title, setTitle] = useState();
   const [text, setText] = useState();
-  const [state, setState] = useState();
+  const [state, setState] = useState()
 
   const handleBook = async () => {
     window.scrollTo(0, 0);
@@ -24,7 +24,7 @@ export default function WritingPage() {
     if (book && book.chapters) {
       setTitle(book.chapters[numberChapter - 1].title);
       setText(book.chapters[numberChapter - 1].text);
-      setState(!state);
+      setState(!state)
     }
   };
 
@@ -47,9 +47,11 @@ export default function WritingPage() {
       title: title,
       text: text,
     };
-    state(!state);
+    state(!state)
     console.log(book.chapters);
     editBook(book._id, book);
+    
+    navigate("/editBook")
   };
 
   return (
@@ -79,14 +81,9 @@ export default function WritingPage() {
               onChange={(e) => handleChangeText(e)}
             />
             {title && title.length > 0 && text && text.length > 0 ? (
-              <section>
-                <button type="submit" className="btn">
-                  Guardar cápitulo, suguiente capitulo
-                </button>
-                <button onClick={()=>navigate("/editBook")} className="btn">
-                 Salir
-                </button>
-              </section>
+              <button type="submit" className="btn">
+                Guardar cápitulo
+              </button>
             ) : (
               <h3 className="text-red-600">Debe escribir un título</h3>
             )}
