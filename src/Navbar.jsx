@@ -9,12 +9,11 @@ export default function Navbar() {
   const [state, setState] = useState(false);
   const cookie = Cookies.get();
 
-  console.log(cookie);
+  console.log(cookie + "cookkie");
 
   const getUser = async () => {
     const res = await profile();
     res ? setUser(res.data.userFound) : null;
-    localStorage.setItem("User",user)
     setState(!state);
   };
 
@@ -52,7 +51,7 @@ export default function Navbar() {
                     </li>
                     <li
                       onClick={() => {
-                        logout(), setState(!state), localStorage.removeItem("User"), navigate("/allBooks");
+                        logout(), setState(!state), navigate("/allBooks");
                       }}
                     >
                       Logout
