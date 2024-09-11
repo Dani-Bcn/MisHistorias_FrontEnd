@@ -50,6 +50,7 @@ export default function WritingPage() {
     state(!state);
     console.log(book.chapters);
     editBook(book._id, book);
+    navigate("/editBook")
   };
 
   return (
