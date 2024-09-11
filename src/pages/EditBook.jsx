@@ -30,7 +30,7 @@ export default function EditBook() {
 
   };
 
-  // Sin acceso a editar desde la barra de direcciones 
+ 
 
   useEffect(() => {
     handleBooks();
