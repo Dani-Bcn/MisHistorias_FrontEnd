@@ -54,7 +54,7 @@ export default function Navbar() {
                   </li>
                   <li
                     onClick={() => {
-                     logout();setState(!state),location.reload()
+                     logout(),setState(!state)
 
                     }}
                   >
