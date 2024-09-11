@@ -16,6 +16,7 @@ export default function WritingComments() {
   const navigate = useNavigate();
 
   const getUser = async () => {
+    if (!localStorage.getItem("token")) navigate("/allBooks") ;
     const res = await profile();
     res ? setUser(res.data.userFound) : null;
   };

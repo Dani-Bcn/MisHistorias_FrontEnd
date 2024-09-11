@@ -17,7 +17,6 @@ export default function EditBook() {
 
   const coco = async () => {
     if (!localStorage.getItem("token")) navigate("/allBooks") ;
-    console.log(localStorage.getItem("token"))
     const res = await profile();
     res.data.message === "No autorizado" ? navigate("/") : null;
     setBooksUser(res.data.userFound.books);
