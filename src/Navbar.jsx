@@ -19,7 +19,7 @@ export default function Navbar() {
 
   useEffect(() => {
     getUser();
-  },[state]);
+  },[]);
   return (
     <main className="fixed w-screen h-12 bg-slate-600/15  items-center  backdrop-blur-[5px] flex z-[100]">
       <div className=" w-screen  flex justify-center  items-center text-xl text-slate-200">
