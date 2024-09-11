@@ -49,10 +49,10 @@ export default function WritingPage() {
     editBook(book._id, book);
     setTimeout(() => {
       location.reload()
-    }, 100);
+    }, 150);
     setTimeout(() => {
       navigate("/editBook")
-    }, 150);
+    }, 250);
     
     
   };
