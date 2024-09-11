@@ -15,14 +15,12 @@ export default function Profile() {
   const [user, setUser] = useState();
   const [handleDelete, setHandeDelete] = useState(false);
   const [numDeleteBook, setNumDeleteBook] = useState();
-  const [state,setState] = useState(false)
+  const [state, setState] = useState(false);
 
   const getUser = async () => {
     const res = await profile();
     res ? setUser(res.data.userFound) : null;
   };
-
- 
 
   const removeImg = async (values) => {
     await deleteImg({ coco: values });
@@ -30,15 +28,14 @@ export default function Profile() {
 
   const handlePublish = (book) => {
     book.published = true;
-   editBook(book._id, book) 
-   
+    editBook(book._id, book);
   };
 
   const removeBook = (book) => {
     user.books.map((books, i) => {
       if (books._id === books) {
         user.books.splice(i, 1);
-       setState(!state)
+        setState(!state);
       }
     });
     deleteBooks(book);
@@ -50,9 +47,9 @@ export default function Profile() {
       userId: user._id,
     };
     const res = await removeBookLibrary(objectsId);
-   setState(!state);
+    setState(!state);
   };
- useEffect(() => {
+  useEffect(() => {
     getUser();
   }, [state]);
   user ? console.log(user.books) : null;
@@ -144,7 +141,9 @@ export default function Profile() {
                             {book.published !== true ? (
                               <button
                                 className="btn  w-10 flex justify-start"
-                                onClick={() => {handlePublish(book),setState(!state)}}
+                                onClick={() => {
+                                  handlePublish(book), setState(!state);
+                                }}
                               >
                                 <span>P</span>ublicar
                               </button>
@@ -172,7 +171,7 @@ export default function Profile() {
                                       //Elimina la imagen de Cloudinary
                                       removeBook(book._id),
                                         removeImg(book.imageUrl),
-                                        setState(!state)
+                                        setState(!state);
                                     }}
                                   >
                                     V

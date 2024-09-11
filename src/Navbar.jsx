@@ -14,6 +14,7 @@ export default function Navbar() {
   const getUser = async () => {
     const res = await profile();
     res ? setUser(res.data.userFound) : null;
+    setState(!state)
   };
 
   useEffect(() => {
@@ -26,7 +27,7 @@ export default function Navbar() {
           <li onClick={() => navigate("/allBooks")}>
             <span className="font-bold">T</span>odas las historias
           </li>
-          {!cookie.token ? (
+          {!user? (
             <div className="flex gap-5 items-start justify-center">
               <li onClick={() => navigate("/register")}>
                 <span className="font-bold">R</span>egistro
@@ -37,7 +38,7 @@ export default function Navbar() {
             </div>
           ) : (
             <div className="flex gap-5 justify-center items-center">
-              {cookie.token && user ? (
+              {user ? (
                 <ul className="flex justify-center items-center gap-x-5">
                   <li>
                     <img
