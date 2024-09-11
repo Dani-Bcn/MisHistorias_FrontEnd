@@ -1,5 +1,4 @@
 import axios from "axios";
-import Cookies from "js-cookie";
 
 
 const axxios = axios.create({
@@ -7,7 +6,7 @@ const axxios = axios.create({
   withCredentials: true,
 });
 
-const cookie = Cookies()
+
 //Eliminar libro de biblioteca
 export const removeBookLibrary = async (objectIds) =>
   await axxios.put(
