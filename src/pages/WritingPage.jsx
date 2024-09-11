@@ -14,18 +14,18 @@ export default function WritingPage() {
   const [book, setBook] = useState(getBookLocal);
   const [title, setTitle] = useState();
   const [text, setText] = useState();
-  const [state, setState] = useState()
+  const [state, setState] = useState();
 
   const handleBook = async () => {
     window.scrollTo(0, 0);
     const res = await getBook(getBookLocal); //getBook busca el libri por su id
 
     setBook(res.data);
-    if (book && book.chapters) {
+    /* if (book && book.chapters) {
       setTitle(book.chapters[numberChapter - 1].title);
       setText(book.chapters[numberChapter - 1].text);
-      setState(!state)
-    }
+      setState(!state);
+    } */
   };
 
   useEffect(() => {
@@ -44,17 +44,12 @@ export default function WritingPage() {
 
   const saveChapter = () => {
     book.chapters[numberChapter - 1] = {
-      title: title,
-      text: text,
+      title: book.chapters[numberChapter - 1].title,
+      text: book.chapters[numberChapter - 1].text,
     };
-    state(!state)
+    state(!state);
     console.log(book.chapters);
     editBook(book._id, book);
-    setTimeout(() => {
-      location.reload()
-       navigate("/editBook")
-    }, 250);
-   
   };
 
   return (
@@ -84,9 +79,14 @@ export default function WritingPage() {
               onChange={(e) => handleChangeText(e)}
             />
             {title && title.length > 0 && text && text.length > 0 ? (
-              <button type="submit" className="btn">
-                Guardar cápitulo
-              </button>
+              <section>
+                <button type="submit" className="btn">
+                  Guardar cápitulo
+                </button>
+                <button type="submit" className="btn">
+                  Guardar cápitulo
+                </button>
+              </section>
             ) : (
               <h3 className="text-red-600">Debe escribir un título</h3>
             )}
