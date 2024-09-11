@@ -50,7 +50,14 @@ export default function Navbar() {
                   </li>
                   <li
                     onClick={() => {
-                     logout(),setState(!state), navigate("/allBooks")
+                     logout(),setState(!state),
+                     
+                     setTimeout(() => {
+                      navigate("/allBooks") 
+                      location.reload()
+
+                     }, 150);
+                     
 
                     }}
                   >
