@@ -54,7 +54,8 @@ export default function Navbar() {
                   </li>
                   <li
                     onClick={() => {
-                     logout();
+                     logout();setState(!state)
+
                     }}
                   >
                     Logout
