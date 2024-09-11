@@ -47,6 +47,7 @@ export default function WritingPage() {
       title: title,
       text: text,
     };
+    state(!state)
     console.log(book.chapters);
     editBook(book._id, book);
     navigate("/editBook")
