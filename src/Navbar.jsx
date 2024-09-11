@@ -9,7 +9,6 @@ export default function Navbar() {
   const [state, setState] = useState(false);
   const cookie = Cookies.get();
 
-  console.log(cookie + "cookkie");
 
   const getUser = async () => {
     const res = await profile();
