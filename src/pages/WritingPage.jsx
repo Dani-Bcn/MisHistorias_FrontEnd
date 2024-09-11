@@ -48,16 +48,8 @@ export default function WritingPage() {
       text: text,
     };
     console.log(book.chapters);
-    if (book) {
-      editBook(book._id, book);
-      setStateEdit(!state);
-
-      setTimeout(() => { 
-        location.reload();
-        navigate("/editBook");
-       
-      }, 150);
-    }
+    editBook(book._id, book);
+    setState(!state)
   };
 
   return (
