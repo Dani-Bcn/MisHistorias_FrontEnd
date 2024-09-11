@@ -20,7 +20,7 @@ export default function EditBook() {
     const res = await profile();
     res.data.message === "No autorizado" ? navigate("/") : null;
     setBooksUser(res.data.userFound.books);
-    if (!user ) navigate("/allBooks");
+    if (!user || !book ) navigate("/allBooks");
   };
  
   const handleBooks = async () => {
