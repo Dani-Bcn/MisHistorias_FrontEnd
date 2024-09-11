@@ -13,6 +13,7 @@ export default function PageBook() {
   const [messageVote, setMessageVote] = useState(false);
   const [user, setUser] = useState();
   const [verifyComments, setVerifyComments] = useState(true);
+  const [state, setState] = useState(false)
 
   const getUser = async () => {
     const res = await profile();
@@ -77,7 +78,7 @@ export default function PageBook() {
     });
   };
 
-  const handleClick = (e) => {
+  const handleVote = (e) => {
     console.log("handle vote")
     if (
       !book.idUserVote.includes(user._id) ||
@@ -92,9 +93,7 @@ export default function PageBook() {
         : null; // La calificación del libro es la suma de todas las calificaciones dividida por el número de votaciones.
 
       book ? editBook(book._id, book) : null;
-      setTimeout(() => {
-        location.reload()  
-      }, 100);
+      setState(!state)
       
     } else {
       setMessageVote(true);
@@ -131,7 +130,7 @@ export default function PageBook() {
                 onClick={() => setHandleChapters(!handleCahpters)}
                 className="w-26 text-2xl cursor-pointer hover:text-orange-600 transiton-all duration-[.5s] "
               >
-                <span className="font-semibold ">C</span>apítulos
+                <span className="font-semibold ">C</span>apítulos &nbsp; 
                 {book.chapters.length}
               </p>
               {handleCahpters ? (
@@ -185,7 +184,7 @@ export default function PageBook() {
                         <div
                           key={e.text}
                           id={e.text}
-                          onClick={() => handleClick(e)}
+                          onClick={() => handleVote(e)}
                           onMouseOver={() => handleOver(e)}
                           onMouseOut={() => handleOut(e)}
                           className="star w-5 h-5 bg-white cursor-pointer"
@@ -199,9 +198,7 @@ export default function PageBook() {
                   onClick={() => setMessageVote(false)}
                   className="relative  h-5 flex flex-col gap-5 text-[15px] text-red-600 cursor-pointer"
                 >
-                  <h3 className="absolute">
-                    No puedes votar dos veces por el mismo libro
-                  </h3>
+                  
                 </div>
               ) : null}
             </div>

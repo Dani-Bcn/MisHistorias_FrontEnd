@@ -15,15 +15,14 @@ export default function Profile() {
   const [user, setUser] = useState();
   const [handleDelete, setHandeDelete] = useState(false);
   const [numDeleteBook, setNumDeleteBook] = useState();
+  const [state,setState] = useState(false)
 
   const getUser = async () => {
     const res = await profile();
     res ? setUser(res.data.userFound) : null;
   };
 
-  useEffect(() => {
-    getUser();
-  }, []);
+ 
 
   const removeImg = async (values) => {
     await deleteImg({ coco: values });
@@ -39,7 +38,7 @@ export default function Profile() {
     user.books.map((books, i) => {
       if (books._id === books) {
         user.books.splice(i, 1);
-        location.reload();
+       setState(!state)
       }
     });
     deleteBooks(book);
@@ -51,9 +50,11 @@ export default function Profile() {
       userId: user._id,
     };
     const res = await removeBookLibrary(objectsId);
-    location.reload();
+   setState(!state);
   };
-
+ useEffect(() => {
+    getUser();
+  }, [state]);
   user ? console.log(user.books) : null;
 
   return (
@@ -143,12 +144,12 @@ export default function Profile() {
                             {book.published !== true ? (
                               <button
                                 className="btn  w-10 flex justify-start"
-                                onClick={() => handlePublish(book)}
+                                onClick={() => {handlePublish(book),setState(!state)}}
                               >
                                 <span>P</span>ublicar
                               </button>
                             ) : (
-                              <h3>
+                              <h3 className="font-semibold text-[18px]">
                                 <span>P</span>ublicado
                               </h3>
                             )}
@@ -171,7 +172,7 @@ export default function Profile() {
                                       //Elimina la imagen de Cloudinary
                                       removeBook(book._id),
                                         removeImg(book.imageUrl),
-                                        location.reload();
+                                        setState(!state)
                                     }}
                                   >
                                     V

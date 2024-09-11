@@ -95,15 +95,15 @@ export default function RegisterUser() {
           ) : null}
         </div>
         {errorInput ? (
-          <div className="text-red-500 text-xl mt-40 flex flex-col items-center">
+          <div className="absolute text-red-500 text-xl mt-[400px] ml-[600px] flex flex-col items-center">
             <p>{response.message}</p>
             <p>Ya tienes cuenta ?</p>
             <button
               type="button"
-              className="btn w-40 h-10 text-2xl mt-5 text-black"
+              className="btn w-40 h-10 text-2xl mt-5"
               onClick={() => navigate("/login")}
             >
-              Acceder
+              <span>A</span>cceder
             </button>
           </div>
         ) : null}

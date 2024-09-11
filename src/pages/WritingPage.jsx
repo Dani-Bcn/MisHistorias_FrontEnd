@@ -15,6 +15,7 @@ export default function WritingPage() {
   const [title, setTitle] = useState();
   const [text, setText] = useState();
   const [stateEdit, setStateEdit] = useState(false);
+  const [state, setState] = useState(false)
 
   const handleBook = async () => {
     window.scrollTo(0, 0);
@@ -30,7 +31,7 @@ export default function WritingPage() {
   useEffect(() => {
     setStateEdit(true);
     handleBook();
-  }, []);
+  }, [state]);
 
   const handleChangeTitle = (e) => {
     setTitle((prev) => (prev = e.target.value));
@@ -49,12 +50,14 @@ export default function WritingPage() {
     };
     console.log(book.chapters);
     if (book) {
-      editBook(book._id, book);
- navigate("/editBook");
-      setTimeout(() => {
-        location.reload()
-       
-      }, 100);
+      editBook(book._id, book); 
+     
+   
+ 
+          navigate("/editBook");
+    
+     
+      
     }
   };
 

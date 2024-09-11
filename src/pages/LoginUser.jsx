@@ -41,14 +41,12 @@ export default function LoginUser() {
         <h2 className="text-5xl">
           <span>A</span>cceder
         </h2>
-        <div className="flex flex-col gap-10 justify-between text-xl ">
-         
+        <div className="flex flex-col gap-10 justify-between text-xl ">        
           <input 
             className=" bg-black/0 border-2 border-orange-400"
           type="email" {...register("email", { required: true })}
           placeholder="Correo electrónico"
-          />
-         
+          />         
           <input
             className="bg-black/0 border-2 border-orange-400"
             type="password"
@@ -58,7 +56,7 @@ export default function LoginUser() {
         </div>
         
 
-        <button className="btn text-2xl" type="submit">
+        <button className="btn text-2xl -mt-10" type="submit">
           <span>E</span>nviar
         </button>
         </section>

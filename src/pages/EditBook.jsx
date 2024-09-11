@@ -13,6 +13,7 @@ export default function EditBook() {
   const [book, setBook] = useState();
   const [user, setUser] = useState();
   const [chapters, setChapters] = useState()
+  const [state, setState] = useState(false)
 
   const coco = async () => {
     const res = await profile();
@@ -42,7 +43,7 @@ export default function EditBook() {
   useEffect(() => {
     handleBooks();
     coco();
-  }, []);
+  }, [state])
 
   const handleAddChapter = (e) => {
        book.chapters.push({
@@ -59,9 +60,8 @@ export default function EditBook() {
     book.chapters.splice(e,1)
     editBook(book._id,book)
     console.log(chapters)
-    setTimeout(() => {
-      location.reload()
-    }, 100);
+    location.reload()
+   setState(!state)
   };
 
   const handleDescription = (e) => {
