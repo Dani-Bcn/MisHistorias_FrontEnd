@@ -135,7 +135,7 @@ export default function EditBook() {
                           Confirma que deseas eliminar el capítulo
                         </h3>
                         <p
-                          onClick={() => handleDelete(i)}
+                          onClick={() => {handleDelete(i),setState(!state)}}
                           className="text-green-400 cursor-pointer font-bold"
                         >
                           V
