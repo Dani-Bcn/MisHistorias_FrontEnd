@@ -1,11 +1,13 @@
 import axios from "axios";
+import Cookies from "js-cookie";
+
 
 const axxios = axios.create({
   baseURL: "https://mis-historias-back-end.vercel.app",
   withCredentials: true,
 });
 
-
+const cookie = Cookies()
 //Eliminar libro de biblioteca
 export const removeBookLibrary = async (objectIds) =>
   await axxios.put(
@@ -39,11 +41,8 @@ export const loginUser = async (user) =>
   });
 
  //Cerrar sesión usuario 
- export const logout = async (req, res) => {
-  res.cookie("token", "", {
-    expires: new Date(0),
-  });
-  res.json({message:"Sesión cerrada"});
+ export const logout = async ()=> {
+  await axxios.post("/api/logoutUser")
 };
 
 //Obtener perfil usuario
