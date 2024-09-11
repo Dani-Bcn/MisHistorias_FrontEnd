@@ -39,8 +39,12 @@ export const loginUser = async (user) =>
   });
 
  //Cerrar sesión usuario 
-export const logout = async (user) =>
-  await axxios.post("/api/logoutUser", user);
+ export const logout = async (req, res) => {
+  res.cookie("token", "", {
+    expires: new Date(0),
+  });
+  res.sendStatus(200);
+};
 
 //Obtener perfil usuario
 export const profile = async () =>
