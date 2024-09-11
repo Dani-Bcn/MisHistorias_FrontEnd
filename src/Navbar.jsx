@@ -52,7 +52,7 @@ export default function Navbar() {
                     </li>
                     <li
                       onClick={() => {
-                        logout(), setState(!state), localStorage.removeItem("User") navigate("/allBooks");
+                        logout(), setState(!state), localStorage.removeItem("User"), navigate("/allBooks");
                       }}
                     >
                       Logout
