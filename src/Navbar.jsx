@@ -54,7 +54,7 @@ export default function Navbar() {
                   </li>
                   <li
                     onClick={() => {
-                     logout(),setState(!state)
+                     logout(),setState(!state), navigate("/allBooks")
 
                     }}
                   >
