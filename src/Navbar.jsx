@@ -14,7 +14,7 @@ export default function Navbar() {
   const getUser = async () => {
     const res = await profile();
     res ? setUser(res.data.userFound) : null;
-    localStorage.set("User",user)
+    localStorage.setItem("User",user)
     setState(!state);
   };
 
