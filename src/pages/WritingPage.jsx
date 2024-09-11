@@ -15,7 +15,7 @@ export default function WritingPage() {
   const [title, setTitle] = useState();
   const [text, setText] = useState();
   const [stateEdit, setStateEdit] = useState(false);
-  const [state, setState] = useState(false)
+  const [state, setState] = useState(false);
 
   const handleBook = async () => {
     window.scrollTo(0, 0);
@@ -49,14 +49,11 @@ export default function WritingPage() {
     };
     console.log(book.chapters);
     if (book) {
-      editBook(book._id, book); 
-     
-   setStateEdit(!state)
- 
-          navigate("/editBook");
-    
-     
-      
+      editBook(book._id, book);
+
+      setStateEdit(!state);
+      navigate("/editBook");
+      location.reload()
     }
   };
 
