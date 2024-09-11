@@ -20,10 +20,10 @@ export default function WritingPage() {
     const res = await getBook(getBookLocal); //getBook busca el libri por su id
 
     setBook(res.data);
-    if (book && book.chapters) {
+    
       setTitle(book.chapters[numberChapter - 1].title);
       setText(book.chapters[numberChapter - 1].text);
-    }
+    
   };
 
   useEffect(() => {
@@ -47,9 +47,7 @@ export default function WritingPage() {
     };
     console.log(book.chapters);
     editBook(book._id, book);
-    setTimeout(() => {
-      navigate("/editBook");
-    }, 150);
+    
   };
 
   return (
