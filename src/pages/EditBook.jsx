@@ -12,47 +12,43 @@ export default function EditBook() {
   const navigate = useNavigate();
   const [book, setBook] = useState();
   const [user, setUser] = useState();
-  const [chapters, setChapters] = useState()
-  const [state, setState] = useState(false)
+  const [chapters, setChapters] = useState();
+  const [state, setState] = useState(false);
 
   const coco = async () => {
-    if (!localStorage.getItem("token")) navigate("/allBooks") ;
+    if (!localStorage.getItem("token")) navigate("/allBooks");
     const res = await profile();
     res.data.message === "No autorizado" ? navigate("/") : null;
     setBooksUser(res.data.userFound.books);
-   
   };
- 
+
   const handleBooks = async () => {
     const res = await getBook(localStorage.getItem("bookId"));
     res ? setBook(res.data) : null;
-    book ? setChapters(book.chapters):null
-
+    book ? setChapters(book.chapters) : null;
   };
-
- 
 
   useEffect(() => {
     handleBooks();
     coco();
-  }, [state])
+  }, [state]);
 
   const handleAddChapter = (e) => {
-       book.chapters.push({
+    book.chapters.push({
       title: "",
       text: "",
-    }); 
-    book ? editBook(book._id, book) : null;
+    });
+    editBook(book._id, book);
     localStorage.setItem("numChapter", e);
     navigate("/writingPage");
   };
 
-  const handleDelete = async  (e) => {
-    console.log(book.chapters)
-    book.chapters.splice(e,1)
-    await editBook(book._id,book)
-    setState(!state)
-    console.log(chapters)
+  const handleDelete = async (e) => {
+    console.log(book.chapters);
+    book.chapters.splice(e, 1);
+    await editBook(book._id, book);
+    setState(!state);
+    console.log(chapters);
   };
 
   const handleDescription = (e) => {
@@ -105,8 +101,8 @@ export default function EditBook() {
                     </h3>
                     <button
                       onClick={() => {
-                          localStorage.setItem("numChapter", i + 1)
-                          navigate("/writingPage");
+                        localStorage.setItem("numChapter", i + 1);
+                        navigate("/writingPage");
                       }}
                       className="btn"
                     >
@@ -126,7 +122,9 @@ export default function EditBook() {
                           Confirma que deseas eliminar el capítulo
                         </h3>
                         <p
-                          onClick={() => {handleDelete(i)}}
+                          onClick={() => {
+                            handleDelete(i);
+                          }}
                           className="text-green-400 cursor-pointer font-bold"
                         >
                           V
