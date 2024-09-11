@@ -43,7 +43,7 @@ export const loginUser = async (user) =>
   res.cookie("token", "", {
     expires: new Date(0),
   });
-  res.sendStatus(200);
+  res.sendStatus(200).json({message:"Sesión cerrada"});
 };
 
 //Obtener perfil usuario
