@@ -21,11 +21,11 @@ export default function WritingPage() {
     const res = await getBook(getBookLocal); //getBook busca el libri por su id
 
     setBook(res.data);
-    /* if (book && book.chapters) {
+    if (book && book.chapters) {
       setTitle(book.chapters[numberChapter - 1].title);
       setText(book.chapters[numberChapter - 1].text);
       setState(!state);
-    } */
+    }
   };
 
   useEffect(() => {
@@ -44,13 +44,12 @@ export default function WritingPage() {
 
   const saveChapter = () => {
     book.chapters[numberChapter - 1] = {
-      title: book.chapters[numberChapter - 1].title,
-      text: book.chapters[numberChapter - 1].text,
+      title: title,
+      text: text,
     };
     state(!state);
     console.log(book.chapters);
     editBook(book._id, book);
-    navigate("/editBook")
   };
 
   return (
@@ -82,10 +81,10 @@ export default function WritingPage() {
             {title && title.length > 0 && text && text.length > 0 ? (
               <section>
                 <button type="submit" className="btn">
-                  Guardar cápitulo
+                  Guardar cápitulo, suguiente capitulo
                 </button>
-                <button type="submit" className="btn">
-                  Guardar cápitulo
+                <button onClick={()=>navigate("/editBook")} className="btn">
+                 Salir
                 </button>
               </section>
             ) : (
