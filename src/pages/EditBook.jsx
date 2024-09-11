@@ -56,12 +56,12 @@ export default function EditBook() {
     navigate("/writingPage");
   };
 
-  const handleDelete = (e) => {
+  const handleDelete = async  (e) => {
     console.log(book.chapters)
     book.chapters.splice(e,1)
-    editBook(book._id,book)
+    await editBook(book._id,book)
+    setState(!state)
     console.log(chapters)
-   setState(!state)
   };
 
   const handleDescription = (e) => {
@@ -135,7 +135,7 @@ export default function EditBook() {
                           Confirma que deseas eliminar el capítulo
                         </h3>
                         <p
-                          onClick={() => {handleDelete(i),setState(!state)}}
+                          onClick={() => {handleDelete(i)}}
                           className="text-green-400 cursor-pointer font-bold"
                         >
                           V
