@@ -14,19 +14,21 @@ export default function WritingPage() {
   const [book, setBook] = useState(getBookLocal);
   const [title, setTitle] = useState();
   const [text, setText] = useState();
-  const [state, setState] = useState()
+  const [stateEdit, setStateEdit] = useState(false);
 
   const handleBook = async () => {
     window.scrollTo(0, 0);
     const res = await getBook(getBookLocal); //getBook busca el libri por su id
 
     setBook(res.data);
-
-    setTitle(book.chapters[numberChapter - 1].title);
-    setText(book.chapters[numberChapter - 1].text);
+    if (book && book.chapters) {
+      setTitle(book.chapters[numberChapter - 1].title);
+      setText(book.chapters[numberChapter - 1].text);
+    }
   };
 
   useEffect(() => {
+    setStateEdit(true);
     handleBook();
   }, []);
 
@@ -46,11 +48,13 @@ export default function WritingPage() {
       text: text,
     };
     console.log(book.chapters);
-    editBook(book._id, book);
-    setTimeout(() => {
+    if (book) {
+      editBook(book._id, book);
       navigate("/editBook");
-    }, 250);
-    
+      setTimeout(() => {
+        location.reload();
+      }, 100);
+    }
   };
 
   return (
