@@ -61,7 +61,6 @@ export default function EditBook() {
     book.chapters.splice(e,1)
     editBook(book._id,book)
     console.log(chapters)
-    location.reload()
    setState(!state)
   };
 
