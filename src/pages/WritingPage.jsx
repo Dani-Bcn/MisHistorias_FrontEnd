@@ -29,7 +29,6 @@ export default function WritingPage() {
   };
 
   useEffect(() => {
-    setStateEdit(true);
     handleBook();
   }, [state]);
 
@@ -52,7 +51,7 @@ export default function WritingPage() {
     if (book) {
       editBook(book._id, book); 
      
-   
+   setStateEdit(!state)
  
           navigate("/editBook");
     
