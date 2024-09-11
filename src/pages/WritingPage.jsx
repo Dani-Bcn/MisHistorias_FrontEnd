@@ -14,6 +14,7 @@ export default function WritingPage() {
   const [book, setBook] = useState(getBookLocal);
   const [title, setTitle] = useState();
   const [text, setText] = useState();
+  const [state, setState] = useState()
 
   const handleBook = async () => {
     window.scrollTo(0, 0);
@@ -23,13 +24,14 @@ export default function WritingPage() {
     if (book && book.chapters) {
       setTitle(book.chapters[numberChapter - 1].title);
       setText(book.chapters[numberChapter - 1].text);
+      setState(!state)
     }
   };
 
   useEffect(() => {
     handleBook();
   }, []);
-  
+
   const handleChangeTitle = (e) => {
     setTitle((prev) => (prev = e.target.value));
     book.chapters.title = title;
