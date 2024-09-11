@@ -16,7 +16,7 @@ export default function EditBook() {
   const [state, setState] = useState(false)
 
   const coco = async () => {
-    if (!localStorage.getItem("User"));
+    if (!localStorage.getItem("User")) navigate("/allBooks") ;
     console.log(localStorage.getItem("User"))
     const res = await profile();
     res.data.message === "No autorizado" ? navigate("/") : null;
