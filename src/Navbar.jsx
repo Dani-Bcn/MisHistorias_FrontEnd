@@ -14,6 +14,7 @@ export default function Navbar() {
   const getUser = async () => {
     const res = await profile();
     res ? setUser(res.data.userFound) : null;
+    setState(!state)
   };
 
   useEffect(() => {
