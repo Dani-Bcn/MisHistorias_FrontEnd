@@ -1,6 +1,5 @@
 import axios from "axios";
 
-
 const axxios = axios.create({
   baseURL: "https://mis-historias-back-end.vercel.app",
   withCredentials: true,
@@ -40,9 +39,8 @@ export const loginUser = async (user) =>
   });
 
  //Cerrar sesión usuario 
- export const logout = async (req, res) => {
- res.send("Sesión cerrada")
-};
+export const logout = async (user) =>
+  await axxios.post("/api/logoutUser", user);
 
 //Obtener perfil usuario
 export const profile = async () =>
