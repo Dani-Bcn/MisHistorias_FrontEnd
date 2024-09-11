@@ -28,7 +28,7 @@ export default function WritingPage() {
 
   useEffect(() => {
     handleBook();
-  }, [state]);
+  }, []);
 
   const handleChangeTitle = (e) => {
     setTitle((prev) => (prev = e.target.value));
