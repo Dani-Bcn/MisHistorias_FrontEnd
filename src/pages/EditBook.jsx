@@ -14,7 +14,8 @@ export default function EditBook() {
   const [user, setUser] = useState();
   const [chapters, setChapters] = useState();
   const [state, setState] = useState(false);
-  
+  console.group("coco")
+
   const coco = async () => {
     if (!localStorage.getItem("token")) navigate("/allBooks");
     const res = await profile();
