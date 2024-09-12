@@ -8,9 +8,7 @@ export default function Navbar() {
   const [user, setUser] = useState();
   const [state, setState] = useState(false);
   const cookie = Cookies.get();
-  const [screen, setScreen] = useState(window.screen);
-  const [stateMobile, setStateMobile] = useState();
-
+  
   const getUser = async () => {
     const res = await profile();
     res ? setUser(res.data.userFound) : null;
@@ -18,11 +16,8 @@ export default function Navbar() {
   };
 
   useEffect(() => {
-    getUser();    
-    screen.width < 950 ? setStateMobile(false) : setStateMobile(true)
+    getUser();
   }, []);
- 
-  window.addEventListener("resize", ()=> screen.width < 950 ? setStateMobile(false) : setStateMobile(true));
   return (
     <main className="fixed w-screen h-12 bg-slate-600/15  items-center  backdrop-blur-[5px] flex z-[100]">
       <div className=" w-screen  flex justify-center  items-center text-xl text-slate-200">
@@ -30,8 +25,7 @@ export default function Navbar() {
           <li onClick={() => navigate("/allBooks")}>
             <span className="font-bold">T</span>odas las historias
           </li>
-          {stateMobile?
-          !user ? (
+          {!user ? (
             <div className="flex gap-5 items-start justify-center">
               <li onClick={() => navigate("/register")}>
                 <span className="font-bold">R</span>egistro
@@ -54,13 +48,16 @@ export default function Navbar() {
                   </li>
                   <li
                     onClick={() => {
-                      logout(),
-                        setState(!state),
-                        setTimeout(() => {
-                          navigate("/allBooks");
-                          location.reload();
-                          localStorage.setItem("token", "");
-                        }, 150);
+                     logout(),setState(!state),
+                     
+                     setTimeout(() => {
+                      navigate("/allBooks") 
+                      location.reload()
+                      localStorage.setItem("token","")
+
+                     }, 150);
+                     
+
                     }}
                   >
                     Logout
@@ -68,8 +65,7 @@ export default function Navbar() {
                 </ul>
               ) : null}
             </div>
-          )
-          :null}
+          )}
         </ul>
       </div>
     </main>
