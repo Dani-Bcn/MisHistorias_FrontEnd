@@ -14,11 +14,12 @@ export default function Navbar() {
     res ? setUser(res.data.userFound) : null;
     setState(!state);
   };
-  window.addEventListener("resize", () => setSizeScreen(window.screen.width));
+
   useEffect(() => {
-    window.addEventListener("resize", () => setSizeScreen(window.screen.width));
+    
     getUser();
-  }, [state]);
+  }, []);
+  
   return (
     <main className="fixed w-screen h-12 bg-slate-600/15 items-center backdrop-blur-[5px] flex z-[100]">
       <div className=" w-screen  flex justify-center  items-center text-xl text-slate-200 ">
@@ -27,8 +28,8 @@ export default function Navbar() {
           <li onClick={() => navigate("/allBooks")}>
             <span className="font-bold">T</span>odas las historias
           </li>
-          
-          {!user ? (
+          {sizeScreen > 900?
+          !user ? (
             <div className="flex gap-5 items-start justify-center">
               <li onClick={() => navigate("/register")}>
                 <span className="font-bold">R</span>egistro
@@ -64,7 +65,7 @@ export default function Navbar() {
                 </ul>
               ) : null}
             </div>
-          )}
+          ):null}
         </ul>
       </div>
     </main>
