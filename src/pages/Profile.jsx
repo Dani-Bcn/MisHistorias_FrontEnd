@@ -244,7 +244,7 @@ export default function Profile() {
                             <button
                               type="button"
                               onClick={() => {
-                                deleteBookLibrary(book._id),setState(!state)
+                                deleteBookLibrary(book._id)
                               }}
                               className="btn w-28 flex justify-start"
                             >
