@@ -25,7 +25,7 @@ export default function AllBooks() {
   useEffect(() => {
     searchBooks();
     setAcces(localStorage.getItem("token"));
-  }, [acces]);
+  }, []);
   const getBook = async (bookId) => {
     const objectsId = {
       bookId: bookId,

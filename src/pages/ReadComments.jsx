@@ -7,8 +7,6 @@ export default function ReadComments() {
   const [book, setBook] = useState();
   const [user, setUser] = useState();
   const [activeEdit, setActiveEdit] = useState(false);
-  const [state, setState] = useState(false);
-
   const navigate = useNavigate();
 
   const getUser = async () => {
@@ -39,9 +37,9 @@ export default function ReadComments() {
   const handleSubmit = (i) => {
     book.comments[i].text = editText;
     book ? editBook(book._id, book) : null;
-    setActiveEdit(false)
-    setState(!state)
-    navigate("/allBooks")
+    setTimeout(() => {
+      location.reload();
+    }, 100);
   };
 
   return (
@@ -96,7 +94,7 @@ export default function ReadComments() {
                                     <div
                                       className=" text-3xl font-black hover:text-red-600 transition-all cursor-pointer"
                                       onClick={() => {
-                                        setActiveEdit(false);
+                                        setActiveEdit(false), location.reload();
                                       }}
                                     >
                                       X

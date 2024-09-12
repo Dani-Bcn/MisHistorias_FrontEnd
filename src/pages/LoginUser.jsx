@@ -35,8 +35,9 @@ export default function LoginUser() {
           } else if (res.data.message) {
             setErrorEmail(true);
             setErrorPassword(false);
-          } else {
-            navigate("/profile");
+          } else {      navigate("/profile");
+            location.reload()
+      
           }
         })}
       >

@@ -8,7 +8,7 @@ import {
 } from "../api/auth";
 import { useNavigate } from "react-router-dom";
 
-export default function Profile() {
+export default function UserProfile() {
   /*  window.scrollTo(0, 0) */
 
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ export default function Profile() {
   const [state, setState] = useState(false);
 
   const getUser = async () => {
-    const res = await profile();
+  const res = await profile(); 
    setUser(res.data.userFound) 
   };
 

@@ -11,7 +11,7 @@ import Home from "./pages/Home";
 import Navbar from "./Navbar";
 import RegisterUser from "./pages/RegisterUser";
 import LoginUser from "./pages/LoginUser";
-import Profile from "./pages/Profile";
+import UserProfile from "./pages/Profile";
 import CreateBook from "./pages/CreateBook";
 import AllBooks from "./pages/AllBooks";
 import { useEffect, useState } from "react";
@@ -36,7 +36,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<RegisterUser />} />
         <Route path="/login" element={<LoginUser />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile" element={<UserProfile />} />
         <Route path="/createBook" element={<CreateBook />} />
         <Route path="/allBooks" element={<AllBooks />} />
         <Route path="/PageBook" element={<PageBook />} />
