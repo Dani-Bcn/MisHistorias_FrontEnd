@@ -16,17 +16,13 @@ export default function Navbar() {
     res ? setUser(res.data.userFound) : null;
     setState(!state);
   };
-  const resize =(()=>{
-    
-  })
 
   useEffect(() => {
-    getUser();
-    
-    screen.width < 450 ? setStateMobile(false) : setStateMobile(true)
+    getUser();    
+    screen.width < 950 ? setStateMobile(false) : setStateMobile(true)
   }, []);
  
-  window.addEventListener("resize", ()=> screen.width < 450 ? setStateMobile(false) : setStateMobile(true) );
+  window.addEventListener("resize", ()=> screen.width < 950 ? setStateMobile(false) : setStateMobile(true));
   return (
     <main className="fixed w-screen h-12 bg-slate-600/15  items-center  backdrop-blur-[5px] flex z-[100]">
       <div className=" w-screen  flex justify-center  items-center text-xl text-slate-200">
