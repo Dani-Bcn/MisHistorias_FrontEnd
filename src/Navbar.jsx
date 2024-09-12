@@ -8,9 +8,7 @@ export default function Navbar() {
   const [user, setUser] = useState();
   const [state, setState] = useState(false);
   const cookie = Cookies.get();
-
-  console.log(cookie);
-
+  
   const getUser = async () => {
     const res = await profile();
     res ? setUser(res.data.userFound) : null;

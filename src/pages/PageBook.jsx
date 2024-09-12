@@ -79,7 +79,6 @@ export default function PageBook() {
   };
 
   const handleVote = (e) => {
-    console.log("handle vote")
     if (
       !book.idUserVote.includes(user._id) ||
       !book.idUserVote.includes(book.dataUser.userId)

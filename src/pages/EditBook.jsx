@@ -44,11 +44,9 @@ export default function EditBook() {
   };
 
   const handleDelete = async (e) => {
-    console.log(book.chapters);
     book.chapters.splice(e, 1);
     await editBook(book._id, book);
     setState(!state);
-    console.log(chapters);
   };
 
   const handleDescription = (e) => {

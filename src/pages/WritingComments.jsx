@@ -35,8 +35,7 @@ export default function WritingComments() {
      navigate("/Allbooks")
      :null
     : null;
-
-  book && user ? console.log(book, user) : null;
+    
   const handleClick = (e) => {
     if (getText.length < 5) {
       setVerifyText(true);

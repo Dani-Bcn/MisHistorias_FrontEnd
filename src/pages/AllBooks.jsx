@@ -153,7 +153,7 @@ export default function AllBooks() {
                             onClick={() => getBook(e._id)}
                           >
                             <span>A</span>ñadir Biblioteca
-                          </button>{" "}
+                          </button>
                         </div>
                       ) : null}
                       {e.comments.length > 0 ? (
