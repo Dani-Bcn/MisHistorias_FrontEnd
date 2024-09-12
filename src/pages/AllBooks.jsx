@@ -2,8 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { getAllBooks, profile } from "../api/auth";
 import { useNavigate } from "react-router-dom";
 import { addBook } from "../api/auth";
-import { arrayGenres } from "../components/Images_Genres";
-import Cookies from "js-cookie";
 import gsap from "gsap";
 
 export default function AllBooks() {
@@ -12,15 +10,13 @@ export default function AllBooks() {
   const [books, setBooks] = useState();
   const [userId, setUserId] = useState();
   const [user, setUser] = useState();
-  const [activeDescription, setActiveDescription] = useState(true);
   
 
   const searchBooks = async () => {
-    const res = await getAllBooks();
-  
+    const res = await getAllBooks();  
       const resUser = await profile();
       console.log(resUser)
-      setUserId(resUser.data.userFound._id);
+     res? setUserId(resUser.data.userFound._id):null
       setUser(resUser.data.userFound);
     
     setBooks(res.data.booksFound);
