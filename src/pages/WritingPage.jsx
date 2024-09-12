@@ -21,7 +21,7 @@ export default function WritingPage() {
     const res = await getBook(getBookLocal); //getBook busca el libri por su id
 
     setBook(res.data);
-    if (book && book.chapters &&  title && text) {
+    if (book && book.chapters) {
       setTitle(book.chapters[numberChapter - 1].title);
       setText(book.chapters[numberChapter - 1].text);
     }
@@ -47,9 +47,13 @@ export default function WritingPage() {
       title: title,
       text: text,
     };
+    console.log(book.chapters);
     if (book) {
       editBook(book._id, book);
       navigate("/editBook");
+      setTimeout(() => {
+        location.reload();
+      }, 100);
     }
   };
 
