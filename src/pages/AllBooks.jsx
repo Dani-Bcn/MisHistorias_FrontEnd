@@ -14,15 +14,13 @@ export default function AllBooks() {
 
   const searchBooks = async () => {
     const res = await getAllBooks();
-   if (acces) {
+    if (acces) {
       const resUser = await profile();
-     !resUser.data.message? setUserId(resUser.data.userFound._id):null
+      !resUser.data.message ? setUserId(resUser.data.userFound._id) : null;
       setUser(resUser.data.userFound);
-    } 
+    }
     setBooks(res.data.booksFound);
   };
-  
- 
 
   useEffect(() => {
     searchBooks();
@@ -33,7 +31,7 @@ export default function AllBooks() {
       bookId: bookId,
       userId: userId,
     };
-     await addBook(objectsId);
+    await addBook(objectsId);
   };
 
   const handleDescription = (e, i) => {
@@ -53,79 +51,56 @@ export default function AllBooks() {
   };
 
   return (
-    <main className="w-screen flex  justify-center text-white">
-      <section className="w-full my-32 mx-10 flex flex-wrap justify-between">
+    <main>
+      <section className=" w-secreen bg-slate-800 text-2xl  p-5 text-white">
         {books
           ? books.map((e, i) => {
               if (e.published === true) {
                 return (
-                  <div
-                    key={i}
-                    className="relative w-[425px] p-5  text-xl flex justify-between"
-                  >
-                    <div
-                      id={`card${i}`}
-                      className="absolute blur-xl w-20 h-20 mt-40 ml-80  bg-green-400/[0.2] z-0 rounded-full rotate-[35deg] shadow-[0px_0px_10px] shadow-black "
-                    ></div>
-                    <div
-                      id={`card2${i}`}
-                      className="absolute blur-xl w-20 h-20 mt-40 ml-40  bg-blue-600/[0.2] z-0 rounded-full rotate-[35deg] shadow-[0px_0px_10px] shadow-black"
-                    ></div>
-                    <div
-                      id={`card3${i}`}
-                      className="absolute blur-xl w-20 h-20 ml-10 mt-40  bg-orange-600/[0.2] z-0 rounded-full rotate-[35deg] shadow-[0px_0px_10px] shadow-black"
-                    ></div>
+                  <div key={i} className="mt-20">
+                    <div id={`card${i}`}></div>
+                    <div id={`card2${i}`}></div>
+                    <div id={`card3${i}`}></div>
                     <div>
-                      <div className="absolute w-[500px]">
+                      <div className="flex text-2xl">
                         <span>
-                          <h3 className="absolute text-3xl font-bold z-10">
-                            {e.title[0].toUpperCase()}
-                          </h3>
+                          <h3>{e.title[0].toUpperCase()}</h3>
                         </span>
-                        <h3 className="absolute text-3xl font-bold mx-4 z-10">
-                          {e.title.slice(1)}
-                        </h3>
+                        <h3>{e.title.slice(1)}</h3>
                       </div>
+                      <p className="absolute w-20 h-20 m-2 flex justify-center items-center text-5xl boder-red-200 border-4 bg-slate-950/[0.6] border-orange-600 rounded-full  z-[10]">{e.rating}</p>
                       <img
                         src={e.imageUrl}
                         alt="imageUrl"
-                        className=" w-40 h-72 object-cover mt-10 rounded-br-[15px] rounded-tr-[15px]  shadow-[0px_0px_10px] shadow-black border border-blue-400 z-10"
+                        className="w-full opacity-70 relalative "
                       />
-                      <p className="absolute w-16 h-16 flex justify-center items-center -mt-12  -ml-5 text-4xl text-orange-400 z-[1] border-[3px] border-blue-600 rounded-full bg-black">
-                        {e.rating}
-                      </p>
                     </div>
-                    <div
-                      key={i}
-                      className="w-52 mt-10 items-start gap-2 flex flex-col  z-1"
+                    <button
+                      onClick={() => {
+                        handleDescription(e.title);
+                      }}
                     >
-                      <div className="flex gap-2 text-3xl">
+                      <span>D</span>escripción
+                    </button>
+                    <div
+                      id={e.title.replaceAll(" ", "")}
+                      onClick={() => quitDescription(e.title)}
+                    >
+                      {e.description}
+                    </div>
+                    <div key={i}>
+                      <div>
                         <span>
-                          <p className="font-bold">{e.dataUser.userName}</p>
+                          <p>{e.dataUser.userName}</p>
                         </span>
                         <p>{e.dataUser.lastName}</p>
                       </div>
-                      <h3 className="text-2xl">
+                      <h3>
                         <span>{e.genre[0]}</span>
                         {e.genre.slice(1)}
                       </h3>
+
                       <button
-                        className="btn flex justify-start"
-                        onClick={() => {
-                          handleDescription(e.title);
-                        }}
-                      >
-                        <span>D</span>escripción
-                      </button>
-                      <div
-                        id={e.title.replaceAll(" ", "")}
-                        onClick={() => quitDescription(e.title)}
-                        className="absolute invisible opacity-0	z-[50]  -mt-10 -ml-40  cursor-pointer  w-96 bg-slate-700 p-5 rounded-xl text-[14px]"
-                      >
-                        {e.description}
-                      </div>
-                      <button
-                        className="btn relative flex justify-start z-[1]"
                         onClick={() => {
                           localStorage.setItem("bookId", e._id);
                           navigate("/PageBook");
@@ -134,7 +109,6 @@ export default function AllBooks() {
                         <span>I</span>nfo
                       </button>
                       <button
-                        className="btn relative flex justify-start"
                         onClick={() => {
                           localStorage.setItem("bookId", e._id),
                             navigate("/readBook");
@@ -143,13 +117,10 @@ export default function AllBooks() {
                         <span>L</span>eer
                       </button>
                       {user ? (
-                        <div className="flex flex-col items-start gap-2">
-                          <button
-                            className="btn flex justify-start"
-                            onClick={() => getBook(e._id)}
-                          >
+                        <div>
+                          <button onClick={() => getBook(e._id)}>
                             <span>A</span>ñadir Biblioteca
-                          </button>{" "}
+                          </button>
                         </div>
                       ) : null}
                       {e.comments.length > 0 ? (
@@ -162,18 +133,12 @@ export default function AllBooks() {
                           <span>C</span>omentarios {e.comments.length}
                         </button>
                       ) : null}
-
-                      {e.numVotes.length > 0 ? (
-                        <h3 className="text-[18px]">
-                          <span>V</span>aloraciones {e.numVotes}
-                        </h3>
-                      ) : null}
                     </div>
                   </div>
                 );
               }
             })
-          : null}       
+          : null}
       </section>
     </main>
   );

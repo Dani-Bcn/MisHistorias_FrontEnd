@@ -19,9 +19,9 @@ export default function Navbar() {
     getUser();
   }, [state]);
   return (
-    <main className="fixed w-screen h-12 bg-slate-600/15  items-center  backdrop-blur-[5px] flex z-[100]">
-      <div className=" w-screen  flex justify-center  items-center text-xl text-slate-200">
-        <ul className="w-[90vw] flex gap-10 justify-end items-center">
+    <main className="fixed w-screen h-12 bg-slate-600/15 items-center backdrop-blur-[5px] flex z-[100]">
+      <div className=" w-screen  flex justify-center  items-center text-xl text-slate-200 ">
+        <ul className="w-screen flex  justify-center lg:justify-around gap-5 items-center">
           <li onClick={() => navigate("/allBooks")}>
             <span className="font-bold">T</span>odas las historias
           </li>
