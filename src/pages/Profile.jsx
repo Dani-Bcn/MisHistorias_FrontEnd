@@ -19,7 +19,7 @@ export default function Profile() {
 
   const getUser = async () => {
     const res = await profile();
-    res ? setUser(res.data.userFound) : null;
+   setUser(res.data.userFound) 
   };
 
   const removeImg = async (values) => {
@@ -83,7 +83,7 @@ export default function Profile() {
           </div>
         </section>
       ) : null}
-      {user && user.books.length > 0 ? (
+     
         <section className="w-full pr-40 pl-20 mb-32 mt-20 items-center">
           <h2 className="text-3xl font-bold text-white my-5">
             <span>Mis</span> Historias
@@ -194,8 +194,8 @@ export default function Profile() {
               : null}
           </div>
         </section>
-      ) : null}
-      {user && user.booksLibrary.length > 0 ? (
+      
+      
         <section className="w-full pr-32 pl-20 mb-32 items-center">
           <h2 className="text-3xl font-bold text-white my-5">
             <span>Mi</span> Biblioteca
@@ -259,7 +259,7 @@ export default function Profile() {
               : null}
           </div>
         </section>
-      ) : null}
+     
     </main>
   );
 }
