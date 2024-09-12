@@ -2,8 +2,6 @@ import React, { useEffect, useRef, useState } from "react";
 import { getAllBooks, profile } from "../api/auth";
 import { useNavigate } from "react-router-dom";
 import { addBook } from "../api/auth";
-import { arrayGenres } from "../components/Images_Genres";
-import Cookies from "js-cookie";
 import gsap from "gsap";
 
 export default function AllBooks() {

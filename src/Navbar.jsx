@@ -52,7 +52,6 @@ export default function Navbar() {
                      
                      setTimeout(() => {
                       navigate("/allBooks") 
-                      location.reload()
                       localStorage.setItem("token","")
 
                      }, 150);
