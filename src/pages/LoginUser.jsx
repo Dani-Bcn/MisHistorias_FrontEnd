@@ -4,13 +4,17 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 export default function LoginUser() {
+
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
   const [errorPassword, setErrorPassword] = useState(false);
   const [errorEmail, setErrorEmail] = useState(false);
   const [response, setResponse] = useState();
+  const [state, setState] = useState(false);
 
-
+  useEffect(()=>{
+      console.log(state)
+  },[state])
 
   return (
     <main className=" overflow-hidden relative w-screen h-[100vh]  text-white  flex justify-start  items-center flex-col">
@@ -21,9 +25,9 @@ export default function LoginUser() {
         className=" backdrop-blur-100 mt-40 z-[50] flex flex-col justify-around items-center rounded-xl  transition-all "
         onSubmit={handleSubmit(async (values) => {
           const res = await loginUser(values);
-           setResponse(res.data); 
-          
-           localStorage.setItem("token", res.data)
+          setResponse(res.data);
+
+          localStorage.setItem("token", res.data);
 
           if (res.data.message && res.data.message == "Contraseña no valida") {
             setErrorPassword(true);
@@ -32,32 +36,32 @@ export default function LoginUser() {
             setErrorEmail(true);
             setErrorPassword(false);
           } else {
-             navigate("/profile")
+            navigate("/profile");
           }
         })}
       >
         <section className=" flex flex-col items-center justify-around gap-20">
-        <h2 className="text-5xl">
-          <span>A</span>cceder
-        </h2>
-        <div className="flex flex-col gap-10 justify-between text-xl ">        
-          <input 
-            className=" bg-black/0 border-2 border-orange-400"
-          type="email" {...register("email", { required: true })}
-          placeholder="Correo electrónico"
-          />         
-          <input
-            className="bg-black/0 border-2 border-orange-400"
-            type="password"
-            {...register("password", { required: true })}
-            placeholder="Contraseña"
-          />
-        </div>
-        
+          <h2 className="text-5xl">
+            <span>A</span>cceder
+          </h2>
+          <div className="flex flex-col gap-10 justify-between text-xl ">
+            <input
+              className=" bg-black/0 border-2 border-orange-400"
+              type="email"
+              {...register("email", { required: true })}
+              placeholder="Correo electrónico"
+            />
+            <input
+              className="bg-black/0 border-2 border-orange-400"
+              type="password"
+              {...register("password", { required: true })}
+              placeholder="Contraseña"
+            />
+          </div>
 
-        <button className="btn text-2xl -mt-10" type="submit">
-          <span>E</span>nviar
-        </button>
+          <button className="btn text-2xl -mt-10" type="submit">
+            <span>E</span>nviar
+          </button>
         </section>
         <section className="h-40 flex flex-col items-center gap-3">
           {errorPassword ? (
@@ -71,7 +75,7 @@ export default function LoginUser() {
               <p>{response.message}</p>
               <button onClick={() => navigate("/register")} className="btn">
                 No tienes cuenta?
-              </button>             
+              </button>
             </div>
           ) : null}
         </section>

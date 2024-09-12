@@ -10,30 +10,30 @@ export default function AllBooks() {
   const [books, setBooks] = useState();
   const [userId, setUserId] = useState();
   const [user, setUser] = useState();
-  const [activeDescription, setActiveDescription] = useState(true);
   const [acces, setAcces] = useState(false);
 
   const searchBooks = async () => {
     const res = await getAllBooks();
    if (acces) {
       const resUser = await profile();
-      setUserId(resUser.data.userFound._id);
+     !resUser.data.message? setUserId(resUser.data.userFound._id):null
       setUser(resUser.data.userFound);
     } 
     setBooks(res.data.booksFound);
   };
+  
+ 
 
   useEffect(() => {
     searchBooks();
     setAcces(localStorage.getItem("token"));
   }, [acces]);
-console.log(acces)
   const getBook = async (bookId) => {
     const objectsId = {
       bookId: bookId,
       userId: userId,
     };
-    const res = await addBook(objectsId);
+     await addBook(objectsId);
   };
 
   const handleDescription = (e, i) => {
@@ -51,8 +51,6 @@ console.log(acces)
       marginTop: 0,
     });
   };
-
-  console.log(books)
 
   return (
     <main className="w-screen flex  justify-center text-white">
