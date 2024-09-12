@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { getAllBooks, profile } from "../api/auth";
 import { useNavigate } from "react-router-dom";
 import { addBook } from "../api/auth";
+import { arrayGenres } from "../components/Images_Genres";
+import Cookies from "js-cookie";
 import gsap from "gsap";
 
 export default function AllBooks() {
@@ -10,22 +12,24 @@ export default function AllBooks() {
   const [books, setBooks] = useState();
   const [userId, setUserId] = useState();
   const [user, setUser] = useState();
-  
+  const [activeDescription, setActiveDescription] = useState(true);
+  const [acces, setAcces] = useState(false);
 
   const searchBooks = async () => {
-    const res = await getAllBooks();  
+    const res = await getAllBooks();
+   if (acces) {
       const resUser = await profile();
-      console.log(resUser)
-     res? setUserId(resUser.data.userFound._id):null
+      setUserId(resUser.data.userFound._id);
       setUser(resUser.data.userFound);
-    
+    } 
     setBooks(res.data.booksFound);
   };
 
   useEffect(() => {
     searchBooks();
-  }, []);
-
+    setAcces(Cookies.get("token"));
+  }, [acces]);
+console.log(acces)
   const getBook = async (bookId) => {
     const objectsId = {
       bookId: bookId,
@@ -50,7 +54,7 @@ export default function AllBooks() {
     });
   };
 
-  user?console.log(books,user):null
+  console.log(books)
 
   return (
     <main className="w-screen flex  justify-center text-white">
@@ -149,7 +153,7 @@ export default function AllBooks() {
                             onClick={() => getBook(e._id)}
                           >
                             <span>A</span>ñadir Biblioteca
-                          </button>
+                          </button>{" "}
                         </div>
                       ) : null}
                       {e.comments.length > 0 ? (
