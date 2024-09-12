@@ -17,12 +17,12 @@ export default function AllBooks() {
 
   const searchBooks = async () => {
     const res = await getAllBooks();
-    if (acces) {
+  
       const resUser = await profile();
       console.log(resUser)
       setUserId(resUser.data.userFound._id);
       setUser(resUser.data.userFound);
-    }
+    
     setBooks(res.data.booksFound);
   };
 
