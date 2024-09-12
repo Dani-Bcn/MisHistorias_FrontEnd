@@ -55,7 +55,7 @@ export default function Navbar() {
                         setTimeout(() => {
                         location.reload()
                           setState(!state);
-                        }, 10);
+                        }, 50);
                     }}
                   >
                     Logout
