@@ -35,7 +35,7 @@ export default function WritingComments() {
      navigate("/Allbooks")
      :null
     : null;
-    
+
   const handleClick = (e) => {
     if (getText.length < 5) {
       setVerifyText(true);
@@ -49,9 +49,6 @@ export default function WritingComments() {
       });
       book ? editBook(book._id, book) : null;
       navigate("/pageBook");
-      setTimeout(() => {
-        location.reload();
-      }, 150);
     }
   };
 
