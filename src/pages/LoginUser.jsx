@@ -32,7 +32,7 @@ export default function LoginUser() {
             setErrorEmail(true);
             setErrorPassword(false);
           } else {
-             navigate("/profile"),     
+             navigate("/profile")
           }
         })}
       >
