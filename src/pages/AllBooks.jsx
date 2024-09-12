@@ -54,7 +54,7 @@ export default function AllBooks() {
     });
   };
 
-  console.log(books)
+  console.log(books,user)
 
   return (
     <main className="w-screen flex  justify-center text-white">

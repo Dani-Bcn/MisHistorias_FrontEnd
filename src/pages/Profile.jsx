@@ -52,7 +52,7 @@ export default function Profile() {
   useEffect(() => {
     getUser();
   }, [state]);
-  user ? console.log(user.books) : null;
+  user ? console.log(user) : null;
 
   return (
     <main className="w-screen flex flex-col gap-10 justify-center items-center">
