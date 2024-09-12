@@ -36,7 +36,10 @@ export default function LoginUser() {
             setErrorEmail(true);
             setErrorPassword(false);
           } else {      navigate("/profile");
-            location.reload()
+            setTimeout(() => {
+              location.reload()
+            }, 10);
+           
       
           }
         })}

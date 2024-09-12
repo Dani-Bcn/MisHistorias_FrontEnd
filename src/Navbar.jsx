@@ -12,12 +12,13 @@ export default function Navbar() {
   const getUser = async () => {
     const res = await profile();
     res ? setUser(res.data.userFound) : null;
+    setState(!state);
   };
 
   useEffect(() => {
     getUser();
   }, []);
-
+  
   return (
     <main className="fixed w-screen h-12 bg-slate-600/15 items-center backdrop-blur-[5px] flex z-[100]">
       <div className=" w-screen  flex justify-center  items-center text-xl text-slate-200 over">
@@ -48,11 +49,13 @@ export default function Navbar() {
                   </li>
                   <li
                     onClick={() => {
-                      logout(), setState(!state);
-                      localStorage.removeItem("User");
-                       navigate("/allBooks");
-                      location.reload()
-                     
+                      logout(),
+                        setState(!state),
+                          navigate("/allBooks");
+                        setTimeout(() => {
+                        location.reload()
+                          setState(!state);
+                        }, 10);
                     }}
                   >
                     Logout
