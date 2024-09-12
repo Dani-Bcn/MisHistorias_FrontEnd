@@ -33,9 +33,7 @@ export default function EditBook() {
     coco();
   }, [state]);
 
-  const handleAddChapter = (e) => {
-   
-  
+  const handleAddChapter = (e) => {  
     localStorage.setItem("numChapter", e);
     navigate("/writingPage");
   };
