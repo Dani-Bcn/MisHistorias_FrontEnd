@@ -62,39 +62,41 @@ export default function AllBooks() {
                     <div id={`card2${i}`}></div>
                     <div id={`card3${i}`}></div>
                     <div>
-                      <div className="flex text-2xl">
+                      <div className="flex text-3xl">
                         <span>
                           <h3>{e.title[0].toUpperCase()}</h3>
                         </span>
                         <h3>{e.title.slice(1)}</h3>
                       </div>
+                      <div className="flex gap-x-2">
+                        <span>
+                          <p>{e.dataUser.userName}</p>
+                        </span>
+                        <p>{e.dataUser.lastName}</p>
+                      </div>
                       <p className="absolute w-20 h-20 m-2 flex justify-center items-center text-5xl boder-red-200 border-4 bg-slate-950/[0.6] border-orange-600 rounded-full  z-[10]">{e.rating}</p>
                       <img
                         src={e.imageUrl}
                         alt="imageUrl"
-                        className="w-full opacity-70 relalative "
+                        className="w-full opacity-70 relalative py-2 "
                       />
                     </div>
                     <button
+                    className="hidden lg:block"
                       onClick={() => {
                         handleDescription(e.title);
                       }}
                     >
                       <span>D</span>escripción
                     </button>
-                    <div
+                    <div 
+                    className="text-[0.8em]"                   
                       id={e.title.replaceAll(" ", "")}
                       onClick={() => quitDescription(e.title)}
                     >
                       {e.description}
                     </div>
-                    <div key={i}>
-                      <div>
-                        <span>
-                          <p>{e.dataUser.userName}</p>
-                        </span>
-                        <p>{e.dataUser.lastName}</p>
-                      </div>
+                    <div key={i}>                      
                       <h3>
                         <span>{e.genre[0]}</span>
                         {e.genre.slice(1)}
