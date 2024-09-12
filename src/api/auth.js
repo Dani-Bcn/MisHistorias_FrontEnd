@@ -5,7 +5,7 @@ const axxios = axios.create({
   withCredentials: true,
 });
 
-console.log("Cocomar")
+console.log()
 
 
 //Eliminar libro de biblioteca
