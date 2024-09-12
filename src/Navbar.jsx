@@ -7,8 +7,8 @@ export default function Navbar() {
   const navigate = useNavigate();
   const [user, setUser] = useState();
   const [state, setState] = useState(false);
-  const [sizeScreen, setSizeScreen] = useState();
-
+  const cookie = Cookies.get();
+  
   const getUser = async () => {
     const res = await profile();
     res ? setUser(res.data.userFound) : null;
@@ -16,20 +16,16 @@ export default function Navbar() {
   };
 
   useEffect(() => {
-    
     getUser();
-  }, []);
-  
+  }, [state]);
   return (
     <main className="fixed w-screen h-12 bg-slate-600/15 items-center backdrop-blur-[5px] flex z-[100]">
-      <div className=" w-screen  flex justify-center  items-center text-xl text-slate-200 ">
+      <div className=" w-screen  flex justify-center  items-center text-xl text-slate-200">
         <ul className="w-screen flex  justify-center lg:justify-around gap-5 items-center">
-        
           <li onClick={() => navigate("/allBooks")}>
             <span className="font-bold">T</span>odas las historias
           </li>
-          {sizeScreen > 900?
-          !user ? (
+          {!user ? (
             <div className="flex gap-5 items-start justify-center">
               <li onClick={() => navigate("/register")}>
                 <span className="font-bold">R</span>egistro
@@ -52,12 +48,14 @@ export default function Navbar() {
                   </li>
                   <li
                     onClick={() => {
-                      logout(),
-                        setState(!state),
-                        setTimeout(() => {
-                          navigate("/allBooks");
-                          setState(!state);
-                        }, 150);
+                     logout(),setState(!state),
+                     
+                     setTimeout(() => {
+                      navigate("/allBooks") 
+setState(!state)
+                     }, 150);
+                     
+
                     }}
                   >
                     Logout
@@ -65,7 +63,7 @@ export default function Navbar() {
                 </ul>
               ) : null}
             </div>
-          ):null}
+          )}
         </ul>
       </div>
     </main>
