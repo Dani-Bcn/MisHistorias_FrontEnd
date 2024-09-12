@@ -27,7 +27,7 @@ export default function AllBooks() {
 
   useEffect(() => {
     searchBooks();
-    setAcces(Cookies.get("token"));
+    setAcces(localStorage.getItem("token"));
   }, [acces]);
 console.log(acces)
   const getBook = async (bookId) => {
