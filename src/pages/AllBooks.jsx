@@ -55,7 +55,7 @@ export default function AllBooks() {
       <section className=" w-secreen bg-slate-800 text-2xl  p-5 text-white">
         {books
           ? books.map((e, i) => {
-              if (e.published === true) {
+              if (e.published) {
                 return (
                   <div key={i} className="mt-20">
                     <div id={`card${i}`}></div>

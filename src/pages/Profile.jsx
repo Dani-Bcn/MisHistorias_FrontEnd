@@ -30,6 +30,10 @@ export default function UserProfile() {
     book.published = true;
     editBook(book._id, book);
   };
+  const handleUnPublish = (book) => {
+    book.published = false;
+    editBook(book._id, book);
+  };
 
   const removeBook = (book) => {
     user.books.map((books, i) => {
@@ -140,7 +144,7 @@ export default function UserProfile() {
                             </button>
                             {book.published !== true ? (
                               <button
-                                className="btn  w-10 flex justify-start"
+                                className="btn  w-32 flex justify-start"
                                 onClick={() => {
                                   handlePublish(book), setState(!state);
                                 }}
@@ -148,9 +152,14 @@ export default function UserProfile() {
                                 <span>P</span>ublicar
                               </button>
                             ) : (
-                              <h3 className="font-semibold text-[18px]">
-                                <span>P</span>ublicado
-                              </h3>
+                              <button
+                              className="btn w-32 flex justify-start"
+                              onClick={() => {
+                                handleUnPublish(book), setState(!state);
+                              }}
+                            >
+                              <span>D</span>ejar de publicar
+                            </button>
                             )}
                             <button
                               type="button"
@@ -172,6 +181,7 @@ export default function UserProfile() {
                                       removeBook(book._id),
                                         removeImg(book.imageUrl),
                                         setState(!state);
+                                        window.location.reload(true)
                                     }}
                                   >
                                     V

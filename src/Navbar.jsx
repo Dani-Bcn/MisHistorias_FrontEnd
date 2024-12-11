@@ -9,14 +9,13 @@ export default function Navbar() {
   const [state, setState] = useState(false);
   const cookie = Cookies.get();
 
-  const getUser = async () => {
+ useEffect( async() => {
     const res = await profile();
     res ? setUser(res.data.userFound) : null;
     setState(!state);
-  };
 
-  useEffect(() => {
-    getUser();
+ 
+  
   }, []);
   
   return (
@@ -52,10 +51,6 @@ export default function Navbar() {
                       logout(),
                         setState(!state),
                           navigate("/allBooks");
-                        setTimeout(() => {
-                        location.reload()
-                          setState(!state);
-                        }, 50);
                     }}
                   >
                     Logout
