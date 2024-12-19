@@ -1,17 +1,17 @@
 import axios from "axios";
 
 const axxios = axios.create({
-  baseURL:"https://mis-historias-back-end.vercel.app",
+  baseURL: "https://mis-historias-back-end.vercel.app",
   withCredentials: true,
+  Access:Control-Allow-Origin
 });
-
 
 //Eliminar libro de biblioteca
 export const removeBookLibrary = async (objectIds) =>
   await axxios.put(
     `/api/removeBookLibrary/${objectIds.userId}/${objectIds.bookId}`
   );
-  
+
 //Obtener libro
 export const getBook = async (bookId) =>
   await axxios.get(`/api/getBook/${bookId}`);
@@ -35,10 +35,10 @@ export const loginUser = async (user) =>
     withCredentials: true, // Esto asegura que la cookie se envíe con la solicitud
     headers: {
       "Content-Type": "application/json",
-    },   
+    },
   });
 
- //Cerrar sesión usuario 
+//Cerrar sesión usuario
 export const logout = async (user) =>
   await axxios.post("/api/logoutUser", user);
 
@@ -55,7 +55,7 @@ export const profile = async () =>
 //Obtener id de usuario
 export const getIdUser = async () => await axxios.post("/api/getIdUser");
 
-//?
+//
 export const booksUser = async (idUser) =>
   await axxios.get("/api/booksUser/", idUser);
 

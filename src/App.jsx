@@ -1,11 +1,7 @@
 import "./App.css";
-import Cookies from "js-cookie";
 import {
   Route,
-  BrowserRouter,
   Routes,
-  useNavigate,
-  HashRouter,
 } from "react-router-dom";
 import Home from "./pages/Home";
 import Navbar from "./Navbar";
