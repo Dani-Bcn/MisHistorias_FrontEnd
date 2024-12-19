@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axxios = axios.create({
-  baseURL:"https://mis-historias-back-end.vercel.app",
+  baseURL:"https://mis-historias-back-end.vercel.app/",
   withCredentials: true,
 });
 
