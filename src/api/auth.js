@@ -3,7 +3,6 @@ import axios from "axios";
 const axxios = axios.create({
   baseURL: "https://mis-historias-back-end.vercel.app",
   withCredentials: true,
-  Access:Control-Allow-Origin
 });
 
 //Eliminar libro de biblioteca
