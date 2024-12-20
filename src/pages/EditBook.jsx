@@ -66,8 +66,8 @@ export default function EditBook() {
 
         {book && book.chapters && book.chapters.length !== 0 ? (
           <div className=" relative w-[850px] h-14 flex justify-between items-center text-white bg-gradient-to-r p-5 rounded-3xl from-orange-600/[0.5]">
-            <h3 className="w-20 border-r border-orange-500">Nº</h3>
-            <h3 className="w-96 border-r border-orange-500 ">Capítulo</h3>
+            <h3 className="w-20 border-r border-orange-500">Capítulo</h3>
+            <h3 className="w-96 border-r border-orange-500 ">Descripción</h3>
             <h3 className="w-40">Última actulización </h3>
           </div>
         ) : null}

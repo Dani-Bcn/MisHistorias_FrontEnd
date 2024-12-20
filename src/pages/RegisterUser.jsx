@@ -36,7 +36,8 @@ export default function RegisterUser() {
 
     setResponse(res.data);
     if (!res.data.message) {
-      navigate("/Profile")
+      navigate("/login")
+     
     } else {
       setErrorInput(true);
     }

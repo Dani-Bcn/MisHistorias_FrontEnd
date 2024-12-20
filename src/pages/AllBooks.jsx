@@ -51,13 +51,13 @@ export default function AllBooks() {
   };
 
   return (
-    <main>
-      <section className=" w-secreen bg-slate-800 text-2xl  p-5 text-white">
+    <main className="relative text-white w-screen">
+      <section className=" w-96 h-52   text-2xl  p-10 text-white">
         {books
           ? books.map((e, i) => {
               if (e.published) {
                 return (
-                  <div key={i} className="mt-20">
+                  <div key={i} className="mt-5">
                     <div id={`card${i}`}></div>
                     <div id={`card2${i}`}></div>
                     <div id={`card3${i}`}></div>
@@ -74,11 +74,11 @@ export default function AllBooks() {
                         </span>
                         <p>{e.dataUser.lastName}</p>
                       </div>
-                      <p className="absolute w-20 h-20 m-2 flex justify-center items-center text-5xl boder-red-200 border-4 bg-slate-950/[0.6] border-orange-600 rounded-full  z-[10]">{e.rating}</p>
+                      <p className="absolute w-10 h-10 m-2 flex justify-center items-center text-xl boder-red-200 border-4 bg-slate-950/[0.6] border-orange-600 rounded-full  z-[10]">{e.rating}</p>
                       <img
                         src={e.imageUrl}
                         alt="imageUrl"
-                        className="w-full opacity-70 relalative py-2 "
+                        className="w-48 opacity-70 relalative py-2 "
                       />
                     </div>
                     <button

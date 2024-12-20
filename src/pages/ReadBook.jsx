@@ -30,7 +30,7 @@ export default function ReadBook() {
 
   return book ? (
     <main className="relative text-white w-screen">
-      <nav className="fixed w-96 -mt-12 ml-10 z-[100] ">
+      <nav className="fixed -mt-12 ml-10 z-[100] ">
         <ul className="flex gap-5 text-xl">       
           <li onClick={() => navigate("/pageBook")}>
             <span className="font-bold">I</span>nfo
