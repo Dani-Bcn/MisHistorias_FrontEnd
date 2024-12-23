@@ -24,9 +24,12 @@ export default function WritingPage() {
    
   const getNumberChapter=()=> {
     const res =  setNumChapter(localStorage.getItem("numChapter"));   
-    if ( book.chapters) {
+    if ( book.chapters && book.chapters.length > numberChapter - 1) {
       setTitle(book.chapters[numberChapter - 1].title);
       setText(book.chapters[numberChapter - 1].text);
+    }else{
+      setTitle("");
+      setText("");
     }
    
     return numChapter;

@@ -32,7 +32,7 @@ export const editUser = async (id, values) =>
 export const loginUser = async (user) =>
   await axxios.post("/api/loginUser", user, {
     credentials: "include",
-    withCredentials: true, // Esto asegura que la cookie se envíe con la solicitud
+    withCredentials: true, // Asegura que la cookie se envíe con la solicitud
     headers: {
       "Content-Type": "application/json",
     },
