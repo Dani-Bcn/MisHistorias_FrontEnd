@@ -5,6 +5,7 @@ const axxios = axios.create({
   withCredentials: true,
 });
 //"https://mis-historias-back-end.vercel.app",//
+// "http://localhost:8000"//
 //Eliminar libro de biblioteca
 export const removeBookLibrary = async (objectIds) =>
   await axxios.put(
@@ -41,7 +42,7 @@ export const loginUser = async (user) =>
 export const logout = async (user) =>
   await axxios.post("/api/logoutUser", user,   setTimeout(() => {
     location.reload()
-  }, 10));
+  }, 100));
 
 //Obtener perfil usuario
 export const profile = async () =>

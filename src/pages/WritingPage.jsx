@@ -5,32 +5,40 @@ import { useNavigate } from "react-router-dom";
 export default function WritingPage() {
   window.scrollTo(0, 0);
   const navigate = useNavigate();
-  const [getBookLocal, setgetBookLocal] = useState(
-    localStorage.getItem("bookId")
-  );
+ 
   const [numberChapter, setNumberChapter] = useState(
     localStorage.getItem("numChapter")
   );
   const [book, setBook] = useState(getBookLocal);
+  const [numChapter, setNumChapter] = useState();
   const [title, setTitle] = useState();
-  const [text, setText] = useState();
+  const [text, setText] = useState(); 
   const [stateEdit, setStateEdit] = useState(false);
+  
 
-  const handleBook = async () => {
-    window.scrollTo(0, 0);
-    const res = await getBook(getBookLocal); //getBook busca el libri por su id
-
+  async function getBookLocal() {
+    const res = await getBook(localStorage.getItem("bookId"));
     setBook(res.data);
-    if (book && book.chapters) {
+    return book;
+  }
+   
+  const getNumberChapter=()=> {
+    const res =  setNumChapter(localStorage.getItem("numChapter"));   
+    if ( book.chapters) {
       setTitle(book.chapters[numberChapter - 1].title);
       setText(book.chapters[numberChapter - 1].text);
     }
-  };
+   
+    return numChapter;
+  }
+
+  console.log(book);
+  console.log(numChapter);  
 
   useEffect(() => {
-    setStateEdit(true);
-    handleBook();
-  }, []);
+    getNumberChapter();
+    setStateEdit(true);    
+  }, [book]);
 
   const handleChangeTitle = (e) => {
     setTitle((prev) => (prev = e.target.value));
@@ -43,24 +51,25 @@ export default function WritingPage() {
   };
 
   const saveChapter = () => {
-    book.chapters[numberChapter - 1] = {
+    book.chapters[numberChapter - 1] = { 
       title: title,
       text: text,
     };
-    console.log(book.chapters);
+    console.log(book.chapters); 
     if (book) {
       editBook(book._id, book);
       navigate("/editBook");
-      setTimeout(() => {
-        location.reload();
-      }, 100);
-    }
+      setTimeout(() => {  
+        location.reload(); 
+      }, 10);
+    } 
   };
+  console.log(title)
 
   return (
     <main>
       <section className=" w-[80vw] h-[60vh] m-20 mt-20 ">
-        {book && book.chapters ? (
+        {book.chapters ? (
           <form
             className="w-full h-[40vh] text-xl text-slate-300"
             onSubmit={saveChapter}
@@ -83,7 +92,7 @@ export default function WritingPage() {
               value={text}
               onChange={(e) => handleChangeText(e)}
             />
-            {title && title.length > 0 && text && text.length > 0 ? (
+            {title && text && text.length > 0 ? (
               <button type="submit" className="btn">
                 Guardar cápitulo
               </button>
