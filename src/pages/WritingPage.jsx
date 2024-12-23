@@ -13,8 +13,7 @@ export default function WritingPage() {
   const [numChapter, setNumChapter] = useState();
   const [title, setTitle] = useState();
   const [text, setText] = useState(); 
-  const [stateEdit, setStateEdit] = useState(false);
-  
+  const [stateEdit, setStateEdit] = useState(false);  
 
   async function getBookLocal() {
     const res = await getBook(localStorage.getItem("bookId"));
@@ -58,13 +57,14 @@ export default function WritingPage() {
       title: title,
       text: text,
     };
+    setStateEdit(!stateEdit)
     console.log(book.chapters); 
     if (book) {
       editBook(book._id, book);
       navigate("/editBook");
     } 
-    setStateEdit(!stateEdit)
-    setTimeout(() => {window.location.reload()}, 50);
+   
+   
   };
   console.log(title)
 
