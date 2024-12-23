@@ -40,8 +40,8 @@ export default function WritingPage() {
 
   useEffect(() => {
     getNumberChapter();
-    setStateEdit(true);    
-  }, [book]);
+    setStateEdit(true);   
+  }, [book, stateEdit]);
 
   const handleChangeTitle = (e) => {
     setTitle((prev) => (prev = e.target.value));
@@ -62,10 +62,9 @@ export default function WritingPage() {
     if (book) {
       editBook(book._id, book);
       navigate("/editBook");
-      setTimeout(() => {  
-        location.reload(); 
-      }, 10);
     } 
+    setStateEdit(!stateEdit)
+    setTimeout(() => {window.location.reload()}, 100);
   };
   console.log(title)
 
@@ -95,7 +94,7 @@ export default function WritingPage() {
               value={text}
               onChange={(e) => handleChangeText(e)}
             />
-            {title && text && text.length > 0 ? (
+            {title .length && text.length > 0 ? (
               <button type="submit" className="btn">
                 Guardar cápitulo
               </button>
