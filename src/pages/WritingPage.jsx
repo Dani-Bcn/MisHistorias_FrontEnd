@@ -59,10 +59,7 @@ export default function WritingPage() {
     };
     setStateEdit(!stateEdit)
     console.log(book.chapters); 
-    if (book) {
-      editBook(book._id, book);
-      navigate("/editBook");
-    } 
+   
    
    
   };
