@@ -63,7 +63,9 @@ export default function WritingPage() {
     
      
       navigate("/editBook");
-   
+   setTimeout(() => {
+    window.location.reload();
+   }, 250);
    
   };
   console.log(title)
