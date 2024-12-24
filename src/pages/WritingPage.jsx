@@ -40,7 +40,7 @@ export default function WritingPage() {
   useEffect(() => {
     getNumberChapter();
     setStateEdit(true);
-  }, [book, numChapter, stateEdit]);
+  }, [book, stateEdit]);
 
   const handleChangeTitle = (e) => {
     setTitle((prev) => (prev = e.target.value));
@@ -52,14 +52,15 @@ export default function WritingPage() {
     book.chapters.text = text;
   };
 
-  const saveChapter = () => {
-    book.chapters.push({ title: title, text: text });
+  const saveChapter = async (e) => {
+    e.preventDefault();
+    book.chapters[numberChapter - 1] = {
+      title: title,
+      text: text,
+    };
     setStateEdit(!stateEdit);
     console.log(book.chapters);
-    editBook(book._id, book);
-    setTimeout(() => {
-      location.reload();
-    }, 100);
+    await editBook(book._id, book);
     navigate("/editBook");
   };
   console.log(title);
