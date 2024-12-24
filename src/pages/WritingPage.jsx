@@ -5,42 +5,42 @@ import { useNavigate } from "react-router-dom";
 export default function WritingPage() {
   window.scrollTo(0, 0);
   const navigate = useNavigate();
- 
+
   const [numberChapter, setNumberChapter] = useState(
     localStorage.getItem("numChapter")
   );
   const [book, setBook] = useState(getBookLocal);
   const [numChapter, setNumChapter] = useState();
   const [title, setTitle] = useState();
-  const [text, setText] = useState(); 
-  const [stateEdit, setStateEdit] = useState(false);  
+  const [text, setText] = useState();
+  const [stateEdit, setStateEdit] = useState(false);
 
   async function getBookLocal() {
     const res = await getBook(localStorage.getItem("bookId"));
     setBook(res.data);
     return book;
   }
-   
-  const getNumberChapter=()=> {
-    const res =  setNumChapter(localStorage.getItem("numChapter"));   
-    if ( book.chapters && book.chapters.length > numberChapter - 1) {
+
+  const getNumberChapter = () => {
+    const res = setNumChapter(localStorage.getItem("numChapter"));
+    if (book.chapters && book.chapters.length > numberChapter - 1) {
       setTitle(book.chapters[numberChapter - 1].title);
       setText(book.chapters[numberChapter - 1].text);
-    }else{
+    } else {
       setTitle("");
       setText("");
     }
-   
+
     return numChapter;
-  }
+  };
 
   console.log(book);
-  console.log(numChapter);  
+  console.log(numChapter);
 
   useEffect(() => {
     getNumberChapter();
-    setStateEdit(true);   
-  }, [book, numChapter]);
+    setStateEdit(true);
+  }, [book, numChapter, stateEdit]);
 
   const handleChangeTitle = (e) => {
     setTitle((prev) => (prev = e.target.value));
@@ -53,15 +53,16 @@ export default function WritingPage() {
   };
 
   const saveChapter = () => {
-   book.chapters.push({ title: title, text: text });
-    setStateEdit(!stateEdit)
-    console.log(book.chapters); 
-     editBook(book._id, book);
-    
-     
-      navigate("/editBook");
+    book.chapters.push({ title: title, text: text });
+    setStateEdit(!stateEdit);
+    console.log(book.chapters);
+    editBook(book._id, book);
+    setTimeout(() => {
+      location.reload();
+    }, 100);
+    navigate("/editBook");
   };
-  console.log(title)
+  console.log(title);
 
   return (
     <main>
@@ -89,7 +90,7 @@ export default function WritingPage() {
               value={text}
               onChange={(e) => handleChangeText(e)}
             />
-            {title .length && text.length > 0 ? (
+            {title.length && text.length > 0 ? (
               <button type="submit" className="btn">
                 Guardar cápitulo
               </button>
