@@ -78,9 +78,6 @@ export default function CreateBook() {
             </button>
           ) : null}
         </form>
-        {acces?        
-        <section></section>
-        :null}
         
       </section>
     </main>

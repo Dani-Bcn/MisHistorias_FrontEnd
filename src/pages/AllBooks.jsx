@@ -21,16 +21,19 @@ export default function AllBooks() {
     }
     setBooks(res.data.booksFound);
   };
-
+ 
   useEffect(() => {
     searchBooks();
     setAcces(localStorage.getItem("token"));
-  }, []);
+  }, [acces]); 
+
   const getBook = async (bookId) => {
+    console.log("GetBook", bookId);
     const objectsId = {
       bookId: bookId,
       userId: userId,
     };
+   
     await addBook(objectsId);
   };
 
@@ -40,13 +43,13 @@ export default function AllBooks() {
       opacity: 1,
       marginTop: 40,
     });
-  };
+  }; 
 
   const quitDescription = (e, i) => {
     gsap.to(`#${e.replaceAll(" ", "")}`, {
       visibility: "hidden",
       opacity: 0,
-      marginTop: 0,
+      marginTop: 0, 
     });
   };
 
@@ -118,7 +121,7 @@ export default function AllBooks() {
                       >
                         <span>L</span>eer
                       </button>
-                      {user ? (
+                      {acces ? (
                         <div>
                           <button onClick={() => getBook(e._id)}>
                             <span>A</span>ñadir Biblioteca

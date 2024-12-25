@@ -35,15 +35,7 @@ export default function UserProfile() {
     editBook(book._id, book);
   };
 
-  const removeBook = (book) => {
-    user.books.map((books, i) => {
-      if (books._id === books) {
-        user.books.splice(i, 1);
-        setState(!state);
-      }
-    });
-    deleteBooks(book);
-  };
+ const removeBook = async (bookId) => { bookId, deleteBooks(bookId) };
 
   const deleteBookLibrary = async (bookId) => {
     const objectsId = {
@@ -52,10 +44,11 @@ export default function UserProfile() {
     };
     const res = await removeBookLibrary(objectsId);
     setState(!state);
+    location.reload(true);
   };
   useEffect(() => {
     getUser();
-  }, []);
+  }, [state]); 
  
 
   return (
@@ -249,12 +242,13 @@ export default function UserProfile() {
                                 navigate("/PageBook");
                               }}
                             >
-                              <span>I</span>nfo
+                              <span>I</span>nfo 
                             </button>
                             <button
                               type="button"
                               onClick={() => {
                                 deleteBookLibrary(book._id)
+                                setState(!state);
                               }}
                               className="btn w-28 flex justify-start"
                             >
