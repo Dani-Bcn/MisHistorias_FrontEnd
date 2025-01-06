@@ -9,20 +9,24 @@ export default function ReadBook() {
   const [book, setBook] = useState(null);
   const [user, setUser] = useState(null);
 
-  const fetchUserAndBook = async () => {
-    try {
-      const [userRes, bookRes] = await Promise.all([profile(), getBook(bookId)]);
-      if (userRes?.data?.userFound) setUser(userRes.data.userFound);
-      if (bookRes?.data) setBook(bookRes.data);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
-
   useEffect(() => {
+    const fetchUserAndBook = async () => {
+      try {
+        const [userRes, bookRes] = await Promise.all([profile(), getBook(bookId)]);
+        if (userRes?.data?.userFound) {
+          setUser(userRes.data.userFound);
+        }
+        if (bookRes?.data) {
+          setBook(bookRes.data);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
     fetchUserAndBook();
-    window.scrollTo(0, 0); // Scroll al inicio al cargar la página
-  }, []);
+    window.scrollTo(0, 0); // Scroll to top on page load
+  }, [bookId]);
 
   if (!book) return null;
 
@@ -31,20 +35,26 @@ export default function ReadBook() {
       {/* Navbar */}
       <nav className="fixed top-0 left-0 w-full bg-gray-800 bg-opacity-90 z-50 p-4">
         <ul className="flex gap-5 justify-center text-xl">
-          <li onClick={() => navigate("/pageBook")} className="cursor-pointer hover:underline">
+          <li
+            onClick={() => navigate("/pageBook")}
+            className="cursor-pointer hover:underline"
+          >
             <span className="font-bold">I</span>nfo
           </li>
           {user && user._id === book.dataUser?.userId && (
-            <li onClick={() => navigate("/editBook")} className="cursor-pointer hover:underline">
+            <li
+              onClick={() => navigate("/editBook")}
+              className="cursor-pointer hover:underline"
+            >
               <span className="font-bold">E</span>ditar
             </li>
           )}
         </ul>
       </nav>
 
-      {/* Contenido del libro */}
+      {/* Book Content */}
       <section className="mt-20 p-5 flex flex-col lg:flex-row gap-5">
-        {/* Lista de capítulos */}
+        {/* Chapters List */}
         {book.chapters?.length > 0 && (
           <aside className="lg:w-1/4 w-full bg-gray-800 bg-opacity-70 rounded-xl p-5 sticky top-20">
             <h3 className="text-xl border-b border-gray-500 mb-3">
@@ -68,7 +78,7 @@ export default function ReadBook() {
           </aside>
         )}
 
-        {/* Contenido del capítulo */}
+        {/* Chapter Content */}
         <div className="lg:w-3/4 w-full">
           <h3 className="text-4xl text-center border-b border-gray-500 my-10">
             {book.title}

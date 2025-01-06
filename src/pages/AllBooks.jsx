@@ -36,6 +36,7 @@ export default function AllBooks() {
   // Add book to user's library
   const handleAddBook = async (bookId) => {
     if (!user?._id) return;
+
     try {
       await addBook({ bookId, userId: user._id });
       alert("Book added to your library!");
@@ -46,29 +47,30 @@ export default function AllBooks() {
   };
 
   // GSAP animations
-  const showDescription = (title) => {
-    gsap.to(`#${title.replace(/\s+/g, "")}`, {
-      visibility: "visible",
-      opacity: 1,
-      marginTop: 40,
+  const toggleDescription = (title, action) => {
+    const elementId = title.replace(/\s+/g, "");
+    gsap.to(`#${elementId}`, {
+      visibility: action === "show" ? "visible" : "hidden",
+      opacity: action === "show" ? 1 : 0,
+      marginTop: action === "show" ? 40 : 0,
     });
   };
 
-  const hideDescription = (title) => {
-    gsap.to(`#${title.replace(/\s+/g, "")}`, {
-      visibility: "hidden",
-      opacity: 0,
-      marginTop: 0,
-    });
+  const handleNavigate = (path, bookId) => {
+    localStorage.setItem("bookId", bookId);
+    navigate(path);
   };
 
   return (
     <main className="relative text-white w-screen">
       <section className="w-full max-w-4xl mx-auto p-4">
         {books.length > 0 ? (
-          books.map((book, index) => (
-            book.published && (
-              <div key={index} className="mt-5 p-4 bg-gray-800 rounded-md shadow-lg">
+          books.map((book, index) =>
+            book.published ? (
+              <div
+                key={index}
+                className="mt-5 p-4 bg-gray-800 rounded-md shadow-lg"
+              >
                 <div className="flex flex-col md:flex-row items-center gap-4">
                   <img
                     src={book.imageUrl}
@@ -85,33 +87,27 @@ export default function AllBooks() {
                 </div>
                 <button
                   className="mt-2 px-4 py-2 bg-blue-500 rounded text-white hover:bg-blue-600"
-                  onClick={() => showDescription(book.title)}
+                  onClick={() => toggleDescription(book.title, "show")}
                 >
                   Show Description
                 </button>
                 <div
                   id={book.title.replace(/\s+/g, "")}
                   className="mt-2 text-sm hidden opacity-0"
-                  onClick={() => hideDescription(book.title)}
+                  onClick={() => toggleDescription(book.title, "hide")}
                 >
                   {book.description}
                 </div>
                 <div className="mt-4 flex gap-4 flex-wrap">
                   <button
                     className="px-4 py-2 bg-green-500 rounded text-white hover:bg-green-600"
-                    onClick={() => {
-                      localStorage.setItem("bookId", book._id);
-                      navigate("/PageBook");
-                    }}
+                    onClick={() => handleNavigate("/PageBook", book._id)}
                   >
                     More Info
                   </button>
                   <button
                     className="px-4 py-2 bg-purple-500 rounded text-white hover:bg-purple-600"
-                    onClick={() => {
-                      localStorage.setItem("bookId", book._id);
-                      navigate("/readBook");
-                    }}
+                    onClick={() => handleNavigate("/readBook", book._id)}
                   >
                     Read
                   </button>
@@ -126,18 +122,15 @@ export default function AllBooks() {
                   {book.comments.length > 0 && (
                     <button
                       className="px-4 py-2 bg-teal-500 rounded text-white hover:bg-teal-600"
-                      onClick={() => {
-                        localStorage.setItem("bookId", book._id);
-                        navigate("/readComments");
-                      }}
+                      onClick={() => handleNavigate("/readComments", book._id)}
                     >
                       Comments ({book.comments.length})
                     </button>
                   )}
                 </div>
               </div>
-            )
-          ))
+            ) : null
+          )
         ) : (
           <p className="text-center text-lg">Loading books...</p>
         )}

@@ -6,100 +6,78 @@ export default function WritingPage() {
   window.scrollTo(0, 0);
   const navigate = useNavigate();
 
-  const [numberChapter, setNumberChapter] = useState(
-    localStorage.getItem("numChapter")
-  );
-  const [book, setBook] = useState(getBookLocal);
-  const [numChapter, setNumChapter] = useState();
-  const [title, setTitle] = useState();
-  const [text, setText] = useState();
-  const [stateEdit, setStateEdit] = useState(false);
+  const [book, setBook] = useState(null);
+  const [chapter, setChapter] = useState({ title: "", text: "" });
 
-  async function getBookLocal() {
+  const numberChapter = localStorage.getItem("numChapter");
+
+  // Función para obtener el libro de localStorage
+  const getBookLocal = async () => {
     const res = await getBook(localStorage.getItem("bookId"));
     setBook(res.data);
-    return book;
-  }
-
-  const getNumberChapter = () => {
-    const res = setNumChapter(localStorage.getItem("numChapter"));
-    if (book.chapters && book.chapters.length > numberChapter - 1) {
-      setTitle(book.chapters[numberChapter - 1].title);
-      setText(book.chapters[numberChapter - 1].text);
-    } else {
-      setTitle("");
-      setText("");
-    }
-
-    return numChapter;
   };
-
-  console.log(book);
-  console.log(numChapter);
 
   useEffect(() => {
-    getNumberChapter();
-    setStateEdit(true);
-  }, [book, stateEdit]);
+    getBookLocal();
+  }, []);
 
-  const handleChangeTitle = (e) => {
-    setTitle((prev) => (prev = e.target.value));
-    book.chapters.title = title;
-  };
+  useEffect(() => {
+    if (book && book.chapters) {
+      const currentChapter = book.chapters[numberChapter - 1] || { title: "", text: "" };
+      setChapter(currentChapter);
+    }
+  }, [book, numberChapter]);
 
-  const handleChangeText = (e) => {
-    setText((prev) => (prev = e.target.value));
-    book.chapters.text = text;
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setChapter((prevChapter) => ({ ...prevChapter, [name]: value }));
   };
 
   const saveChapter = async (e) => {
     e.preventDefault();
-    book.chapters[numberChapter - 1] = {
-      title: title,
-      text: text,
-    };
-    setStateEdit(!stateEdit);
-    console.log(book.chapters);
-    await editBook(book._id, book);
+
+    const updatedChapters = [...book.chapters];
+    updatedChapters[numberChapter - 1] = chapter;
+
+    const updatedBook = { ...book, chapters: updatedChapters };
+
+    await editBook(book._id, updatedBook);
     navigate("/editBook");
   };
-  console.log(title);
+
+  if (!book) return null; // Espera que el libro cargue
 
   return (
     <main>
-      <section className=" w-[80vw] h-[60vh] m-20 mt-20 ">
-        {book.chapters ? (
-          <form
-            className="w-full h-[40vh] text-xl text-slate-300"
-            onSubmit={saveChapter}
-          >
+      <section className="w-[80vw] h-[60vh] m-20 mt-20">
+        {book.chapters && (
+          <form className="w-full h-[40vh] text-xl text-slate-300" onSubmit={saveChapter}>
             <input
               placeholder="Título del capítulo"
-              className=" w-96 my-1 h-10 bg-slate-800"
+              className="w-96 my-1 h-10 bg-slate-800"
               name="title"
-              id="title"
               type="text"
-              onChange={(e) => handleChangeTitle(e)}
-              value={title}
+              onChange={handleChange}
+              value={chapter.title}
             />
 
             <textarea
               className="w-full p-5 my-5 h-[300px] text-[15px] bg-slate-800"
-              id="text"
               name="text"
               placeholder="Texto"
-              value={text}
-              onChange={(e) => handleChangeText(e)}
+              value={chapter.text}
+              onChange={handleChange}
             />
-            {title.length && text.length > 0 ? (
+
+            {chapter.title && chapter.text ? (
               <button type="submit" className="btn">
-                Guardar cápitulo
+                Guardar capítulo
               </button>
             ) : (
-              <h3 className="text-red-600">Debe escribir un título</h3>
+              <h3 className="text-red-600">Debe escribir un título y un texto</h3>
             )}
           </form>
-        ) : null}
+        )}
       </section>
     </main>
   );
