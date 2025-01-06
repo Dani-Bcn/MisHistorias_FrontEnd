@@ -8,14 +8,17 @@ export default function Navbar() {
   const [user, setUser] = useState(null);
   const cookie = Cookies.get();
 
+
   // Cargar el perfil del usuario al montar el componente
   useEffect(() => {
     const fetchProfile = async () => {
       try {
         const res = await profile();
         if (res?.data?.userFound) {
-          setUser(res.data.userFound);
+          setUser(res.data.userFound); 
         }
+        
+       
       } catch (error) {
         console.error("Error al obtener el perfil del usuario:", error);
       }
