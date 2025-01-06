@@ -1,149 +1,146 @@
-import React, { useEffect, useRef, useState } from "react";
-import { getAllBooks, profile } from "../api/auth";
+import React, { useEffect, useState } from "react";
+import { getAllBooks, profile, addBook } from "../api/auth";
 import { useNavigate } from "react-router-dom";
-import { addBook } from "../api/auth";
 import gsap from "gsap";
 
 export default function AllBooks() {
-  window.scrollTo(0, 0);
   const navigate = useNavigate();
-  const [books, setBooks] = useState();
-  const [userId, setUserId] = useState();
-  const [user, setUser] = useState();
-  const [acces, setAcces] = useState(false);
+  const [books, setBooks] = useState([]);
+  const [user, setUser] = useState(null);
+  const [access, setAccess] = useState(false);
 
-  const searchBooks = async () => {
-    const res = await getAllBooks();
-    if (acces) {
-      const resUser = await profile();
-      !resUser.data.message ? setUserId(resUser.data.userFound._id) : null;
-      setUser(resUser.data.userFound);
+  // Fetch books and user profile
+  const fetchBooksAndProfile = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      setAccess(!!token);
+
+      const booksResponse = await getAllBooks();
+      setBooks(booksResponse.data.booksFound || []);
+
+      if (token) {
+        const profileResponse = await profile();
+        if (profileResponse?.data?.userFound) {
+          setUser(profileResponse.data.userFound);
+        }
+      }
+    } catch (error) {
+      console.error("Error fetching books or profile:", error);
     }
-    setBooks(res.data.booksFound);
   };
- 
+
   useEffect(() => {
-    searchBooks();
-    setAcces(localStorage.getItem("token"));
-  }, [acces]); 
+    fetchBooksAndProfile();
+  }, []);
 
-  const getBook = async (bookId) => {
-    console.log("GetBook", bookId);
-    const objectsId = {
-      bookId: bookId,
-      userId: userId,
-    };
-   
-    await addBook(objectsId);
+  // Add book to user's library
+  const handleAddBook = async (bookId) => {
+    if (!user?._id) return;
+    try {
+      await addBook({ bookId, userId: user._id });
+      alert("Book added to your library!");
+    } catch (error) {
+      console.error("Error adding book:", error);
+      alert("Failed to add book. Please try again later.");
+    }
   };
 
-  const handleDescription = (e, i) => {
-    gsap.to(`#${e.replaceAll(" ", "")}`, {
+  // GSAP animations
+  const showDescription = (title) => {
+    gsap.to(`#${title.replace(/\s+/g, "")}`, {
       visibility: "visible",
       opacity: 1,
       marginTop: 40,
     });
-  }; 
+  };
 
-  const quitDescription = (e, i) => {
-    gsap.to(`#${e.replaceAll(" ", "")}`, {
+  const hideDescription = (title) => {
+    gsap.to(`#${title.replace(/\s+/g, "")}`, {
       visibility: "hidden",
       opacity: 0,
-      marginTop: 0, 
+      marginTop: 0,
     });
   };
 
   return (
     <main className="relative text-white w-screen">
-      <section className=" w-96 h-52   text-2xl  p-10 text-white">
-        {books
-          ? books.map((e, i) => {
-              if (e.published) {
-                return (
-                  <div key={i} className="mt-5">
-                    <div id={`card${i}`}></div>
-                    <div id={`card2${i}`}></div>
-                    <div id={`card3${i}`}></div>
-                    <div>
-                      <div className="flex text-3xl">
-                        <span>
-                          <h3>{e.title[0].toUpperCase()}</h3>
-                        </span>
-                        <h3>{e.title.slice(1)}</h3>
-                      </div>
-                      <div className="flex gap-x-2">
-                        <span>
-                          <p>{e.dataUser.userName}</p>
-                        </span>
-                        <p>{e.dataUser.lastName}</p>
-                      </div>
-                      <p className="absolute w-10 h-10 m-2 flex justify-center items-center text-xl boder-red-200 border-4 bg-slate-950/[0.6] border-orange-600 rounded-full  z-[10]">{e.rating}</p>
-                      <img
-                        src={e.imageUrl}
-                        alt="imageUrl"
-                        className="w-48 opacity-70 relalative py-2 "
-                      />
-                    </div>
+      <section className="w-full max-w-4xl mx-auto p-4">
+        {books.length > 0 ? (
+          books.map((book, index) => (
+            book.published && (
+              <div key={index} className="mt-5 p-4 bg-gray-800 rounded-md shadow-lg">
+                <div className="flex flex-col md:flex-row items-center gap-4">
+                  <img
+                    src={book.imageUrl}
+                    alt="Book Cover"
+                    className="w-32 h-48 object-cover rounded-md opacity-80"
+                  />
+                  <div className="flex-1">
+                    <h3 className="text-2xl font-bold">{book.title}</h3>
+                    <p className="text-lg">
+                      {book.dataUser.userName} {book.dataUser.lastName}
+                    </p>
+                    <p className="text-sm mt-2">Rating: {book.rating}</p>
+                  </div>
+                </div>
+                <button
+                  className="mt-2 px-4 py-2 bg-blue-500 rounded text-white hover:bg-blue-600"
+                  onClick={() => showDescription(book.title)}
+                >
+                  Show Description
+                </button>
+                <div
+                  id={book.title.replace(/\s+/g, "")}
+                  className="mt-2 text-sm hidden opacity-0"
+                  onClick={() => hideDescription(book.title)}
+                >
+                  {book.description}
+                </div>
+                <div className="mt-4 flex gap-4 flex-wrap">
+                  <button
+                    className="px-4 py-2 bg-green-500 rounded text-white hover:bg-green-600"
+                    onClick={() => {
+                      localStorage.setItem("bookId", book._id);
+                      navigate("/PageBook");
+                    }}
+                  >
+                    More Info
+                  </button>
+                  <button
+                    className="px-4 py-2 bg-purple-500 rounded text-white hover:bg-purple-600"
+                    onClick={() => {
+                      localStorage.setItem("bookId", book._id);
+                      navigate("/readBook");
+                    }}
+                  >
+                    Read
+                  </button>
+                  {access && (
                     <button
-                    className="hidden lg:block"
+                      className="px-4 py-2 bg-orange-500 rounded text-white hover:bg-orange-600"
+                      onClick={() => handleAddBook(book._id)}
+                    >
+                      Add to Library
+                    </button>
+                  )}
+                  {book.comments.length > 0 && (
+                    <button
+                      className="px-4 py-2 bg-teal-500 rounded text-white hover:bg-teal-600"
                       onClick={() => {
-                        handleDescription(e.title);
+                        localStorage.setItem("bookId", book._id);
+                        navigate("/readComments");
                       }}
                     >
-                      <span>D</span>escripción
+                      Comments ({book.comments.length})
                     </button>
-                    <div 
-                    className="text-[0.8em]"                   
-                      id={e.title.replaceAll(" ", "")}
-                      onClick={() => quitDescription(e.title)}
-                    >
-                      {e.description}
-                    </div>
-                    <div key={i}>                      
-                      <h3>
-                        <span>{e.genre[0]}</span>
-                        {e.genre.slice(1)}
-                      </h3>
-
-                      <button
-                        onClick={() => {
-                          localStorage.setItem("bookId", e._id);
-                          navigate("/PageBook");
-                        }}
-                      >
-                        <span>I</span>nfo
-                      </button>
-                      <button
-                        onClick={() => {
-                          localStorage.setItem("bookId", e._id),
-                            navigate("/readBook");
-                        }}
-                      >
-                        <span>L</span>eer
-                      </button>
-                      {acces ? (
-                        <div>
-                          <button onClick={() => getBook(e._id)}>
-                            <span>A</span>ñadir Biblioteca
-                          </button>
-                        </div>
-                      ) : null}
-                      {e.comments.length > 0 ? (
-                        <button
-                          onClick={() => {
-                            localStorage.setItem("bookId", e._id),
-                              navigate("/readComments");
-                          }}
-                        >
-                          <span>C</span>omentarios {e.comments.length}
-                        </button>
-                      ) : null}
-                    </div>
-                  </div>
-                );
-              }
-            })
-          : null}
+                  )}
+                </div>
+              </div>
+            )
+          ))
+        ) : (
+          <p className="text-center text-lg">Loading books...</p>
+        )}
       </section>
     </main>
   );

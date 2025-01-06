@@ -1,99 +1,93 @@
 import React, { useEffect, useState } from "react";
-import { getBook } from "../api/auth";
+import { getBook, profile } from "../api/auth";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-scroll";
-import { profile } from "../api/auth";
 
 export default function ReadBook() {
-  window.scrollTo(0, 0);
   const navigate = useNavigate();
-  const [bookId, setBookId] = useState(localStorage.getItem("bookId"));
-  const [book, setBook] = useState();
-  const [acces, setAcces] = useState(false);
-  const [user, setUser] = useState();
+  const [bookId] = useState(localStorage.getItem("bookId"));
+  const [book, setBook] = useState(null);
+  const [user, setUser] = useState(null);
 
-  const getUser = async () => {
-    const res = await profile();
-    res ? setUser(res.data.userFound) : null;
-  };
-
-  const handleBooks = async () => {
-    const res = await getBook(bookId);
-    res ? setBook(res.data) : null;
+  const fetchUserAndBook = async () => {
+    try {
+      const [userRes, bookRes] = await Promise.all([profile(), getBook(bookId)]);
+      if (userRes?.data?.userFound) setUser(userRes.data.userFound);
+      if (bookRes?.data) setBook(bookRes.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   };
 
   useEffect(() => {
-    handleBooks();
-    getUser()
+    fetchUserAndBook();
+    window.scrollTo(0, 0); // Scroll al inicio al cargar la página
   }, []);
 
+  if (!book) return null;
 
-  return book ? (
-    <main className="relative text-white w-screen">
-      <nav className="fixed -mt-12 ml-10 z-[100] ">
-        <ul className="flex gap-5 text-xl">       
-          <li onClick={() => navigate("/pageBook")}>
+  return (
+    <main className="relative text-white w-full min-h-screen bg-gray-900">
+      {/* Navbar */}
+      <nav className="fixed top-0 left-0 w-full bg-gray-800 bg-opacity-90 z-50 p-4">
+        <ul className="flex gap-5 justify-center text-xl">
+          <li onClick={() => navigate("/pageBook")} className="cursor-pointer hover:underline">
             <span className="font-bold">I</span>nfo
           </li>
-          { user && book && user._id === book.dataUser.userId ? (
-            <li onClick={() => navigate("/editBook")}>
+          {user && user._id === book.dataUser?.userId && (
+            <li onClick={() => navigate("/editBook")} className="cursor-pointer hover:underline">
               <span className="font-bold">E</span>ditar
             </li>
-          ) : null}
+          )}
         </ul>
       </nav>
-      <section className="mt-16 p-5">
-        {book && book.chapters.length > 0 ? (
-          <div className="fixed w-72 bg-gradient-to-b flex flex-col  from-red-200/10 p-5 rounded-xl">
-            <h3 className="text-xl border-b mb-3">
+
+      {/* Contenido del libro */}
+      <section className="mt-20 p-5 flex flex-col lg:flex-row gap-5">
+        {/* Lista de capítulos */}
+        {book.chapters?.length > 0 && (
+          <aside className="lg:w-1/4 w-full bg-gray-800 bg-opacity-70 rounded-xl p-5 sticky top-20">
+            <h3 className="text-xl border-b border-gray-500 mb-3">
               <span>C</span>apítulos
             </h3>
-            {book.chapters.map((e, i) => {
-              return (
+            <ul className="flex flex-col gap-3">
+              {book.chapters.map((chapter, i) => (
                 <Link
                   key={i}
-                  to={e.title}
-                  spy={true}
-                  smooth={true}
+                  to={chapter.title}
+                  spy
+                  smooth
                   offset={-50}
-                  duration={1000}
+                  duration={500}
+                  className="cursor-pointer text-start text-sm hover:text-gray-300"
                 >
-                  <button className="w-80 text-[13px] text-start flex justify-start">
-                    <span>{e.title[0]}</span>
-                    {e.title.slice(1)}
-                  </button>
+                  {chapter.title}
                 </Link>
-              );
-            })}
-          </div>
-        ) : null}
-        <section className="flex flex-col justify-center items-center">
-          <h3 className="text-6xl border-b my-10">
-            <span>{book.title[0]}</span>
-            {book.title.slice(1)}
+              ))}
+            </ul>
+          </aside>
+        )}
+
+        {/* Contenido del capítulo */}
+        <div className="lg:w-3/4 w-full">
+          <h3 className="text-4xl text-center border-b border-gray-500 my-10">
+            {book.title}
           </h3>
-          {book
-            ? book.chapters.map((e, i) => {
-                return (
-                  <div
-                    id={e.title}
-                    key={i}
-                    className="flex flex-col rounded-xl w-[800px]"
-                  >
-                    <h3 className="text-4xl my-10">
-                      <span>{e.title[0]}</span>
-                      {e.title.slice(1)}
-                    </h3>
-                    <p id="pre" className="text-xl ml-10">
-                      <span className="text-4xl font-bold">{e.text[0]}</span>
-                      {e.text.slice(1)}
-                    </p>
-                  </div>
-                );
-              })
-            : null}
-        </section>
+          {book.chapters?.map((chapter, i) => (
+            <article
+              id={chapter.title}
+              key={i}
+              className="bg-gray-800 bg-opacity-70 rounded-xl p-5 mb-10"
+            >
+              <h4 className="text-3xl mb-5">{chapter.title}</h4>
+              <p className="text-lg leading-relaxed">
+                <span className="text-2xl font-bold">{chapter.text[0]}</span>
+                {chapter.text.slice(1)}
+              </p>
+            </article>
+          ))}
+        </div>
       </section>
     </main>
-  ) : null;
+  );
 }

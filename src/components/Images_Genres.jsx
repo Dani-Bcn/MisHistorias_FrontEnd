@@ -1,22 +1,27 @@
-import React from 'react'
-import  aventuras from "/images/Caratula-aventuras.jpeg"
-import  accion from "/images/Caratula-accion.jpeg"
-import  clasico from "/images/Caratula-clasico.jpeg"
-import  infantil from "/images/Caratula-infantil.jpeg"
-import  comedia from "/images/Caratula-comedia.jpeg"
-import  policial from "/images/Caratula-policial.jpeg"
-import  romantico from "/images/Caratula-romantico.jpeg"
-import  thriller from "/images/Caratula-thriller.jpeg"
-import  terror from "/images/Caratula-terror.jpeg"
+import React from 'react';
 
-    export const arrayGenres=[
-     {genre:"Aventuras",image:aventuras},
-     {genre:"Acción", image:accion},
-     {genre:"Infantil", image:infantil},
-     {genre:"Terror", image:terror},
-     {genre:"Clásico", image:clasico},
-     {genre:"Thriller", image:thriller},
-     {genre:"Policial", image:policial,},
-     {genre:"Romántico", image:romantico},
-     {genre:"Comedia", image:comedia,}    
-    ]
+// Cargar imágenes dinámicamente
+const images = {
+  aventuras: "/images/Caratula-aventuras.jpeg",
+  accion: "/images/Caratula-accion.jpeg",
+  clasico: "/images/Caratula-clasico.jpeg",
+  infantil: "/images/Caratula-infantil.jpeg",
+  comedia: "/images/Caratula-comedia.jpeg",
+  policial: "/images/Caratula-policial.jpeg",
+  romantico: "/images/Caratula-romantico.jpeg",
+  thriller: "/images/Caratula-thriller.jpeg",
+  terror: "/images/Caratula-terror.jpeg",
+};
+
+// Array de géneros con imágenes
+export const arrayGenres = [
+  { genre: "Aventuras", image: images.aventuras },
+  { genre: "Acción", image: images.accion },
+  { genre: "Infantil", image: images.infantil },
+  { genre: "Terror", image: images.terror },
+  { genre: "Clásico", image: images.clasico },
+  { genre: "Thriller", image: images.thriller },
+  { genre: "Policial", image: images.policial },
+  { genre: "Romántico", image: images.romantico },
+  { genre: "Comedia", image: images.comedia },
+];
