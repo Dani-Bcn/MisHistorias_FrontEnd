@@ -111,7 +111,7 @@ export default function AllBooks() {
                   >
                     Read
                   </button>
-                  {access && (
+                  {user && (
                     <button
                       className="px-4 py-2 bg-orange-500 rounded text-white hover:bg-orange-600"
                       onClick={() => handleAddBook(book._id)}
