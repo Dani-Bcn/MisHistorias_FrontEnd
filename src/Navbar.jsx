@@ -45,7 +45,7 @@ export default function Navbar() {
           <li onClick={() => navigate("/allBooks")} className="cursor-pointer">
             <span className="font-bold">T</span>odas las historias
           </li>
-          {isAuthenticated ? (
+          {user ? (
             <div className="flex gap-5 justify-center items-center">
               <ul className="flex justify-center items-center gap-x-5">
                 <li>
