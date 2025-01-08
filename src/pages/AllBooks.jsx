@@ -62,7 +62,7 @@ export default function AllBooks() {
   };
 
   return (
-    <main className="relative text-white w-screen">
+    <main className="relative text-white w-screen mt-10">
       <section className="w-full max-w-4xl mx-auto p-4">
         {books.length > 0 ? (
           books.map((book, index) =>
@@ -132,7 +132,7 @@ export default function AllBooks() {
             ) : null
           )
         ) : (
-          <p className="text-center text-lg">Loading books...</p>
+          <p className="text-center text-lg">Sin libros</p>
         )}
       </section>
     </main>

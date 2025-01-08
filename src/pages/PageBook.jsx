@@ -4,179 +4,146 @@ import { useNavigate } from "react-router-dom";
 import { getBook, editBook, profile } from "../api/auth";
 import gsap from "gsap";
 
+const RatingStars = ({ user, book, handleVote, handleOver, handleOut }) => {
+  const stars = Array.from({ length: 10 }, (_, i) => ({
+    num: i + 1,
+    text: `star-${i + 1}`,
+  }));
+
+  return (
+    <div className="flex gap-1">
+      {user &&
+        book.dataUser.userId !== user._id &&
+        !book.idUserVote.includes(user._id) &&
+        stars.map((e) => (
+          <div
+            key={e.text}
+            id={e.text}
+            onClick={() => handleVote(e)}
+            onMouseOver={() => handleOver(e)}
+            onMouseOut={() => handleOut(e)}
+            className="star w-5 h-5 bg-white cursor-pointer transition-all duration-200 hover:scale-110"
+          />
+        ))}
+    </div>
+  );
+};
+
+const ChaptersList = ({ chapters, toggleChapters }) => (
+  <section className="absolute mt-5 ml-5 text-xl bg-white shadow-lg p-4 rounded">
+    {chapters.map((chapter, index) => (
+      <div key={index} className="flex items-center gap-2 py-1">
+        <span className="w-8 text-center font-bold">{index + 1}</span>
+        <button className="text-blue-500 hover:underline">{chapter.title}</button>
+      </div>
+    ))}
+    <button
+      onClick={toggleChapters}
+      className="mt-2 text-red-500 hover:underline"
+    >
+      Cerrar
+    </button>
+  </section>
+);
+
 export default function PageBook() {
-  window.scrollTo(0, 0);
   const navigate = useNavigate();
-  const [handleChapters, setHandleChapters] = useState(false);
+  const [showChapters, setShowChapters] = useState(false);
   const [book, setBook] = useState(null);
-  const [bookId, setBookId] = useState(localStorage.getItem("bookId"));
   const [messageVote, setMessageVote] = useState(false);
   const [user, setUser] = useState(null);
-  const [state, setState] = useState(false);
-
-  const getUser = async () => {
-    const res = await profile();
-    if (res) setUser(res.data.userFound);
-  };
+  const bookId = localStorage.getItem("bookId");
 
   useEffect(() => {
-    getUser();
+    const fetchUser = async () => {
+      const res = await profile();
+      if (res) setUser(res.data.userFound);
+    };
+    fetchUser();
   }, []);
 
-  const searchBook = async () => {
-    const res = await getBook(bookId);
-    if (res) setBook(res.data);
-  };
-
   useEffect(() => {
-    searchBook();
+    const fetchBook = async () => {
+      const res = await getBook(bookId);
+      if (res) setBook(res.data);
+    };
+    fetchBook();
   }, [bookId]);
 
-  let image;
-  if (book) {
-    image = arrayGenres.find((element) => element.genre === book.genre);
-  }
-
-  const readingTime = book?.chapters.reduce((acc, e) => acc + e.text.split(" ").length / 300, 0);
-
-  const [numLetters, setNumLetters] = useState(0);
-
-  useEffect(() => {
-    if (book) {
-      const totalLetters = book.chapters.reduce((acc, e) => acc + e.text.length, 0);
-      setNumLetters(totalLetters);
-    }
-  }, [book]);
-
-  const start = [
-    { num: 1, text: "uno" },
-    { num: 2, text: "dos" },
-    { num: 3, text: "tres" },
-    { num: 4, text: "cuatro" },
-    { num: 5, text: "cinco" },
-    { num: 6, text: "seis" },
-    { num: 7, text: "siete" },
-    { num: 8, text: "ocho" },
-    { num: 9, text: "nueve" },
-    { num: 10, text: "diez" },
-  ];
-
-  const handleOver = (e) => {
-    gsap.to(`#${e.text}`, {
-      background: "rgb(255,115,0)",
-    });
-  };
-
-  const handleOut = (e) => {
-    gsap.to(`#${e.text}`, {
-      background: "rgb(255,255,255)",
-    });
-  };
-
-  const handleVote = (e) => {
+  const handleVote = (rating) => {
     if (!book.idUserVote.includes(user._id)) {
-      book.idUserVote.push(user._id);
-      book.numVotes += 1;
-      book.reCountVotes += e.num;
-      book.rating = (book.reCountVotes / book.numVotes).toFixed(1);
+      const updatedBook = {
+        ...book,
+        idUserVote: [...book.idUserVote, user._id],
+        numVotes: book.numVotes + 1,
+        reCountVotes: book.reCountVotes + rating.num,
+      };
+      updatedBook.rating = (updatedBook.reCountVotes / updatedBook.numVotes).toFixed(1);
 
-      editBook(book._id, book);
-      setState(!state);
+      editBook(updatedBook._id, updatedBook);
+      setBook(updatedBook);
     } else {
       setMessageVote(true);
     }
   };
 
+  const handleMouseOver = (e) => {
+    gsap.to(`#${e.text}`, { background: "rgb(255,115,0)" });
+  };
+
+  const handleMouseOut = (e) => {
+    gsap.to(`#${e.text}`, { background: "rgb(255,255,255)" });
+  };
+
   return (
     <main className="w-screen flex justify-center">
       {book && (
-        <section className="m-24 text-6xl text-white">
-          <h2 className="titles">
+        <section className="max-w-4xl m-10 text-gray-900">
+          <h2 className="text-6xl font-bold text-gray-800">
             <span>{book.title[0]}</span>
             {book.title.slice(1)}
           </h2>
-          <div className="m-5 flex gap-3 text-2xl">
+          <div className="mt-5 flex gap-5">
             <img
               src={book.imageUrl}
-              alt="img-book"
-              className="w-60 h-96 object-cover"
+              alt={`Cover of ${book.title}`}
+              className="w-60 h-96 object-cover rounded shadow"
             />
-            <div className="flex flex-col gap-3">
-              <h2 className="text-5xl flex gap-3">
-                <span>{book.dataUser.userName}</span>
-                {book.dataUser.lastName}
+            <div className="flex flex-col gap-4">
+              <h2 className="text-3xl font-semibold">
+                {book.dataUser.userName} {book.dataUser.lastName}
               </h2>
-              <h3>
-                <span className="font-semibold">P</span>untuación {book.rating}
-              </h3>
-              <p>
-                <span className="font-semibold">G</span>énero &nbsp;
-                {book.genre}
+              <p className="text-lg">
+                <span className="font-semibold">Género:</span> {book.genre}
               </p>
-              <p
-                onClick={() => setHandleChapters(!handleChapters)}
-                className="w-26 text-2xl cursor-pointer hover:text-orange-600 transiton-all duration-[.5s] "
-              >
-                <span className="font-semibold ">C</span>apítulos &nbsp;
-                {book.chapters.length}
-              </p>
-              {handleChapters && (
-                <section className="absolute h-40 mt-20 ml-80 text-xl">
-                  {book.chapters.map((e, i) => (
-                    <div key={i} className="flex justify-start">
-                      <span className="flex justify-center w-10">{i + 1}</span>
-                      <button className="btn cursor-pointer">{e.title}</button>
-                    </div>
-                  ))}
-                </section>
-              )}
-              <button
-                onClick={() => navigate("/readBook")}
-                className="text-2xl p-0 m-0 w-12"
-              >
-                <span>L</span>eer
-              </button>
-              {book.comments.length > 0 && (
-                <button
-                  onClick={() => navigate("/readComments")}
-                  className="text-2xl w-40"
+              <p className="text-lg">
+                <span className="font-semibold">Capítulos:</span>{" "}
+                <span
+                  onClick={() => setShowChapters(!showChapters)}
+                  className="cursor-pointer text-blue-500 hover:underline"
                 >
-                  <span>C</span>omentarios {book.comments.length}
-                </button>
+                  {book.chapters.length}
+                </span>
+              </p>
+              {showChapters && (
+                <ChaptersList
+                  chapters={book.chapters}
+                  toggleChapters={() => setShowChapters(false)}
+                />
               )}
-              {user &&
-                book &&
-                !book.idUserComments.includes(user._id) &&
-                book.dataUser.userId !== user._id && (
-                  <button
-                    onClick={() => navigate("/writingComments")}
-                    className="text-2xl p-0 m-0 w-52"
-                  >
-                    <span>A</span>ñadir comentario
-                  </button>
-                )}
-
-              <div className="flex gap-1">
-                {user &&
-                  book.dataUser.userId !== user._id &&
-                  !book.idUserVote.includes(user._id) &&
-                  start.map((e) => (
-                    <div
-                      key={e.text}
-                      id={e.text}
-                      onClick={() => handleVote(e)}
-                      onMouseOver={() => handleOver(e)}
-                      onMouseOut={() => handleOut(e)}
-                      className="star w-5 h-5 bg-white cursor-pointer"
-                    />
-                  ))}
-              </div>
+              <RatingStars
+                user={user}
+                book={book}
+                handleVote={handleVote}
+                handleOver={handleMouseOver}
+                handleOut={handleMouseOut}
+              />
               {messageVote && (
                 <div
                   onClick={() => setMessageVote(false)}
-                  className="relative h-5 flex flex-col gap-5 text-[15px] text-red-600 cursor-pointer"
+                  className="text-red-600 mt-2 cursor-pointer"
                 >
-                  You have already voted.
+                  Ya has votado.
                 </div>
               )}
             </div>
@@ -186,4 +153,3 @@ export default function PageBook() {
     </main>
   );
 }
-
