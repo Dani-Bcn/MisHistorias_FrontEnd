@@ -23,7 +23,7 @@ export default function Navbar() {
       }
     };
 
-    fetchProfile();
+    /* fetchProfile(); */
   
 
   // Manejar logout

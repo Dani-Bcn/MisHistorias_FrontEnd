@@ -11,18 +11,18 @@ export default function RegisterUser() {
   const [imageUrl, setImageUrl] = useState("");
 
   // Verificar si el usuario está autenticado
-  const verifyUser = async () => {
+/*   const verifyUser = async () => {
     try {
       window.scrollTo(0, 0);
       await profile(); // Opcional: manejar la respuesta si es necesario
     } catch (error) {
       console.error("Error al verificar el usuario:", error);
     }
-  };
+  }; */
 
-  useEffect(() => {
+  /* useEffect(() => {
     verifyUser();
-  }, []); // Se asegura de que solo se ejecute una vez al montar el componente
+  }, []); */ // Se asegura de que solo se ejecute una vez al montar el componente
 
   const handleImage = async (e) => {
     try {

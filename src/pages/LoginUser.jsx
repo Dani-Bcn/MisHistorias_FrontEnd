@@ -5,38 +5,32 @@ import { useForm } from "react-hook-form";
 
 export default function LoginUser() {
   const navigate = useNavigate();
-  const { register, handleSubmit, formState: { errors } } = useForm();
-  const [response, setResponse] = useState(null);
-  const [loginError, setLoginError] = useState({
-    email: false,
-    password: false,
-  });
+  const { register, handleSubmit, formState: { errors }, setError, clearErrors } = useForm();
+  const [serverError, setServerError] = useState(null);
 
   const onSubmit = async (values) => {
     try {
       const res = await loginUser(values);
-      setResponse(res.data);
 
-      // Maneja el token y redirige
       if (res.data?.message) {
-        setLoginError({
-          email: res.data.message === "Correo no válido",
-          password: res.data.message === "Contraseña no válida",
-        });
+        // Maneja errores según el mensaje del servidor
+        if (res.data.message === "Correo no válido") {
+          setError("email", { type: "server", message: "Correo no registrado" });
+        } else if (res.data.message === "Contraseña no válida") {
+          setError("password", { type: "server", message: "Contraseña incorrecta" });
+        } else {
+          setServerError(res.data.message); // Otros mensajes de error
+        }
       } else {
+        // Inicio de sesión exitoso
         localStorage.setItem("token", res.data.token);
         navigate("/profile");
       }
     } catch (error) {
       console.error("Error durante el login:", error);
+      setServerError("Error en el servidor. Intenta más tarde.");
     }
   };
-
-  useEffect(() => {
-    if (response?.data?.message) {
-      console.log(response.data.message);  // Puedes agregar un mensaje de log
-    }
-  }, [response]);
 
   return (
     <main className="overflow-hidden relative w-screen h-screen text-white flex justify-center items-center flex-col">
@@ -58,14 +52,16 @@ export default function LoginUser() {
               type="email"
               {...register("email", { required: "Correo electrónico es obligatorio" })}
               placeholder="Correo electrónico"
+              onFocus={() => clearErrors("email")}
             />
             {errors.email && <span className="text-red-500">{errors.email.message}</span>}
-            
+
             <input
               className="bg-black/0 border-2 border-orange-400"
               type="password"
               {...register("password", { required: "La contraseña es obligatoria" })}
               placeholder="Contraseña"
+              onFocus={() => clearErrors("password")}
             />
             {errors.password && <span className="text-red-500">{errors.password.message}</span>}
           </div>
@@ -76,23 +72,13 @@ export default function LoginUser() {
         </section>
 
         {/* Error Message Section */}
-        <section className="h-40 flex flex-col items-center gap-3">
-          {loginError.password && (
-            <div className="h-10 flex flex-col justify-around items-center gap-2 text-xl text-red-500">
-              <p>{response?.message}</p>
-              <button className="btn">¿Olvidaste tu contraseña?</button>
-            </div>
-          )}
-          {loginError.email && (
-            <div className="text-red-500 h-20 text-xl flex flex-col items-center justify-around gap-2">
-              <p>{response?.message}</p>
-              <button onClick={() => navigate("/register")} className="btn">
-                ¿No tienes cuenta?
-              </button>
-            </div>
-          )}
-        </section>
+        {serverError && (
+          <div className="text-red-500 text-xl mt-5">
+            <p>{serverError}</p>
+          </div>
+        )}
       </form>
     </main>
   );
 }
+
