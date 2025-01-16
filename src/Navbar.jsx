@@ -16,7 +16,7 @@ export default function Navbar() {
         if (res.data.userFound) {
           setUser(res.data.userFound);
           setIsAuthenticated(true);
-          navigate("/profile");
+          /* navigate("/profile"); */
         } else {
           setIsAuthenticated(false);
         }
