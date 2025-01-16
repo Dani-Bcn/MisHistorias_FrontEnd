@@ -24,7 +24,7 @@ export default function LoginUser() {
       } else {
         // Inicio de sesión exitoso
         localStorage.setItem("token", res.data.token);
-        navigate("/profile");
+      /*   navigate("/profile"); */
       }
     } catch (error) {
       console.error("Error durante el login:", error);
