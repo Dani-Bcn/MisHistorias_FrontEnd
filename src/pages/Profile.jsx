@@ -32,18 +32,14 @@ export default function Profile() {
   const handlePublish = (book) => {
     book.published = true;
     editBook(book._id, book);
-    location.reload()
+    location.reload();
   };
 
-  const removeBook = (book) => {
-    console.log(book);
-    user.books.map((books, i) => {
-      if (books._id === books) {
-        user.books.splice(i, 1);
-        location.reload();
-      }
-    });
-    deleteBooks(book);
+  const removeBook = async (bookId) => {
+    console.log(bookId);
+    const res = await deleteBooks(bookId);
+    console.log(res);
+    /* deleteBooks(bookId); */
   };
 
   const deleteBookLibrary = async (bookId) => {
@@ -54,8 +50,6 @@ export default function Profile() {
     const res = await removeBookLibrary(objectsId);
     location.reload();
   };
-
-  
 
   return (
     <main className="w-screen flex flex-col gap-10 justify-center items-center">
@@ -165,17 +159,16 @@ export default function Profile() {
                               <div className="text-red-600">
                                 <h3>Confirma que quieres eliminar el libro</h3>
                                 <div className="w-full flex gap-10">
-                                  <p
+                                  <button
                                     className="text-xl text-green-600 cursor-pointer font-black"
                                     onClick={() => {
                                       //Elimina la imagen de Cloudinary
-                                      removeBook(book._id),
-                                        removeImg(book.imageUrl),
-                                        location.reload();
+                                      removeBook(book._id);
+                                      /*  removeImg(book.imageUrl) */
                                     }}
                                   >
                                     V
-                                  </p>
+                                  </button>
                                   <p
                                     onClick={() => setHandeDelete(false)}
                                     className="text-xl text-red-600 cursor-pointer font-black"

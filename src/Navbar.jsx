@@ -10,11 +10,13 @@ export default function Navbar() {
   // Cargar el perfil del usuario al montar el componente
  
     const fetchProfile = async () => {
+     
       try {
         const res = await profile();
-        if (res?.data?.userFound) {
+        if (res.data.userFound) {
           setUser(res.data.userFound);
           setIsAuthenticated(true);
+          navigate("/profile");
         } else {
           setIsAuthenticated(false);
         }
@@ -22,9 +24,10 @@ export default function Navbar() {
         console.error("Error al obtener el perfil del usuario:", error);
       }
     };
+useEffect(() => {
+     fetchProfile();      
 
-    /* fetchProfile(); */
-  
+  },[])
 
   // Manejar logout
   const handleLogout = async () => {
@@ -39,13 +42,13 @@ export default function Navbar() {
   };
 
   return (
-    <main className="fixed w-screen h-12 bg-slate-600/15 items-center backdrop-blur-[5px] flex z-[100]">
+    <main className="fixed w-screen h-12 bg-slate-800 items-center backdrop-blur-[5px] flex z-[100]">
       <div className="w-screen flex justify-center items-center text-xl text-slate-200">
         <ul className="w-screen flex justify-center lg:justify-around gap-5 items-center">
           <li onClick={() => navigate("/allBooks")} className="cursor-pointer">
             <span className="font-bold">T</span>odas las historias
           </li>
-          {user ? (
+          {isAuthenticated ? (
             <div className="flex gap-5 justify-center items-center">
               <ul className="flex justify-center items-center gap-x-5">
                 <li>

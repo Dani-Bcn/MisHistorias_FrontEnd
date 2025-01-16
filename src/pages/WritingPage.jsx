@@ -48,13 +48,13 @@ export default function WritingPage() {
   if (!book) return null; // Espera que el libro cargue
 
   return (
-    <main>
-      <section className="w-[80vw] h-[60vh] m-20 mt-20">
+    <main className="w-screen mt-16 flex justify-center items-center px-4">
+      <section className="w-[90%] h-[90%]  rounded-xs">
         {book.chapters && (
-          <form className="w-full h-[40vh] text-xl text-slate-300" onSubmit={saveChapter}>
+          <form onSubmit={saveChapter} className="flex flex-col gap-4">
             <input
               placeholder="Título del capítulo"
-              className="w-96 my-1 h-10 bg-slate-800"
+              className="w-full h-12 p-2 text-lg border border-orange-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
               name="title"
               type="text"
               onChange={handleChange}
@@ -62,19 +62,24 @@ export default function WritingPage() {
             />
 
             <textarea
-              className="w-full p-5 my-5 h-[300px] text-[15px] bg-slate-800"
               name="text"
               placeholder="Texto"
+              className="w-full h-96 p-2 text-lg border border-orange-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500 resize-none"
               value={chapter.text}
               onChange={handleChange}
             />
 
             {chapter.title && chapter.text ? (
-              <button type="submit" className="btn">
+              <button
+                type="submit"
+                className="w-full py-2 bg-blue-600 text-white text-lg font-semibold rounded-md hover:bg-blue-700"
+              >
                 Guardar capítulo
               </button>
             ) : (
-              <h3 className="text-red-600">Debe escribir un título y un texto</h3>
+              <h3 className="text-center text-red-600">
+                Debe escribir un título y un texto
+              </h3>
             )}
           </form>
         )}
@@ -82,3 +87,4 @@ export default function WritingPage() {
     </main>
   );
 }
+

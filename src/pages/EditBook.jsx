@@ -80,8 +80,8 @@ export default function EditBook() {
   };
 
   return (
-    <main className="w-full h-screen overflow-x-hidden">
-      <section className="relative w-full px-5 sm:px-10 lg:px-20 mt-10 lg:mt-20">
+    <main className="w-screen h-screen flex justify-center  ">
+      <section className="h-0  bg-red-200 mt-14 ">
         {/* Background effects */}
         <div className="fixed w-72 h-10 left-1/2 transform -translate-x-1/2 rounded-full bg-blue-600/5 mt-20 blur-xl"></div>
         <div className="fixed w-72 h-10 top-40 left-10 rounded-full bg-red-600/10 blur-xl"></div>
