@@ -11,7 +11,7 @@ export default function Navbar() {
  
    
   const token = Cookies.get("token");
-  console.log(token);
+
 
   useEffect(() => {
     const fetchUser = async () => {

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Cookies from "js-cookie";
 
 import { loginUser ,profile} from "../api/auth";
 import { useNavigate } from "react-router-dom";
@@ -24,7 +25,10 @@ export default function LoginUser() {
         }
       } else {
         // Inicio de sesión exitoso
-        localStorage.setItem("token", res.data.token);
+       const token = Cookies.get("token");
+
+        console.log(token);
+        localStorage.setItem("token", token);
      
          navigate("/profile"); 
        
