@@ -19,6 +19,7 @@ export default function Profile() {
   const getUser = async () => {
     const res = await profile();
     res ? setUser(res.data.userFound) : null;
+    
   };
 
   useEffect(() => {

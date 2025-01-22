@@ -31,6 +31,7 @@ export default function LoginUser() {
         localStorage.setItem("token", token);
      
          navigate("/profile"); 
+         location.reload();
        
       }
     } catch (error) {
