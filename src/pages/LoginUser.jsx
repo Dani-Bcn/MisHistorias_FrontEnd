@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+
 import { loginUser ,profile} from "../api/auth";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -26,7 +27,7 @@ export default function LoginUser() {
         localStorage.setItem("token", res.data.token);
      
          navigate("/profile"); 
-         location.reload();
+       
       }
     } catch (error) {
       console.error("Error durante el login:", error);
