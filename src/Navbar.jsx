@@ -51,7 +51,7 @@ useEffect(() => {
                 <li>
                   {user?.imageUserUrl ? (
                     <img
-                      onClick={() => navigate("/profile")}
+                      onClick={() => {console.log("Navegar"),navigate("/profile")}}
                       src={user.imageUserUrl}
                       alt={user.userName || "Usuario"}
                       className="w-10 h-10 rounded-full border-4 border-white hover:border-orange-600 object-cover transition-all duration-300 cursor-pointer"

@@ -98,8 +98,8 @@ export default function PageBook() {
   return (
     <main className="w-screen flex justify-center">
       {book && (
-        <section className="max-w-4xl m-10 text-gray-900">
-          <h2 className="text-6xl font-bold text-gray-800">
+        <section className="max-w-4xl m-10 text-gray-100">
+          <h2 className="text-6xl font-bold text-gray-100">
             <span>{book.title[0]}</span>
             {book.title.slice(1)}
           </h2>
