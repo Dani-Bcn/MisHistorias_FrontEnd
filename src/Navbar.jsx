@@ -10,29 +10,26 @@ export default function Navbar() {
   // Cargar el perfil del usuario al montar el componente
  
     const fetchProfile = async () => {
-     
-      try {
-        const res = await profile();
-        if (res.data.userFound) {
-          setUser(res.data.userFound);
-          setIsAuthenticated(true);
-          /* navigate("/profile"); */
-        } else {
-          setIsAuthenticated(false);
-        }
+       const response =  await profile();
+      try {      
+        setUser(response.data.userFound);
+        setIsAuthenticated(true);        
       } catch (error) {
-        console.error("Error al obtener el perfil del usuario:", error);
+        console.error("Error al cargar el perfil:", error);
       }
+     
     };
 useEffect(() => {
-     fetchProfile();      
+     fetchProfile();   
+     
 
-  },[])
+  },[]);
 
   // Manejar logout
   const handleLogout = async () => {
     try {
       await logout();
+      console.log("Sesión cerrada");
       setUser(null);
       setIsAuthenticated(false);
       navigate("/allBooks");
