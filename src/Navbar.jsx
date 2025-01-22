@@ -64,6 +64,7 @@ useEffect(() => {
                     </div>
                   )}
                 </li>
+                <button onClick={()=> navigate("/pageBook")}>Cocoliso</button>
                 <li
                   onClick={handleLogout}
                   className="cursor-pointer hover:text-orange-600 transition-all"
