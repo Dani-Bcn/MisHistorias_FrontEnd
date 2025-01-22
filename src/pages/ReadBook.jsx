@@ -63,7 +63,7 @@ export default function ReadBook() {
               to={chapter.title}
               spy
               smooth
-              offset={-50}
+              offset={-150}
               duration={500}
               className="cursor-pointer text-start text-sm hover:text-gray-300"
             >
@@ -74,8 +74,8 @@ export default function ReadBook() {
       </aside>
     )}
   
-    {/* Chapter Content */}
-    <div className="lg:w-3/4 w-full mx-auto text-red-50">
+    /* Chapter Content */
+    <div className="lg:w-2/4 w-full mx-auto text-red-50">
       <h3 className="text-4xl text-center border-b border-gray-500 my-10">
         {book.title}
       </h3>

@@ -85,12 +85,7 @@ export default function AllBooks() {
                     <p className="text-sm mt-2">Rating: {book.rating}</p>
                   </div>
                 </div>
-                <button
-                  className="mt-2 px-4 py-2 bg-blue-500 rounded text-white hover:bg-blue-600"
-                  onClick={() => toggleDescription(book.title, "show")}
-                >
-                  Show Description
-                </button>
+              
                 <div
                   id={book.title.replace(/\s+/g, "")}
                   className="mt-2 text-sm hidden opacity-0"
@@ -103,20 +98,20 @@ export default function AllBooks() {
                     className="px-4 py-2 bg-green-500 rounded text-white hover:bg-green-600"
                     onClick={() => handleNavigate("/PageBook", book._id)}
                   >
-                    More Info
+                     Información
                   </button>
                   <button
                     className="px-4 py-2 bg-purple-500 rounded text-white hover:bg-purple-600"
                     onClick={() => handleNavigate("/readBook", book._id)}
                   >
-                    Read
+                    Leer
                   </button>
                   {user && (
                     <button
                       className="px-4 py-2 bg-orange-500 rounded text-white hover:bg-orange-600"
                       onClick={() => handleAddBook(book._id)}
                     >
-                      Add to Library
+                      Add  My blilioteca
                     </button>
                   )}
                   {book.comments.length > 0 && (
@@ -124,7 +119,7 @@ export default function AllBooks() {
                       className="px-4 py-2 bg-teal-500 rounded text-white hover:bg-teal-600"
                       onClick={() => handleNavigate("/readComments", book._id)}
                     >
-                      Comments ({book.comments.length})
+                      Comentarios ({book.comments.length})
                     </button>
                   )}
                 </div>
