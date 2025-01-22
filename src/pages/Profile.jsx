@@ -18,8 +18,14 @@ export default function Profile() {
 
   const getUser = async () => {
     const res = await profile();
-    res ? setUser(res.data.userFound) : null;
-    
+
+    if (res && res.data.userFound) {
+      setUser(res.data.userFound);
+    }else{
+      navigate("/allBooks");
+    }
+
+
   };
 
   useEffect(() => {

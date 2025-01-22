@@ -10,9 +10,12 @@ export default function Navbar() {
   useEffect(() => {
     const fetchUser = async () => {
       const res = await profile();
-      if (res) {
+      console.log(res.data.message);
+      if (res.data.message !== "no autorizado") {
         setUser(res.data.userFound);
         setIsAuthenticated(true);
+      }else{
+        setIsAuthenticated(false);
       }
      
     };
@@ -26,7 +29,7 @@ export default function Navbar() {
     setIsAuthenticated(false);
     navigate("/allbooks");
   };
-
+console.log(user)
 
 
   return (
@@ -34,7 +37,8 @@ export default function Navbar() {
       {
         isAuthenticated ? ( 
           <>
-            <h1 className="text-2xl">Hola, {user?.name}</h1>
+          <button onClick={()=> navigate("/allbooks")}>Galeria de libros</button>
+          <img onClick={()=>navigate("/profile")} src={user.imageUserUrl} alt=""  className="w-10 h-10 rounded-[100%] border-2 border-orange-400 cursor-pointer"  />
             <button onClick={handleLogout} className="text-2xl">Cerrar sesión</button>
           </>
         ) : (

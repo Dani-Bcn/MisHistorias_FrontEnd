@@ -43,6 +43,7 @@ export default function CreateBook() {
       const res = await createBook(dataValues);
       localStorage.setItem("bookId", res.data.newBook._id);
       navigate("/profile");
+      location.reload();
     } catch (error) {
       console.error("Error al crear el libro:", error);
       // Aquí puedes añadir lógica para mostrar un mensaje de error al usuario si es necesario
