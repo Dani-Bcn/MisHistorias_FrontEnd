@@ -63,64 +63,64 @@ export default function AllBooks() {
   console.log(books);
 
   return (
-    <main className="w-screen   text-slate-50 flex flex-col p-5">
-     
-       
-        {books.length > 0
-          ? books.map((book, index) =>
-              book.published ? (
-                <div key={index} className="mt-10 bg-red-600/35 w-full p-5 rounded-3xl">
-                  <p className="absolute mt-7 ml-1 flex justify-center items-center  w-10 h-10 bg-blue-800/85 rounded-full border-2 border-orange-500">
-                    {book.rating}
-                  </p>
+    <main className="w-screen mt-10   text-slate-50 flex flex-col p-5 gap-20">
+      {books.length > 0
+        ? books.map((book, index) =>
+            book.published ? (
+              <div
+                key={index}
+                className=" w-full  mt-10  rounded-3xl"
+              >
+                <p className="absolute mt-7 ml-1 flex justify-center items-center  w-10 h-10 bg-blue-800/85 rounded-full border-2 border-orange-500">
+                  {book.rating}
+                </p>
 
-                  <div>
-                    <h3>{book.title}</h3>
+                <div className=" flex flex-col justify-center items-center ">
+                  <h3 className="text-4xl">{book.title}</h3>
+                  <img
+                    src={book.imageUrl}
+                    alt="Book Cover"
+                    className="w-96 h-96 object-contain opacity-25"
+                  />
+                  <div className="absolute flex flex-col justify-center items-center gap-2">
+                    <p className="text-2xl">
+                      <span>{book.dataUser.userName}</span>{" "}
+                      {book.dataUser.lastName}
+                    </p>
                     <img
-                      src={book.imageUrl}
-                      alt="Book Cover"
-                      className="w-20 h-32"
+                      className="w-20 h-20 object-cover border-4 border-orange-400 rounded-full"
+                      src={book.dataUser.imageUserUrl}
+                      alt=""
                     />
-                    <div>
-                      <p>
-                        {book.dataUser.userName} {book.dataUser.lastName}
-                      </p>
-                      <p>{book.genre}</p>
-                      <p>Capitulos : {book.chapters.length} </p>
-                    </div>
-                  </div>
-
-                  <div>
-                    <button
-                      onClick={() => handleNavigate("/PageBook", book._id)}
-                    >
-                      + info
-                    </button>
-                    <button
-                      onClick={() => handleNavigate("/readBook", book._id)}
-                    >
-                      Leer
-                    </button>
-                    {user && (
-                      <button onClick={() => handleAddBook(book._id)}>
-                        Add My blilioteca
-                      </button>
-                    )}
-                    {book.comments.length > 0 && (
-                      <button
-                        onClick={() =>
-                          handleNavigate("/readComments", book._id)
-                        }
-                      >
-                        Comentarios ({book.comments.length})
-                      </button>
-                    )}
-                  </div>
+                    <p>{book.genre}</p>
+                    <p>Capitulos : {book.chapters.length} </p>
+                 {/*    <button onClick={() => handleNavigate("/PageBook", book._id)}>
+                    + info
+                  </button> */}
+                  <button>{book.createdAt.slice(0,10).split('-').reverse().join('-')}</button>
+                  </div>                
                 </div>
-              ) : null
-            )
-          : null}
-   
+                <div>                 
+                  <button onClick={() => handleNavigate("/readBook", book._id)}>
+                    Leer
+                  </button>
+                  {user && (
+                    <button onClick={() => handleAddBook(book._id)}>
+                      Add My blilioteca
+                    </button>
+                  )}
+                  {book.comments.length > 0 && (
+                    <button
+                      onClick={() => handleNavigate("/readComments", book._id)}
+                    >
+                      Comentarios ({book.comments.length})
+                    </button>
+                  )}
+                </div>
+              </div>
+            ) : null
+          )
+        : null}
     </main>
   );
 }
