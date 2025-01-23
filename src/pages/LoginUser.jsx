@@ -98,10 +98,13 @@ console.log(user);
             {errors.email && (
               <span className="text-red-500">{errors.email.message}</span>
             )}
+
             <input
               className="bg-black/0 border-2 border-orange-400"
-              type="password" lang="4"
-            
+              type="password"
+              {...register("password", {
+                required: "La contraseña es obligatoria",
+              })}
               placeholder="Contraseña"
               onFocus={() => clearErrors("password")}
             />
@@ -110,7 +113,7 @@ console.log(user);
             )}
           </div>
 
-          <button className="btn text-2xl -mt-10">
+          <button className="btn text-2xl -mt-10" type="submit">
             <span>E</span>nviar
           </button>
         </section>
