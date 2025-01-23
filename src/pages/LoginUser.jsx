@@ -1,40 +1,15 @@
 import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 
-import { loginUser, profile } from "../api/auth";
+import { loginUser ,profile} from "../api/auth";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 export default function LoginUser() {
   const navigate = useNavigate();
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    setError,
-    clearErrors,
-  } = useForm();
-
+  const { register, handleSubmit, formState: { errors }, setError, clearErrors } = useForm();
   const [serverError, setServerError] = useState(null);
-  const [user,setUser]=useState(null);
-  const cookie = Cookies.get("token");
 
-console.log(cookie);
-  useEffect(() => {
-    const fetchUser = async () => {
-      const res = await profile();
-      setUser(res.data.userFound);
-    user?navigate("/allBooks"):null
-    };
-    fetchUser();
-    if (user) {
-      navigate("/profile");
-    } else {
-      navigate("/login");
-    }
-  }, [user]);
-  
-console.log(user);
   const onSubmit = async (values) => {
     try {
       const res = await loginUser(values);
@@ -42,26 +17,22 @@ console.log(user);
       if (res.data?.message) {
         // Maneja errores según el mensaje del servidor
         if (res.data.message === "Correo no válido") {
-          setError("email", {
-            type: "server",
-            message: "Correo no registrado",
-          });
+          setError("email", { type: "server", message: "Correo no registrado" });
         } else if (res.data.message === "Contraseña no válida") {
-          setError("password", {
-            type: "server",
-            message: "Contraseña incorrecta",
-          });
+          setError("password", { type: "server", message: "Contraseña incorrecta" });
         } else {
           setServerError(res.data.message); // Otros mensajes de error
         }
       } else {
         // Inicio de sesión exitoso
-        const token = Cookies.get("token");
+       const token = Cookies.get("token");
 
+        console.log(token);
         localStorage.setItem("token", token);
-
-        navigate("/profile");
-        location.reload();
+     
+         navigate("/profile"); 
+         location.reload();
+       
       }
     } catch (error) {
       console.error("Error durante el login:", error);
@@ -82,35 +53,25 @@ console.log(user);
         onSubmit={handleSubmit(onSubmit)}
       >
         <section className="flex flex-col items-center justify-around gap-20">
-          <h2 className="text-5xl">
-            <span>A</span>cceder
-          </h2>
+          <h2 className="text-5xl"><span>A</span>cceder</h2>
           <div className="flex flex-col gap-10 justify-between text-xl">
             <input
               className="bg-black/0 border-2 border-orange-400"
               type="email"
-              {...register("email", {
-                required: "Correo electrónico es obligatorio",
-              })}
+              {...register("email", { required: "Correo electrónico es obligatorio" })}
               placeholder="Correo electrónico"
               onFocus={() => clearErrors("email")}
             />
-            {errors.email && (
-              <span className="text-red-500">{errors.email.message}</span>
-            )}
+            {errors.email && <span className="text-red-500">{errors.email.message}</span>}
 
             <input
               className="bg-black/0 border-2 border-orange-400"
               type="password"
-              {...register("password", {
-             
-              })}
+              {...register("password", { required: "La contraseña es obligatoria" })}
               placeholder="Contraseña"
               onFocus={() => clearErrors("password")}
             />
-            {errors.password && (
-              <span className="text-red-500">{errors.password.message}</span>
-            )}
+            {errors.password && <span className="text-red-500">{errors.password.message}</span>}
           </div>
 
           <button className="btn text-2xl -mt-10" type="submit">
@@ -128,3 +89,4 @@ console.log(user);
     </main>
   );
 }
+
