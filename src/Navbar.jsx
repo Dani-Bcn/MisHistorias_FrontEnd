@@ -43,7 +43,7 @@ export default function Navbar() {
             alt=""
             className="w-10 h-10 rounded-[100%] border-2 border-orange-400 cursor-pointer"
           />
-          <button onClick={handleLogout} className="text-2xl">
+          <button onClick={()=>handleLogout()} className="text-2xl">
             Cerrar sesión
           </button>
         </>
