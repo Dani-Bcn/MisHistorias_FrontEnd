@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { logout, profile } from "./api/auth";
+import Cookies from "js-cookie";
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ export default function Navbar() {
 
   const handleLogout = async () => {
     await logout();
-    localStorage.removeItem("token");
+    Cookies.remove("token");
     setUser(null);
     setIsAuthenticated(false);
     navigate("/allbooks");
