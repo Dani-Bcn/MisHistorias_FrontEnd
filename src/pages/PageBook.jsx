@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { arrayGenres } from "../components/Images_Genres";
 import { useNavigate } from "react-router-dom";
 import { getBook, editBook, profile } from "../api/auth";
 import gsap from "gsap";
@@ -11,7 +10,7 @@ const RatingStars = ({ user, book, handleVote, handleOver, handleOut }) => {
   }));
 
   return (
-    <div className="flex gap-1">
+    <div className="flex gap-1 flex-wrap">
       {user &&
         book.dataUser.userId !== user._id &&
         !book.idUserVote.includes(user._id) &&
@@ -30,16 +29,18 @@ const RatingStars = ({ user, book, handleVote, handleOver, handleOut }) => {
 };
 
 const ChaptersList = ({ chapters, toggleChapters }) => (
-  <section className="absolute mt-5 ml-5 text-xl bg-white shadow-lg p-4 rounded">
+  <section className="absolute mt-5 ml-5 text-sm sm:text-base bg-white shadow-lg p-4 rounded max-w-xs sm:max-w-sm">
     {chapters.map((chapter, index) => (
       <div key={index} className="flex items-center gap-2 py-1">
-        <span className="w-8 text-center font-bold">{index + 1}</span>
-        <button className="text-blue-500 hover:underline">{chapter.title}</button>
+        <span className="w-6 sm:w-8 text-center font-bold">{index + 1}</span>
+        <button className="text-blue-500 hover:underline text-sm sm:text-base">
+          {chapter.title}
+        </button>
       </div>
     ))}
     <button
       onClick={toggleChapters}
-      className="mt-2 text-red-500 hover:underline"
+      className="mt-2 text-red-500 hover:underline text-sm"
     >
       Cerrar
     </button>
@@ -78,7 +79,9 @@ export default function PageBook() {
         numVotes: book.numVotes + 1,
         reCountVotes: book.reCountVotes + rating.num,
       };
-      updatedBook.rating = (updatedBook.reCountVotes / updatedBook.numVotes).toFixed(1);
+      updatedBook.rating = (
+        updatedBook.reCountVotes / updatedBook.numVotes
+      ).toFixed(1);
 
       editBook(updatedBook._id, updatedBook);
       setBook(updatedBook);
@@ -96,28 +99,31 @@ export default function PageBook() {
   };
 
   return (
-    <main className="w-screen flex justify-center">
+    <main className="w-screen flex justify-center px-4">
       {book && (
         <section className="max-w-4xl m-10 text-gray-100">
-          <h2 className="text-6xl font-bold text-gray-100">
+          <h2 className="text-4xl sm:text-6xl font-bold text-gray-100">
             <span>{book.title[0]}</span>
             {book.title.slice(1)}
           </h2>
-          <div className="mt-5 flex gap-5">
+          <div className="mt-5 flex flex-col lg:flex-row gap-5">
+            <div className="w-16 h-16 absolute mt-3 ml-3 z-10 bg-blue-800/50  rounded-full border-[3px] border-orange-400 flex justify-center items-center">
+              <p className="text-5xl text-orange-200">{book.rating}</p>
+            </div>
             <img
               src={book.imageUrl}
               alt={`Cover of ${book.title}`}
-              className="w-60 h-96 object-cover rounded shadow"
+              className="w-52 max-w-xs lg:max-w-sm h-auto object-cover rounded shadow"
             />
             <div className="flex flex-col gap-4">
-              <h2 className="text-3xl font-semibold">
+              <h2 className="text-xl sm:text-3xl font-semibold">
                 {book.dataUser.userName} {book.dataUser.lastName}
               </h2>
-              <p className="text-lg">
+              <p className="text-base sm:text-lg">
                 <span className="font-semibold">Género:</span> {book.genre}
               </p>
-              <p className="text-lg">
-                <span className="font-semibold">Capítulos:</span>{" "}
+              <p className="text-base sm:text-lg">
+                <span className="font-semibold">Capítulos : </span>
                 <span
                   onClick={() => setShowChapters(!showChapters)}
                   className="cursor-pointer text-blue-500 hover:underline"
@@ -141,7 +147,7 @@ export default function PageBook() {
               {messageVote && (
                 <div
                   onClick={() => setMessageVote(false)}
-                  className="text-red-600 mt-2 cursor-pointer"
+                  className="text-red-600 mt-2 cursor-pointer text-sm"
                 >
                   Ya has votado.
                 </div>

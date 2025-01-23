@@ -60,6 +60,7 @@ export default function AllBooks() {
     localStorage.setItem("bookId", bookId);
     navigate(path);
   };
+  console.log(books)
 
   return (
     <main className="relative text-white w-screen mt-10">
@@ -71,18 +72,22 @@ export default function AllBooks() {
                 key={index}
                 className="mt-5 p-4 bg-gray-800 rounded-md shadow-lg"
               >
-                <div className="flex flex-col md:flex-row items-center gap-4">
+                <div className="w-14 h-14 absolute -mt-3 -ml-3 z-10 bg-blue-300/50  rounded-full border-[3px] border-orange-400 flex justify-center items-center">
+                <p className="text-5xl text-green-200">{book.rating}</p>
+                </div>
+                <div className="flex flex-col md:flex-row items-start gap-4">
                   <img
                     src={book.imageUrl}
                     alt="Book Cover"
                     className="w-32 h-48 object-cover rounded-md opacity-80"
                   />
                   <div className="flex-1">
-                    <h3 className="text-2xl font-bold">{book.title}</h3>
+                    <h3 className="text-xl font-bold">{book.title}</h3>
                     <p className="text-lg">
                       {book.dataUser.userName} {book.dataUser.lastName}
                     </p>
-                    <p className="text-sm mt-2">Rating: {book.rating}</p>
+                    <p className="text-lg">{book.genre}</p> 
+                    <p>Capitulos : {book.chapters.length} </p>                  
                   </div>
                 </div>
               
@@ -95,13 +100,13 @@ export default function AllBooks() {
                 </div>
                 <div className="mt-4 flex gap-4 flex-wrap">
                   <button
-                    className="px-4 py-2 bg-green-500 rounded text-white hover:bg-green-600"
+                    className="px-4 py-2 bg-slate-500 rounded text-white hover:bg-green-600"
                     onClick={() => handleNavigate("/PageBook", book._id)}
                   >
-                     Información
+                     + info
                   </button>
                   <button
-                    className="px-4 py-2 bg-purple-500 rounded text-white hover:bg-purple-600"
+                    className="px-4 py-2 bg-slate-500 rounded text-white hover:bg-purple-600"
                     onClick={() => handleNavigate("/readBook", book._id)}
                   >
                     Leer
