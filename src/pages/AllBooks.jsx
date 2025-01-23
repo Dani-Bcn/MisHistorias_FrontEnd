@@ -64,27 +64,63 @@ export default function AllBooks() {
 
   return (
     <main className="w-screen   text-slate-50 flex flex-col p-5">
-      {books.length > 0
-        ? books.map((book, index) =>
-            book.published ? (
-              <section className="mt-10 px-3 py-2  bg-red-700/35 rounded-2xl">
-                <h3>{book.title}</h3>
-                <div className="flex gap-4">
-                  <img className="w-20 " src={book.imageUrl} alt="" />
+     
+       
+        {books.length > 0
+          ? books.map((book, index) =>
+              book.published ? (
+                <div key={index} className="mt-10 bg-red-600/35 w-full p-5 rounded-3xl">
+                  <p className="absolute mt-7 ml-1 flex justify-center items-center  w-10 h-10 bg-blue-800/85 rounded-full border-2 border-orange-500">
+                    {book.rating}
+                  </p>
+
                   <div>
-                    <p>
-                      {book.dataUser.userName} {book.dataUser.lastName}
-                    </p>
-                    <p>{book.genre}</p>
+                    <h3>{book.title}</h3>
+                    <img
+                      src={book.imageUrl}
+                      alt="Book Cover"
+                      className="w-20 h-32"
+                    />
+                    <div>
+                      <p>
+                        {book.dataUser.userName} {book.dataUser.lastName}
+                      </p>
+                      <p>{book.genre}</p>
+                      <p>Capitulos : {book.chapters.length} </p>
+                    </div>
                   </div>
+
                   <div>
-                   {/*  <p>{book.description}</p> */}
+                    <button
+                      onClick={() => handleNavigate("/PageBook", book._id)}
+                    >
+                      + info
+                    </button>
+                    <button
+                      onClick={() => handleNavigate("/readBook", book._id)}
+                    >
+                      Leer
+                    </button>
+                    {user && (
+                      <button onClick={() => handleAddBook(book._id)}>
+                        Add My blilioteca
+                      </button>
+                    )}
+                    {book.comments.length > 0 && (
+                      <button
+                        onClick={() =>
+                          handleNavigate("/readComments", book._id)
+                        }
+                      >
+                        Comentarios ({book.comments.length})
+                      </button>
+                    )}
                   </div>
                 </div>
-              </section>
-            ) : null
-          )
-        : null}
+              ) : null
+            )
+          : null}
+   
     </main>
   );
 }
