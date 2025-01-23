@@ -37,12 +37,13 @@ console.log(user)
       {
         isAuthenticated ? ( 
           <>
-          <button onClick={()=> navigate("/allbooks")}>Galeria de libros</button>
+         
           <img onClick={()=>navigate("/profile")} src={user.imageUserUrl} alt=""  className="w-10 h-10 rounded-[100%] border-2 border-orange-400 cursor-pointer"  />
             <button onClick={handleLogout} className="text-2xl">Cerrar sesión</button>
           </>
         ) : (
           <>
+           <button onClick={()=> navigate("/allbooks")}>Libros</button>
             <button onClick={() => navigate("/login")} className="text-2xl">Iniciar sesión</button>
             <button onClick={() => navigate("/register")} className="text-2xl">Registrarse</button>
           </>
