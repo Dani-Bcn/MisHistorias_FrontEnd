@@ -27,7 +27,7 @@ console.log(cookie);
     user?navigate("/allBooks"):null
     };
     fetchUser();
-    if (cookie) {
+    if (user) {
       navigate("/profile");
     } else {
       navigate("/login");
