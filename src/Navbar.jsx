@@ -24,8 +24,8 @@ export default function Navbar() {
 
   const handleLogout = async () => {
     await logout();
-    Cookies.remove("token");
-    localStorage.removeItem("token");
+    await Cookies.remove("token");
+   console.log(Cookies.get("token"));
     setUser(null);
     setIsAuthenticated(false);
     navigate("/allbooks");
