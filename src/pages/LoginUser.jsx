@@ -101,9 +101,7 @@ console.log(user);
             <input
               className="bg-black/0 border-2 border-orange-400"
               type="password" lang="4"
-              {...register("password", {
-                required: "La contraseña es obligatoria",
-              })}
+            
               placeholder="Contraseña"
               onFocus={() => clearErrors("password")}
             />
