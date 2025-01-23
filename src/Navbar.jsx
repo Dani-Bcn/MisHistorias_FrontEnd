@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { logout, profile } from "./api/auth";
+import Cookies from "js-cookie";
 
 export default function Navbar() {
   const navigate = useNavigate();
