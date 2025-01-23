@@ -40,7 +40,7 @@ export default function Navbar() {
             onClick={() => navigate("/profile")}
             src={user.imageUserUrl}
             alt=""
-            className="w-10 h-10 rounded-[100%] border-2 border-orange-400 cursor-pointer"
+            className="w-10 h-10 object-cover rounded-[100%] border-2 border-orange-400 cursor-pointer"
           />
           <button onClick={handleLogout} className="text-2xl">
             Cerrar sesión
@@ -48,6 +48,7 @@ export default function Navbar() {
         </>
       ) : (
         <>
+        <button onClick={() => navigate("/allbooks")}>Libros</button>
           <button onClick={() => navigate("/login")} className="text-2xl">
             Iniciar sesión
           </button>

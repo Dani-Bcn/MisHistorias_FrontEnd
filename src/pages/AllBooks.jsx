@@ -60,81 +60,31 @@ export default function AllBooks() {
     localStorage.setItem("bookId", bookId);
     navigate(path);
   };
-  console.log(books)
+  console.log(books);
 
   return (
-    <main className="relative text-white w-screen mt-10">
-      <section className="w-full max-w-4xl mx-auto p-4">
-        {books.length > 0 ? (
-          books.map((book, index) =>
+    <main className="w-screen   text-slate-50 flex flex-col p-5">
+      {books.length > 0
+        ? books.map((book, index) =>
             book.published ? (
-              <div
-                key={index}
-                className="mt-5 p-4 bg-gray-800 rounded-md shadow-lg"
-              >
-                <div className="w-14 h-14 absolute -mt-3 -ml-3 z-10 bg-blue-300/50  rounded-full border-[3px] border-orange-400 flex justify-center items-center">
-                <p className="text-5xl text-green-200">{book.rating}</p>
-                </div>
-                <div className="flex flex-col md:flex-row items-start gap-4">
-                  <img
-                    src={book.imageUrl}
-                    alt="Book Cover"
-                    className="w-32 h-48 object-cover rounded-md opacity-80"
-                  />
-                  <div className="flex-1">
-                    <h3 className="text-xl font-bold">{book.title}</h3>
-                    <p className="text-lg">
+              <section className="mt-10 px-3 py-2  bg-red-700/35 rounded-2xl">
+                <h3>{book.title}</h3>
+                <div className="flex gap-4">
+                  <img className="w-20 " src={book.imageUrl} alt="" />
+                  <div>
+                    <p>
                       {book.dataUser.userName} {book.dataUser.lastName}
                     </p>
-                    <p className="text-lg">{book.genre}</p> 
-                    <p>Capitulos : {book.chapters.length} </p>                  
+                    <p>{book.genre}</p>
+                  </div>
+                  <div>
+                   {/*  <p>{book.description}</p> */}
                   </div>
                 </div>
-              
-                <div
-                  id={book.title.replace(/\s+/g, "")}
-                  className="mt-2 text-sm hidden opacity-0"
-                  onClick={() => toggleDescription(book.title, "hide")}
-                >
-                  {book.description}
-                </div>
-                <div className="mt-4 flex gap-4 flex-wrap">
-                  <button
-                    className="px-4 py-2 bg-slate-500 rounded text-white hover:bg-green-600"
-                    onClick={() => handleNavigate("/PageBook", book._id)}
-                  >
-                     + info
-                  </button>
-                  <button
-                    className="px-4 py-2 bg-slate-500 rounded text-white hover:bg-purple-600"
-                    onClick={() => handleNavigate("/readBook", book._id)}
-                  >
-                    Leer
-                  </button>
-                  {user && (
-                    <button
-                      className="px-4 py-2 bg-orange-500 rounded text-white hover:bg-orange-600"
-                      onClick={() => handleAddBook(book._id)}
-                    >
-                      Add  My blilioteca
-                    </button>
-                  )}
-                  {book.comments.length > 0 && (
-                    <button
-                      className="px-4 py-2 bg-teal-500 rounded text-white hover:bg-teal-600"
-                      onClick={() => handleNavigate("/readComments", book._id)}
-                    >
-                      Comentarios ({book.comments.length})
-                    </button>
-                  )}
-                </div>
-              </div>
+              </section>
             ) : null
           )
-        ) : (
-          null
-        )}
-      </section>
+        : null}
     </main>
   );
 }
