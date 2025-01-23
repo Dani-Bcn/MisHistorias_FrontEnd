@@ -23,6 +23,7 @@ export default function Navbar() {
 
   const handleLogout = async () => {
     await logout();
+    Cookies.remove("token");
     localStorage.removeItem("token");
     setUser(null);
     setIsAuthenticated(false);
