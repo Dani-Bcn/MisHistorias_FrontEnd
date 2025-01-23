@@ -98,10 +98,9 @@ console.log(user);
             {errors.email && (
               <span className="text-red-500">{errors.email.message}</span>
             )}
-
             <input
               className="bg-black/0 border-2 border-orange-400"
-              type="password"
+              type="password" lang="4"
               {...register("password", {
                 required: "La contraseña es obligatoria",
               })}
@@ -113,7 +112,7 @@ console.log(user);
             )}
           </div>
 
-          <button className="btn text-2xl -mt-10" type="submit">
+          <button className="btn text-2xl -mt-10">
             <span>E</span>nviar
           </button>
         </section>
