@@ -103,7 +103,7 @@ console.log(user);
               className="bg-black/0 border-2 border-orange-400"
               type="password"
               {...register("password", {
-                required: "La contraseña es obligatoria",
+             
               })}
               placeholder="Contraseña"
               onFocus={() => clearErrors("password")}

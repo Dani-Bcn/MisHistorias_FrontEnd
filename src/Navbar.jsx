@@ -14,10 +14,9 @@ export default function Navbar() {
       if (res.data.message !== "no autorizado") {
         setUser(res.data.userFound);
         setIsAuthenticated(true);
-      }else{
+      } else {
         setIsAuthenticated(false);
       }
-     
     };
     fetchUser();
   }, []);
@@ -29,27 +28,33 @@ export default function Navbar() {
     setIsAuthenticated(false);
     navigate("/allbooks");
   };
-console.log(user)
-
+  console.log(user);
 
   return (
     <main className="fixed w-screen h-12 bg-slate-800 items-center backdrop-blur-[5px] flex z-[100] text-white justify-around">
-      {
-        isAuthenticated ? ( 
-          <>
-         
-          <img onClick={()=>navigate("/profile")} src={user.imageUserUrl} alt=""  className="w-10 h-10 rounded-[100%] border-2 border-orange-400 cursor-pointer"  />
-            <button onClick={handleLogout} className="text-2xl">Cerrar sesión</button>
-          </>
-        ) : (
-          <>
-           <button onClick={()=> navigate("/allbooks")}>Libros</button>
-            <button onClick={() => navigate("/login")} className="text-2xl">Iniciar sesión</button>
-            <button onClick={() => navigate("/register")} className="text-2xl">Registrarse</button>
-          </>
-        )
-      }
-      
+      {isAuthenticated ? (
+        <>
+          <button onClick={() => navigate("/allbooks")}> Libros</button>
+          <img
+            onClick={() => navigate("/profile")}
+            src={user.imageUserUrl}
+            alt=""
+            className="w-10 h-10 rounded-[100%] border-2 border-orange-400 cursor-pointer"
+          />
+          <button onClick={handleLogout} className="text-2xl">
+            Cerrar sesión
+          </button>
+        </>
+      ) : (
+        <>
+          <button onClick={() => navigate("/login")} className="text-2xl">
+            Iniciar sesión
+          </button>
+          <button onClick={() => navigate("/register")} className="text-2xl">
+            Registrarse
+          </button>
+        </>
+      )}
     </main>
   );
 }
