@@ -63,45 +63,44 @@ export default function AllBooks() {
   console.log(books);
 
   return (
-    <main className="w-screen mt-10   text-slate-50 flex flex-col p-5 gap-20">
+    <main className="w-screen mt-20   text-slate-50 flex flex-col p-5 gap-32">
       {books.length > 0
         ? books.map((book, index) =>
             book.published ? (
-              <div
-                key={index}
-                className=" w-full  mt-10  rounded-3xl"
-              >
-                <p className="absolute mt-7 ml-1 flex justify-center items-center  w-10 h-10 bg-blue-800/85 rounded-full border-2 border-orange-500">
+              <div key={index} className=" w-full  rounded-3xl">
+                <p className="absolute  ml-1 flex justify-center items-center  w-10 h-10 bg-blue-800/85 rounded-full border-2 border-orange-500">
                   {book.rating}
                 </p>
 
-                <div className=" flex flex-col justify-center items-center ">
-                  <h3 className="text-4xl">{book.title}</h3>
-                  <img
-                    src={book.imageUrl}
-                    alt="Book Cover"
-                    className="w-96 h-96 object-cover opacity-25"
-                  />
-                  <div className="absolute flex flex-col justify-center items-center gap-2">
+                <div className="h-72 flex flex-col justify-center items-center ">
+                  <h3 className="text-1xl font-bold py-5 ">{book.title}</h3>
+                  <div>
+                    <img
+                      src={book.imageUrl}
+                      alt="Book Cover"
+                      className="relative mask z-0 object-fill w-60 h-80 rounded-lg opacity-30"
+                    />
+                  </div>
+                  <div className="absolute z-10  flex flex-col justify-center items-center gap-2">
                     <p className="text-2xl">
-                      <span>{book.dataUser.userName}</span>{" "}
+                      <span>{book.dataUser.userName}</span>
                       {book.dataUser.lastName}
                     </p>
                     <img
-                      className="w-20 h-20 object-cover border-4 border-orange-400 rounded-full"
+                      className=" w-20 h-20 object-cover border-4 border-orange-400 rounded-full"
                       src={book.dataUser.imageUserUrl}
                       alt=""
                     />
                     <p>{book.genre}</p>
                     <p>Capitulos : {book.chapters.length} </p>
-                    <button onClick={() => handleNavigate("/PageBook", book._id)}>
+
+                    <p>{book.description}</p>
+                  </div>
+                </div>
+                <div className="flex justify-center items-center gap-5">
+                  <button onClick={() => handleNavigate("/PageBook", book._id)}>
                     + info
                   </button>
-                
-                  <p>{book.description}</p>
-                  </div>                
-                </div>
-                <div>                 
                   <button onClick={() => handleNavigate("/readBook", book._id)}>
                     Leer
                   </button>
@@ -110,13 +109,7 @@ export default function AllBooks() {
                       Add My blilioteca
                     </button>
                   )}
-                  {book.comments.length > 0 && (
-                    <button
-                      onClick={() => handleNavigate("/readComments", book._id)}
-                    >
-                      Comentarios ({book.comments.length})
-                    </button>
-                  )}
+                  
                 </div>
               </div>
             ) : null

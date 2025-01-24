@@ -88,6 +88,7 @@ button {
   transition: all;
   transition-duration: .5s;
   margin-left: 0px;
+  z-index: 10;
 }
 
 button:hover { 
@@ -114,4 +115,11 @@ span {
 pre{
   font-weight: 100;
   font-family:'Gill Sans', 'Trebuchet MS';
+}
+.mask{
+
+  mask-image: linear-gradient(black 0%, transparent);
+}
+.maskUser{
+    mask-image: linear-gradient(black 20%, transparent);
 }

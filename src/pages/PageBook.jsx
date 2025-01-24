@@ -112,9 +112,10 @@ export default function PageBook() {
               <p className="text-5xl text-orange-200">{book.rating}</p>
             </div>
             <img
+            
               src={book.imageUrl}
               alt={`Cover of ${book.title}`}
-              className="w-52 max-w-xs lg:max-w-sm h-auto object-cover rounded shadow"
+              className="w-52 max-w-xs lg:max-w-sm h-auto object-cover rounded shadow mask"
             />
             <div className="flex flex-col gap-4">
               <h2 className="text-xl sm:text-3xl font-semibold">
@@ -158,9 +159,7 @@ export default function PageBook() {
                 </div>
               )}
             </div>
-            <span>Comentarios :</span>
-            <p>{book.comments[0][0]}</p>
-         
+
           </div>
         </section>
       )}
