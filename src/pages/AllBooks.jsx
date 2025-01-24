@@ -80,7 +80,7 @@ export default function AllBooks() {
                   <img
                     src={book.imageUrl}
                     alt="Book Cover"
-                    className="w-96 h-96 object-contain opacity-25"
+                    className="w-96 h-96 object-cover opacity-25"
                   />
                   <div className="absolute flex flex-col justify-center items-center gap-2">
                     <p className="text-2xl">
@@ -94,10 +94,11 @@ export default function AllBooks() {
                     />
                     <p>{book.genre}</p>
                     <p>Capitulos : {book.chapters.length} </p>
-                 {/*    <button onClick={() => handleNavigate("/PageBook", book._id)}>
+                    <button onClick={() => handleNavigate("/PageBook", book._id)}>
                     + info
-                  </button> */}
-                  <button>{book.createdAt.slice(0,10).split('-').reverse().join('-')}</button>
+                  </button>
+                
+                  <p>{book.description}</p>
                   </div>                
                 </div>
                 <div>                 

@@ -97,16 +97,17 @@ export default function PageBook() {
   const handleMouseOut = (e) => {
     gsap.to(`#${e.text}`, { background: "rgb(255,255,255)" });
   };
+  console.log(book)
 
   return (
     <main className="w-screen flex justify-center px-4">
       {book && (
         <section className="max-w-4xl m-10 text-gray-100">
-          <h2 className="text-4xl sm:text-6xl font-bold text-gray-100">
+          <h2 className="text-4xl p-5 sm:text-6xl font-bold text-gray-100">
             <span>{book.title[0]}</span>
             {book.title.slice(1)}
           </h2>
-          <div className="mt-5 flex flex-col lg:flex-row gap-5">
+          <div className="w-screen p-5 flex flex-col lg:flex-row gap-5">
             <div className="w-16 h-16 absolute mt-3 ml-3 z-10 bg-blue-800/50  rounded-full border-[3px] border-orange-400 flex justify-center items-center">
               <p className="text-5xl text-orange-200">{book.rating}</p>
             </div>
@@ -117,7 +118,7 @@ export default function PageBook() {
             />
             <div className="flex flex-col gap-4">
               <h2 className="text-xl sm:text-3xl font-semibold">
-                {book.dataUser.userName} {book.dataUser.lastName}
+                <span>{book.dataUser.userName}</span> {book.dataUser.lastName}
               </h2>
               <p className="text-base sm:text-lg">
                 <span className="font-semibold">Género:</span> {book.genre}
@@ -130,13 +131,17 @@ export default function PageBook() {
                 >
                   {book.chapters.length}
                 </span>
+                
               </p>
+              <div><span>Descripción :</span><p>{book.description}</p></div>
               {showChapters && (
                 <ChaptersList
                   chapters={book.chapters}
                   toggleChapters={() => setShowChapters(false)}
                 />
               )}
+              <div className="flex gap-2 text-1xl"><span>Creado : </span><p>{book.createdAt.slice(0,10).split('-').reverse().join('-')}</p></div>
+              <div className="flex gap-2 text-1xl"><span>Modificado : </span><p>{book.updatedAt.slice(0,10).split('-').reverse().join('-')}</p></div>
               <RatingStars
                 user={user}
                 book={book}
@@ -153,6 +158,9 @@ export default function PageBook() {
                 </div>
               )}
             </div>
+            <span>Comentarios :</span>
+            <p>{book.comments[0][0]}</p>
+         
           </div>
         </section>
       )}
