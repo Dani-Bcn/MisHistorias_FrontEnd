@@ -49,12 +49,12 @@ export default function WritingPage() {
 
   return (
     <main className="w-screen mt-16 flex justify-center items-center px-4">
-      <section className="w-[90%] h-[90%]  rounded-xs">
+      <section className="w-full max-w-4xl p-4 bg-white rounded-lg shadow-md">
         {book.chapters && (
           <form onSubmit={saveChapter} className="flex flex-col gap-4">
             <input
               placeholder="Título del capítulo"
-              className="w-full h-12 p-2 text-lg border border-orange-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
+              className="w-full h-12 p-3 text-lg border border-orange-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               name="title"
               type="text"
               onChange={handleChange}
@@ -64,7 +64,7 @@ export default function WritingPage() {
             <textarea
               name="text"
               placeholder="Texto"
-              className="w-full h-96 p-2 text-lg border border-orange-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500 resize-none"
+              className="w-full h-80 md:h-96 p-3 text-lg border border-orange-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
               value={chapter.text}
               onChange={handleChange}
             />
@@ -72,7 +72,7 @@ export default function WritingPage() {
             {chapter.title && chapter.text ? (
               <button
                 type="submit"
-                className="w-full py-2 bg-blue-600 text-white text-lg font-semibold rounded-md hover:bg-blue-700"
+                className="w-full py-3 bg-blue-600 text-white text-lg font-semibold rounded-md hover:bg-blue-700"
               >
                 Guardar capítulo
               </button>
@@ -87,4 +87,3 @@ export default function WritingPage() {
     </main>
   );
 }
-

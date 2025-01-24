@@ -97,23 +97,22 @@ export default function EditBook() {
 
         {/* Chapters list */}
         {book?.chapters?.length > 0 && (
-          <>
+          <main className="p-5">
             <div className="flex flex-wrap justify-between items-center text-white bg-gradient-to-r p-5 rounded-xl sm:rounded-3xl from-orange-600/[0.5]">
-              <h3 className="w-1/3 sm:w-20 border-r border-orange-500">Nº</h3>
-              <h3 className="w-full sm:w-1/2 lg:w-96 border-r border-orange-500 text-center sm:text-left">Capítulo</h3>
+              <h3 className="w-1/3 sm:w-20 ">Nº</h3>
+              <h3 className="w-full sm:w-1/2 lg:w-96  text-center sm:text-left">Capítulo</h3>
               <h3 className="hidden sm:block w-1/4 sm:w-40">Última actualización</h3>
             </div>
-
             {book.chapters.map((chapter, index) => (
               <div
                 key={index}
                 className="flex flex-wrap justify-between items-center text-white bg-gradient-to-r px-5 py-2 my-5 rounded-xl sm:rounded-3xl from-slate-600/[0.5]"
               >
-                <h3 className="w-1/3 sm:w-20 border-r border-orange-500">{`#${index + 1}`}</h3>
-                <h3 className="w-full sm:w-1/2 lg:w-96 text-center sm:text-left border-r border-orange-500">
+                <h3 className="w-1/3 sm:w-20 ">{`#${index + 1}`}</h3>
+                <h3 className="w-full sm:w-1/2 lg:w-96 text-center sm:text-left ">
                   {chapter.title}
                 </h3>
-                <h3 className="hidden sm:block w-1/4 sm:w-52 border-r border-orange-500">
+                <h3 className="hidden sm:block w-1/4 sm:w-52 ">
                   {new Date(book.updatedAt).toLocaleDateString("es-ES")}
                 </h3>
                 <div className="flex gap-2 sm:gap-5 w-full sm:w-auto justify-center mt-2 sm:mt-0">
@@ -152,7 +151,7 @@ export default function EditBook() {
                 )}
               </div>
             ))}
-          </>
+          </main>
         )}
 
         {/* Actions */}

@@ -55,7 +55,6 @@ export default function AllBooks() {
       marginTop: action === "show" ? 40 : 0,
     });
   };
-
   const handleNavigate = (path, bookId) => {
     localStorage.setItem("bookId", bookId);
     navigate(path);
@@ -71,9 +70,8 @@ export default function AllBooks() {
                 <p className="absolute  ml-1 flex justify-center items-center  w-10 h-10 bg-blue-800/85 rounded-full border-2 border-orange-500">
                   {book.rating}
                 </p>
-
                 <div className="h-72 flex flex-col justify-center items-center ">
-                  <h3 className="text-1xl font-bold py-5 ">{book.title}</h3>
+                  <h3 className="text-2xl font-bold py-5 text-orange-200 ">{book.title}</h3>
                   <div>
                     <img
                       src={book.imageUrl}
@@ -81,7 +79,7 @@ export default function AllBooks() {
                       className="relative mask z-0 object-fill w-60 h-80 rounded-lg opacity-30"
                     />
                   </div>
-                  <div className="absolute z-10  flex flex-col justify-center items-center gap-2">
+                  <div className="absolute z-10 flex flex-col justify-center items-center gap-2">
                     <p className="text-2xl">
                       <span>{book.dataUser.userName}</span>
                       {book.dataUser.lastName}
@@ -93,7 +91,6 @@ export default function AllBooks() {
                     />
                     <p>{book.genre}</p>
                     <p>Capitulos : {book.chapters.length} </p>
-
                     <p>{book.description}</p>
                   </div>
                 </div>
@@ -108,8 +105,7 @@ export default function AllBooks() {
                     <button onClick={() => handleAddBook(book._id)}>
                       Add My blilioteca
                     </button>
-                  )}
-                  
+                  )}                  
                 </div>
               </div>
             ) : null
