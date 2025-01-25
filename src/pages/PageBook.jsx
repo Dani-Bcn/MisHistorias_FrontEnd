@@ -112,19 +112,23 @@ export default function PageBook() {
       setResultsLibrary(
         user.booksLibrary.some((obj) => Object.values(obj).includes(bookId))
       );
-  }, [user, bookId]);
+  }, [user, bookId,resultsLibarary]);
 
   // Add book to user's library
   const handleAddBook = async (bookId) => {
-    if (!user?._id) return;
+    if (!user) return;
 
     try {
       await addBook({ bookId, userId: user._id });
       alert("Book added to your library!");
+      location.reload();
     } catch (error) {
       console.error("Error adding book:", error);
       alert("Failed to add book. Please try again later.");
     }
+  };
+  const handleNavigate = (path) => {    
+    navigate(path);
   };
 
   return (
@@ -181,7 +185,11 @@ export default function PageBook() {
                 <p>
                   {book.updatedAt.slice(0, 10).split("-").reverse().join("-")}
                 </p>
+                
               </div>
+              <button onClick={() => handleNavigate("/readBook", book._id)}>
+                    Leer
+                  </button>
               <RatingStars
                 user={user}
                 book={book}
@@ -190,7 +198,7 @@ export default function PageBook() {
                 handleOut={handleMouseOut}
               />
 
-              {!resultsLibarary && (
+              {!resultsLibarary && user &&(
                 <button onClick={() => handleAddBook(book._id)}>
                   Add My blilioteca
                 </button>

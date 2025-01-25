@@ -42,8 +42,7 @@ export default function AllBooks() {
       marginTop: action === "show" ? 40 : 0,
     });
   };
-  const handleNavigate = (path, bookId) => {
-    localStorage.setItem("bookId", bookId);
+  const handleNavigate = (path, bookId) => {   
     navigate(path);
   };
   console.log(books);
@@ -72,7 +71,7 @@ export default function AllBooks() {
                       className="relative mask z-0 object-fill w-60 h-80 rounded-lg opacity-30"
                     />
                   </div>
-                  <div className="absolute z-10 flex flex-col justify-center items-center gap-2">
+                  <div className="absolute z-10 flex flex-col justify-center items-center gap-3">
                     <p className="text-2xl">
                       <span>{book.dataUser.userName}</span>
                       {book.dataUser.lastName}
@@ -84,7 +83,7 @@ export default function AllBooks() {
                     />
                     <p>{book.genre}</p>
                     <p>Capitulos : {book.chapters.length} </p>
-                    <p>{book.description}</p>
+                    <p className="absolute mt-[400px] flex justify-start w-72">{book.description}</p>
                   </div>
                 </div>
                 <div className="flex justify-center items-center gap-5">
