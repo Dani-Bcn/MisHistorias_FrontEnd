@@ -43,9 +43,9 @@ export default function Profile() {
   };
 
   const removeBook = async (bookId) => {
-    console.log(bookId);
+   
     const res = await deleteBooks(bookId);
-    console.log(res);
+   
     /* deleteBooks(bookId); */
   };
 

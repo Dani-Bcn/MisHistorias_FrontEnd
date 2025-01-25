@@ -11,7 +11,7 @@ export default function Navbar() {
   useEffect(() => {
     const fetchUser = async () => {
       const res = await profile();
-      console.log(res.data.message);
+    
       if (res.data.message !== "no autorizado") {
         setUser(res.data.userFound);
         setIsAuthenticated(true);
@@ -29,7 +29,7 @@ export default function Navbar() {
     setIsAuthenticated(false);
     navigate("/allbooks");
   };
-  console.log(user);
+ 
 
   return (
     <main className="fixed w-screen h-12 bg-slate-800 items-center backdrop-blur-[5px] flex z-[100] text-white justify-around">

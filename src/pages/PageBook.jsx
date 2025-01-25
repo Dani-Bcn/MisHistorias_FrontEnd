@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getBook, editBook, profile } from "../api/auth";
+import { getBook, editBook, profile, addBook } from "../api/auth";
 import gsap from "gsap";
+import { use } from "react";
 
 const RatingStars = ({ user, book, handleVote, handleOver, handleOut }) => {
   const stars = Array.from({ length: 10 }, (_, i) => ({
@@ -53,6 +54,7 @@ export default function PageBook() {
   const [book, setBook] = useState(null);
   const [messageVote, setMessageVote] = useState(false);
   const [user, setUser] = useState(null);
+  const [resultsLibarary, setResultsLibrary] = useState(false);
   const bookId = localStorage.getItem("bookId");
 
   useEffect(() => {
@@ -97,7 +99,33 @@ export default function PageBook() {
   const handleMouseOut = (e) => {
     gsap.to(`#${e.text}`, { background: "rgb(255,255,255)" });
   };
-  console.log(book)
+
+  /*  books.map((book) => {  
+    console.log(book._id)
+  }
+  ) */
+  console.log(bookId);
+  user && user.booksLibrary && console.log("Bliblioteca", user.booksLibrary);
+  useEffect(() => {
+    user &&
+      user.booksLibrary &&
+      setResultsLibrary(
+        user.booksLibrary.some((obj) => Object.values(obj).includes(bookId))
+      );
+  }, [user, bookId]);
+
+  // Add book to user's library
+  const handleAddBook = async (bookId) => {
+    if (!user?._id) return;
+
+    try {
+      await addBook({ bookId, userId: user._id });
+      alert("Book added to your library!");
+    } catch (error) {
+      console.error("Error adding book:", error);
+      alert("Failed to add book. Please try again later.");
+    }
+  };
 
   return (
     <main className="w-screen flex justify-center px-4">
@@ -112,7 +140,6 @@ export default function PageBook() {
               <p className="text-5xl text-orange-200">{book.rating}</p>
             </div>
             <img
-            
               src={book.imageUrl}
               alt={`Cover of ${book.title}`}
               className="w-52 max-w-xs lg:max-w-sm h-auto object-cover rounded shadow mask"
@@ -132,17 +159,29 @@ export default function PageBook() {
                 >
                   {book.chapters.length}
                 </span>
-                
               </p>
-              <div><span>Descripción :</span><p>{book.description}</p></div>
+              <div>
+                <span>Descripción :</span>
+                <p>{book.description}</p>
+              </div>
               {showChapters && (
                 <ChaptersList
                   chapters={book.chapters}
                   toggleChapters={() => setShowChapters(false)}
                 />
               )}
-              <div className="flex gap-2 text-1xl"><span>Creado : </span><p>{book.createdAt.slice(0,10).split('-').reverse().join('-')}</p></div>
-              <div className="flex gap-2 text-1xl"><span>Modificado : </span><p>{book.updatedAt.slice(0,10).split('-').reverse().join('-')}</p></div>
+              <div className="flex gap-2 text-1xl">
+                <span>Creado : </span>
+                <p>
+                  {book.createdAt.slice(0, 10).split("-").reverse().join("-")}
+                </p>
+              </div>
+              <div className="flex gap-2 text-1xl">
+                <span>Modificado : </span>
+                <p>
+                  {book.updatedAt.slice(0, 10).split("-").reverse().join("-")}
+                </p>
+              </div>
               <RatingStars
                 user={user}
                 book={book}
@@ -150,6 +189,12 @@ export default function PageBook() {
                 handleOver={handleMouseOver}
                 handleOut={handleMouseOut}
               />
+
+              {!resultsLibarary && (
+                <button onClick={() => handleAddBook(book._id)}>
+                  Add My blilioteca
+                </button>
+              )}
               {messageVote && (
                 <div
                   onClick={() => setMessageVote(false)}
@@ -159,7 +204,6 @@ export default function PageBook() {
                 </div>
               )}
             </div>
-
           </div>
         </section>
       )}

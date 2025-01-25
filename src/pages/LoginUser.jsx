@@ -27,7 +27,7 @@ export default function LoginUser() {
         // Inicio de sesión exitoso
        const token = Cookies.get("token");
 
-        console.log(token);
+       
         localStorage.setItem("token", token);
      
          navigate("/profile"); 
