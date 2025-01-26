@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getAllBooks, profile, addBook } from "../api/auth";
+import { getAllBooks, profile } from "../api/auth";
 import { useNavigate } from "react-router-dom";
 import gsap from "gsap";
 
@@ -7,14 +7,11 @@ export default function AllBooks() {
   const navigate = useNavigate();
   const [books, setBooks] = useState([]);
   const [user, setUser] = useState(null);
-  const [access, setAccess] = useState(false);
-  window.scrollTo(0, 0);
 
   // Fetch books and user profile
   const fetchBooksAndProfile = async () => {
     try {
       const token = localStorage.getItem("token");
-      setAccess(!!token);
 
       const booksResponse = await getAllBooks();
       setBooks(booksResponse.data.booksFound || []);
@@ -43,80 +40,83 @@ export default function AllBooks() {
       marginTop: action === "show" ? 40 : 0,
     });
   };
+
   const handleNavigate = (path, bookId) => {
     localStorage.setItem("bookId", bookId);
     navigate(path);
   };
-  console.log(books);
 
   return (
-    <main className="w-screen  text-white flex justify-center items-center">
-      <section className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-5 mt-20">
-        {books.length > 0
-          ? books.map((book, index) =>
-              book.published ? (
+    <main className="w-screen min-h-screen text-white flex flex-col items-center bg-gray-900">
+      <section className="w-[90%] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mt-20">
+        {books.length > 0 ? (
+          books.map(
+            (book, index) =>
+              book.published && (
                 <div
                   key={index}
-                  className="w-36 h-[600px] flex gap-2 flex-col bg-red-300/50 items-center p-2"
+                  className="bg-gray-800 shadow-teal-300 rounded-lg shadow-lg p-4 flex flex-col"
                 >
-                  <h3 className="w-full h-24   text-center">{book.title}</h3>
-                  <div className=" w-full flex justify-around items-center ">
-                    <p className="w-10 h-10 border-orange-500 border-2 text-slate-900 font-semibold rounded-full text-center flex items-center justify-center text-2xl">
-                      {book.rating}
-                    </p>
-                    <div className="flex flex-col items-center gap-2">
-                      <img
-                        src="/public/images/icono.png"
-                        alt=""
-                        className="w-6 h-6"
-                      />
-                      <p>{book.numVotes}</p>
-                    </div>
-                  </div>
-                  <div className="w-24 ">
+                  <div className="flex flex-col items-center">
                     <img
                       src={book.imageUrl}
                       alt="Book Cover"
-                      className="w-24 h-32 object-cover aspect-w-16"
+                      className=" w-48 h-56 object-cover rounded-lg"
+                    />
+                    <h3 className="text-xl font-bold mt-4 text-center">
+                      {book.title}
+                    </h3>
+                    <p className="text-sm text-gray-400 mt-2">
+                      {book.dataUser.userName} {book.dataUser.lastName}
+                    </p>
+                    <img
+                      src={book.dataUser.imageUserUrl}
+                      alt="User"
+                      className="w-12 h-12 rounded-full mt-2"
                     />
                   </div>
-                  <div className="w-10 h-10">
-                  <img
-                    className="w-10 h-10 -mt-7 object-cover border-2 border-orange-400 rounded-full"
-                    src={book.dataUser.imageUserUrl}
-                    alt=""
-                  />
-                  </div>
-                  <p>
-                    <span>{book.dataUser.userName}</span>
-                    {book.dataUser.lastName}
-                  </p>
-
-                  <p>{book.genre}</p>
-                  <div className="w-full h-60 justify-center items-center  text-center  bg-red-800">
-                    <p className=" w-full  bg-red-200 text-[12px]">
-                      {book.description}
+                  <div className="mt-4 text-sm text-gray-300">
+                    <p>
+                      <strong>Género:</strong> {book.genre}
+                    </p>
+                    <p>
+                      <strong>Capítulos:</strong> {book.chapters.length}
+                    </p>
+                    <p className="truncate">
+                      <strong>Sinopsis:</strong> {book.description}
                     </p>
                   </div>
-                  <div className="flex gap-2">
-                    <button
-                      onClick={() => {
-                        localStorage.getItem("bookId", book._id),
-                          handleNavigate("/PageBook", book._id);
-                      }}
-                    >
-                      + info
-                    </button>
-                    <button
-                      onClick={() => handleNavigate("/readBook", book._id)}
-                    >
-                      Leer
-                    </button>
+                  <div className="mt-4 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <p>{book.rating}</p>
+                      <img
+                        src="/public/images/icono.png"
+                        alt="Rating Icon"
+                        className="w-6"
+                      />
+                      <p>{book.numVotes}</p>
+                    </div>
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => handleNavigate("/PageBook", book._id)}
+                        className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-lg text-sm"
+                      >
+                        + Info
+                      </button>
+                      <button
+                        onClick={() => handleNavigate("/readBook", book._id)}
+                        className="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded-lg text-sm"
+                      >
+                        Leer
+                      </button>
+                    </div>
                   </div>
                 </div>
-              ) : null
-            )
-          : null}
+              )
+          )
+        ) : (
+          <p className="text-gray-400">No hay libros publicados disponibles.</p>
+        )}
       </section>
     </main>
   );
