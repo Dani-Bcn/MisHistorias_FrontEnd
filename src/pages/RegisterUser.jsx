@@ -71,25 +71,25 @@ export default function RegisterUser() {
 
         <div className="flex flex-col text-xl gap-5 text-white justify-center items-center">
           <input
-            className="bg-transparent border-2 border-orange-400 p-2"
+            className="bg-transparent border-2 border-indigo-400 p-2"
             type="text"
             placeholder="Nombre"
             {...register("userName", { required: true })}
           />
           <input
-            className="bg-transparent border-2 border-orange-400 p-2"
+            className="bg-transparent border-2 border-indigo-400 p-2"
             type="text"
             placeholder="Apellido"
             {...register("lastName", { required: true })}
           />
           <input
-            className="bg-transparent border-2 border-orange-400 p-2"
+            className="bg-transparent border-2 border-indigo-400 p-2"
             type="email"
             placeholder="Correo electrónico"
             {...register("email", { required: true })}
           />
           <input
-            className="bg-transparent border-2 border-orange-400 p-2"
+            className="bg-transparent border-2 border-indigo-400 p-2"
             type="password"
             placeholder="Contraseña"
             {...register("password", { required: true })}
@@ -98,7 +98,7 @@ export default function RegisterUser() {
             type="file"
             id="file-upload-button"
             onChange={handleImage}
-            className="w-60 h-14 text-orange-400"
+            className="w-60 h-14 text-indigo-400"
           />
           {imageUrl && (
             <button

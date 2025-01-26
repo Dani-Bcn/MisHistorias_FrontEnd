@@ -51,7 +51,7 @@ export default function EditUser() {
       {user ? (
         <section className="w-full flex flex-col gap-5 justify-center items-center text-white text-3xl">
           <img
-            className="rounded-full border-8 border-orange-400"
+            className="rounded-full border-8 border-indigo-400"
             src={user.imageUserUrl}
             alt="image_user"
           />

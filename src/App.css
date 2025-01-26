@@ -6,6 +6,7 @@
   padding: 0;
   margin: 0;
   list-style: none;
+  z-index: 10;
 }
 html {
    --tw-bg-opacity: 1;
@@ -94,13 +95,13 @@ button {
 button:hover { 
   transition: all;
   transition-duration: .5s;
-  color: rgb(255, 94, 0);
+  color: rgb(255, 150, 88);
 }
 
 span {
   margin: 0;
   padding: 0;
-  color: rgb(255, 165, 82);
+  color: rgb(145, 171, 255);
 }
 
 .titles{
@@ -120,7 +121,7 @@ pre{
 }
 .mask{
 
-  mask-image: linear-gradient(black 0%, transparent);
+  mask-image: linear-gradient(black 50%, transparent );
 }
 .maskUser{
     mask-image: linear-gradient(black 20%, transparent);

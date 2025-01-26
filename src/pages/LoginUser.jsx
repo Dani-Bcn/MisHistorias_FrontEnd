@@ -56,7 +56,7 @@ export default function LoginUser() {
           <h2 className="text-5xl"><span>A</span>cceder</h2>
           <div className="flex flex-col gap-10 justify-between text-xl">
             <input
-              className="bg-black/0 border-2 border-orange-400"
+              className="bg-black/0 border-2 border-indigo-400"
               type="email"
               {...register("email", { required: "Correo electrónico es obligatorio" })}
               placeholder="Correo electrónico"
@@ -65,7 +65,7 @@ export default function LoginUser() {
             {errors.email && <span className="text-red-500">{errors.email.message}</span>}
 
             <input
-              className="bg-black/0 border-2 border-orange-400"
+              className="bg-black/0 border-2 border-indigo-400"
               type="password"
               {...register("password", { required: "La contraseña es obligatoria" })}
               placeholder="Contraseña"

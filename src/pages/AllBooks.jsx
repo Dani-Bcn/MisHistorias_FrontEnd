@@ -47,65 +47,72 @@ export default function AllBooks() {
   };
 
   return (
-    <main className="w-screen min-h-screen text-white flex flex-col items-center bg-gray-900">
-      <section className="w-[90%] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mt-20">
+    <main className=" overflow-hidden   text-slate-200 flex flex-col items-center ">
+      <section className="w-[72%] lg:w-[90%] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 py-20 ">
         {books.length > 0 ? (
           books.map(
             (book, index) =>
               book.published && (
                 <div
                   key={index}
-                  className="bg-gray-800 shadow-teal-300 rounded-lg shadow-lg p-4 flex flex-col"
+                  className="relative  bg-gray-800 shadow-indigo-900/25 rounded-lg shadow-lg p-5 flex flex-col items-around justify-between"
                 >
-                  <div className="flex flex-col items-center">
-                    <img
-                      src={book.imageUrl}
-                      alt="Book Cover"
-                      className=" w-48 h-56 object-cover rounded-lg"
-                    />
-                    <h3 className="text-xl font-bold mt-4 text-center">
-                      {book.title}
-                    </h3>
-                    <p className="text-sm text-gray-400 mt-2">
-                      {book.dataUser.userName} {book.dataUser.lastName}
-                    </p>
+                  <img
+                    src={book.imageUrl}
+                    alt="Book Cover"
+                    className=" opacity-30 border-[1px] border-indigo-600 absolute z-0 w-[85%] h-60 mask object-cover rounded-lg"
+                  />
+                  <h3 className="h-10 z-10 text-2xl font-bold my-7 text-center text-orange-400">
+                    {book.title}
+                  </h3>
+                  <div className="flex justify-end text-2xl flex-col items-center">
+                    <div className="flex gap-2 items-center justify-center">
+                      <span className="font-bold">
+                        {book.dataUser.userName}
+                      </span>
+                      <p className=" text-center text-transform: capitalize"> {book.dataUser.lastName}</p>
+                    </div>
                     <img
                       src={book.dataUser.imageUserUrl}
                       alt="User"
-                      className="w-12 h-12 rounded-full mt-2 object-cover"
+                      className="w-14 h-14 rounded-full border-2  border-indigo-500 mt-2 object-cover"
                     />
                   </div>
-                  <div className="mt-4 text-sm text-gray-300">
+                  <div className="mt-4 text-sm text-white  p-3 rounded-xl ">
                     <p>
-                      <strong>Género:</strong> {book.genre}
+                      <strong>Género :</strong> {book.genre}
                     </p>
                     <p>
-                      <strong>Capítulos:</strong> {book.chapters.length}
+                      <strong>Capítulos :</strong> {book.chapters.length}
                     </p>
                     <p className="truncate">
-                      <strong>Sinopsis:</strong> {book.description}
+                      <strong>Sinopsis :</strong> {book.description}
                     </p>
                   </div>
                   <div className="mt-4 flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <p>{book.rating}</p>
-                      <img
-                        src="https://res.cloudinary.com/nneodani/image/upload/v1737915966/a1bbhiqtuctaocvffdhg.png"
-                        alt="Rating Icon"
-                        className="w-6"
-                      />
-                      <p>{book.numVotes}</p>
+                      <p className="w-10 h-10 flex  justify-center items-center rounded-full border border-indigo-500">
+                        {book.rating}
+                      </p>
+                      <div className="flex flex-col items-center justify-center mt-2">
+                        <img
+                          src="https://res.cloudinary.com/nneodani/image/upload/v1737915966/a1bbhiqtuctaocvffdhg.png"
+                          alt="Rating Icon"
+                          className="w-4"
+                        />
+                        <p>{book.numVotes}</p>
+                      </div>
                     </div>
                     <div className="flex gap-2">
                       <button
                         onClick={() => handleNavigate("/PageBook", book._id)}
-                        className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-lg text-sm"
+                        className=" text-white px-2 py-2 border  border-indigo-400 rounded-lg text-xs text-center"
                       >
-                        + Info
+                        Info
                       </button>
                       <button
                         onClick={() => handleNavigate("/readBook", book._id)}
-                        className="bg-green-600 hover:bg-green-700 text-white px-3 py-1 rounded-lg text-sm"
+                        className=" text-white px-2 py-2 border  border-indigo-400 rounded-lg text-xs text-center"
                       >
                         Leer
                       </button>

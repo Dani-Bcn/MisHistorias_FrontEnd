@@ -140,8 +140,8 @@ export default function PageBook() {
             {book.title.slice(1)}
           </h2>
           <div className="w-screen p-5 flex flex-col lg:flex-row gap-5">
-            <div className="w-16 h-16 absolute mt-3 ml-3 z-10 bg-blue-800/50  rounded-full border-[3px] border-orange-400 flex justify-center items-center">
-              <p className="text-5xl text-orange-200">{book.rating}</p>
+            <div className="w-16 h-16 absolute mt-3 ml-3 z-10 bg-blue-800/50  rounded-full border-[3px] border-indigo-400 flex justify-center items-center">
+              <p className="text-5xl text-indigo-200">{book.rating}</p>
             </div>
             <img
               src={book.imageUrl}

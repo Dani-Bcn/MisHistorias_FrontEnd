@@ -98,7 +98,7 @@ export default function EditBook() {
         {/* Chapters list */}
         {book?.chapters?.length > 0 && (
           <main className="p-5">
-            <div className="flex flex-wrap justify-between items-center text-white bg-gradient-to-r p-5 rounded-xl sm:rounded-3xl from-orange-600/[0.5]">
+            <div className="flex flex-wrap justify-between items-center text-white bg-gradient-to-r p-5 rounded-xl sm:rounded-3xl from-indigo-600/[0.5]">
               <h3 className="w-1/3 sm:w-20 ">Nº</h3>
               <h3 className="w-full sm:w-1/2 lg:w-96  text-center sm:text-left">Capítulo</h3>
               <h3 className="hidden sm:block w-1/4 sm:w-40">Última actualización</h3>

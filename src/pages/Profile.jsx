@@ -73,7 +73,7 @@ export default function Profile() {
           <img
             src={user.imageUserUrl}
             alt={user.userName}
-            className="relative w-60 h-60 border-8 object-cover object-top border-orange-400 rounded-full "
+            className="relative w-60 h-60 border-8 object-cover object-top border-indigo-400 rounded-full "
           />
           <div className="relative flex  gap-72 justify-center items-center  text-white z-10">
             <button
@@ -99,7 +99,7 @@ export default function Profile() {
                   return (
                     <div
                       key={i}
-                      className="w-60 h-40 flex flex-col text-white border-l border-t border-orange-600 rounded-l-xl rounded-bl-none  px-5 "
+                      className="w-60 h-40 flex flex-col text-white border-l border-t border-indigo-600 rounded-l-xl rounded-bl-none  px-5 "
                     >
                       <div className="w-full relative">
                         <h2 className="text-2xl w-96 py-3 font-semibold">
@@ -112,10 +112,10 @@ export default function Profile() {
                             alt={book.title}
                             className="w-32 h-52 object-cover"
                           />
-                          <p className="absolute w-16 h-16 flex justify-center items-center mt-36 -ml-5 text-4xl text-orange-400 z-[100] border-[3px] border-blue-600 rounded-full bg-black">
+                          <p className="absolute w-16 h-16 flex justify-center items-center mt-36 -ml-5 text-4xl text-indigo-400 z-[100] border-[3px] border-blue-600 rounded-full bg-black">
                             {book.rating}
                           </p>
-                          <div className=" flex flex-col gap-2 border-b border-r rounded-l-none rounded-b-xl border-orange-600 p-5">
+                          <div className=" flex flex-col gap-2 border-b border-r rounded-l-none rounded-b-xl border-indigo-600 p-5">
                             <button
                               className="w-16 btn flex justify-start"
                               onClick={() => {
@@ -206,7 +206,7 @@ export default function Profile() {
                   return (
                     <div
                       key={i}
-                      className="w-60 h-40 flex flex-col text-white border-l border-t border-orange-600 rounded-l-xl rounded-bl-none px-5 "
+                      className="w-60 h-40 flex flex-col text-white border-l border-t border-indigo-600 rounded-l-xl rounded-bl-none px-5 "
                     >
                       <div className="w-full relative">
                         <h2 className="text-2xl w-96 py-3 font-semibold">
@@ -219,10 +219,10 @@ export default function Profile() {
                             alt={book.title}
                             className="w-32 h-52 object-cover"
                           />
-                          <p className="absolute w-16 h-16 flex justify-center items-center mt-36  -ml-5 text-4xl text-orange-400 z-[100] border-[3px] border-blue-600 rounded-full bg-black">
+                          <p className="absolute w-16 h-16 flex justify-center items-center mt-36  -ml-5 text-4xl text-indigo-400 z-[100] border-[3px] border-blue-600 rounded-full bg-black">
                             {book.rating}
                           </p>
-                          <div className="m-5 h-48 flex flex-col gap-2 border-b border-r rounded-l-none rounded-b-xl border-orange-600 px-5 ">
+                          <div className="m-5 h-48 flex flex-col gap-2 border-b border-r rounded-l-none rounded-b-xl border-indigo-600 px-5 ">
                             <button
                               className="btn w-12 flex justify-start"
                               onClick={() => {

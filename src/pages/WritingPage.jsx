@@ -54,7 +54,7 @@ export default function WritingPage() {
           <form onSubmit={saveChapter} className="flex flex-col gap-4">
             <input
               placeholder="Título del capítulo"
-              className="w-full h-12 p-3 text-lg border border-orange-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full h-12 p-3 text-lg border border-indigo-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
               name="title"
               type="text"
               onChange={handleChange}
@@ -64,7 +64,7 @@ export default function WritingPage() {
             <textarea
               name="text"
               placeholder="Texto"
-              className="w-full h-80 md:h-96 p-3 text-lg border border-orange-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+              className="w-full h-80 md:h-96 p-3 text-lg border border-indigo-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
               value={chapter.text}
               onChange={handleChange}
             />
