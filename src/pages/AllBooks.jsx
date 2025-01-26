@@ -90,7 +90,7 @@ export default function AllBooks() {
                     <div className="flex items-center gap-2">
                       <p>{book.rating}</p>
                       <img
-                        src="/public/images/icono.png"
+                        src="https://res.cloudinary.com/nneodani/image/upload/v1737915966/a1bbhiqtuctaocvffdhg.png"
                         alt="Rating Icon"
                         className="w-6"
                       />
