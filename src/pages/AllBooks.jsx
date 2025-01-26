@@ -72,7 +72,7 @@ export default function AllBooks() {
                     <img
                       src={book.dataUser.imageUserUrl}
                       alt="User"
-                      className="w-12 h-12 rounded-full mt-2"
+                      className="w-12 h-12 rounded-full mt-2 object-cover"
                     />
                   </div>
                   <div className="mt-4 text-sm text-gray-300">
