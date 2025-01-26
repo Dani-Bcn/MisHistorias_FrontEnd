@@ -98,6 +98,8 @@ button:hover {
 }
 
 span {
+  margin: 0;
+  padding: 0;
   color: rgb(255, 165, 82);
 }
 

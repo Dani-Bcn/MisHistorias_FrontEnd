@@ -8,6 +8,7 @@ export default function AllBooks() {
   const [books, setBooks] = useState([]);
   const [user, setUser] = useState(null);
   const [access, setAccess] = useState(false);
+  window.scrollTo(0, 0);
 
   // Fetch books and user profile
   const fetchBooksAndProfile = async () => {
@@ -42,62 +43,81 @@ export default function AllBooks() {
       marginTop: action === "show" ? 40 : 0,
     });
   };
-  const handleNavigate = (path, bookId) => {   
+  const handleNavigate = (path, bookId) => {
+    localStorage.setItem("bookId", bookId);
     navigate(path);
   };
   console.log(books);
 
   return (
-    <main className="w-screen mt-20   text-slate-50 flex flex-col p-5 gap-32">
-      {books.length > 0
-        ? books.map((book, index) =>
-            book.published ? (
-              <div key={index} className=" w-full  rounded-3xl">
-                <div className=" absolute flex flex-col justify-between items-center gap-2">
-                  <p className="ml-1 flex justify-center items-center  w-10 h-10 bg-blue-800/85 rounded-full border-2 border-orange-500">
-                    {book.rating}
-                  </p>
-                  <img src="/public/images/icono.png" alt="" className="w-10" />
-                  <p>{book.numVotes}</p>
-                </div>
-                <div className="h-72 flex flex-col justify-center items-center ">
-                  <h3 className="text-2xl font-bold py-5 text-orange-200 ">
-                    {book.title}
-                  </h3>
-                  <div>
+    <main className="w-screen  text-white flex justify-center items-center">
+      <section className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-7 gap-5 mt-20">
+        {books.length > 0
+          ? books.map((book, index) =>
+              book.published ? (
+                <div
+                  key={index}
+                  className="w-36 h-[600px] flex gap-2 flex-col bg-red-300/50 items-center p-2"
+                >
+                  <h3 className="w-full h-24   text-center">{book.title}</h3>
+                  <div className=" w-full flex justify-around items-center ">
+                    <p className="w-10 h-10 border-orange-500 border-2 text-slate-900 font-semibold rounded-full text-center flex items-center justify-center text-2xl">
+                      {book.rating}
+                    </p>
+                    <div className="flex flex-col items-center gap-2">
+                      <img
+                        src="/public/images/icono.png"
+                        alt=""
+                        className="w-6 h-6"
+                      />
+                      <p>{book.numVotes}</p>
+                    </div>
+                  </div>
+                  <div className="w-24 ">
                     <img
                       src={book.imageUrl}
                       alt="Book Cover"
-                      className="relative mask z-0 object-fill w-60 h-80 rounded-lg opacity-30"
+                      className="w-24 h-32 object-cover aspect-w-16"
                     />
                   </div>
-                  <div className="absolute z-10 flex flex-col justify-center items-center gap-3">
-                    <p className="text-2xl">
-                      <span>{book.dataUser.userName}</span>
-                      {book.dataUser.lastName}
+                  <div className="w-10 h-10">
+                  <img
+                    className="w-10 h-10 -mt-7 object-cover border-2 border-orange-400 rounded-full"
+                    src={book.dataUser.imageUserUrl}
+                    alt=""
+                  />
+                  </div>
+                  <p>
+                    <span>{book.dataUser.userName}</span>
+                    {book.dataUser.lastName}
+                  </p>
+
+                  <p>{book.genre}</p>
+                  <div className="w-full h-60 justify-center items-center  text-center  bg-red-800">
+                    <p className=" w-full  bg-red-200 text-[12px]">
+                      {book.description}
                     </p>
-                    <img
-                      className=" w-20 h-20 object-cover border-4 border-orange-400 rounded-full"
-                      src={book.dataUser.imageUserUrl}
-                      alt=""
-                    />
-                    <p>{book.genre}</p>
-                    <p>Capitulos : {book.chapters.length} </p>
-                    <p className="absolute mt-[400px] flex justify-start w-72">{book.description}</p>
+                  </div>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => {
+                        localStorage.getItem("bookId", book._id),
+                          handleNavigate("/PageBook", book._id);
+                      }}
+                    >
+                      + info
+                    </button>
+                    <button
+                      onClick={() => handleNavigate("/readBook", book._id)}
+                    >
+                      Leer
+                    </button>
                   </div>
                 </div>
-                <div className="flex justify-center items-center gap-5">
-                  <button onClick={() => handleNavigate("/PageBook", book._id)}>
-                    + info
-                  </button>
-                  <button onClick={() => handleNavigate("/readBook", book._id)}>
-                    Leer
-                  </button>
-                </div>
-              </div>
-            ) : null
-          )
-        : null}
+              ) : null
+            )
+          : null}
+      </section>
     </main>
   );
 }

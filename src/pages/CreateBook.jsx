@@ -45,8 +45,7 @@ export default function CreateBook() {
       navigate("/profile");
       location.reload();
     } catch (error) {
-      console.error("Error al crear el libro:", error);
-      // Aquí puedes añadir lógica para mostrar un mensaje de error al usuario si es necesario
+      console.error("Error al crear el libro:", error); 
     }
   });
 
@@ -69,7 +68,7 @@ export default function CreateBook() {
 
           <div className="flex flex-col">
             <label className="p-2">Descripción</label>
-            <textarea
+            <textarea maxlength="150"
               {...register("description", { required: "La descripción es obligatoria" })}
               className="h-7 rounded-md"
             />

@@ -174,8 +174,8 @@ export default function EditBook() {
         {isEditingDescription && (
           <form onSubmit={handleDescriptionUpdate} className="mt-10">
             <textarea
-              name="description"
-              className="w-full h-40 rounded-md bg-slate-800 text-white p-2"
+              name="description" maxLength={150}
+              className="w-72 h-40 rounded-md bg-slate-800 text-white p-2"
               placeholder="Nueva descripción"
             />
             <div className="flex gap-5 justify-center mt-5">
