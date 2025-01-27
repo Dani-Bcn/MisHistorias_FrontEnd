@@ -47,7 +47,7 @@ export default function AllBooks() {
   };
 
   return (
-    <main className=" overflow-hidden   text-slate-200 flex flex-col items-center ">
+    <main className=" overflow-hidden  bg-orange-200/75  text-slate-200 flex flex-col items-center ">
       <section className="w-[72%] lg:w-[90%] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 py-20 ">
         {books.length > 0 ? (
           books.map(
@@ -55,7 +55,7 @@ export default function AllBooks() {
               book.published && (
                 <div
                   key={index}
-                  className="relative  bg-gray-800 shadow-indigo-900/25 rounded-lg shadow-lg p-5 flex flex-col items-around justify-between"
+                  className="relative  bg-gray-800 hover:shadow-none transition-all duration-500 shadow-black/50 rounded-lg shadow-lg p-5 flex flex-col items-around justify-between"
                 >
                   <img
                     src={book.imageUrl}

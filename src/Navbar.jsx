@@ -39,7 +39,7 @@ export default function Navbar() {
   };
   console.log(desplegable);
   return (
-    <main className="fixed w-screen h-12 bg-slate-800 items-center backdrop-blur-[5px] flex z-[100] text-white justify-around">
+    <main className="fixed w-screen h-12 bg-slate-800/0 items-center backdrop-blur-[5px] flex z-[100] text-indigo-600 justify-around">
       {isAuthenticated ? (
         <>
           <button onClick={() => navigate("/allbooks")}>Libros</button>
