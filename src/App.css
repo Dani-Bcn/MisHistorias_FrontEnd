@@ -11,7 +11,7 @@
 html {
    --tw-bg-opacity: 1;
    
-    background-color: rgb(254 215 170 / 0.75);
+    background-color: rgba(0, 0, 0, 0.75);
 } ;
 
 #editBook::placeholder {
