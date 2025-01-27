@@ -63,6 +63,7 @@ export default function WritingPage() {
 
             <textarea
               name="text"
+              type="text"
               placeholder="Texto"
               className="w-full h-80 md:h-96 p-3 text-lg border border-indigo-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
               value={chapter.text}

@@ -68,7 +68,7 @@ export default function CreateBook() {
 
           <div className="flex flex-col">
             <label className="p-2">Descripción</label>
-            <textarea maxlength="150"
+            <textarea maxLength="150"
               {...register("description", { required: "La descripción es obligatoria" })}
               className="h-7 rounded-md"
             />
