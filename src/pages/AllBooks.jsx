@@ -75,7 +75,7 @@ export default function AllBooks() {
                     <img
                       src={book.dataUser.imageUserUrl}
                       alt={book.dataUser.userName}
-                      className="w-14 h-14 rounded-full border-2  border-indigo-500 mt-2 object-cover"
+                      className="w-14 h-14 rounded-full border-2  border-orange-400 mt-2 object-cover"
                     />
                   </div>
                   <div className="mt-4 text-sm text-white gap-1 flex flex-col rounded-xl ">
