@@ -60,7 +60,7 @@ export default function AllBooks() {
                   <img
                     src={book.imageUrl}
                     alt="Book Cover"
-                    className=" opacity-30 border-[1px] border-indigo-600 absolute z-0 w-[85%] h-60 mask object-cover rounded-lg"
+                    className=" opacity-30 border-[1px] border-indigo-600 absolute z-0 w-[85%] h-68 mask object-cover rounded-lg"
                   />
                   <h3 className="h-10 z-10 text-2xl font-bold my-7 text-center text-orange-400">
                     {book.title}
@@ -74,20 +74,18 @@ export default function AllBooks() {
                     </div>
                     <img
                       src={book.dataUser.imageUserUrl}
-                      alt="User"
+                      alt={book.dataUser.userName}
                       className="w-14 h-14 rounded-full border-2  border-indigo-500 mt-2 object-cover"
                     />
                   </div>
-                  <div className="mt-4 text-sm text-white  p-3 rounded-xl ">
+                  <div className="mt-4 text-sm text-white gap-1 flex flex-col rounded-xl ">
                     <p>
-                      <strong>Género :</strong> {book.genre}
+                      <span>Género :</span> {book.genre}
                     </p>
                     <p>
-                      <strong>Capítulos :</strong> {book.chapters.length}
+                      <span>Capítulos :</span> {book.chapters.length}
                     </p>
-                    <p className="truncate">
-                      <strong>Sinopsis :</strong> {book.description}
-                    </p>
+                   <p ><span>Sipnosis :</span>  {book.description} </p>
                   </div>
                   <div className="mt-4 flex items-center justify-between">
                     <div className="flex items-center gap-2">

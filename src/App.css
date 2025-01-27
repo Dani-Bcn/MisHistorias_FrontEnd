@@ -126,7 +126,6 @@ pre{
 .maskUser{
     mask-image: linear-gradient(black 20%, transparent);
 }
-
 .card {
   width: 190px;
   height: 254px;
