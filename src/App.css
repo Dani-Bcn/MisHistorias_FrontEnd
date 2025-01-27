@@ -85,7 +85,7 @@ button {
   height: 30px;
   font-size: 16px;
   font-weight: 600;
-  color: rgb(221, 221, 221);
+  color: rgb(195, 219, 255);
   transition: all;
   transition-duration: .5s;
   margin-left: 0px;
@@ -95,7 +95,7 @@ button {
 button:hover { 
   transition: all;
   transition-duration: .5s;
-  color: rgb(255, 150, 88);
+  color: rgb(250, 195, 163);
 }
 
 span {
