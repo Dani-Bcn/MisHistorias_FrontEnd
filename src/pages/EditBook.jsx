@@ -80,7 +80,7 @@ export default function EditBook() {
   };
 
   return (
-    <main className="w-screen h-screen flex justify-center  ">
+    <main className="w-screen flex justify-center  ">
       <section className="h-0  bg-red-200 mt-14 ">
         {/* Background effects */}
         <div className="fixed w-72 h-10 left-1/2 transform -translate-x-1/2 rounded-full bg-blue-600/5 mt-20 blur-xl"></div>
@@ -174,7 +174,7 @@ export default function EditBook() {
         {isEditingDescription && (
           <form onSubmit={handleDescriptionUpdate} className="mt-10">
             <textarea
-              name="description" maxLength={150}
+              name="description" maxLength={150}  minLength={25}
               className="w-72 h-40 rounded-md bg-slate-800 text-white p-2"
               placeholder="Nueva descripción"
             />
