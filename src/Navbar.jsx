@@ -34,8 +34,8 @@ export default function Navbar() {
   const desplegarGeneros = () => {
     setDesplegable(!desplegable);
     !desplegable
-      ? gsap.to(".generos", { y: 100, opacity: 1, duration: 1 })
-      : gsap.to(".generos", { y: 0, opacity: 0, duration: 1 });
+      ? gsap.to(".generos", { y: 80, opacity: 1, duration: 0.5 })
+      : gsap.to(".generos", { y: -200, opacity: 0, duration: 0.5 });
   };
   console.log(desplegable);
   return (
@@ -45,9 +45,9 @@ export default function Navbar() {
           <button onClick={() => navigate("/allbooks")}>Libros</button>
           <div className="h-8">
             <button onClick={() => desplegarGeneros()}>Géneros</button>
-            <ul onClick={() => desplegarGeneros()} className="generos opacity-0 -mt-20 bg-indigo-600 p-2 rounded-xl">
+            <ul onClick={() => desplegarGeneros()} className="generos opacity-0 -ml-3 text-white -mt-20 bg-indigo-600/85 p-2 rounded-xl">
               <li>Aventuras</li>
-              <li>acción</li>
+              <li>Acción</li>
               <li>Infantil </li>
               <li>Terror</li>
               <li>Clásico</li>
