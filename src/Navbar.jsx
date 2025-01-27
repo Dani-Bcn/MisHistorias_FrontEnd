@@ -8,6 +8,8 @@ export default function Navbar() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [cerrarSesion, setCerrarSesion] = useState(false);
+  const [desplegable, setDesplegable] = useState(false);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -30,14 +32,32 @@ export default function Navbar() {
     setIsAuthenticated(false);
     navigate("/allbooks");
   };
-  const [desplegable, setDesplegable] = useState(false);
+
   const desplegarGeneros = () => {
     setDesplegable(!desplegable);
     !desplegable
       ? gsap.to(".generos", { y: 80, opacity: 1, duration: 0.5 })
       : gsap.to(".generos", { y: -200, opacity: 0, duration: 0.5 });
   };
-  console.log(desplegable);
+
+  const avisoCerrarSesion = () => {
+    return (
+      <div className="absolute text-2xl mt-56 w-40 h-32 bg-red-400 flex flex-col justify-around items-center rounded-2xl">
+        <h3>¿ Ya te vas ?</h3>
+        <div className="w-full  text-2xl flex justify-around">
+          <button
+            onClick={() => {
+              handleLogout(), setCerrarSesion(false);
+            }}
+          >
+            Si!
+          </button>
+          <button onClick={() => setCerrarSesion(false)}>No,aún no!</button>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <main className="fixed w-screen h-12 bg-slate-800/0 items-center backdrop-blur-[5px] flex z-[100] text-indigo-600 justify-around">
       {isAuthenticated ? (
@@ -45,7 +65,10 @@ export default function Navbar() {
           <button onClick={() => navigate("/allbooks")}>Libros</button>
           <div className="h-8">
             <button onClick={() => desplegarGeneros()}>Géneros</button>
-            <ul onClick={() => desplegarGeneros()} className="generos opacity-0 -ml-3 text-white -mt-20 bg-indigo-600/85 p-2 rounded-xl">
+            <ul
+              onClick={() => desplegarGeneros()}
+              className="generos opacity-0 -ml-3 text-white -mt-20 bg-indigo-600/85 p-2 rounded-xl"
+            >
               <li>Aventuras</li>
               <li>Acción</li>
               <li>Infantil </li>
@@ -63,9 +86,11 @@ export default function Navbar() {
             alt=""
             className="w-10 h-10 object-cover rounded-[100%] border-2 border-orange-400 cursor-pointer"
           />
-          <button onClick={handleLogout} className="text-2xl">
+          <button onClick={() => setCerrarSesion(true)} className="text-2xl">
             Cerrar sesión
           </button>
+
+          {cerrarSesion ? avisoCerrarSesion() : null}
         </>
       ) : (
         <>
