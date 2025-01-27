@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { logout, profile } from "./api/auth";
+import { booksUser, logout, profile } from "./api/auth";
 import gsap from "gsap";
 import Cookies from "js-cookie";
 
@@ -33,16 +33,15 @@ export default function Navbar() {
     navigate("/allbooks");
   };
 
-  const desplegarGeneros = () => {
-    setDesplegable(!desplegable);
-    !desplegable
-      ? gsap.to(".generos", { y: 80, opacity: 1, duration: 0.5 })
-      : gsap.to(".generos", { y: -200, opacity: 0, duration: 0.5 });
-  };
+  desplegable?gsap.to(".generos", {  opacity: 1,  display:"flex",  duration: 0.5 }):gsap.to(".generos", { opacity: 0,display:"none",duration: 0.5 })
+ 
+    
+  
+  
 
   const avisoCerrarSesion = () => {
     return (
-      <div className="absolute text-2xl mt-56 w-40 h-32 bg-red-400 flex flex-col justify-around items-center rounded-2xl">
+      <div className="absolute text-2xl mt-56 w-72 h-32 bg-red-400 flex flex-col justify-around items-center rounded-2xl">
         <h3>¿ Ya te vas ?</h3>
         <div className="w-full  text-2xl flex justify-around">
           <button
@@ -50,55 +49,67 @@ export default function Navbar() {
               handleLogout(), setCerrarSesion(false);
             }}
           >
-            Si!
+            Si, decidido!
           </button>
-          <button onClick={() => setCerrarSesion(false)}>No,aún no!</button>
+          <button onClick={() => setCerrarSesion(false)}>No, aún no!</button>
         </div>
       </div>
     );
   };
 
   return (
-    <main className="fixed w-screen h-12 bg-slate-800/0 items-center backdrop-blur-[5px] flex z-[100] text-indigo-600 justify-around">
+    <main className="fixed w-screen h-12  items-center backdrop-blur-[5px] flex z-[100] text-indigo-700 justify-around ">
+      <button className="-mt-1" onClick={() => navigate("/allbooks")}>
+        Libros
+      </button>
+      <div className=" mt-24 w-32 h-32 flex-col  ">
+        <button
+       
+          onMouseOver={() => setDesplegable(true)}
+          onMouseOut={() => setDesplegable(false)}
+        >
+          Géneros
+        </button>
+        <ul
+          onMouseOver={() => setDesplegable(true)}
+          onMouseOut={() => setDesplegable(false)}
+          className="flex-col opacity-0 generos opacity-1 -ml-5 text-indigo-400 text-xl bg-indigo-600/10 border-2 border-orange-400 p-2 rounded-lg"
+        >
+          <li>Aventuras</li>
+          <li>Acción</li>
+          <li>Infantil </li>
+          <li>Terror</li>
+          <li>Clásico</li>
+          <li>Thriller</li>
+          <li>Policial</li>
+          <li>Romántico</li>
+          <li>Comedia</li>
+        </ul>
+      </div>
       {isAuthenticated ? (
         <>
-          <button onClick={() => navigate("/allbooks")}>Libros</button>
-          <div className="h-8">
-            <button onClick={() => desplegarGeneros()}>Géneros</button>
-            <ul
-              onClick={() => desplegarGeneros()}
-              className="generos opacity-0 -ml-3 text-white -mt-20 bg-indigo-600/85 p-2 rounded-xl"
-            >
-              <li>Aventuras</li>
-              <li>Acción</li>
-              <li>Infantil </li>
-              <li>Terror</li>
-              <li>Clásico</li>
-              <li>Thriller</li>
-              <li>Policial</li>
-              <li>Romántico</li>
-              <li>Comedia</li>
-            </ul>
-          </div>
           <img
             onClick={() => navigate("/profile")}
             src={user.imageUserUrl}
             alt=""
             className="w-10 h-10 object-cover rounded-[100%] border-2 border-orange-400 cursor-pointer"
           />
-          <button onClick={() => setCerrarSesion(true)} className="text-2xl">
+          <button
+            onClick={() => {
+              setCerrarSesion(true);
+            }}
+            className="text-xl"
+          >
             Cerrar sesión
           </button>
-
           {cerrarSesion ? avisoCerrarSesion() : null}
         </>
       ) : (
         <>
-          <button onClick={() => navigate("/allbooks")}>Libros</button>
-          <button onClick={() => navigate("/login")} className="text-2xl">
+          <button onClick={() => navigate("/login")} >
             Iniciar sesión
           </button>
-          <button onClick={() => navigate("/register")} className="text-2xl">
+          <button onClick={() => navigate("/register")} >
             Registrarse
           </button>
         </>

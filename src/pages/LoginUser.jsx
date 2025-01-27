@@ -49,7 +49,7 @@ export default function LoginUser() {
 
       {/* Login Form */}
       <form
-        className="backdrop-blur-100 mt-40 z-[50] flex flex-col justify-around items-center rounded-xl transition-all"
+        className="backdrop-blur-100 mt-20 z-[50] flex flex-col justify-around items-center rounded-xl transition-all"
         onSubmit={handleSubmit(onSubmit)}
       >
         <section className="flex flex-col items-center justify-around gap-20">
@@ -74,7 +74,7 @@ export default function LoginUser() {
             {errors.password && <span className="text-red-500">{errors.password.message}</span>}
           </div>
 
-          <button className="btn text-2xl -mt-10" type="submit">
+          <button className="btn text-2xl -mt-10 border-2 border-orange-400 shadow-sm shadow-black hover:shadow-none transition-all duration-300 rounded-full p-5" type="submit">
             <span>E</span>nviar
           </button>
         </section>

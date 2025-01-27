@@ -10,8 +10,10 @@
 }
 html {
    --tw-bg-opacity: 1;
-   background-color: rgb(2 6 23 / var(--tw-bg-opacity)) /* #020617 */;
-}
+   
+    background-color: rgb(254 215 170 / 0.75);
+} ;
+
 #editBook::placeholder {
   color: rgb(190, 190, 190);
 }
@@ -83,9 +85,9 @@ button {
   align-items: center;
   justify-content: center;
   height: 30px;
-  font-size: 16px;
+  font-size: 24px;
   font-weight: 600;
-  color: rgb(195, 219, 255);
+  color: rgb(13, 110, 255);
   transition: all;
   transition-duration: .5s;
   margin-left: 0px;
@@ -95,7 +97,8 @@ button {
 button:hover { 
   transition: all;
   transition-duration: .5s;
-  color: rgb(250, 195, 163);
+  color: rgb(156, 69, 19);
+  
 }
 
 span {

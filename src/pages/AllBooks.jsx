@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getAllBooks, profile } from "../api/auth";
 import { useNavigate } from "react-router-dom";
-import gsap from "gsap";
 
 export default function AllBooks() {
   const navigate = useNavigate();
@@ -26,20 +25,11 @@ export default function AllBooks() {
       console.error("Error fetching books or profile:", error);
     }
   };
+  
 
   useEffect(() => {
     fetchBooksAndProfile();
-  }, []);
-
-  // GSAP animations
-  const toggleDescription = (title, action) => {
-    const elementId = title.replace(/\s+/g, "");
-    gsap.to(`#${elementId}`, {
-      visibility: action === "show" ? "visible" : "hidden",
-      opacity: action === "show" ? 1 : 0,
-      marginTop: action === "show" ? 40 : 0,
-    });
-  };
+  }, []); 
 
   const handleNavigate = (path, bookId) => {
     localStorage.setItem("bookId", bookId);

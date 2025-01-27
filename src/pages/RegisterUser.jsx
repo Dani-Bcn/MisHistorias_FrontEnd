@@ -67,7 +67,7 @@ export default function RegisterUser() {
         className="flex flex-col  items-center justify-center transition-all"
         onSubmit={onSubmit}
       >
-        <h2 className="text-5xl text-white my-10">Registro</h2>
+        <h2 className="text-5xl text-white my-10"><span>R</span>egistro</h2>
 
         <div className="flex flex-col text-xl gap-5 text-white justify-center items-center">
           <input
