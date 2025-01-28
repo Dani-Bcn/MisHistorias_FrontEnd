@@ -61,9 +61,9 @@ export default function Profile() {
   return (
     <main className="w-screen flex flex-col gap-10 justify-center items-center">
       {user ? (
-        <section className="relative flex  flex-col  justify-center  items-center mt-48">
-          <div className="absolute w-72 h-72 -mx-5 -mt-5 bg-green-400/[0.5] blur-xl shadow-[0px_0px_20px] shadow-black  rounded-3xl rotate-45"></div>
-          <div className="absolute w-72 h-72 -mx-5 -mt-5  bg-blue-400/[0.3] blur-xl shadow-[0px_0px_10px] shadow-black  rounded-3xl  scale-[1.2] rotate-45"></div>
+        <section className="relative flex  flex-col  justify-center  items-center mt-40">
+        {/*  < div className="absolute w-72 h-72 -mx-5 -mt-5 bg-green-400/[0.5] blur-xl shadow-[0px_0px_20px] shadow-black  rounded-3xl rotate-45"></div>
+          <div className="absolute w-72 h-72 -mx-5 -mt-5  bg-blue-400/[0.3] blur-xl shadow-[0px_0px_10px] shadow-black  rounded-3xl  scale-[1.2] rotate-45"></div> */}
           <div className="relative -mt-20 py-5 flex gap-2 text-5xl text-white">
             <span>
               <h2 className="font-bold">{user.userName}</h2>
@@ -81,7 +81,6 @@ export default function Profile() {
               onClick={() => navigate("/createBook")}
             >
               <h3 className="mt-5">
-                {" "}
                 <span>C</span>rear una nueva historia
               </h3>
             </button>
@@ -89,11 +88,11 @@ export default function Profile() {
         </section>
       ) : null}
       {user && user.books.length > 0 ? (
-        <section className="w-full pr-40 pl-20 mb-32 mt-20 items-center">
+        <section className="w-full pl-10  mb-32 mt-20 items-center">
           <h2 className="text-3xl font-bold text-white my-5">
             <span>Mis</span> Historias
           </h2>
-          <div className="flex gap-64 flex-wrap py-10">
+          <div className="flex gap-32 sm:gap-24  flex-wrap py-10">
             {user
               ? user.books.map((book, i) => {
                   return (
@@ -102,7 +101,7 @@ export default function Profile() {
                       className="w-60 h-40 flex flex-col text-white border-l border-t border-indigo-600 rounded-l-xl rounded-bl-none  px-5 "
                     >
                       <div className="w-full relative">
-                        <h2 className="text-2xl w-96 py-3 font-semibold">
+                        <h2 className="text-2xl  py-3 font-semibold">
                           <span>{book.title[0]}</span>
                           {book.title.slice(1)}
                         </h2>
@@ -196,7 +195,7 @@ export default function Profile() {
         </section>
       ) : null}
       {user && user.booksLibrary.length > 0 ? (
-        <section className="w-full pr-32 pl-20 mb-32 items-center">
+        <section className="w-full pl-10 items-center">
           <h2 className="text-3xl font-bold text-white my-5">
             <span>Mi</span> Biblioteca
           </h2>
@@ -209,7 +208,7 @@ export default function Profile() {
                       className="w-60 h-40 flex flex-col text-white border-l border-t border-indigo-600 rounded-l-xl rounded-bl-none px-5 "
                     >
                       <div className="w-full relative">
-                        <h2 className="text-2xl w-96 py-3 font-semibold">
+                        <h2 className="text-2xl w-56 py-3 font-semibold">
                           <span>{book.title[0]}</span>
                           {book.title.slice(1)}
                         </h2>
@@ -222,7 +221,7 @@ export default function Profile() {
                           <p className="absolute w-16 h-16 flex justify-center items-center mt-36  -ml-5 text-4xl text-indigo-400 z-[100] border-[3px] border-blue-600 rounded-full bg-black">
                             {book.rating}
                           </p>
-                          <div className="m-5 h-48 flex flex-col gap-2 border-b border-r rounded-l-none rounded-b-xl border-indigo-600 px-5 ">
+                          <div className="m-5  h-48 flex flex-col gap-2 border-b border-r rounded-l-none rounded-b-xl border-indigo-600 px-5 ">
                             <button
                               className="btn w-12 flex justify-start"
                               onClick={() => {

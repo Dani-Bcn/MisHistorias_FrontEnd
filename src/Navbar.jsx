@@ -39,12 +39,12 @@ export default function Navbar() {
 
   const avisoCerrarSesion = () => {
     return (
-      <div className="absolute text-2xl mt-56 w-72 h-32 bg-red-400 flex flex-col justify-around items-center rounded-2xl">
+      <div className="absolute z-[100] text-2xl mt-56 w-72 h-32 bg-red-400 flex flex-col justify-around items-center rounded-2xl">
         <h3>¿ Ya te vas ?</h3>
         <div className="w-full  text-2xl flex justify-around">
           <button
             onClick={() => {
-              handleLogout(), setCerrarSesion(false);
+              handleLogout(), setCerrarSesion(true);
             }}
           >
             Si, decidido!
@@ -56,10 +56,10 @@ export default function Navbar() {
   };
 
   return (
-    <main className="fixed w-screen flex items-center justify-center backdrop-blur-[5px] z-[100] bg-red-200/0">
-      <section className=" w-full h-8 lg:mt-5 mt-2 grid grid-cols-4 items-center   text-indigo-700 justify-around  text-sm lg:text-2xl lg:h-14 ">
+    <main  className="w-full h-10 flex items-center  justify-around  text-indigo-400 ">
+      
         <button onClick={() => navigate("/allbooks")}>Libros</button>
-        <div className="  w-40  h-24 flex-col row-span-2  ">
+        <div  className="z-[200]">
           <button
             onMouseOver={() => setDesplegable(true)}
             onMouseOut={() => setDesplegable(false)}
@@ -69,7 +69,7 @@ export default function Navbar() {
           <ul
             onMouseOver={() => setDesplegable(true)}
             onMouseOut={() => setDesplegable(false)}
-            className="flex-col opacity-0 generos opacity-1   text-white  bg-indigo-600/85 p-5 rounded-xl"
+            className="flex-col opacity-0 generos opacity-1  absolute  text-white  bg-indigo-600/85 p-5 rounded-xl"
           >
             <li>Aventuras</li>
             <li>Acción</li>
@@ -88,13 +88,13 @@ export default function Navbar() {
               onClick={() => navigate("/profile")}
               src={user.imageUserUrl}
               alt=""
-              className="w-10 h-10 object-cover rounded-[100%] border-2 border-orange-400 cursor-pointer"
+              className="w-10 h-10 object-cover rounded-[100%]  border-2 border-orange-400 cursor-pointer"
             />
             <button
               onClick={() => {
                 setCerrarSesion(true);
               }}
-              className="text-xl"
+            
             >
               Cerrar sesión
             </button>
@@ -106,7 +106,7 @@ export default function Navbar() {
             <button onClick={() => navigate("/register")}>Registrarse</button>
           </>
         )}
-      </section>
+    
     </main>
   );
 }

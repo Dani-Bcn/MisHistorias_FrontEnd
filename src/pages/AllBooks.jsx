@@ -52,7 +52,7 @@ export default function AllBooks() {
                     alt="Book Cover"
                     className=" opacity-30 border-[1px] border-indigo-600 absolute z-0 w-[85%] h-68 mask object-cover rounded-lg"
                   />
-                  <h3 className="h-10 z-10 text-2xl font-bold my-7 text-center text-orange-400">
+                  <h3 className="h-10  z-10 text-2xl font-bold my-7 text-center text-orange-400">
                     {book.title}
                   </h3>
                   <div className="flex justify-end text-2xl flex-col items-center">

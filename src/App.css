@@ -80,25 +80,7 @@ input::file-selector-button {
   align-items: center;
 }
 
-button { 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 30px;
-  font-weight: 600;
-  color: rgb(13, 110, 255);
-  transition: all;
-  transition-duration: .5s;
-  margin-left: 0px;
-  z-index: 10;
-}
 
-button:hover { 
-  transition: all;
-  transition-duration: .5s;
-  color: rgb(156, 69, 19);
-  
-}
 
 span {
   margin: 0;
