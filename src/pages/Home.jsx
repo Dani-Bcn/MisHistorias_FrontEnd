@@ -77,7 +77,7 @@ export default function Home() {
     <main className="absolute w-screen h-screen flex flex-col justify-center items-center overflow-hidden  bg-orange-200/75">
       <img src={img} alt="img-back-home" className="absolute brightness-[0.3] object-cover" />
       <div className="z-[50] w-screen -mt-72 ml-5 h-screen flex justify-center items-center text-white text-[0.4em] lg:text-[1em]">
-        <h1 id="box" className="text-xl mt-[400px] z-[10]">Creamos &nbsp;</h1>
+        <h1 id="box" className="text-xl mt-[400px] z-[10]">¿ Creamos &nbsp;</h1>
         <h1 id="box1" className="text-xl mt-[-600px] text-white opacity-0">una &nbsp;</h1>
         <h1 id="box2" className="text-2xl text-white ml-[-400px] mt-[-200px] opacity-0">historia &nbsp;</h1>
         <h1 id="box3" className="text-xl text-white ml-[390px] mt-[-200px] opacity-0">? &nbsp;</h1>

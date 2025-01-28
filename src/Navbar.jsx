@@ -33,11 +33,9 @@ export default function Navbar() {
     navigate("/allbooks");
   };
 
-  desplegable?gsap.to(".generos", {  opacity: 1, display:"flex",  duration: 0.5 }):gsap.to(".generos", { opacity: 0,display:"none",duration: 0.5 })
- 
-    
-  
-  
+  desplegable
+    ? gsap.to(".generos", { opacity: 1, display: "flex", duration: 0.5 })
+    : gsap.to(".generos", { opacity: 0, display: "none", duration: 0.5 });
 
   const avisoCerrarSesion = () => {
     return (
@@ -59,63 +57,56 @@ export default function Navbar() {
 
   return (
     <main className="fixed w-screen flex items-center justify-center backdrop-blur-[5px] z-[100] bg-red-200/0">
-    <section className=" w-full h-8 lg:mt-5 mt-2 grid grid-cols-4 items-center   text-indigo-700 justify-around  text-sm lg:text-2xl lg:h-14 ">
-      <button  onClick={() => navigate("/allbooks")}>
-        Libros
-      </button>
-      <div className="  w-40  h-24 flex-col row-span-2  ">
-        <button
-       
-          onMouseOver={() => setDesplegable(true)}
-          onMouseOut={() => setDesplegable(false)}
-        >
-          Géneros
-        </button>
-        <ul
-          onMouseOver={() => setDesplegable(true)}
-          onMouseOut={() => setDesplegable(false)}
-          className="flex-col opacity-0 generos opacity-1   text-white  bg-indigo-600/85 p-5 rounded-xl"
-        >
-          <li>Aventuras</li>
-          <li>Acción</li>
-          <li>Infantil </li>
-          <li>Terror</li>
-          <li>Clásico</li>
-          <li>Thriller</li>
-          <li>Policial</li>
-          <li>Romántico</li>
-          <li>Comedia</li>
-        </ul>
-      </div>
-      {isAuthenticated ? (
-        <>
-          <img
-            onClick={() => navigate("/profile")}
-            src={user.imageUserUrl}
-            alt=""
-            className="w-10 h-10 object-cover rounded-[100%] border-2 border-orange-400 cursor-pointer"
-          />
+      <section className=" w-full h-8 lg:mt-5 mt-2 grid grid-cols-4 items-center   text-indigo-700 justify-around  text-sm lg:text-2xl lg:h-14 ">
+        <button onClick={() => navigate("/allbooks")}>Libros</button>
+        <div className="  w-40  h-24 flex-col row-span-2  ">
           <button
-            onClick={() => {
-              setCerrarSesion(true);
-            }}
-            className="text-xl"
+            onMouseOver={() => setDesplegable(true)}
+            onMouseOut={() => setDesplegable(false)}
           >
-            Cerrar sesión
+            Géneros
           </button>
-          {cerrarSesion ? avisoCerrarSesion() : null}
-        </>
-      ) : (
-        <>
-          <button onClick={() => navigate("/login")} >
-            Iniciar sesión
-          </button>
-          <button onClick={() => navigate("/register")} >
-            Registrarse
-          </button>
-        </>
-      )}
-    </section>
+          <ul
+            onMouseOver={() => setDesplegable(true)}
+            onMouseOut={() => setDesplegable(false)}
+            className="flex-col opacity-0 generos opacity-1   text-white  bg-indigo-600/85 p-5 rounded-xl"
+          >
+            <li>Aventuras</li>
+            <li>Acción</li>
+            <li>Infantil </li>
+            <li>Terror</li>
+            <li>Clásico</li>
+            <li>Thriller</li>
+            <li>Policial</li>
+            <li>Romántico</li>
+            <li>Comedia</li>
+          </ul>
+        </div>
+        {isAuthenticated ? (
+          <>
+            <img
+              onClick={() => navigate("/profile")}
+              src={user.imageUserUrl}
+              alt=""
+              className="w-10 h-10 object-cover rounded-[100%] border-2 border-orange-400 cursor-pointer"
+            />
+            <button
+              onClick={() => {
+                setCerrarSesion(true);
+              }}
+              className="text-xl"
+            >
+              Cerrar sesión
+            </button>
+            {cerrarSesion ? avisoCerrarSesion() : null}
+          </>
+        ) : (
+          <>
+            <button onClick={() => navigate("/login")}>Iniciar sesión</button>
+            <button onClick={() => navigate("/register")}>Registrarse</button>
+          </>
+        )}
+      </section>
     </main>
   );
 }
