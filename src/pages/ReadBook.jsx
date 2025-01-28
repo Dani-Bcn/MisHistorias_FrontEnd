@@ -52,7 +52,7 @@ export default function ReadBook() {
         </ul>
       </nav>
     {book.chapters?.length > 0 && (
-      <aside className="text-red-50 lg:w-1/4 w-full bg-gray-800 bg-opacity-70 rounded-xl p-5 lg:fixed lg:top-20 mt-10">
+      <aside className="text-red-50 lg:w-56 w-full bg-gray-800 bg-opacity-70 rounded-xl p-5 lg:fixed lg:top-20 mt-10">
         <h3 className="text-xl border-b border-gray-500 mb-3">
           <span>C</span>apítulos
         </h3>
