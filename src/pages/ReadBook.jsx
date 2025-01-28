@@ -31,9 +31,9 @@ export default function ReadBook() {
   if (!book) return null;
 
   return (
-    <section className="mt-20 w-screen p-5 flex flex-col lg:flex-row gap-5">
+    <section className="w-screen p-5 flex flex-col lg:flex-row gap-5">
     
-    <nav className="fixed text-red-50 top-0 left-0 w-full bg-gray-800 bg-opacity-90 z-50 p-4 mt-12">
+    <nav className="fixed text-red-50  w-full backdrop-blur-lg mt-5 z-20 ">
         <ul className="flex gap-5 justify-center text-xl">
           <li
             onClick={() => navigate("/pageBook")}
@@ -74,7 +74,7 @@ export default function ReadBook() {
       </aside>
     )}
 
-    <div className="lg:w-2/4 w-full mx-auto text-red-50">
+    <div className="lg:w-2/4 w-full mx-auto text-red-50 mt-20">
       <h3 className="text-4xl text-center border-b border-gray-500 my-10">
         {book.title}
       </h3>
