@@ -138,7 +138,7 @@ export default function PageBook() {
             <img
               src={book.imageUrl}
               alt={`Cover of ${book.title}`}
-              className="w-52  lg:max-w-sm  object-cover rounded shadow mask"
+              className="w-52 h-96 lg:max-w-sm  object-cover rounded shadow"
             />
             <div className="flex flex-col gap-4">
               <h2 className="text-xl sm:text-3xl font-semibold">
@@ -210,22 +210,28 @@ export default function PageBook() {
                 handleOver={handleMouseOver}
                 handleOut={handleMouseOut}
               />
-            </div>
 
-            {book.comments.length > 0? <h3>Comentarios</h3>:null}
-            {book.comments.map((comentarios, indice) => {
-              return (
-                <div key={indice} className="bg-indigo-400/50 p-2 rounded-lg">
-                  <p>{comentarios.user}</p>
-
-                  <p>{comentarios.text}</p>
-                  <div className="flex">
-                    <p> {comentarios.update.month}&nbsp; / &nbsp; </p>
-                    <p> {comentarios.update.year} </p>
-                  </div>
+              {book && book.comments.length > 0 ? (
+                <div className="flex flex-col gap-3">
+                  <h3 >Comentarios</h3>
+                  {book.comments.map((comentarios, indice) => {
+                    return (
+                      <div
+                        key={indice}
+                        className="bg-indigo-400/50  rounded-lg p-3"
+                      >
+                        <p>{comentarios.user}</p>
+                        <p>{comentarios.text}</p>
+                        <div className="flex">
+                          {/*   <p> {comentarios.update.month}&nbsp; / &nbsp; </p>
+                          <p> {comentarios.update.year} </p> */}
+                        </div>
+                      </div>
+                    );
+                  })}
                 </div>
-              );
-            })}
+              ) : null}
+            </div>
           </div>
         </section>
       )}

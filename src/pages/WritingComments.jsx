@@ -74,18 +74,18 @@ export default function WritingComments() {
 
   return (
     <main className="w-screen flex justify-center">
-      <section className="w-full flex flex-col items-center mt-40 text-white text-4xl">
-        <h2>
+      <section className="w-full flex flex-col items-center mt-40 sm:mt-16 text-white text-4xl">
+        <h2 className="text-xl">
           <span>E</span>scribe tu comentario
         </h2>
         <textarea
           id="cooc"
           value={getText}
           onChange={(e) => setGetText(e.target.value)}
-          className="w-96 h-60 my-10 text-xl rounded-md"
+          className="w-3/4 h-40 my-10 text-xl rounded-md "
         />
-        <button onClick={handleClick} className="text-xl">
-          Guardar comentario
+        <button onClick={handleClick} className="text-sm">
+          Guardar 
         </button>
         {verifyText && (
           <h3
