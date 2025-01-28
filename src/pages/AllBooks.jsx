@@ -45,12 +45,12 @@ export default function AllBooks() {
               book.published && (
                 <div
                   key={index}
-                  className="relative  bg-gray-800 hover:shadow-none transition-all duration-500 shadow-black/50 rounded-lg shadow-lg p-5 flex flex-col items-around justify-between"
+                  className="relative p-5 bg-gray-800 hover:shadow-none transition-all duration-500 shadow-black/50 rounded-lg shadow-lg flex flex-col items-around justify-between"
                 >
                   <img
                     src={book.imageUrl}
                     alt="Book Cover"
-                    className=" opacity-30 border-[1px] border-indigo-600 absolute z-0 w-[85%] h-68 mask object-cover rounded-lg"
+                    className=" opacity-30 -m-5 w-full h-96 sm:h-full  absolute z-0   mask object-cover rounded-lg"
                   />
                   <h3 className="h-10  z-10 text-2xl font-bold my-7 text-center text-orange-400">
                     {book.title}
