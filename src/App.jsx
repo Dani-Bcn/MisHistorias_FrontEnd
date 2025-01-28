@@ -40,7 +40,7 @@ function App() {
         <Route path="/writingPage" element={<WritingPage />} />
         <Route path="/readBook" element={<ReadBook />} />
         <Route path="/editUser" element={<EditUser />} />
-        <Route path="writingComments" element={<WritingComments />} />
+        <Route path="/writingComments" element={<WritingComments />} />
         <Route path="readComments" element={<ReadComments />} />
       </Routes>
     </main>

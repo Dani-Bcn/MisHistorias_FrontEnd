@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getBook, editBook, profile, addBook } from "../api/auth";
 import gsap from "gsap";
-import { use } from "react";
 
 const RatingStars = ({ user, book, handleVote, handleOver, handleOut }) => {
   const stars = Array.from({ length: 10 }, (_, i) => ({
@@ -54,7 +53,7 @@ export default function PageBook() {
   const [book, setBook] = useState(null);
   const [messageVote, setMessageVote] = useState(false);
   const [user, setUser] = useState(null);
-  const [resultsLibarary, setResultsLibrary] = useState(false);
+  const [resultsLibrary, setResultsLibrary] = useState(false);
   const bookId = localStorage.getItem("bookId");
 
   useEffect(() => {
@@ -100,20 +99,21 @@ export default function PageBook() {
     gsap.to(`#${e.text}`, { background: "rgb(255,255,255)" });
   };
 
-  /*  books.map((book) => {  
-    console.log(book._id)
-  }
-  ) */
-  console.log(bookId);
-  user && user.booksLibrary && console.log("Bliblioteca", user.booksLibrary);
+
+ 
+
   useEffect(() => {
     user &&
       user.booksLibrary &&
       setResultsLibrary(
         user.booksLibrary.some((obj) => Object.values(obj).includes(bookId))
       );
-  }, [user, bookId, resultsLibarary]);
-
+  }, [user, bookId, resultsLibrary]);
+console.log(book)
+user &&
+ console.log(book.comments.some((obj) => Object.values(obj).includes(user._id)))
+ user &&
+console.log(user)
   // Add book to user's library
   const handleAddBook = async (bookId) => {
     if (!user) return;
@@ -130,6 +130,8 @@ export default function PageBook() {
   const handleNavigate = (path) => {
     navigate(path);
   };
+
+ 
 
   return (
     <main className="w-screen flex justify-center px-4">
@@ -188,12 +190,17 @@ export default function PageBook() {
                   <button onClick={() => handleNavigate("/readBook", book._id)}>
                     Leer
                   </button>
-                  {!resultsLibarary && user && (
+                  {!resultsLibrary && user && (
                 <button onClick={() => handleAddBook(book._id)}>
                  + Blilioteca
                 </button>
               )}      
                 </div>
+                {user && 
+                   !user.books.some((obj) => Object.values(obj).includes(bookId))?
+                  <button onClick={()=> navigate("/writingComments")}>Añadir comentario</button>:null
+                }
+                
               </div>
 
               <RatingStars
