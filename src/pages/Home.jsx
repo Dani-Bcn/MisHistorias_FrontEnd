@@ -74,7 +74,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="absolute w-screen h-screen flex flex-col justify-center items-center overflow-hidden  bg-orange-200/75">
+    <main className="absolute w-screen h-screen flex flex-col justify-center items-center overflow-hidden  bg-slate-950">
       <img src={img} alt="img-back-home" className="absolute brightness-[0.3] object-cover" />
       <div className="z-[50] w-screen -mt-72 ml-5 h-screen flex justify-center items-center text-white text-[0.4em] lg:text-[1em]">
         <h1 id="box" className="text-xl mt-[400px] z-[10]">¿ Creamos &nbsp;</h1>
