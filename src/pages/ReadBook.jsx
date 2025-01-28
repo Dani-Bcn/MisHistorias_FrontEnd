@@ -32,7 +32,7 @@ export default function ReadBook() {
 
   return (
     <section className="mt-20 w-screen p-5 flex flex-col lg:flex-row gap-5">
-    {/* Chapters List */}
+    
     <nav className="fixed text-red-50 top-0 left-0 w-full bg-gray-800 bg-opacity-90 z-50 p-4 mt-12">
         <ul className="flex gap-5 justify-center text-xl">
           <li
@@ -73,8 +73,7 @@ export default function ReadBook() {
         </ul>
       </aside>
     )}
-  
-    /* Chapter Content */
+
     <div className="lg:w-2/4 w-full mx-auto text-red-50">
       <h3 className="text-4xl text-center border-b border-gray-500 my-10">
         {book.title}

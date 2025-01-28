@@ -64,32 +64,32 @@ export default function RegisterUser() {
         alt="Background"
       />
       <form
-        className="flex flex-col  items-center justify-center transition-all"
+        className="flex flex-col lg:gap-5  items-center justify-center transition-all"
         onSubmit={onSubmit}
       >
-        <h2 className="text-5xl text-white my-10"><span>R</span>egistro</h2>
+        <h2 className="text-3xl lg:text-5xl text-white my-4"><span>R</span>egistro</h2>
 
-        <div className="flex flex-col text-xl gap-5 text-white justify-center items-center">
+        <div className="flex flex-col sm:gap-2 lg:gap-6 gap-6 text-white justify-center items-center">
           <input
-            className="bg-transparent border-2 border-indigo-400 p-2"
+            className="bg-transparent border-2 border-indigo-400 p-1 lg:p-3"
             type="text"
             placeholder="Nombre"
             {...register("userName", { required: true })}
           />
           <input
-            className="bg-transparent border-2 border-indigo-400 p-2"
+            className="bg-transparent border-2 border-indigo-400 p-1 lg:p-3"
             type="text"
             placeholder="Apellido"
             {...register("lastName", { required: true })}
           />
           <input
-            className="bg-transparent border-2 border-indigo-400 p-2"
+            className="bg-transparent border-2 border-indigo-400 p-1 lg:p-3"
             type="email"
             placeholder="Correo electrónico"
             {...register("email", { required: true })}
           />
           <input
-            className="bg-transparent border-2 border-indigo-400 p-2"
+            className="bg-transparent border-2 border-indigo-400 p-1 lg:p-3"
             type="password"
             placeholder="Contraseña"
             {...register("password", { required: true })}
@@ -98,7 +98,7 @@ export default function RegisterUser() {
             type="file"
             id="file-upload-button"
             onChange={handleImage}
-            className="w-60 h-14 text-indigo-400"
+            className="w-48 h-8 text-indigo-400 text-xs "
           />
           {imageUrl && (
             <button

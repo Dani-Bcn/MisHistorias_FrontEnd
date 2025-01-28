@@ -33,7 +33,7 @@ export default function Navbar() {
     navigate("/allbooks");
   };
 
-  desplegable?gsap.to(".generos", {  opacity: 1,  display:"flex",  duration: 0.5 }):gsap.to(".generos", { opacity: 0,display:"none",duration: 0.5 })
+  desplegable?gsap.to(".generos", {  opacity: 1, display:"flex",  duration: 0.5 }):gsap.to(".generos", { opacity: 0,display:"none",duration: 0.5 })
  
     
   
@@ -58,11 +58,12 @@ export default function Navbar() {
   };
 
   return (
-    <main className="fixed w-screen h-12  items-center backdrop-blur-[5px] flex z-[100] text-indigo-700 justify-around ">
-      <button className="-mt-1" onClick={() => navigate("/allbooks")}>
+    <main className="fixed w-screen flex items-center justify-center backdrop-blur-[5px] z-[100] bg-red-200/0">
+    <section className=" w-full h-8 lg:mt-5 mt-2 grid grid-cols-4 items-center   text-indigo-700 justify-around  text-sm lg:text-2xl lg:h-14 ">
+      <button  onClick={() => navigate("/allbooks")}>
         Libros
       </button>
-      <div className=" mt-24 w-32 h-32 flex-col  ">
+      <div className="  w-40  h-24 flex-col row-span-2  ">
         <button
        
           onMouseOver={() => setDesplegable(true)}
@@ -73,7 +74,7 @@ export default function Navbar() {
         <ul
           onMouseOver={() => setDesplegable(true)}
           onMouseOut={() => setDesplegable(false)}
-          className="flex-col opacity-0 generos opacity-1 -ml-5 text-indigo-400 text-xl bg-indigo-600/10 border-2 border-orange-400 p-2 rounded-lg"
+          className="flex-col opacity-0 generos opacity-1   text-white  bg-indigo-600/85 p-5 rounded-xl"
         >
           <li>Aventuras</li>
           <li>Acción</li>
@@ -114,6 +115,7 @@ export default function Navbar() {
           </button>
         </>
       )}
+    </section>
     </main>
   );
 }

@@ -37,7 +37,7 @@ export default function AllBooks() {
   };
 
   return (
-    <main className=" overflow-hidden  bg-slate-600/75  text-slate-200 flex flex-col items-center ">
+    <main className=" overflow-hidden   text-slate-200 flex flex-col items-center ">
       <section className="w-[72%] lg:w-[90%] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 py-20 ">
         {books.length > 0 ? (
           books.map(
