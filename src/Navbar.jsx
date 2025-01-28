@@ -39,7 +39,7 @@ export default function Navbar() {
 
   const avisoCerrarSesion = () => {
     return (
-      <div className="absolute z-[100] text-2xl mt-56 w-72 h-32 bg-red-400 flex flex-col justify-around items-center rounded-2xl">
+      <div className="absolute z-[100] text-2xl mt-56 w-72 h-32 bg-indigo-400/ text-white flex flex-col justify-around items-center rounded-sm">
         <h3>¿ Ya te vas ?</h3>
         <div className="w-full  text-2xl flex justify-around">
           <button
@@ -91,6 +91,7 @@ export default function Navbar() {
               className="w-10 h-10 object-cover rounded-[100%]  border-2 border-orange-400 cursor-pointer"
             />
             <button
+            
               onClick={() => {
                 setCerrarSesion(true);
               }}

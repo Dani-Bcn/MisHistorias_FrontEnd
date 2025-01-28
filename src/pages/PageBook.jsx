@@ -112,7 +112,7 @@ export default function PageBook() {
       setResultsLibrary(
         user.booksLibrary.some((obj) => Object.values(obj).includes(bookId))
       );
-  }, [user, bookId,resultsLibarary]);
+  }, [user, bookId, resultsLibarary]);
 
   // Add book to user's library
   const handleAddBook = async (bookId) => {
@@ -127,7 +127,7 @@ export default function PageBook() {
       alert("Failed to add book. Please try again later.");
     }
   };
-  const handleNavigate = (path) => {    
+  const handleNavigate = (path) => {
     navigate(path);
   };
 
@@ -139,14 +139,14 @@ export default function PageBook() {
             <span>{book.title[0]}</span>
             {book.title.slice(1)}
           </h2>
-          <div className="w-screen p-5 flex flex-col sm:flex-row gap-5">
+          <div className="p-5 flex flex-col sm:flex-row gap-5">
             <div className="w-16 h-16 absolute mt-3 ml-3 z-10 bg-blue-800/50  rounded-full border-[3px] border-indigo-400 flex justify-center items-center">
               <p className="text-5xl text-indigo-200">{book.rating}</p>
             </div>
             <img
               src={book.imageUrl}
               alt={`Cover of ${book.title}`}
-              className="w-52 max-w-xs lg:max-w-sm h-auto object-cover rounded shadow mask"
+              className="w-52  lg:max-w-sm  object-cover rounded shadow mask"
             />
             <div className="flex flex-col gap-4">
               <h2 className="text-xl sm:text-3xl font-semibold">
@@ -174,22 +174,28 @@ export default function PageBook() {
                   toggleChapters={() => setShowChapters(false)}
                 />
               )}
-              <div className="flex gap-2 text-1xl">
-                <span>Creado : </span>
+              <div className="flex flex-col justify-start items-start">
                 <p>
+                  <span>Creado : </span>
                   {book.createdAt.slice(0, 10).split("-").reverse().join("-")}
                 </p>
-              </div>
-              <div className="flex gap-2 text-1xl">
-                <span>Modificado : </span>
+
                 <p>
+                  <span>Modificado : </span>
                   {book.updatedAt.slice(0, 10).split("-").reverse().join("-")}
                 </p>
-                
-              </div>
-              <button onClick={() => handleNavigate("/readBook", book._id)}>
+                <div className="flex gap-5">
+                  <button onClick={() => handleNavigate("/readBook", book._id)}>
                     Leer
                   </button>
+                  {!resultsLibarary && user && (
+                <button onClick={() => handleAddBook(book._id)}>
+                 + Blilioteca
+                </button>
+              )}      
+                </div>
+              </div>
+
               <RatingStars
                 user={user}
                 book={book}
@@ -198,19 +204,7 @@ export default function PageBook() {
                 handleOut={handleMouseOut}
               />
 
-              {!resultsLibarary && user &&(
-                <button onClick={() => handleAddBook(book._id)}>
-                  Add My blilioteca
-                </button>
-              )}
-              {messageVote && (
-                <div
-                  onClick={() => setMessageVote(false)}
-                  className="text-red-600 mt-2 cursor-pointer text-sm"
-                >
-                  Ya has votado.
-                </div>
-              )}
+                  
             </div>
           </div>
         </section>
