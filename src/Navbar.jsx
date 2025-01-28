@@ -39,75 +39,77 @@ export default function Navbar() {
 
   const avisoCerrarSesion = () => {
     return (
-      <div className="absolute z-[100] text-2xl mt-56 w-72 h-32 bg-indigo-400/ text-white flex flex-col justify-around items-center rounded-sm">
+      <div className="absolute z-[100] text-2xl  mt-56 w-96 p-5 h-40 bg-indigo-400  text-white flex flex-col justify-around items-center rounded-lg">
         <h3>¿ Ya te vas ?</h3>
-        <div className="w-full  text-2xl flex justify-around">
+        <div className="w-full   flex justify-around">
           <button
+            className="hover:text-orange-200"
             onClick={() => {
               handleLogout(), setCerrarSesion(true);
             }}
           >
             Si, decidido!
           </button>
-          <button onClick={() => setCerrarSesion(false)}>No, aún no!</button>
+          <button
+            className="hover:text-orange-200"
+            onClick={() => setCerrarSesion(false)}
+          >
+            No, aún no!
+          </button>
         </div>
       </div>
     );
   };
 
   return (
-    <main  className="fixed  bg-red-300/5  backdrop-blur-xl z-[100] w-screen h-10 flex items-center  justify-around  text-indigo-400 ">
-      
-        <button onClick={() => navigate("/allbooks")}>Libros</button>
-        <div  className="z-[200]">
+    <main className="fixed  bg-red-300/5  backdrop-blur-xl z-[100] w-screen h-10 flex items-center  justify-around  text-indigo-400 ">
+      <button onClick={() => navigate("/allbooks")}>Libros</button>
+      <div className="z-[200]">
+        <button
+          onMouseOver={() => setDesplegable(true)}
+          onMouseOut={() => setDesplegable(false)}
+        >
+          Géneros
+        </button>
+        <ul
+          onMouseOver={() => setDesplegable(true)}
+          onMouseOut={() => setDesplegable(false)}
+          className="flex-col opacity-0 generos opacity-1  absolute  text-white  bg-indigo-600/85 p-5 rounded-xl"
+        >
+          <li>Aventuras</li>
+          <li>Acción</li>
+          <li>Infantil </li>
+          <li>Terror</li>
+          <li>Clásico</li>
+          <li>Thriller</li>
+          <li>Policial</li>
+          <li>Romántico</li>
+          <li>Comedia</li>
+        </ul>
+      </div>
+      {isAuthenticated ? (
+        <>
+          <img
+            onClick={() => navigate("/profile")}
+            src={user.imageUserUrl}
+            alt=""
+            className="w-10 h-10 object-cover rounded-[100%]  border-2 border-orange-400 cursor-pointer"
+          />
           <button
-            onMouseOver={() => setDesplegable(true)}
-            onMouseOut={() => setDesplegable(false)}
+            onClick={() => {
+              setCerrarSesion(true);
+            }}
           >
-            Géneros
+            Cerrar sesión
           </button>
-          <ul
-            onMouseOver={() => setDesplegable(true)}
-            onMouseOut={() => setDesplegable(false)}
-            className="flex-col opacity-0 generos opacity-1  absolute  text-white  bg-indigo-600/85 p-5 rounded-xl"
-          >
-            <li>Aventuras</li>
-            <li>Acción</li>
-            <li>Infantil </li>
-            <li>Terror</li>
-            <li>Clásico</li>
-            <li>Thriller</li>
-            <li>Policial</li>
-            <li>Romántico</li>
-            <li>Comedia</li>
-          </ul>
-        </div>
-        {isAuthenticated ? (
-          <>
-            <img
-              onClick={() => navigate("/profile")}
-              src={user.imageUserUrl}
-              alt=""
-              className="w-10 h-10 object-cover rounded-[100%]  border-2 border-orange-400 cursor-pointer"
-            />
-            <button
-            
-              onClick={() => {
-                setCerrarSesion(true);
-              }}
-            
-            >
-              Cerrar sesión
-            </button>
-            {cerrarSesion ? avisoCerrarSesion() : null}
-          </>
-        ) : (
-          <>
-            <button onClick={() => navigate("/login")}>Iniciar sesión</button>
-            <button onClick={() => navigate("/register")}>Registrarse</button>
-          </>
-        )}
-    
+          {cerrarSesion ? avisoCerrarSesion() : null}
+        </>
+      ) : (
+        <>
+          <button onClick={() => navigate("/login")}>Iniciar sesión</button>
+          <button onClick={() => navigate("/register")}>Registrarse</button>
+        </>
+      )}
     </main>
   );
 }
