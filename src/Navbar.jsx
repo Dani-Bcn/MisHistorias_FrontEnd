@@ -56,7 +56,7 @@ export default function Navbar() {
   };
 
   return (
-    <main  className="w-full h-10 flex items-center  justify-around  text-indigo-400 ">
+    <main  className="w-screen h-10 flex items-center  justify-around  text-indigo-400 ">
       
         <button onClick={() => navigate("/allbooks")}>Libros</button>
         <div  className="z-[200]">
