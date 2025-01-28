@@ -101,7 +101,7 @@ export default function Profile() {
                       className="w-60 h-40 flex flex-col text-white border-l border-t border-indigo-600 rounded-l-xl rounded-bl-none  px-5 "
                     >
                       <div className="w-full relative">
-                        <h2 className="text-2xl  py-3 font-semibold">
+                        <h2 className="text-xl  py-3 font-semibold">
                           <span>{book.title[0]}</span>
                           {book.title.slice(1)}
                         </h2>
@@ -195,20 +195,20 @@ export default function Profile() {
         </section>
       ) : null}
       {user && user.booksLibrary.length > 0 ? (
-        <section className="w-full pl-10 items-center">
+        <section className="w-full pl-10 flex flex-col justify-start items-center">
           <h2 className="text-3xl font-bold text-white my-5">
             <span>Mi</span> Biblioteca
           </h2>
-          <div className="flex gap-64 py-10 flex-wrap ">
+          <div className="flex gap-40  flex-wrap ">
             {user
               ? user.booksLibrary.map((book, i) => {
                   return (
                     <div
                       key={i}
-                      className="w-60 h-40 flex flex-col text-white border-l border-t border-indigo-600 rounded-l-xl rounded-bl-none px-5 "
+                      className="w-72 h-40 flex flex-col text-white border-l border-t border-indigo-600 rounded-l-xl rounded-bl-none px-5 "
                     >
                       <div className="w-full relative">
-                        <h2 className="text-2xl w-56 py-3 font-semibold">
+                        <h2 className="text-xl w-96 py-3 font-semibold">
                           <span>{book.title[0]}</span>
                           {book.title.slice(1)}
                         </h2>

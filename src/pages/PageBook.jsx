@@ -135,11 +135,11 @@ export default function PageBook() {
     <main className="w-screen flex justify-center px-4">
       {book && (
         <section className="max-w-4xl m-10 text-gray-100">
-          <h2 className="text-4xl p-5 sm:text-6xl font-bold text-gray-100">
+          <h2 className="text-3xl p-5 sm:text-3xl font-bold text-gray-100">
             <span>{book.title[0]}</span>
             {book.title.slice(1)}
           </h2>
-          <div className="w-screen p-5 flex flex-col lg:flex-row gap-5">
+          <div className="w-screen p-5 flex flex-col sm:flex-row gap-5">
             <div className="w-16 h-16 absolute mt-3 ml-3 z-10 bg-blue-800/50  rounded-full border-[3px] border-indigo-400 flex justify-center items-center">
               <p className="text-5xl text-indigo-200">{book.rating}</p>
             </div>
@@ -164,7 +164,7 @@ export default function PageBook() {
                   {book.chapters.length}
                 </span>
               </p>
-              <div>
+              <div className="w-80">
                 <span>Descripción :</span>
                 <p>{book.description}</p>
               </div>
