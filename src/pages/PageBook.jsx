@@ -99,9 +99,6 @@ export default function PageBook() {
     gsap.to(`#${e.text}`, { background: "rgb(255,255,255)" });
   };
 
-
- 
-
   useEffect(() => {
     user &&
       user.booksLibrary &&
@@ -109,15 +106,10 @@ export default function PageBook() {
         user.booksLibrary.some((obj) => Object.values(obj).includes(bookId))
       );
   }, [user, bookId, resultsLibrary]);
-console.log(book)
-user &&
- console.log(book.comments.some((obj) => Object.values(obj).includes(user._id)))
- user &&
-console.log(user)
+
   // Add book to user's library
   const handleAddBook = async (bookId) => {
     if (!user) return;
-
     try {
       await addBook({ bookId, userId: user._id });
       alert("Book added to your library!");
@@ -130,8 +122,6 @@ console.log(user)
   const handleNavigate = (path) => {
     navigate(path);
   };
-
- 
 
   return (
     <main className="w-screen flex justify-center px-4">
@@ -191,16 +181,26 @@ console.log(user)
                     Leer
                   </button>
                   {!resultsLibrary && user && (
-                <button onClick={() => handleAddBook(book._id)}>
-                 + Blilioteca
-                </button>
-              )}      
+                    <button onClick={() => handleAddBook(book._id)}>
+                      + Blilioteca
+                    </button>
+                  )}
                 </div>
-                {user && 
-                   !user.books.some((obj) => Object.values(obj).includes(bookId))?
-                  <button onClick={()=> navigate("/writingComments")}>Añadir comentario</button>:null
-                }
-                
+
+                {user &&
+                !book.idUserComments.includes(user._id) &&
+                !user.books.some((obj) =>
+                  Object.values(obj).includes(bookId)
+                ) ? (
+                  <button
+                    onClick={() => {
+                      localStorage.setItem("token", user._id),
+                        navigate("/writingComments");
+                    }}
+                  >
+                    Añadir comentario
+                  </button>
+                ) : null}
               </div>
 
               <RatingStars
@@ -210,9 +210,22 @@ console.log(user)
                 handleOver={handleMouseOver}
                 handleOut={handleMouseOut}
               />
-
-                  
             </div>
+
+            {book.comments.length > 0? <h3>Comentarios</h3>:null}
+            {book.comments.map((comentarios, indice) => {
+              return (
+                <div key={indice} className="bg-indigo-400/50 p-2 rounded-lg">
+                  <p>{comentarios.user}</p>
+
+                  <p>{comentarios.text}</p>
+                  <div className="flex">
+                    <p> {comentarios.update.month}&nbsp; / &nbsp; </p>
+                    <p> {comentarios.update.year} </p>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </section>
       )}
