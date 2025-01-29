@@ -73,8 +73,7 @@ export default function WritingPage() {
             {chapter.title && chapter.text ? (
               <button
                 type="submit"
-                className="w-full py-3 bg-blue-600 text-white text-lg font-semibold rounded-md hover:bg-blue-700"
-              >
+                      className="border-[0.5px] border-indigo-400 w-56 rounded-2xl py-1 px-2 ">
                 Guardar capítulo
               </button>
             ) : (

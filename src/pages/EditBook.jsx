@@ -127,7 +127,7 @@ export default function EditBook() {
                       localStorage.setItem("numChapter", index + 1);
                       navigate("/writingPage");
                     }}
-                    className="btn"
+                   className="border-[0.5px] border-indigo-400 rounded-2xl py-1 px-2 "
                   >
                     Editar
                   </button>
@@ -135,19 +135,19 @@ export default function EditBook() {
                     onClick={() =>
                       setVerifyDelete({ verify: true, chapterIndex: index })
                     }
-                    className="btn w-20"
+                         className="border-[0.5px] border-indigo-400 rounded-2xl py-1 px-2 "
                   >
                     Eliminar
                   </button>
                 </div>
                 {verifyDelete.verify && verifyDelete.chapterIndex === index && (
                   <div className="absolute flex items-center gap-5 z-50 bg-slate-700 p-2 rounded-full">
-                    <span className="text-red-400 font-bold">
-                      ¿Eliminar capítulo?
+                    <span className="text-red-400 ">
+                      Confirmar
                     </span>
                     <button
                       onClick={() => handleDeleteChapter(index)}
-                      className="text-green-400 font-bold"
+                           className="border-[0.5px] border-green-400 rounded-2xl py-1 px-2 "
                     >
                       Confirmar
                     </button>
@@ -155,7 +155,7 @@ export default function EditBook() {
                       onClick={() =>
                         setVerifyDelete({ verify: false, chapterIndex: null })
                       }
-                      className="text-red-400 font-bold"
+                            className="border-[0.5px] border-red-400 rounded-2xl py-1 px-2 "
                     >
                       Cancelar
                     </button>
@@ -168,16 +168,16 @@ export default function EditBook() {
 
         {/* Actions */}
         <div className="flex gap-5 justify-start items-start sm:justify-start h-56  ">
-          <button onClick={handleAddChapter} className="btn">
+          <button onClick={handleAddChapter}      className="border-[0.5px] border-indigo-400 w-32 rounded-2xl py-1 px-2 ">
             Añadir Capítulo
           </button>
-          <button onClick={() => navigate("/pageBook")} className="btn">
+          <button onClick={() => navigate("/pageBook")}       className="border-[0.5px] border-indigo-400 w-32 rounded-2xl py-1 px-2 ">
             Ver Libro
           </button>
-          <button onClick={() => navigate("/readBook")} className="btn">
+          <button onClick={() => navigate("/readBook")}       className="border-[0.5px] border-indigo-400 w-32 rounded-2xl py-1 px-2 ">
             Leer Libro
           </button>
-          <button onClick={() => setIsEditingDescription(true)} className="btn">
+          <button onClick={() => setIsEditingDescription(true)}      className="border-[0.5px] border-indigo-400 w-40 rounded-2xl py-1 px-2 ">
             Editar Descripción
           </button>
 
