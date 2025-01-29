@@ -54,7 +54,7 @@ export default function EditBook() {
 
   const handleAddChapter = () => {
     const newChapter = { title: "", text: "" };
-   const updatedChapters = [...book.chapters, newChapter];
+    const updatedChapters = [...book.chapters, newChapter];
     localStorage.setItem("numChapter", updatedChapters.length);
     navigate("/writingPage");
   };
@@ -127,7 +127,7 @@ export default function EditBook() {
                       localStorage.setItem("numChapter", index + 1);
                       navigate("/writingPage");
                     }}
-                   className="border-[0.5px] border-indigo-400 rounded-2xl py-1 px-2 "
+                    className="border-[0.5px] border-indigo-400 rounded-2xl py-1 px-2 "
                   >
                     Editar
                   </button>
@@ -135,19 +135,17 @@ export default function EditBook() {
                     onClick={() =>
                       setVerifyDelete({ verify: true, chapterIndex: index })
                     }
-                         className="border-[0.5px] border-indigo-400 rounded-2xl py-1 px-2 "
+                    className="border-[0.5px] border-indigo-400 rounded-2xl py-1 px-2 "
                   >
                     Eliminar
                   </button>
                 </div>
                 {verifyDelete.verify && verifyDelete.chapterIndex === index && (
                   <div className="absolute flex items-center gap-5 z-50 bg-slate-700 p-2 rounded-full">
-                    <span className="text-red-400 ">
-                      Confirmar
-                    </span>
+                    <span className="text-red-400 ">Confirmar</span>
                     <button
                       onClick={() => handleDeleteChapter(index)}
-                           className="border-[0.5px] border-green-400 rounded-2xl py-1 px-2 "
+                      className="border-[0.5px] border-green-400 rounded-2xl py-1 px-2 "
                     >
                       Confirmar
                     </button>
@@ -155,7 +153,7 @@ export default function EditBook() {
                       onClick={() =>
                         setVerifyDelete({ verify: false, chapterIndex: null })
                       }
-                            className="border-[0.5px] border-red-400 rounded-2xl py-1 px-2 "
+                      className="border-[0.5px] border-red-400 rounded-2xl py-1 px-2 "
                     >
                       Cancelar
                     </button>
@@ -167,17 +165,29 @@ export default function EditBook() {
         )}
 
         {/* Actions */}
-        <div className="flex gap-5 justify-start items-start sm:justify-start h-56  ">
-          <button onClick={handleAddChapter}      className="border-[0.5px] border-indigo-400 w-32 rounded-2xl py-1 px-2 ">
+        <div className="flex flex-wrap gap-5 justify-start items-start sm:justify-start h-56 pl-5 ">
+          <button
+            onClick={handleAddChapter}
+            className="border-[0.5px] border-indigo-400 w-32 rounded-2xl py-1 px-2 "
+          >
             Añadir Capítulo
           </button>
-          <button onClick={() => navigate("/pageBook")}       className="border-[0.5px] border-indigo-400 w-32 rounded-2xl py-1 px-2 ">
+          <button
+            onClick={() => navigate("/pageBook")}
+            className="border-[0.5px] border-indigo-400 w-32 rounded-2xl py-1 px-2 "
+          >
             Ver Libro
           </button>
-          <button onClick={() => navigate("/readBook")}       className="border-[0.5px] border-indigo-400 w-32 rounded-2xl py-1 px-2 ">
+          <button
+            onClick={() => navigate("/readBook")}
+            className="border-[0.5px] border-indigo-400 w-32 rounded-2xl py-1 px-2 "
+          >
             Leer Libro
           </button>
-          <button onClick={() => setIsEditingDescription(true)}      className="border-[0.5px] border-indigo-400 w-40 rounded-2xl py-1 px-2 ">
+          <button
+            onClick={() => setIsEditingDescription(true)}
+            className="border-[0.5px] border-indigo-400 w-40 rounded-2xl py-1 px-2 "
+          >
             Editar Descripción
           </button>
 
