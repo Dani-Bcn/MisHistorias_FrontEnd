@@ -57,7 +57,7 @@ export default function Profile() {
     const res = await removeBookLibrary(objectsId);
     location.reload();
   };
-  console.log(user)
+  
 
   return (
     <main className="w-screen flex flex-col gap-10 justify-center items-center">

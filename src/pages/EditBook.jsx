@@ -5,7 +5,10 @@ import { profile } from "../api/auth";
 
 export default function EditBook() {
   const [booksUser, setBooksUser] = useState([]);
-  const [verifyDelete, setVerifyDelete] = useState({ verify: false, chapterIndex: null });
+  const [verifyDelete, setVerifyDelete] = useState({
+    verify: false,
+    chapterIndex: null,
+  });
   const [isEditingDescription, setIsEditingDescription] = useState(false);
   const [book, setBook] = useState(null);
   const navigate = useNavigate();
@@ -51,8 +54,7 @@ export default function EditBook() {
 
   const handleAddChapter = () => {
     const newChapter = { title: "", text: "" };
-    const updatedChapters = [...book.chapters, newChapter];
-    updateBook({ ...book, chapters: updatedChapters });
+   const updatedChapters = [...book.chapters, newChapter];
     localStorage.setItem("numChapter", updatedChapters.length);
     navigate("/writingPage");
   };
@@ -80,8 +82,8 @@ export default function EditBook() {
   };
 
   return (
-    <main className="w-screen flex justify-center text-white ">
-      <section className="h-0  bg-red-200 mt-14 ">
+    <main className="w-screen  flex justify-center text-white ">
+      <section className=" mt-14 ">
         {/* Background effects */}
         <div className="fixed w-72 h-10 left-1/2 transform -translate-x-1/2 rounded-full bg-blue-600/5 mt-20 blur-xl"></div>
         <div className="fixed w-72 h-10 top-40 left-10 rounded-full bg-red-600/10 blur-xl"></div>
@@ -100,8 +102,12 @@ export default function EditBook() {
           <main className="p-5">
             <div className="flex flex-wrap justify-between items-center text-white bg-gradient-to-r p-5 rounded-xl sm:rounded-3xl from-indigo-600/[0.5]">
               <h3 className="w-1/3 sm:w-20 ">Nº</h3>
-              <h3 className="w-full sm:w-1/2 lg:w-96  text-center sm:text-left">Capítulo</h3>
-              <h3 className="hidden sm:block w-1/4 sm:w-40">Última actualización</h3>
+              <h3 className="w-full sm:w-1/2 lg:w-96  text-center sm:text-left">
+                Capítulo
+              </h3>
+              <h3 className="hidden sm:block w-1/4 sm:w-40">
+                Última actualización
+              </h3>
             </div>
             {book.chapters.map((chapter, index) => (
               <div
@@ -126,7 +132,9 @@ export default function EditBook() {
                     Editar
                   </button>
                   <button
-                    onClick={() => setVerifyDelete({ verify: true, chapterIndex: index })}
+                    onClick={() =>
+                      setVerifyDelete({ verify: true, chapterIndex: index })
+                    }
                     className="btn w-20"
                   >
                     Eliminar
@@ -134,7 +142,9 @@ export default function EditBook() {
                 </div>
                 {verifyDelete.verify && verifyDelete.chapterIndex === index && (
                   <div className="absolute flex items-center gap-5 z-50 bg-slate-700 p-2 rounded-full">
-                    <span className="text-red-400 font-bold">¿Eliminar capítulo?</span>
+                    <span className="text-red-400 font-bold">
+                      ¿Eliminar capítulo?
+                    </span>
                     <button
                       onClick={() => handleDeleteChapter(index)}
                       className="text-green-400 font-bold"
@@ -142,7 +152,9 @@ export default function EditBook() {
                       Confirmar
                     </button>
                     <button
-                      onClick={() => setVerifyDelete({ verify: false, chapterIndex: null })}
+                      onClick={() =>
+                        setVerifyDelete({ verify: false, chapterIndex: null })
+                      }
                       className="text-red-400 font-bold"
                     >
                       Cancelar
@@ -155,7 +167,7 @@ export default function EditBook() {
         )}
 
         {/* Actions */}
-        <div className="flex flex-wrap gap-5 justify-center sm:justify-start mt-10">
+        <div className="flex gap-5 justify-start items-start sm:justify-start h-56  ">
           <button onClick={handleAddChapter} className="btn">
             Añadir Capítulo
           </button>
@@ -168,30 +180,32 @@ export default function EditBook() {
           <button onClick={() => setIsEditingDescription(true)} className="btn">
             Editar Descripción
           </button>
-        </div>
 
-        {/* Edit description */}
-        {isEditingDescription && (
-          <form onSubmit={handleDescriptionUpdate} className="mt-10">
-            <textarea
-              name="description" maxLength={150}  minLength={25}
-              className="w-72 h-40 rounded-md bg-slate-800 text-white p-2"
-              placeholder="Nueva descripción"
-            />
-            <div className="flex gap-5 justify-center mt-5">
-              <button
-                type="button"
-                onClick={() => setIsEditingDescription(false)}
-                className="text-red-600 font-bold"
-              >
-                Cancelar
-              </button>
-              <button type="submit" className="text-green-600 font-bold">
-                Guardar
-              </button>
-            </div>
-          </form>
-        )}
+          {/* Edit description */}
+          {isEditingDescription && (
+            <form onSubmit={handleDescriptionUpdate}>
+              <textarea
+                name="description"
+                maxLength={150}
+                minLength={25}
+                className="w-72 h-40 rounded-md bg-slate-800 text-white p-2"
+                placeholder={book.description}
+              />
+              <div className="flex gap-5 justify-center mt-5">
+                <button
+                  type="button"
+                  onClick={() => setIsEditingDescription(false)}
+                  className="text-red-600 font-bold"
+                >
+                  Cancelar
+                </button>
+                <button type="submit" className="text-green-600 font-bold">
+                  Guardar
+                </button>
+              </div>
+            </form>
+          )}
+        </div>
       </section>
     </main>
   );
