@@ -74,7 +74,7 @@ export default function Navbar() {
         <ul
           onMouseOver={() => setDesplegable(true)}
           onMouseOut={() => setDesplegable(false)}
-          className="flex-col opacity-0 generos opacity-1  absolute  text-white  bg-indigo-600/85 p-5 rounded-xl"
+          className="flex-col opacity-0 generos opacity-1  absolute  text-white  bg-orange-600/85 p-5 rounded-xl"
         >
           <li>Aventuras</li>
           <li>Acción</li>

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { getBook, editBook, profile, addBook } from "../api/auth";
 import gsap from "gsap";
 
-const RatingStars = ({ user, book, handleVote, handleOver, handleOut }) => {
+const RatingStars = ({ user, book, handleVote }) => {
   const stars = Array.from({ length: 10 }, (_, i) => ({
     num: i + 1,
     text: `star-${i + 1}`,
@@ -19,9 +19,7 @@ const RatingStars = ({ user, book, handleVote, handleOver, handleOut }) => {
             key={e.text}
             id={e.text}
             onClick={() => handleVote(e)}
-            onMouseOver={() => handleOver(e)}
-            onMouseOut={() => handleOut(e)}
-            className="star w-5 h-5 bg-white cursor-pointer transition-all duration-200 hover:scale-110"
+            className="star w-6 h-6 bg-yellow-500 hover:bg-yellow-300 cursor-pointer transition-all duration-200 hover:scale-110"
           />
         ))}
     </div>
@@ -86,6 +84,7 @@ export default function PageBook() {
 
       editBook(updatedBook._id, updatedBook);
       setBook(updatedBook);
+      location.reload()
     } else {
       setMessageVote(true);
     }
@@ -122,6 +121,7 @@ export default function PageBook() {
   const handleNavigate = (path) => {
     navigate(path);
   };
+  console.log(book)
 
   return (
     <main className="w-screen flex justify-center px-4">
@@ -166,6 +166,8 @@ export default function PageBook() {
                   toggleChapters={() => setShowChapters(false)}
                 />
               )}
+              <p><span>Puntuación : </span>{book.rating}</p>
+              <p><span>Votos : </span>{book.idUserVote.length}</p>
               <div className="flex flex-col justify-start items-start">
                 <p>
                   <span>Creado : </span>
@@ -211,8 +213,11 @@ export default function PageBook() {
                 handleOut={handleMouseOut}
               />
 
-              {book && book.comments.length > 0 ? (
-                <div className="flex flex-col gap-3">
+              
+            </div>
+          </div>
+          {book && book.comments.length > 0 ? (
+                <div className="flex flex-col gap-3 px-5">
                   <h3 >Comentarios</h3>
                   {book.comments.map((comentarios, indice) => {
                     return (
@@ -231,10 +236,10 @@ export default function PageBook() {
                   })}
                 </div>
               ) : null}
-            </div>
-          </div>
         </section>
+        
       )}
+     
     </main>
   );
 }
