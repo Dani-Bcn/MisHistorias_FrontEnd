@@ -52,6 +52,9 @@ p {
   white-space: pre-wrap; /* Mantener saltos de línea y espacios */
   word-wrap: break-word; /* Ajustar el texto al contenedor */
 }
+button:hover{
+color: rgb(255, 176, 103);
+}
 
 .input-file {
   width: 250px;
