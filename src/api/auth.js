@@ -1,7 +1,9 @@
 import axios from "axios";
 
 const axxios = axios.create({
-  baseURL: "http://localhost:8000" || "https://mis-historias-back-end.vercel.app", 
+  baseURL: process.env.NODE_ENV === "production"
+    ? "https://mis-historias-back-end.vercel.app"
+    : "http://localhost:8000",
   withCredentials: true,
 });
 
