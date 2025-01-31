@@ -46,7 +46,7 @@ export default function Profile() {
    
     const res = await deleteBooks(bookId);
    
-    /* deleteBooks(bookId); */
+  
   };
 
   const deleteBookLibrary = async (bookId) => {
@@ -63,8 +63,8 @@ export default function Profile() {
     <main className="w-screen flex flex-col gap-10 justify-center items-center">
       {user ? (
         <section className="relative flex  flex-col  justify-center  items-center mt-40">
-        {/*  < div className="absolute w-72 h-72 -mx-5 -mt-5 bg-green-400/[0.5] blur-xl shadow-[0px_0px_20px] shadow-black  rounded-3xl rotate-45"></div>
-          <div className="absolute w-72 h-72 -mx-5 -mt-5  bg-blue-400/[0.3] blur-xl shadow-[0px_0px_10px] shadow-black  rounded-3xl  scale-[1.2] rotate-45"></div> */}
+          
+       
           <div className="relative -mt-20 py-5 flex gap-2 text-5xl text-white">
             <span>
               <h2 className="font-bold">{user.userName}</h2>
@@ -88,7 +88,7 @@ export default function Profile() {
           </div>
         </section>
       ) : null}
-      {user && user.books.length > 0 ? (
+      {user && user.books ? (
         <section className="w-full pl-10  mb-32 mt-20 items-center">
           <h2 className="text-3xl font-bold text-white my-5">
             <span>Mis</span> Historias
@@ -195,7 +195,7 @@ export default function Profile() {
           </div>
         </section>
       ) : null}
-      {user && user.booksLibrary.length > 0 ? (
+      {user && user.booksLibrary.lenght > 0 ? (
         <section className="w-full pl-10 flex flex-col justify-start items-center">
           <h2 className="text-3xl font-bold text-white my-5">
             <span>Mi</span> Biblioteca
