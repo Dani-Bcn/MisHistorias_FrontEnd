@@ -110,7 +110,7 @@ export default function AllBooks() {
               )
           )
         ) : (
-          <p className="text-gray-400">No hay libros publicados disponibles.</p>
+          null
         )}
       </section>
     </main>
