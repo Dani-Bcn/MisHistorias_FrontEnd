@@ -18,7 +18,6 @@ import ReadBook from "./pages/ReadBook";
 import EditUser from "./pages/EditUser";
 import WritingComments from "./pages/WritingComments";
 import ReadComments from "./pages/ReadComments";
-import LogGoogle from "./pages/LogGoogle"
 
 function App() {
   const [acces, setAcces] = useState();
@@ -42,9 +41,7 @@ function App() {
         <Route path="/readBook" element={<ReadBook />} />
         <Route path="/editUser" element={<EditUser />} />
         <Route path="/writingComments" element={<WritingComments />} />
-        <Route path="/readComments" element={<ReadComments />} />
-        <Route path="/logGoogle" element={<LogGoogle />} />
-        
+        <Route path="/readComments" element={<ReadComments />} />              
       </Routes>
     </main>
   );

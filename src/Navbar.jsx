@@ -14,7 +14,6 @@ export default function Navbar() {
   useEffect(() => {
     const fetchUser = async () => {
       const res = await profile();
-
       if (res.data.message !== "no autorizado") {
         setUser(res.data.userFound);
         setIsAuthenticated(true);
@@ -62,7 +61,7 @@ export default function Navbar() {
   };
 
   return (
-    <main className="fixed  bg-red-300/5  backdrop-blur-xl z-[100] w-screen h-10 flex items-center  justify-around  text-indigo-400 ">
+    <main className="fixed  bg-red-300/0  backdrop-blur-xl z-[100] w-screen h-10 flex items-center  justify-around  text-indigo-400 ">
       <button onClick={() => navigate("/allbooks")}>Libros</button>
       <div className="z-[200]">
         <button
