@@ -7,8 +7,6 @@ const axxios = axios.create({
   withCredentials: true,
 });
 
-//"https://mis-historias-back-end.vercel.app",
-//"http://localhost:8000",
 export const removeBookLibrary = async (objectIds) =>
   await axxios.put(
     `/api/removeBookLibrary/${objectIds.userId}/${objectIds.bookId}`
