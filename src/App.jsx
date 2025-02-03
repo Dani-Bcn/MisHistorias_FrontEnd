@@ -5,6 +5,7 @@ import {
 } from "react-router-dom";
 import Home from "./pages/Home";
 import Navbar from "./Navbar";
+import Footer from "./Footer";
 import RegisterUser from "./pages/RegisterUser";
 import LoginUser from "./pages/LoginUser";
 import UserProfile from "./pages/Profile";
@@ -43,6 +44,7 @@ function App() {
         <Route path="/writingComments" element={<WritingComments />} />
         <Route path="/readComments" element={<ReadComments />} />              
       </Routes>
+      <Footer/>
     </main>
   );
 }
