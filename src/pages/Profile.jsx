@@ -189,7 +189,7 @@ export default function Profile() {
         </section>
       ) : null}
       {user  ? (
-        <section className="w-full pl-10 flex flex-col justify-start items-center">
+        <section className=" pl-10 flex flex-col justify-start items-center">
           <h2 className="text-3xl font-bold text-white my-5">
             <span>Mi</span> Biblioteca
           </h2>

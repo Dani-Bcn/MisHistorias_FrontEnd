@@ -44,7 +44,7 @@ function App() {
         <Route path="/writingComments" element={<WritingComments />} />
         <Route path="/readComments" element={<ReadComments />} />              
       </Routes>
-  {/*     <Footer/> */}
+      <Footer/>
     </main>
   );
 }
