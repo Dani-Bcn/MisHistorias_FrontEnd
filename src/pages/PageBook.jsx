@@ -228,8 +228,8 @@ export default function PageBook() {
                         <p>{comentarios.user}</p>
                         <p>{comentarios.text}</p>
                         <div className="flex">
-                          {/*   <p> {comentarios.update.month}&nbsp; / &nbsp; </p>
-                          <p> {comentarios.update.year} </p> */}
+                          <p> {comentarios.update.month}&nbsp; / &nbsp; </p>
+                          <p> {comentarios.update.year} </p> 
                         </div>
                       </div>
                     );
