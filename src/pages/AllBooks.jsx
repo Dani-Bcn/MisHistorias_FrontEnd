@@ -51,12 +51,6 @@ export default function AllBooks() {
                     src={book.imageUrl}
                     alt="Book Cover"
                     aspect-square
-
-
-
-
-
-                    alt="Book Cover"
                     className=" opacity-30 -m-5 w-full h-96 sm:h-full  absolute z-0   mask object-cover rounded-lg"
                   />
                   <h3 className="h-10  z-10 text-2xl font-bold my-7 text-center text-orange-400">
