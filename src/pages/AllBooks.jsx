@@ -37,7 +37,7 @@ export default function AllBooks() {
   };
 
   return (
-    <main className=" overflow-hidden   text-slate-200 flex flex-col items-center ">
+    <main className=" h-min-screen   text-slate-200 flex flex-col items-center ">
       <section className="w-[72%] lg:w-[90%] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 py-20 ">
         {books.length > 0 ? (
           books.map(
@@ -45,10 +45,17 @@ export default function AllBooks() {
               book.published && (
                 <div
                   key={index}
-                  className="relative p-5 bg-gray-800 hover:shadow-none transition-all duration-500 shadow-black/50 rounded-lg shadow-lg flex flex-col items-around justify-between"
+                  className="aspect-auto relative p-5 bg-gray-800 hover:shadow-none transition-all duration-500 shadow-black/50 rounded-lg shadow-lg flex flex-col items-around justify-between gap-5"
                 >
                   <img
                     src={book.imageUrl}
+                    alt="Book Cover"
+                    aspect-square
+
+
+
+
+
                     alt="Book Cover"
                     className=" opacity-30 -m-5 w-full h-96 sm:h-full  absolute z-0   mask object-cover rounded-lg"
                   />
