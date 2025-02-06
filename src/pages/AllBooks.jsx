@@ -47,7 +47,7 @@ export default function AllBooks() {
               book.published && (
                 <div
                   key={index}
-                  className="aspect-auto relative p-5 bg-gray-800 hover:shadow-none transition-all duration-500 shadow-black/50 rounded-lg shadow-lg flex flex-col items-around justify-between gap-5"
+                  className="aspect-auto relative p-5 bg-black hover:shadow-none transition-all duration-500 shadow-black/50 rounded-lg shadow-lg flex flex-col items-around justify-between"
                 >
                   <img
                     src={book.imageUrl}
@@ -55,10 +55,10 @@ export default function AllBooks() {
                     aspect-square
                     className=" opacity-50 -m-5 w-full h-96 sm:h-full  absolute z-0   mask object-cover rounded-lg"
                   />
-                  <h3 className="h-10  z-10 text-2xl font-bold my-7 text-center text-orange-400">
+                  <h3 className="  z-10 text-xl font-bold  text-center text-orange-300">
                     {book.title}
                   </h3>
-                  <div className="flex justify-end text-2xl flex-col items-center">
+                  <div className="flex justify-end text-xl flex-col items-center">
                     <div className="flex gap-2 items-center justify-center">
                       <span className="font-bold">
                         {book.dataUser.userName}
