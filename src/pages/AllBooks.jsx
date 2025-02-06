@@ -37,9 +37,10 @@ export default function AllBooks() {
   };
 
   return (
-    <main className=" h-min-screen mt-20   text-slate-200 flex flex-col items-center ">
+    <main className=" h-min-screen my-20   text-slate-200 flex flex-col items-center ">
       
-      <h2 className="mb-5 text-3xl"><span >L</span>ibros</h2>
+      <h2 className="mt-5 lg:mt-20 text-3xl lg:text-5xl "><span >L</span>ibros</h2>
+      <div className="w-80 sm:w-screen my-5 h-[1px] bg-gradient-to-r from-orange-500/0 via-orange-500 to-orange-500/0  mb-20"></div>
       <section className="w-[72%] lg:w-[90%] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5  ">
         {books.length > 0 ? (
           books.map(

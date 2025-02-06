@@ -31,7 +31,7 @@ export default function Profile() {
   }, []);
 
   const removeImg = async (values) => {
-    await deleteImg({ coco: values });
+    await deleteImg({ imgLibro: values });
   };
 
   const handlePublish = (book) => {
@@ -54,18 +54,13 @@ export default function Profile() {
   };
 
   return (
-    <main className="text-indigo-100 w-screen mt-20 flex flex-col gap-10 justify-center items-center">
+    <main className="text-indigo-100 w-screen my-20 flex flex-col gap-10 justify-center items-center">
       {user ? (
         <section className="relative flex  flex-col gap-5  justify-center  items-center">
           <h2 className="text-5xl flex gap-2">
             <span className="font-bold">{user.userName}</span>
             {user.lastName}
           </h2>
-          <img
-            src={user.imageUserUrl}
-            alt={user.userName}
-            className="relative w-40 h-40 lg:w-60 lg:h-60 border-8 object-cover  rounded-full "
-          />
           <div className="relative flex  gap-72 justify-center items-center  text-white z-10">
             <button
               className="btn text-2xl"
@@ -98,12 +93,12 @@ export default function Profile() {
                           alt={book.title}
                           className="w-32 h-52 rounded-lg object-cover"
                         />
-                        <p className="absolute w-10 h-10 flex justify-center items-center m-2  text-xl text-indigo-400 z-[100] border-[3px] border-indigo-600 rounded-full bg-black/70">
+                        <p className="absolute w-10 h-10 flex justify-center items-center m-2  text-xl text-orange-300 z-[100] border-[3px] border-indigo-600 rounded-full bg-black/70">
                           {book.rating}
                         </p>
                         <div className="text-xl flex flex-col gap-2  rounded-l-none rounded-b-xl  p-5">
                           <button
-                            className="w-16 btn flex justify-start"
+                            className="p-1 bg-indigo-950 rounded-lg btn flex   justify-start"
                             onClick={() => {
                               localStorage.setItem("bookId", book._id),
                                 navigate("/editBook");
@@ -156,8 +151,8 @@ export default function Profile() {
                                   className="text-xl text-green-700 cursor-pointer font-black"
                                   onClick={() => {
                                     //Elimina la imagen de Cloudinary
+                                    removeImg(book.imageUrl);
                                     removeBook(book._id);
-                                    /*  removeImg(book.imageUrl) */
                                   }}
                                 >
                                   V
@@ -181,7 +176,7 @@ export default function Profile() {
         </section>
       ) : null}
       {user ? (
-        <section className="pl-5 flex flex-col justify-start items-start">
+         <section className="w-full p-5 text-3xl flex flex-col gap-5">
           <h2 className="text-3xl  text-white">
             <span>Mi</span> Biblioteca
           </h2>
@@ -204,7 +199,7 @@ export default function Profile() {
                             alt={book.title}
                             className="w-32 h-52 object-cover"
                           />
-                          <p className="absolute w-10 h-10 flex justify-center items-center m-2  text-xl text-indigo-400 z-[100] border-[3px] border-indigo-600 rounded-full bg-black/70">
+                          <p className="absolute w-10 h-10 flex justify-center items-center m-2  text-xl text-orange-300 z-[100] border-[3px] border-indigo-600 rounded-full bg-black/70">
                             {book.rating}
                           </p>
                           <div className="text-xl flex flex-col gap-2  rounded-l-none rounded-b-xl  p-5">
