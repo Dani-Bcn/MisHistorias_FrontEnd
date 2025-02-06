@@ -68,11 +68,11 @@ export default function Profile() {
           />
           <div className="relative flex  gap-72 justify-center items-center  text-white z-10">
             <button
-              className="btn text-3xl"
+              className="btn text-2xl"
               onClick={() => navigate("/createBook")}
             >
               <h3>
-                <span>C</span>rear una nueva historia
+                <span>C</span>rea una nueva historia
               </h3>
             </button>
           </div>
@@ -87,7 +87,7 @@ export default function Profile() {
             {user
               ? user.books.map((book, i) => {
                   return (
-                    <div key={i} className="flex flex-col">
+                    <div key={i} className="flex flex-col h-72">
                       <h2 className="text-xl  py-3 font-semibold">
                         <span>{book.title[0]}</span>
                         {book.title.slice(1)}
@@ -149,11 +149,11 @@ export default function Profile() {
                             </button>
                           </button>
                           {handleDelete && numDeleteBook === i ? (
-                            <div className="text-red-600">
-                              <h3>Confirma que quieres eliminar el libro</h3>
-                              <div className="w-full flex gap-10">
+                            <div className="relative flex flex-col items-center text-sm  bg-indigo-400 rounded-md">
+                              <h3>Confirmar</h3>
+                              <div className="w-full flex justify-around">
                                 <button
-                                  className="text-xl text-green-600 cursor-pointer font-black"
+                                  className="text-xl text-green-700 cursor-pointer font-black"
                                   onClick={() => {
                                     //Elimina la imagen de Cloudinary
                                     removeBook(book._id);
@@ -181,11 +181,11 @@ export default function Profile() {
         </section>
       ) : null}
       {user ? (
-        <section className=" pl-10 flex flex-col justify-start items-center">
-          <h2 className="text-3xl font-bold text-white my-5">
+        <section className="pl-5 flex flex-col justify-start items-start">
+          <h2 className="text-3xl  text-white">
             <span>Mi</span> Biblioteca
           </h2>
-          <div className="flex gap-40  flex-wrap ">
+          <div className="flex gap-5  flex-wrap ">
             {user && user.booksLibrary.length > 0
               ? user.booksLibrary.map((book, i) => {
                   console.log(book);
@@ -204,10 +204,10 @@ export default function Profile() {
                             alt={book.title}
                             className="w-32 h-52 object-cover"
                           />
-                          <p className="absolute w-16 h-16 flex justify-center items-center mt-36  -ml-5 text-4xl text-indigo-400 z-[100] border-[3px] border-blue-600 rounded-full bg-black">
+                          <p className="absolute w-10 h-10 flex justify-center items-center m-2  text-xl text-indigo-400 z-[100] border-[3px] border-indigo-600 rounded-full bg-black/70">
                             {book.rating}
                           </p>
-                          <div className="m-5  h-48 flex flex-col gap-2 border-b border-r rounded-l-none rounded-b-xl border-indigo-600 px-5 ">
+                          <div className="text-xl flex flex-col gap-2  rounded-l-none rounded-b-xl  p-5">
                             <button
                               className="btn w-12 flex justify-start"
                               onClick={() => {
@@ -231,9 +231,9 @@ export default function Profile() {
                               onClick={() => {
                                 deleteBookLibrary(book._id);
                               }}
-                              className="btn w-28 flex justify-start"
+                              className="btn  flex justify-start"
                             >
-                              <span> - &nbsp;</span>bliblioteca
+                              <span>-&nbsp;</span>bliblioteca
                             </button>
                           </div>
                         </div>
