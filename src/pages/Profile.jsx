@@ -13,7 +13,7 @@ export default function Profile() {
 
   const navigate = useNavigate();
   const [user, setUser] = useState();
-  const [handleDelete, setHandeDelete] = useState(false);
+  const [handleDelete, setHandleDelete] = useState(false);
   const [numDeleteBook, setNumDeleteBook] = useState();
 
   const getUser = async () => {
@@ -53,8 +53,12 @@ export default function Profile() {
     location.reload();
   };
 
+  const handleDeleteBook = () => {
+    setHandeDelete(true);
+  };
+
   return (
-    <main className=" h-min-screen mt-32 mb-20   text-slate-200 flex flex-col items-center ">
+    <main className=" h-min-screen mt-32 mb-20 text-slate-200 flex flex-col items-center ">
       {user ? (
         <section className="relative flex  flex-col gap-5  justify-center  items-center">
           <h2 className="text-7xl flex gap-2">
@@ -75,8 +79,10 @@ export default function Profile() {
       ) : null}
       {user && user.books ? (
         <section className="w-screen flex flex-col items-center sm:items-start px-10 gap-10">
-           <h2 className="mt-5 lg:mt-10 text-3xl lg:text-4xl "><span >Mis</span>libros</h2>
-           <div className="w-80 sm:w-screen  h-[1px] bg-gradient-to-r  from-orange-500/0 sm:from-orange-500 sm:via-orange-500/50 via-orange-500 to-orange-500/0"></div>
+          <h2 className="mt-5 lg:mt-10 text-3xl lg:text-4xl ">
+            <span>Mis</span>libros
+          </h2>
+          <div className="w-80 sm:w-screen  h-[1px] bg-gradient-to-r  from-orange-500/0 sm:from-orange-500 sm:via-orange-500/50 via-orange-500 to-orange-500/0"></div>
           <section className="w-[72%] lg:w-[90%] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5  ">
             {user
               ? user.books.map((book, i) => {
@@ -100,7 +106,6 @@ export default function Profile() {
                             {book.dataUser.userName}
                           </span>
                           <p className=" text-center text-transform: capitalize">
-                            {" "}
                             {book.dataUser.lastName}
                           </p>
                         </div>
@@ -117,9 +122,6 @@ export default function Profile() {
                         <p>
                           <span>Capítulos :</span> {book.chapters.length}
                         </p>
-                        <p>
-                          <span>Sipnosis :</span> {book.description}{" "}
-                        </p>
                       </div>
                       <div className="mt-4 flex items-center justify-between">
                         <div className="flex items-center gap-2">
@@ -135,24 +137,60 @@ export default function Profile() {
                             <p>{book.numVotes}</p>
                           </div>
                         </div>
-                        <div className="flex gap-2">
-                          <button
-                            onClick={() =>
-                              handleNavigate("/PageBook", book._id)
-                            }
-                            className=" text-white px-2 py-2 border  border-indigo-400 rounded-lg text-xs text-center"
-                          >
-                            Info
-                          </button>
-                          <button
-                            onClick={() =>
-                              handleNavigate("/readBook", book._id)
-                            }
-                            className=" text-white px-2 py-2 border  border-indigo-400 rounded-lg text-xs text-center"
-                          >
-                            Leer
-                          </button>
-                        </div>
+                      </div>
+                      <div className="flex gap-2">
+                        <button
+                          onClick={() => handleNavigate("/PageBook", book._id)}
+                          className=" text-white p-1 border  border-indigo-400 rounded-lg text-xs text-center"
+                        >
+                          Info
+                        </button>
+                        <button
+                          onClick={() => handleNavigate("/readBook", book._id)}
+                          className=" text-white p-1 border  border-indigo-400 rounded-lg text-xs text-center"
+                        >
+                          Leer
+                        </button>
+                        <button
+                          onClick={() => {
+                            localStorage.setItem("bookId", book._id),
+                              navigate("/editBook");
+                          }}
+                          className=" text-white p-1 border  border-indigo-400 rounded-lg text-xs text-center"
+                        >
+                          Editar
+                        </button>
+                        <button
+                          onClick={() => {
+                            setHandleDelete(true);
+                          }}
+                          className="text-white p-1 border  border-indigo-400 rounded-lg text-xs text-center"
+                        >
+                          Eliminar
+                        </button>
+                        {handleDelete ? (
+                          <div className="absolute w-20 h-14 grid grid-cols-2 grid-rows-2 bg-indigo-400 justify-center items-center rounded-md">
+                            <p className="grid col-span-2 items-center justify-center">
+                              Confirmar
+                            </p>
+                            <button
+                              onClick={() => {
+                                setHandleDelete(false);
+                              }}
+                              className="text-red-600 grid row-span-2 col-start-1"
+                            >
+                              X
+                            </button>
+                            <button
+                              onClick={() => {
+                                deleteBooks(book._id), setHandleDelete(false);
+                              }}
+                              className=" text-green-900 grid col-start-2 "
+                            >
+                              V
+                            </button>
+                          </div>
+                        ) : null}
                       </div>
                     </div>
                   );
