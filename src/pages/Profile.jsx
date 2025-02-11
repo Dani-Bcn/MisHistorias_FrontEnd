@@ -10,7 +10,6 @@ import { useNavigate } from "react-router-dom";
 
 export default function Profile() {
   /*  window.scrollTo(0, 0) */
-
   const navigate = useNavigate();
   const [user, setUser] = useState();
   const [handleDelete, setHandleDelete] = useState(false);
@@ -54,7 +53,7 @@ export default function Profile() {
   };
 
   const handleDeleteBook = () => {
-    setHandeDelete(true);
+    setHandleDelete(true);
   };
 
   return (
@@ -80,7 +79,8 @@ export default function Profile() {
       {user && user.books ? (
         <section className="w-screen flex flex-col items-center sm:items-start px-10 gap-10">
           <h2 className="mt-5 lg:mt-10 text-3xl lg:text-4xl ">
-            <span>Mis</span>libros
+            <span>Mis</span> libros
+            
           </h2>
           <div className="w-80 sm:w-screen  h-[1px] bg-gradient-to-r  from-orange-500/0 sm:from-orange-500 sm:via-orange-500/50 via-orange-500 to-orange-500/0"></div>
           <section className="w-[72%] lg:w-[90%] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5  ">
@@ -94,8 +94,8 @@ export default function Profile() {
                       <img
                         src={book.imageUrl}
                         alt="Book Cover"
-                        aspect-square
-                        className=" opacity-50 -m-5 w-full h-96 sm:h-full  absolute z-0   mask object-cover rounded-lg"
+                     
+                        className="  opacity-50 -m-5 w-full h-full absolute z-0   mask object-cover rounded-lg"
                       />
                       <h3 className="  z-10 text-xl font-bold  text-center text-orange-300">
                         {book.title}
@@ -200,11 +200,12 @@ export default function Profile() {
         </section>
       ) : null}
       {user ? (
-        <section className="w-full p-5 text-3xl flex flex-col gap-5">
-          <h2 className="text-3xl  text-white">
+        <section className="w-full py-10  text-3xl flex flex-col gap-5">
+          <h2 className="text-3xl  text-white text-center sm:text-start">
             <span>Mi</span> Biblioteca
           </h2>
-          <div className="flex gap-5  flex-wrap ">
+          <div className="w-80  sm:w-screen h-[1px] bg-gradient-to-r from-orange-500/0 via-orange-500 to-orange-500/0 "></div>
+          <div className="flex gap-5   flex-wrap ">
             {user && user.booksLibrary.length > 0
               ? user.booksLibrary.map((book, i) => {
                   console.log(book);

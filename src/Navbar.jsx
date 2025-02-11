@@ -36,6 +36,13 @@ export default function Navbar() {
     ? gsap.to(".generos", { opacity: 1, display: "flex", duration: 0.5 })
     : gsap.to(".generos", { opacity: 0, display: "none", duration: 0.5 });
 
+
+    const generos=((e)=>{
+        console.log(e.target.innerText)
+        localStorage.setItem("genero",e.target.innerText)
+        navigate("/allbooks")
+    })
+
   const avisoCerrarSesion = () => {
     return (
       <div className="absolute z-[100] text-2xl  mt-56 w-96 p-5 h-40 bg-indigo-400  text-white flex flex-col justify-around items-center rounded-lg">
@@ -62,7 +69,7 @@ export default function Navbar() {
 
   return (
     <main className="fixed  bg-red-300/0  backdrop-blur-xl z-[100] w-screen h-16 flex items-center  justify-around  text-indigo-400 ">
-      <button onClick={() => navigate("/allbooks")}>Libros</button>
+      <button onClick={() => {navigate("/allbooks") , localStorage.setItem("genero" , "allbooks")}}>Libros</button>
       <div className="z-[200]">
         <button
           onMouseOver={() => setDesplegable(true)}
@@ -74,6 +81,7 @@ export default function Navbar() {
           onMouseOver={() => setDesplegable(true)}
           onMouseOut={() => setDesplegable(false)}
           className="flex-col opacity-0 generos opacity-1  absolute  text-white  bg-indigo-600/85 p-5 rounded-xl"
+          onClick={(e) => generos(e)}
         >
           <li>Aventuras</li>
           <li>Acción</li>
