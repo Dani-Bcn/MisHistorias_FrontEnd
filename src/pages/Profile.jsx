@@ -28,7 +28,7 @@ export default function Profile() {
 
   useEffect(() => {
     getUser();
-  }, [setHandleDeleteLibrary]);
+  }, [handleDeleteLibrary,user]);
 
   const removeImg = async (values) => {
     await deleteImg({ imgLibro: values });

@@ -66,15 +66,13 @@ export default function PageBook() {
       if (res) setUser(res.data.userFound);
     };
     fetchUser();
-  }, []);
 
-  useEffect(() => {
     const fetchBook = async () => {
       const res = await getBook(bookId);
       if (res) setBook(res.data);
     };
     fetchBook();
-  }, [bookId]);
+  }, [bookId,user]);
 
   const handleVote = (rating) => {
     if (!book.idUserVote.includes(user._id)) {
@@ -115,8 +113,6 @@ export default function PageBook() {
     if (!user) return;
     try {
       await addBook({ bookId, userId: user._id });
-      alert("Book added to your library!");
-      location.reload();
     } catch (error) {
       console.error("Error adding book:", error);
       alert("Failed to add book. Please try again later.");
@@ -224,11 +220,13 @@ export default function PageBook() {
                   <button onClick={() => handleNavigate("/readBook", book._id)}>
                     Leer
                   </button>
-                  {!resultsLibrary && user && (
+                  {!resultsLibrary ? (
                     <button onClick={() => handleAddBook(book._id)}>
                       + Blilioteca
                     </button>
-                  )}
+                  ):
+                  <h3>Ya en tu biblioteca</h3>
+                  }
                 </div>
 
                 {
