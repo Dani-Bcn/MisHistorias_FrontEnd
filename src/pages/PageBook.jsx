@@ -84,7 +84,6 @@ export default function PageBook() {
 
       editBook(updatedBook._id, updatedBook);
       setBook(updatedBook);
-      location.reload()
     } else {
       setMessageVote(true);
     }
