@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getBook, editBook, profile, addBook } from "../api/auth";
 import gsap from "gsap";
+import { use } from "react";
 
 const RatingStars = ({ user, book, handleVote }) => {
   const stars = Array.from({ length: 10 }, (_, i) => ({
@@ -100,15 +101,11 @@ export default function PageBook() {
   };
 
   useEffect(() => {
-  
     user &&
       user.booksLibrary &&
-      
       setResultsLibrary(
         user.booksLibrary.some((obj) => Object.values(obj).includes(bookId))
       );
-      
-      book && user && setUserFoundComment(book.idUserComments.includes(user._id))
   }, [user, bookId, resultsLibrary]);
 
   // Add book to user's library
@@ -126,8 +123,15 @@ export default function PageBook() {
   const handleNavigate = (path) => {
     navigate(path);
   };
- 
- console.log(userFoundComment) 
+
+  console.log(userFoundComment);
+  const [editingIndex, setEditingIndex] = useState(null);
+  const [editedComment, setEditedComment] = useState("");
+
+  const handleEdit = (indice, text) => {
+    setEditingIndex(indice);
+    setEditedComment(text);
+  };
 
   return (
     <main className="w-screen flex justify-center px-4">
@@ -172,8 +176,14 @@ export default function PageBook() {
                   toggleChapters={() => setShowChapters(false)}
                 />
               )}
-              <p><span>Puntuación : </span>{book.rating}</p>
-              <p><span>Votos : </span>{book.idUserVote.length}</p>
+              <p>
+                <span>Puntuación : </span>
+                {book.rating}
+              </p>
+              <p>
+                <span>Votos : </span>
+                {book.idUserVote.length}
+              </p>
               <div className="flex flex-col justify-start items-start">
                 <p>
                   <span>Creado : </span>
@@ -218,34 +228,43 @@ export default function PageBook() {
                 handleOver={handleMouseOver}
                 handleOut={handleMouseOut}
               />
-
-              
             </div>
           </div>
           {book && book.comments.length > 0 ? (
-                <div className="flex flex-col gap-3 px-5">
-                  <h3 >Comentarios</h3>
-                  {book.comments.map((comentarios, indice) => {
-                    return (
-                      <div
-                        key={indice}
-                        className="bg-indigo-400/50  rounded-lg p-3"
-                      >
-                        <p>{comentarios.user} {comentarios.lastName}</p>
-                        <p>{comentarios.text}</p>
-                        <div className="flex">
-                          <p> {comentarios.update.month}&nbsp; / &nbsp; </p>
-                          <p> {comentarios.update.year} </p> 
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              ) : null}
+        <div className="flex flex-col gap-3 px-5">
+          <h3>Comentarios</h3>
+          {book.comments.map((comentarios, indice) => (
+            <div key={indice} className="bg-indigo-400/50 rounded-lg p-3">
+              <p>
+                {comentarios.user} {comentarios.lastName}
+              </p>
+              {editingIndex === indice ? (
+                <>
+                  <textarea
+                    className="w-full p-2 border rounded"
+                    value={editedComment}
+                    onChange={(e) => setEditedComment(e.target.value)}
+                  />
+                  <button onClick={() => handleSave(indice)}>Guardar</button>
+                </>
+              ) : (
+                <p>{comentarios.text}</p>
+              )}
+              <div className="flex">
+                <p>{comentarios.update.month}&nbsp;/&nbsp;</p>
+                <p>{comentarios.update.year}</p>
+              </div>
+              {user && comentarios.userId === user._id && (
+                <button onClick={() => handleEdit(indice, comentarios.text)}>
+                  Editar
+                </button>
+              )}
+            </div>
+          ))}
+        </div>
+      ) : null}
         </section>
-        
       )}
-     
     </main>
   );
 }
