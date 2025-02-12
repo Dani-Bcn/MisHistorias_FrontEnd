@@ -8,7 +8,7 @@ export default function WritingComments() {
   const [user, setUser] = useState(null);
   const [verifyText, setVerifyText] = useState(false);
   const navigate = useNavigate();
-  
+
   const date = new Date();
   const day = date.getDate();
   const month = date.getMonth() + 1; // Months are zero-indexed
@@ -62,10 +62,11 @@ export default function WritingComments() {
       book.comments.push({
         text: getText,
         user: user.userName,
+        lastName: user.lastName,
         userId: user._id,
         update: { month, year, day },
       });
-      
+
       editBook(book._id, book).then(() => {
         navigate("/pageBook");
       });
@@ -75,9 +76,12 @@ export default function WritingComments() {
   return (
     <main className="w-screen flex justify-center">
       <section className="w-full flex flex-col items-center mt-40 sm:mt-16 text-white text-4xl">
-        <h2 className="text-xl">
-          <span>E</span>scribe tu comentario
-        </h2>
+        <h3 className="text-xl py-5">
+          <span>E</span>scribe tu comentario sobre la obra de
+        </h3>       
+          <span className="text-yellow-400">{book?.title}</span>
+    
+
         <textarea
           id="cooc"
           value={getText}
@@ -85,7 +89,7 @@ export default function WritingComments() {
           className="w-3/4 h-40 my-10 text-xl rounded-md "
         />
         <button onClick={handleClick} className="text-sm">
-          Guardar 
+          Guardar
         </button>
         {verifyText && (
           <h3

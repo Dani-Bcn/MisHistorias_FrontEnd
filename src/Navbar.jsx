@@ -69,7 +69,7 @@ export default function Navbar() {
 
   return (
     <main className="fixed  bg-red-300/0  backdrop-blur-xl z-[100] w-screen h-16 flex items-center  justify-around  text-indigo-400 ">
-      <button onClick={() => {navigate("/allbooks") , localStorage.setItem("genero" , "allbooks")}}>Libros</button>
+      <button onClick={() => {navigate("/allbooks") , localStorage.setItem("genero" , "Libros")}}>Libros</button>
       <div className="z-[200]">
         <button
           onMouseOver={() => setDesplegable(true)}
@@ -81,7 +81,7 @@ export default function Navbar() {
           onMouseOver={() => setDesplegable(true)}
           onMouseOut={() => setDesplegable(false)}
           className="flex-col opacity-0 generos opacity-1  absolute  text-white  bg-indigo-600/85 p-5 rounded-xl"
-          onClick={(e) => generos(e)}
+          onClick={(e) => {generos(e), setDesplegable(false)}}
         >
           <li>Aventuras</li>
           <li>Acción</li>

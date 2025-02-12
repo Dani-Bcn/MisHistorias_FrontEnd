@@ -225,7 +225,7 @@ export default function PageBook() {
                         key={indice}
                         className="bg-indigo-400/50  rounded-lg p-3"
                       >
-                        <p>{comentarios.user}</p>
+                        <p>{comentarios.user} {comentarios.lastName}</p>
                         <p>{comentarios.text}</p>
                         <div className="flex">
                           <p> {comentarios.update.month}&nbsp; / &nbsp; </p>
