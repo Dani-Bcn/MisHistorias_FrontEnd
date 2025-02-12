@@ -76,7 +76,7 @@ export default function ReadBook() {
 
     <div className="lg:w-2/4 w-full mx-auto text-red-50 mt-20">
       <h3 className="text-4xl text-center border-b border-gray-500 my-10">
-        {book.title}
+        <span>{book.title[0]}</span>{book.title.slice(1)}
       </h3>
       {book.chapters?.map((chapter, i) => (
         <article
@@ -84,7 +84,7 @@ export default function ReadBook() {
           key={i}
           className="bg-gray-800 bg-opacity-70 rounded-xl p-5 mb-10"
         >
-          <h4 className="text-3xl mb-5">{chapter.title}</h4>
+          <h4 className="text-3xl mb-5"><span>{chapter.title[0]}</span>{chapter.title.slice(1)}</h4>
           <p className="text-lg leading-relaxed">
             <span className="text-2xl font-bold">{chapter.text[0]}</span>
             {chapter.text.slice(1)}
