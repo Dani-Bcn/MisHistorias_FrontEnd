@@ -78,9 +78,11 @@ export default function WritingComments() {
       <section className="w-full flex flex-col items-center mt-40 sm:mt-16 text-white text-4xl">
         <h3 className="text-xl py-5">
           <span>E</span>scribe tu comentario sobre la obra de
-        </h3>       
-          <span className="text-yellow-400">{book?.title}</span>
-    
+        </h3>
+        <h2>
+          <span>{book?.title[0]}</span>
+          {book?.title.slice(1)}
+        </h2>
 
         <textarea
           id="cooc"

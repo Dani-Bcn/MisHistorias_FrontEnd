@@ -53,7 +53,10 @@ export default function PageBook() {
   const [messageVote, setMessageVote] = useState(false);
   const [user, setUser] = useState(null);
   const [resultsLibrary, setResultsLibrary] = useState(false);
-  const [userFoundComment, setUserFoundComment] = useState(false);
+  const [editingIndex, setEditingIndex] = useState(null);
+  const [editedComment, setEditedComment] = useState("");
+  const [deleteComment,setDeleteComment] = useState(null)
+
 
   const bookId = localStorage.getItem("bookId");
 
@@ -101,12 +104,11 @@ export default function PageBook() {
   };
 
   useEffect(() => {
-    user &&
-      user.booksLibrary &&
+   
       setResultsLibrary(
-        user.booksLibrary.some((obj) => Object.values(obj).includes(bookId))
+        user?.booksLibrary.some((obj) => Object.values(obj).includes(bookId))
       );
-  }, [user, bookId, resultsLibrary]);
+  }, [user, bookId, resultsLibrary,deleteComment]);
 
   // Add book to user's library
   const handleAddBook = async (bookId) => {
@@ -124,26 +126,37 @@ export default function PageBook() {
     navigate(path);
   };
 
-  console.log(userFoundComment);
-  const [editingIndex, setEditingIndex] = useState(null);
-  const [editedComment, setEditedComment] = useState("");
+  console.log(book);
+ 
 
   const handleEdit = (indice, text) => {
     setEditingIndex(indice);
     setEditedComment(text);
   };
-const handleSave = () => {
+  const handleRemove = (indice, text) => {
 
+    book.comments.splice(indice, 1);
+    book.idUserComments.splice(indice, 1);
+
+   
+
+    
+
+    editBook(book._id, book).then(() => {
+      setEditingIndex(null);
+    });
+    setDeleteComment(undefined)
+  };
+  const handleSave = () => {
     if (editingIndex !== null) {
       const updatedComments = [...book.comments];
       updatedComments[editingIndex].text = editedComment;
-
-    }      
-      editBook(book._id, book).then(() => {
-        setEditingIndex(null);
-
-      });
     }
+    editBook(book._id, book).then(() => {
+      setEditingIndex(null);
+    });
+  };
+
 
 
   return (
@@ -218,9 +231,9 @@ const handleSave = () => {
                   )}
                 </div>
 
-                {user &&
-                !book.idUserComments.includes(user._id) &&
-                !user.books.some((obj) =>
+                {
+                !book.idUserComments.includes(user?._id) &&
+                !user?.books.some((obj) =>
                   Object.values(obj).includes(bookId)
                 ) ? (
                   <button
@@ -243,39 +256,50 @@ const handleSave = () => {
               />
             </div>
           </div>
-          {book && book.comments.length > 0 ? (
-        <div className="flex flex-col gap-3 px-5">
-          <h3>Comentarios</h3>
-          {book.comments.map((comentarios, indice) => (
-            <div key={indice} className="bg-indigo-400/50 rounded-lg p-3">
-              <p>
-                {comentarios.user} {comentarios.lastName}
-              </p>
-              {editingIndex === indice ? (
-                <>
-                  <textarea
-                    className="w-full p-2 border rounded"
-                    value={editedComment}
-                    onChange={(e) => setEditedComment(e.target.value)}
-                  />
-                  <button onClick={() => handleSave(indice)}>Guardar</button>
-                </>
-              ) : (
-                <p>{comentarios.text}</p>
-              )}
-              <div className="flex">
-                <p>{comentarios.update.month}&nbsp;/&nbsp;</p>
-                <p>{comentarios.update.year}</p>
-              </div>
-              {user && comentarios.userId === user._id && (
-                <button onClick={() => handleEdit(indice, comentarios.text)}>
-                  Editar
-                </button>
-              )}
+          {book.comments.length > 0 ? (
+            <div className="flex flex-col gap-3 px-5">
+              <h3>Comentarios</h3>
+              {book.comments.map((comentarios, indice) => (
+                <div key={indice} className="bg-indigo-400/50 rounded-lg p-3">
+                  <p>
+                    {comentarios.user} {comentarios.lastName}
+                  </p>
+                  {editingIndex === indice ? (
+                    <>
+                      <textarea
+                        className="w-full p-2 border rounded"
+                        value={editedComment}
+                        onChange={(e) => setEditedComment(e.target.value)}
+                      />
+                      <button onClick={() => handleSave(indice)}>
+                        Guardar
+                      </button>
+                    </>
+                  ) : (
+                    <p>{comentarios.text}</p>
+                  )}
+                  <div className="flex">
+                    <p>{comentarios.update.month}&nbsp;/&nbsp;</p>
+                    <p>{comentarios.update.year}</p>
+                  </div>
+                  {comentarios.userId === user?._id && (
+                    <div className="flex gap-5">
+                      <button
+                        onClick={() => handleEdit(indice, comentarios.text)}
+                      >
+                        Editar
+                      </button>
+                      <button
+                        onClick={() => handleRemove(indice, comentarios.text)}
+                      >
+                        Eliminar
+                      </button>
+                    </div>
+                  )}
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-      ) : null}
+          ) : null}
         </section>
       )}
     </main>
