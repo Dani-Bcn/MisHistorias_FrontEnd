@@ -13,6 +13,7 @@ export default function Profile() {
   const navigate = useNavigate();
   const [user, setUser] = useState();
   const [handleDelete, setHandleDelete] = useState(false);
+  const [handleDeleteLibrary, setHandleDeleteLibrary] = useState(false);
   const [numDeleteBook, setNumDeleteBook] = useState();
 
   const getUser = async () => {
@@ -27,7 +28,7 @@ export default function Profile() {
 
   useEffect(() => {
     getUser();
-  }, []);
+  }, [setHandleDeleteLibrary]);
 
   const removeImg = async (values) => {
     await deleteImg({ imgLibro: values });
@@ -48,19 +49,21 @@ export default function Profile() {
       bookId: bookId,
       userId: user._id,
     };
+    setHandleDeleteLibrary(true)
     const res = await removeBookLibrary(objectsId);
-    location.reload();
+   
   };
 
   const handleDeleteBook = () => {
     setHandleDelete(true);
   };
+  user && console.log(user.booksLibrary)
 
   return (
     <main className=" h-min-screen mt-32 mb-20 text-slate-200 flex flex-col items-center ">
       {user ? (
         <section className="relative flex  flex-col gap-5  justify-center  items-center">
-          <h2 className="text-7xl flex gap-2">
+          <h2 className="text-4xl xl:text-7xl flex gap-2">
             <span className="font-bold">{user.userName}</span>
             {user.lastName}
           </h2>
@@ -140,13 +143,19 @@ export default function Profile() {
                       </div>
                       <div className="flex gap-2">
                         <button
-                          onClick={() => handleNavigate("/PageBook", book._id)}
+                          onClick={() => {
+                            localStorage.setItem("bookId", book._id)
+                            navigate("/PageBook");
+                          }}
                           className=" text-white p-1 border  border-indigo-400 rounded-lg text-xs text-center"
                         >
                           Info
                         </button>
                         <button
-                          onClick={() => handleNavigate("/readBook", book._id)}
+                          onClick={() =>  {
+                            localStorage.setItem("bookId", book._id)
+                            navigate("/ReadBook");
+                          }}
                           className=" text-white p-1 border  border-indigo-400 rounded-lg text-xs text-center"
                         >
                           Leer
@@ -199,14 +208,14 @@ export default function Profile() {
           </section>
         </section>
       ) : null}
-      {user ? (
+      {user && user.booksLibrary.length > 0? (
         <section className="w-full py-10  text-3xl flex flex-col gap-5">
           <h2 className="text-3xl  text-white text-center sm:text-start">
             <span>Mi</span> Biblioteca
           </h2>
           <div className="w-80  sm:w-screen h-[1px] bg-gradient-to-r from-orange-500/0 via-orange-500 to-orange-500/0 "></div>
           <div className="flex gap-5   flex-wrap ">
-            {user && user.booksLibrary.length > 0
+            {user 
               ? user.booksLibrary.map((book, i) => {
                   console.log(book);
                   return (

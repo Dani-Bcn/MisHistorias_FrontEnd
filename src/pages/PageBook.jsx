@@ -52,6 +52,8 @@ export default function PageBook() {
   const [messageVote, setMessageVote] = useState(false);
   const [user, setUser] = useState(null);
   const [resultsLibrary, setResultsLibrary] = useState(false);
+  const [userFoundComment, setUserFoundComment] = useState(false);
+
   const bookId = localStorage.getItem("bookId");
 
   useEffect(() => {
@@ -98,11 +100,15 @@ export default function PageBook() {
   };
 
   useEffect(() => {
+  
     user &&
       user.booksLibrary &&
+      
       setResultsLibrary(
         user.booksLibrary.some((obj) => Object.values(obj).includes(bookId))
       );
+      
+      book && user && setUserFoundComment(book.idUserComments.includes(user._id))
   }, [user, bookId, resultsLibrary]);
 
   // Add book to user's library
@@ -120,7 +126,8 @@ export default function PageBook() {
   const handleNavigate = (path) => {
     navigate(path);
   };
-  console.log(book)
+ 
+ console.log(userFoundComment) 
 
   return (
     <main className="w-screen flex justify-center px-4">
