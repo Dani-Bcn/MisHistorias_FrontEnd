@@ -31,22 +31,24 @@ export default function AllBooks() {
 
   useEffect(() => {
     fetchBooksAndProfile();
-    setTitle(localStorage.getItem("genero"));
-  }, []);
+   
+  }, [title]);
 
   const handleNavigate = (path, bookId) => {
     localStorage.setItem("bookId", bookId);
     navigate(path);
+   
   };
 
   const selectedGenre = localStorage.getItem("genero");
   const filteredBooks = books.filter(
+   
     (book) => book.published && (book.genre === selectedGenre || selectedGenre === "Libros")
   );
 
   return (
     <main className="h-min-screen my-20 text-slate-200 flex flex-col items-center">
-      <h2 className="mt-5 lg:mt-20 text-3xl lg:text-5xl">{title}</h2>
+      <h2 className="mt-5 lg:mt-20 text-3xl lg:text-5xl">{selectedGenre}</h2>
       <div className="w-80 sm:w-screen my-5 h-[1px] bg-gradient-to-r from-orange-500/0 via-orange-500 to-orange-500/0 mb-20"></div>
       
       <section className="w-[72%] lg:w-[90%] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
@@ -117,7 +119,7 @@ export default function AllBooks() {
           ))
         ) : (
           <p className="text-center text-xl text-orange-300 col-span-full">
-            No se encontraron libros del género {title.toLowerCase()}.
+            No se encontraron libros del género {selectedGenre.toLowerCase()}.
           </p>
         )}
       </section>
