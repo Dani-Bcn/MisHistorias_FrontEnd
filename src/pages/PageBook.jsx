@@ -132,6 +132,19 @@ export default function PageBook() {
     setEditingIndex(indice);
     setEditedComment(text);
   };
+const handleSave = () => {
+
+    if (editingIndex !== null) {
+      const updatedComments = [...book.comments];
+      updatedComments[editingIndex].text = editedComment;
+
+    }      
+      editBook(book._id, book).then(() => {
+        setEditingIndex(null);
+
+      });
+    }
+
 
   return (
     <main className="w-screen flex justify-center px-4">
