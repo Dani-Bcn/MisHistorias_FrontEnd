@@ -36,12 +36,14 @@ export default function Profile() {
 
   const handlePublish = (book) => {
     book.published = true;
+    setIsPublicated(!isPublicated);
     editBook(book._id, book);
     getUser()
   };
 
   const handleRemovePublish = (book) => {
     book.published = false;
+    setIsPublicated(!isPublicated);
     editBook(book._id, book);
     getUser()
    
@@ -170,7 +172,7 @@ export default function Profile() {
                         >
                           Editar
                         </button>
-                        {!book?.published ? (
+                        {!book?.published? (
                           <button
                             onClick={() => handlePublish(book)}
                             className="w-14 text-white p-1 border  border-indigo-400 rounded-lg text-xs text-center"
