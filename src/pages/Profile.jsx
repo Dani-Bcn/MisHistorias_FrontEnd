@@ -53,15 +53,7 @@ export default function Profile() {
     };
 
     const res = await removeBookLibrary(objectsId);
-
-    if (res && res.status === 200) {
-      // Actualizar el estado del usuario para reflejar el cambio
-      const updatedUser = { ...user };
-      updatedUser.booksLibrary = updatedUser.booksLibrary.filter(
-        (book) => book._id !== bookId
-      );
-      setUser(updatedUser);
-    }
+    getUser()
   };
 
   const handleDeleteBook = (bookId) => {
@@ -205,13 +197,19 @@ export default function Profile() {
                         {isDeleteBook === book._id ? (
                           <div className="flex gap-5">
                             <div
-                            onClick={()=> {deleteBooks(book._id), getUser()}}
- className="w-18 text-white p-1  border  border-indigo-400 rounded-lg text-xs text-center"
-                            >Confirmar</div>
+                              onClick={() => {
+                                deleteBooks(book._id), getUser();
+                              }}
+                              className="w-18 text-white p-1  border  border-indigo-400 rounded-lg text-xs text-center"
+                            >
+                              Confirmar
+                            </div>
                             <div
-                            onClick={()=>setIsDeleteBook(false)}
- className="w-18 text-white p-1  border  border-indigo-400 rounded-lg text-xs text-center"
-                            >Cancelar</div>
+                              onClick={() => setIsDeleteBook(false)}
+                              className="w-18 text-white p-1  border  border-indigo-400 rounded-lg text-xs text-center"
+                            >
+                              Cancelar
+                            </div>
                           </div>
                         ) : null}
                       </div>
