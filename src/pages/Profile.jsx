@@ -34,23 +34,14 @@ export default function Profile() {
     await deleteImg({ imgLibro: values });
   };
 
-  const handlePublish =  (book) => {
-    getUser()
-    book.published  = true;
-   
-    editBook(book._id, book);
+  const handlePublish = (book) => {
+    getUser();
+    book.published = true;
 
- 
+    editBook(book._id, book);
   };
 
-  const handleRemovePublish = (book) => {
-    getUser()
-    book.published = false;
-     
-    editBook(book._id, book);
-     
-   
-  };
+  const handleRemovePublish = (book) => {};
 
   const deleteBookLibrary = async (bookId) => {
     const objectsId = {
@@ -59,7 +50,7 @@ export default function Profile() {
     };
 
     const res = await removeBookLibrary(objectsId);
-    getUser()
+    getUser();
   };
 
   const handleDeleteBook = (bookId) => {
@@ -175,17 +166,24 @@ export default function Profile() {
                         >
                           Editar
                         </button>
-                        {!book?.published? (
+                        {!book?.published ? (
                           <button
-                            onClick={() => handlePublish(book)}
+                            onClick={() => {
+                              book.published = true;
+                              editBook(book._id, book);
+                              getUser();
+                            }}
                             className="w-14 text-white p-1 border  border-indigo-400 rounded-lg text-xs text-center"
                           >
                             Publicar
                           </button>
                         ) : (
                           <button
-                            onClick={() => handleRemovePublish(book)}
-
+                            onClick={() => {
+                              book.published = false;
+                              editBook(book._id, book);
+                              getUser();
+                            }}
                             className="w-16 text-white p-1 border  border-indigo-400 rounded-lg text-xs text-center"
                           >
                             - publicar
