@@ -38,7 +38,7 @@ export default function Profile() {
     book.published  = true;
    
     editBook(book._id, book);
-    getUser()
+    await getUser()
  
   };
 
@@ -46,7 +46,7 @@ export default function Profile() {
     book.published = false;
      
     editBook(book._id, book);
-    getUser()
+    await getUser()
    
   };
 
