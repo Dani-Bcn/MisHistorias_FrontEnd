@@ -38,14 +38,14 @@ export default function Profile() {
     book.published  = true;
      setIsPublicated(!isPublicated);
     editBook(book._id, book);
-   await getUser()
+ 
   };
 
   const handleRemovePublish = async(book) => {
     book.published = false;
      setIsPublicated(!isPublicated);
     editBook(book._id, book);
-   await getUser()
+
    
   };
 
