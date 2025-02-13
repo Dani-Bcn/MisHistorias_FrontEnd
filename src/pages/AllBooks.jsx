@@ -44,16 +44,13 @@ export default function AllBooks() {
       book.published &&
       (book.genre === selectedGenre || selectedGenre === "Libros")
   );
-  
- 
-
 
   return (
     <main className="h-min-screen my-20 text-slate-200 flex flex-col items-center">
-      <h2 className="mt-5 lg:mt-10 text-3xl lg:text-5xl">{selectedGenre}</h2>
-      <div className="w-80 sm:w-[92%] my-5 h-[1px] bg-gradient-to-r from-orange-500/0 via-orange-500 to-orange-500/0 mb-20"></div>
+      <h2 className="w-screen flex text-enter justify-center sm:w-[92%] my-5 xl:my-10 h-[1px] text-2xl xl:text-4xl ">{selectedGenre}</h2>
+      <div className="w-screen sm:w-[92%] my-5 h-[1px] bg-gradient-to-r from-orange-500/0 via-orange-500 to-orange-500/0 mb-10"></div>
 
-      <section className="w-[72%] lg:w-[90%] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
+      <section className="w-[72%] lg:w-[90%] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-10">
         {loading ? (
           Array.from({ length: 6 }).map((_, index) => (
             <SkeletonLoader key={index} />
@@ -62,7 +59,7 @@ export default function AllBooks() {
           filteredBooks.map((book, index) => (
             <div
               key={index}
-              className="relative h-[450px] sm:h-full  p-5 bg-black hover:shadow-none transition-all duration-500 shadow-black/50 rounded-lg shadow-lg flex flex-col items-around justify-between"
+              className="relative h-[450px]   p-5 bg-black hover:shadow-none transition-all duration-500 shadow-black/50 rounded-lg shadow-lg flex flex-col items-around justify-between"
             >
               <img
                 src={book.imageUrl}
@@ -88,8 +85,6 @@ export default function AllBooks() {
               <div className="mt-4 text-sm text-white gap-1 flex flex-col rounded-xl">
                 <p>
                   <span>Género :</span> {book.genre}
-
-
                 </p>
 
                 <p>
@@ -131,12 +126,11 @@ export default function AllBooks() {
             </div>
           ))
         ) : (
-          <div className="w-screen overflow-hidden flex justify-center  " >
-          
-            <p className="w-2/6 text-start">
+       
+            <p className="text-xl">
               No se encontraron libros del género {selectedGenre.toLowerCase()}.
             </p>
-          </div>
+         
         )}
       </section>
     </main>
