@@ -44,9 +44,12 @@ export default function AllBooks() {
       book.published &&
       (book.genre === selectedGenre || selectedGenre === "Libros")
   );
+  
+ 
+
 
   return (
-    <main className="h-min-screen mt-20 text-slate-200 flex flex-col items-center">
+    <main className="h-min-screen my-20 text-slate-200 flex flex-col items-center">
       <h2 className="mt-5 lg:mt-10 text-3xl lg:text-5xl">{selectedGenre}</h2>
       <div className="w-80 sm:w-[92%] my-5 h-[1px] bg-gradient-to-r from-orange-500/0 via-orange-500 to-orange-500/0 mb-20"></div>
 
@@ -59,7 +62,7 @@ export default function AllBooks() {
           filteredBooks.map((book, index) => (
             <div
               key={index}
-              className="relative p-5 bg-black hover:shadow-none transition-all duration-500 shadow-black/50 rounded-lg shadow-lg flex flex-col items-around justify-between"
+              className="relative h-[450px] sm:h-full  p-5 bg-black hover:shadow-none transition-all duration-500 shadow-black/50 rounded-lg shadow-lg flex flex-col items-around justify-between"
             >
               <img
                 src={book.imageUrl}
@@ -85,7 +88,10 @@ export default function AllBooks() {
               <div className="mt-4 text-sm text-white gap-1 flex flex-col rounded-xl">
                 <p>
                   <span>Género :</span> {book.genre}
+
+
                 </p>
+
                 <p>
                   <span>Capítulos :</span> {book.chapters.length}
                 </p>
@@ -125,9 +131,9 @@ export default function AllBooks() {
             </div>
           ))
         ) : (
-          <div className="w-screen flex justify-center  -ml-16" >
+          <div className="w-screen overflow-hidden flex justify-center  " >
           
-            <p >
+            <p className="w-2/6 text-start">
               No se encontraron libros del género {selectedGenre.toLowerCase()}.
             </p>
           </div>
