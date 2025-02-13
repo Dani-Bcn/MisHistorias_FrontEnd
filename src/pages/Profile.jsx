@@ -36,16 +36,17 @@ export default function Profile() {
 
   const handlePublish = async (book) => {
     book.published  = true;
-     setIsPublicated(!isPublicated);
+   
     editBook(book._id, book);
+    getUser()
  
   };
 
   const handleRemovePublish = async(book) => {
     book.published = false;
-     setIsPublicated(!isPublicated);
+     
     editBook(book._id, book);
-
+    getUser()
    
   };
 
