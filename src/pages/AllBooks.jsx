@@ -48,7 +48,7 @@ export default function AllBooks() {
   return (
     <main className="h-min-screen my-20 text-slate-200 flex flex-col items-center">
       <h2 className="mt-5 lg:mt-20 text-3xl lg:text-5xl">{selectedGenre}</h2>
-      <div className="w-80 sm:w-screen my-5 h-0.5 bg-gradient-to-r from-orange-500/0 via-orange-500 to-orange-500/0 mb-20"></div>
+      <div className="w-80 sm:w-[92%] my-5 h-[1px] bg-gradient-to-r from-orange-500/0 via-orange-500 to-orange-500/0 mb-20"></div>
 
       <section className="w-[72%] lg:w-[90%] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
         {loading ? (
@@ -110,7 +110,7 @@ export default function AllBooks() {
                 <div className="flex gap-2">
                   <button
                     onClick={() => handleNavigate("/PageBook", book._id)}
-                    className="text-white px-2 py-2 border border-indigo-400 rounded-lg text-xs text-center"
+                    className="text-white px-2 border border-indigo-400 rounded-lg text-xs text-center"
                   >
                     Info
                   </button>

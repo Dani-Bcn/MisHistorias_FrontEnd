@@ -13,8 +13,7 @@ export default function Profile() {
   const navigate = useNavigate();
   const [user, setUser] = useState();
   const [handleDelete, setHandleDelete] = useState(false);
-  const [handleDeleteLibrary, setHandleDeleteLibrary] = useState(null);
-  const [numDeleteBook, setNumDeleteBook] = useState();
+  const [handleDeleteLibrary, setHandleDeleteLibrary] = useState(true);
   const [isPublicated, setIsPublicated] = useState(false);
 
   const getUser = async () => {
@@ -38,32 +37,25 @@ export default function Profile() {
   const handlePublish = (book) => {
     book.published = true;
     editBook(book._id, book);
-    setIsPublicated(true);
+    setIsPublicated(!isPublicated);
   };
   
   const handleRemovePublish = (book) => {
     book.published = false;
     editBook(book._id, book);
-    setIsPublicated(true);
-  };
-
-
-  const removeBook = async (bookId) => {
-    const res = await deleteBooks(bookId);
-  };
+    setIsPublicated(!isPublicated);
+  };  
 
   const deleteBookLibrary = async (bookId) => {
     const objectsId = {
       bookId: bookId,
       userId: user._id,
     };
-    setHandleDeleteLibrary(true);
+   
     const res = await removeBookLibrary(objectsId);
   };
 
-  const handleDeleteBook = () => {
-    setHandleDelete(true);
-  };
+  
 
   console.log(user);
   return (
@@ -87,11 +79,11 @@ export default function Profile() {
         </section>
       ) : null}
       {user && user.books ? (
-        <section className="w-screen flex flex-col items-center sm:items-start px-10 gap-10">
+        <section className="w-screen sm:mx-20 flex flex-col items-center sm:items-start  gap-10">
           <h2 className="mt-5 lg:mt-10 text-3xl lg:text-4xl ">
             <span>Mis</span> libros
           </h2>
-          <div className="w-80 sm:w-screen  h-[1px] bg-gradient-to-r  from-orange-500/0 sm:from-orange-500 sm:via-orange-500/50 via-orange-500 to-orange-500/0"></div>
+          <div className="w-80 sm:w-[80%]  h-[1px] bg-gradient-to-r  from-orange-500 sm:from-orange-500 sm:via-orange-500/50 via-orange-500 to-orange-500/0"></div>
           <section className="w-[72%] lg:w-[90%] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5  ">
             {user
               ? user.books.map((book, i) => {
@@ -131,12 +123,12 @@ export default function Profile() {
                           <span>Capítulos :</span> {book.chapters.length}
                         </p>
                       </div>
-                      <div className="mt-4 flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          <p className="w-10 h-10 flex  justify-center items-center rounded-full border border-indigo-500">
+                      <div className="my-4 flex items-center justify-between">
+                        <div className="flex  items-center gap-2">
+                          <p className="w-10 h-10 flex  justify-center items-center rounded-full border border-orange-400">
                             {book.rating}
                           </p>
-                          <div className="flex flex-col items-center justify-center mt-2">
+                          <div className="flex items-center justify-center mt-2 gap-2">
                             <img
                               src="https://res.cloudinary.com/nneodani/image/upload/v1737915966/a1bbhiqtuctaocvffdhg.png"
                               alt="Rating Icon"
@@ -230,13 +222,13 @@ export default function Profile() {
         </section>
       ) : null}
       {user && user.booksLibrary.length > 0 ? (
-        <section className="w-full py-10  text-3xl flex flex-col gap-5">
+        <section className="w-full py-20 sm:p-20 px-10 text-3xl flex flex-col gap-5 items-start">
           <h2 className="text-3xl  text-white text-center sm:text-start">
             <span>Mi</span> Biblioteca
           </h2>
-          <div className="w-80  sm:w-screen h-[1px] bg-gradient-to-r from-orange-500/0 via-orange-500 to-orange-500/0 "></div>
+          <div className="w-80  sm:w-[80%] h-[1px] bg-gradient-to-r from-orange-500 via-orange-500 to-orange-500/0 "></div>
           <div className="flex gap-5   flex-wrap ">
-            {user
+            {user && handleDeleteLibrary
               ? user.booksLibrary.map((book, i) => {
                   return (
                     <div key={i}>
@@ -276,7 +268,8 @@ export default function Profile() {
                             <button
                               type="button"
                               onClick={() => {
-                                deleteBookLibrary(book._id);
+                                deleteBookLibrary(book._id)
+                                /* setHandleDeleteLibrary(false) */
                               }}
                               className="btn  flex justify-start"
                             >

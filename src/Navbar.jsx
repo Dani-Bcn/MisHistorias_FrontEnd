@@ -45,7 +45,7 @@ export default function Navbar() {
 
   const avisoCerrarSesion = () => {
     return (
-      <div className="absolute z-[100] text-2xl  mt-56 w-96 p-5 h-40 bg-indigo-400  text-white flex flex-col justify-around items-center rounded-lg">
+      <div className="fixed z-[100] text-2xl  mt-56 w-96 p-5 h-40 bg-indigo-400  text-white flex flex-col justify-around items-center rounded-lg">
         <h3>¿ Ya te vas ?</h3>
         <div className="w-full   flex justify-around">
           <button

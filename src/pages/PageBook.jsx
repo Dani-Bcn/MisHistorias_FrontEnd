@@ -52,7 +52,7 @@ export default function PageBook() {
   const [book, setBook] = useState(null);
   const [messageVote, setMessageVote] = useState(false);
   const [user, setUser] = useState(null);
-  const [resultsLibrary, setResultsLibrary] = useState(false);
+  const [resultsLibrary, setResultsLibrary] = useState(null);
   const [editingIndex, setEditingIndex] = useState(null);
   const [editedComment, setEditedComment] = useState("");
   const [deleteComment, setDeleteComment] = useState(null);
@@ -71,7 +71,17 @@ export default function PageBook() {
       if (res) setBook(res.data);
     };
     fetchBook();
-  }, []);
+  }, [resultsLibrary]);
+
+  useEffect(() => {
+    setResultsLibrary(
+      user?.booksLibrary.some((obj) => Object.values(obj).includes(bookId)) 
+    );
+  },[resultsLibrary,user]);
+
+  console.log(user?.booksLibrary);
+  console.log(book);
+  console.log(resultsLibrary);
 
   const handleVote = (rating) => {
     if (!book.idUserVote.includes(user._id)) {
@@ -100,17 +110,12 @@ export default function PageBook() {
     gsap.to(`#${e.text}`, { background: "rgb(255,255,255)" });
   };
 
-  useEffect(() => {
-    setResultsLibrary(
-      user?.booksLibrary.some((obj) => Object.values(obj).includes(bookId))
-    );
-  }, [user, bookId, resultsLibrary, deleteComment]);
-
   // Add book to user's library
   const handleAddBook = async (bookId) => {
     if (!user) return;
     try {
       await addBook({ bookId, userId: user._id });
+    
     } catch (error) {
       console.error("Error adding book:", error);
       alert("Failed to add book. Please try again later.");
@@ -119,8 +124,6 @@ export default function PageBook() {
   const handleNavigate = (path) => {
     navigate(path);
   };
-
-  console.log(book);
 
   const handleEdit = (indice, text) => {
     setEditingIndex(indice);
@@ -148,7 +151,7 @@ export default function PageBook() {
   return (
     <main className="w-screen flex justify-center px-4">
       {book && (
-        <section className="max-w-4xl m-10 text-gray-100">
+        <section className="max-w-4xl m-10 text-gray-100  ">
           <h2 className="text-3xl p-5 sm:text-3xl font-bold text-gray-100">
             <span>{book.title[0]}</span>
             {book.title.slice(1)}
@@ -160,7 +163,7 @@ export default function PageBook() {
             <img
               src={book.imageUrl}
               alt={`Cover of ${book.title}`}
-              className="w-52 h-96 lg:max-w-sm  object-cover rounded shadow"
+              className="w-52 h-96 lg:max-w-sm  object-cover rounded shadow-lg"
             />
             <div className="flex flex-col gap-4">
               <h2 className="text-xl sm:text-3xl font-semibold">
@@ -196,7 +199,7 @@ export default function PageBook() {
                 <span>Votos : </span>
                 {book.idUserVote.length}
               </p>
-              <div className="flex flex-col justify-start items-start">
+              <div className="flex flex-col justify-start items-start gap-4">
                 <p>
                   <span>Creado : </span>
                   {book.createdAt.slice(0, 10).split("-").reverse().join("-")}
@@ -206,13 +209,19 @@ export default function PageBook() {
                   <span>Modificado : </span>
                   {book.updatedAt.slice(0, 10).split("-").reverse().join("-")}
                 </p>
-                <div className="flex gap-5">
-                  <button onClick={() => handleNavigate("/readBook", book._id)}>
+                <div className="flex gap-5 my-2">
+                  <button
+                    onClick={() => handleNavigate("/readBook", book._id)}
+                    className="text-white w-16 border border-indigo-400 rounded-lg text-2xs text-center"
+                  >
                     Leer
                   </button>
                   {user ? (
-                    !resultsLibrary ? (
-                      <button onClick={() => handleAddBook(book._id)}>
+                    !   user?.booksLibrary.some((obj) => Object.values(obj).includes(bookId))  ? (
+                      <button
+                        onClick={() => {handleAddBook(book._id), setResultsLibrary(true)}}
+                        className="text-white w-24 border border-indigo-400 rounded-lg text-2xs text-center"
+                      >
                         + Blilioteca
                       </button>
                     ) : (
@@ -221,7 +230,8 @@ export default function PageBook() {
                   ) : null}
                 </div>
 
-                { user && !book.idUserComments.includes(user?._id) &&
+                {user &&
+                !book.idUserComments.includes(user?._id) &&
                 !user?.books.some((obj) =>
                   Object.values(obj).includes(bookId)
                 ) ? (
@@ -246,8 +256,9 @@ export default function PageBook() {
             </div>
           </div>
           {book.comments.length > 0 ? (
-            <div className="flex flex-col gap-3 px-5">
+            <div className="flex flex-col gap-3 px-2">
               <h3>Comentarios</h3>
+              <div className="w-80 sm:w-[92%]  h-[1px] bg-gradient-to-r from-orange-500 via-orange-500 to-orange-500/0 "></div>
               {book.comments.map((comentarios, indice) => (
                 <div key={indice} className="bg-indigo-400/50 rounded-lg p-3">
                   <p>
