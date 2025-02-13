@@ -203,14 +203,14 @@ export default function Profile() {
                         </button>
 
                         {isDeleteBook === book._id ? (
-                          <div>
+                          <div className="flex gap-5">
                             <div
                             onClick={()=> {deleteBooks(book._id), getUser()}}
-
-                            >Eliminar</div>
+ className="w-18 text-white p-1  border  border-indigo-400 rounded-lg text-xs text-center"
+                            >Confirmar</div>
                             <div
                             onClick={()=>setIsDeleteBook(false)}
-
+ className="w-18 text-white p-1  border  border-indigo-400 rounded-lg text-xs text-center"
                             >Cancelar</div>
                           </div>
                         ) : null}
