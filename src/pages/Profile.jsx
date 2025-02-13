@@ -34,18 +34,18 @@ export default function Profile() {
     await deleteImg({ imgLibro: values });
   };
 
-  const handlePublish = (book) => {
-    book.published = true;
-    setIsPublicated(!isPublicated);
+  const handlePublish = async (book) => {
+    book.published  = true;
+     setIsPublicated(!isPublicated);
     editBook(book._id, book);
-    getUser()
+   await getUser()
   };
 
-  const handleRemovePublish = (book) => {
+  const handleRemovePublish = async(book) => {
     book.published = false;
-    setIsPublicated(!isPublicated);
+     setIsPublicated(!isPublicated);
     editBook(book._id, book);
-    getUser()
+   await getUser()
    
   };
 
