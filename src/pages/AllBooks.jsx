@@ -31,29 +31,30 @@ export default function AllBooks() {
 
   useEffect(() => {
     fetchBooksAndProfile();
-   
   }, [title]);
 
   const handleNavigate = (path, bookId) => {
     localStorage.setItem("bookId", bookId);
     navigate(path);
-   
   };
 
   const selectedGenre = localStorage.getItem("genero");
   const filteredBooks = books.filter(
-   
-    (book) => book.published && (book.genre === selectedGenre || selectedGenre === "Libros")
+    (book) =>
+      book.published &&
+      (book.genre === selectedGenre || selectedGenre === "Libros")
   );
 
   return (
     <main className="h-min-screen my-20 text-slate-200 flex flex-col items-center">
       <h2 className="mt-5 lg:mt-20 text-3xl lg:text-5xl">{selectedGenre}</h2>
-      <div className="w-80 sm:w-screen my-5 h-[1px] bg-gradient-to-r from-orange-500/0 via-orange-500 to-orange-500/0 mb-20"></div>
-      
+      <div className="w-80 sm:w-screen my-5 h-0.5 bg-gradient-to-r from-orange-500/0 via-orange-500 to-orange-500/0 mb-20"></div>
+
       <section className="w-[72%] lg:w-[90%] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5">
         {loading ? (
-          Array.from({ length: 6 }).map((_, index) => <SkeletonLoader key={index} />)
+          Array.from({ length: 6 }).map((_, index) => (
+            <SkeletonLoader key={index} />
+          ))
         ) : filteredBooks.length > 0 ? (
           filteredBooks.map((book, index) => (
             <div
@@ -82,9 +83,15 @@ export default function AllBooks() {
                 />
               </div>
               <div className="mt-4 text-sm text-white gap-1 flex flex-col rounded-xl">
-                <p><span>Género :</span> {book.genre}</p>
-                <p><span>Capítulos :</span> {book.chapters.length}</p>
-                <p><span>Sipnosis :</span> {book.description}</p>
+                <p>
+                  <span>Género :</span> {book.genre}
+                </p>
+                <p>
+                  <span>Capítulos :</span> {book.chapters.length}
+                </p>
+                <p>
+                  <span>Sipnosis :</span> {book.description}
+                </p>
               </div>
               <div className="mt-4 flex items-center justify-between">
                 <div className="flex items-center gap-2">

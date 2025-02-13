@@ -55,8 +55,7 @@ export default function PageBook() {
   const [resultsLibrary, setResultsLibrary] = useState(false);
   const [editingIndex, setEditingIndex] = useState(null);
   const [editedComment, setEditedComment] = useState("");
-  const [deleteComment,setDeleteComment] = useState(null)
-
+  const [deleteComment, setDeleteComment] = useState(null);
 
   const bookId = localStorage.getItem("bookId");
 
@@ -72,7 +71,7 @@ export default function PageBook() {
       if (res) setBook(res.data);
     };
     fetchBook();
-  }, [bookId,user]);
+  }, []);
 
   const handleVote = (rating) => {
     if (!book.idUserVote.includes(user._id)) {
@@ -102,11 +101,10 @@ export default function PageBook() {
   };
 
   useEffect(() => {
-   
-      setResultsLibrary(
-        user?.booksLibrary.some((obj) => Object.values(obj).includes(bookId))
-      );
-  }, [user, bookId, resultsLibrary,deleteComment]);
+    setResultsLibrary(
+      user?.booksLibrary.some((obj) => Object.values(obj).includes(bookId))
+    );
+  }, [user, bookId, resultsLibrary, deleteComment]);
 
   // Add book to user's library
   const handleAddBook = async (bookId) => {
@@ -123,25 +121,19 @@ export default function PageBook() {
   };
 
   console.log(book);
- 
 
   const handleEdit = (indice, text) => {
     setEditingIndex(indice);
     setEditedComment(text);
   };
-  const handleRemove = (indice, text) => {
 
+  const handleRemove = (indice, text) => {
     book.comments.splice(indice, 1);
     book.idUserComments.splice(indice, 1);
-
-   
-
-    
-
     editBook(book._id, book).then(() => {
       setEditingIndex(null);
     });
-    setDeleteComment(undefined)
+    setDeleteComment(undefined);
   };
   const handleSave = () => {
     if (editingIndex !== null) {
@@ -152,8 +144,6 @@ export default function PageBook() {
       setEditingIndex(null);
     });
   };
-
-
 
   return (
     <main className="w-screen flex justify-center px-4">
@@ -220,17 +210,18 @@ export default function PageBook() {
                   <button onClick={() => handleNavigate("/readBook", book._id)}>
                     Leer
                   </button>
-                  {!resultsLibrary ? (
-                    <button onClick={() => handleAddBook(book._id)}>
-                      + Blilioteca
-                    </button>
-                  ):
-                  <h3>Ya en tu biblioteca</h3>
-                  }
+                  {user ? (
+                    !resultsLibrary ? (
+                      <button onClick={() => handleAddBook(book._id)}>
+                        + Blilioteca
+                      </button>
+                    ) : (
+                      <h3>En tu biblioteca</h3>
+                    )
+                  ) : null}
                 </div>
 
-                {
-                !book.idUserComments.includes(user?._id) &&
+                { user && !book.idUserComments.includes(user?._id) &&
                 !user?.books.some((obj) =>
                   Object.values(obj).includes(bookId)
                 ) ? (
