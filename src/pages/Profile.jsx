@@ -91,7 +91,7 @@ export default function Profile() {
             <span>Mis</span> libros
           </h2>
           <div className="w-80 sm:w-[80%]  h-[1px] bg-gradient-to-r  from-orange-500/0 sm:from-orange-500  sm:via-orange-500/50 via-orange-500 to-orange-500/0"></div>
-          <section className=" lg:w-[90%] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 items-center  ">
+          <section className="w-[72%] lg:w-[90%] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5   ">
             {user
               ? user.books.map((book, i) => {
                   return (

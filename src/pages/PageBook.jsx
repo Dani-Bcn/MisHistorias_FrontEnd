@@ -175,7 +175,6 @@ export default function PageBook() {
               <p className="text-base sm:text-lg">
                 <span className="font-semibold">Capítulos : </span>
                 <span
-                  onClick={() => setShowChapters(!showChapters)}
                   className="cursor-pointer text-blue-500 hover:underline"
                 >
                   {book.chapters.length}
