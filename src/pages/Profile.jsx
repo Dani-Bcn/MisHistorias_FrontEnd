@@ -12,9 +12,9 @@ export default function Profile() {
   /*  window.scrollTo(0, 0) */
   const navigate = useNavigate();
   const [user, setUser] = useState();
-  const [handleDelete, setHandleDelete] = useState(false);
   const [isLibrary, setIsLibrary] = useState(true);
   const [isPublicated, setIsPublicated] = useState(false);
+  const [isDeleteBook, setIsDeleteBook] = useState(false);
 
   const getUser = async () => {
     const res = await profile();
@@ -28,9 +28,7 @@ export default function Profile() {
 
   useEffect(() => {
     getUser();
-    
-  
-  }, [isLibrary, handleDelete, isPublicated]);
+  }, [isLibrary, isPublicated]);
 
   const removeImg = async (values) => {
     await deleteImg({ imgLibro: values });
@@ -41,32 +39,38 @@ export default function Profile() {
     editBook(book._id, book);
     setIsPublicated(!isPublicated);
   };
-  
+
   const handleRemovePublish = (book) => {
     book.published = false;
     editBook(book._id, book);
     setIsPublicated(!isPublicated);
-  };  
+  };
 
   const deleteBookLibrary = async (bookId) => {
     const objectsId = {
       bookId: bookId,
       userId: user._id,
     };
-  
+
     const res = await removeBookLibrary(objectsId);
-  
+
     if (res && res.status === 200) {
       // Actualizar el estado del usuario para reflejar el cambio
       const updatedUser = { ...user };
-      updatedUser.booksLibrary = updatedUser.booksLibrary.filter(book => book._id !== bookId);
+      updatedUser.booksLibrary = updatedUser.booksLibrary.filter(
+        (book) => book._id !== bookId
+      );
       setUser(updatedUser);
     }
   };
 
-  console.log(user);
+  const handleDeleteBook = (bookId) => {
+    setIsDeleteBook(bookId);
+    console.log(bookId);
+  };
+
   return (
-    <main className=" h-min-screen mt-32 mb-20 text-slate-200 flex flex-col items-center ">
+    <main className=" w-screen  h-min-screen mt-32 mb-20 text-slate-200 flex flex-col items-center ">
       {user ? (
         <section className="relative flex  flex-col gap-5  justify-center  items-center">
           <h2 className="text-4xl xl:text-7xl flex gap-2">
@@ -86,12 +90,12 @@ export default function Profile() {
         </section>
       ) : null}
       {user && user.books ? (
-        <section className="w-screen sm:mx-20 flex flex-col items-center sm:items-start  gap-10">
+        <section className="sm:w-[90%] sm:ml-20 flex flex-col items-center sm:items-start  gap-5">
           <h2 className="mt-5 lg:mt-10 text-3xl lg:text-4xl ">
             <span>Mis</span> libros
           </h2>
           <div className="w-80 sm:w-[80%]  h-[1px] bg-gradient-to-r  from-orange-500/0 sm:from-orange-500  sm:via-orange-500/50 via-orange-500 to-orange-500/0"></div>
-          <section className="w-[72%] lg:w-[90%] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5   ">
+          <section className="w-[72%] lg:w-[90%] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-10 sm:gap-32 xl:gap-56   ">
             {user
               ? user.books.map((book, i) => {
                   return (
@@ -185,39 +189,29 @@ export default function Profile() {
                             onClick={() => handleRemovePublish(book)}
                             className="w-16 text-white p-1 border  border-indigo-400 rounded-lg text-xs text-center"
                           >
-                           - publicar
+                            - publicar
                           </button>
                         )}
 
                         <button
                           onClick={() => {
-                            setHandleDelete(true);
+                            handleDeleteBook(book._id);
                           }}
                           className="w-14 text-white p-1  border  border-indigo-400 rounded-lg text-xs text-center"
                         >
                           Eliminar
                         </button>
-                        {handleDelete ? (
-                          <div className="absolute w-20 h-14 grid grid-cols-2 grid-rows-2 bg-indigo-400 justify-center items-center rounded-md">
-                            <p className="grid col-span-2 items-center justify-center">
-                              Confirmar
-                            </p>
-                            <button
-                              onClick={() => {
-                                setHandleDelete(false);
-                              }}
-                              className="text-red-600 grid row-span-2 col-start-1"
-                            >
-                              X
-                            </button>
-                            <button
-                              onClick={() => {
-                                deleteBooks(book._id), setHandleDelete(false);
-                              }}
-                              className=" text-green-900 grid col-start-2 "
-                            >
-                              V
-                            </button>
+
+                        {isDeleteBook === book._id ? (
+                          <div>
+                            <div
+                            onClick={()=> {deleteBooks(book._id), getUser()}}
+
+                            >Eliminar</div>
+                            <div
+                            onClick={()=>setIsDeleteBook(false)}
+
+                            >Cancelar</div>
                           </div>
                         ) : null}
                       </div>
@@ -235,7 +229,7 @@ export default function Profile() {
           </h2>
           <div className="w-80  sm:w-[80%] h-[1px] bg-gradient-to-r from-orange-500 via-orange-500 to-orange-500/0 "></div>
           <div className="flex gap-5   flex-wrap ">
-            {user && user.booksLibrary 
+            {user && user.booksLibrary
               ? user.booksLibrary.map((book, i) => {
                   return (
                     <div key={i}>
@@ -275,8 +269,7 @@ export default function Profile() {
                             <button
                               type="button"
                               onClick={() => {
-                                deleteBookLibrary(book._id)
-                               ;
+                                deleteBookLibrary(book._id);
                               }}
                               className="btn  flex justify-start"
                             >
