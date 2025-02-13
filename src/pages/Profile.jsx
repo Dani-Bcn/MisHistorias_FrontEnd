@@ -13,7 +13,7 @@ export default function Profile() {
   const navigate = useNavigate();
   const [user, setUser] = useState();
   const [handleDelete, setHandleDelete] = useState(false);
-  const [handleDeleteLibrary, setHandleDeleteLibrary] = useState(true);
+  const [isLibrary, setIsLibrary] = useState(true);
   const [isPublicated, setIsPublicated] = useState(false);
 
   const getUser = async () => {
@@ -28,7 +28,9 @@ export default function Profile() {
 
   useEffect(() => {
     getUser();
-  }, [handleDeleteLibrary, handleDelete, isPublicated]);
+    
+  
+  }, [isLibrary, handleDelete, isPublicated]);
 
   const removeImg = async (values) => {
     await deleteImg({ imgLibro: values });
@@ -51,11 +53,16 @@ export default function Profile() {
       bookId: bookId,
       userId: user._id,
     };
-   
-    const res = await removeBookLibrary(objectsId);
-  };
-
   
+    const res = await removeBookLibrary(objectsId);
+  
+    if (res && res.status === 200) {
+      // Actualizar el estado del usuario para reflejar el cambio
+      const updatedUser = { ...user };
+      updatedUser.booksLibrary = updatedUser.booksLibrary.filter(book => book._id !== bookId);
+      setUser(updatedUser);
+    }
+  };
 
   console.log(user);
   return (
@@ -83,8 +90,8 @@ export default function Profile() {
           <h2 className="mt-5 lg:mt-10 text-3xl lg:text-4xl ">
             <span>Mis</span> libros
           </h2>
-          <div className="w-80 sm:w-[80%]  h-[1px] bg-gradient-to-r  from-orange-500 sm:from-orange-500 sm:via-orange-500/50 via-orange-500 to-orange-500/0"></div>
-          <section className="w-[72%] lg:w-[90%] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5  ">
+          <div className="w-80 sm:w-[80%]  h-[1px] bg-gradient-to-r  from-orange-500/0 sm:from-orange-500  sm:via-orange-500/50 via-orange-500 to-orange-500/0"></div>
+          <section className=" lg:w-[90%] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-5 items-center  ">
             {user
               ? user.books.map((book, i) => {
                   return (
@@ -228,7 +235,7 @@ export default function Profile() {
           </h2>
           <div className="w-80  sm:w-[80%] h-[1px] bg-gradient-to-r from-orange-500 via-orange-500 to-orange-500/0 "></div>
           <div className="flex gap-5   flex-wrap ">
-            {user && handleDeleteLibrary
+            {user && user.booksLibrary 
               ? user.booksLibrary.map((book, i) => {
                   return (
                     <div key={i}>
@@ -269,7 +276,7 @@ export default function Profile() {
                               type="button"
                               onClick={() => {
                                 deleteBookLibrary(book._id)
-                                /* setHandleDeleteLibrary(false) */
+                               ;
                               }}
                               className="btn  flex justify-start"
                             >
