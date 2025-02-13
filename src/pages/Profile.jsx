@@ -58,7 +58,7 @@ export default function Profile() {
   };
 
   return (
-    <main className="w-screen h-min-screen mt-32 mb-20 text-slate-200 flex flex-col items-center">
+    <main className=" h-min-screen mt-32 mb-20 text-slate-200 flex flex-col items-center">
       {user ? (
         <section className="relative flex flex-col gap-5 justify-center items-center">
           <h2 className="text-4xl xl:text-7xl flex gap-2">
@@ -208,8 +208,8 @@ export default function Profile() {
         </section>
       ) : null}
       {user && user.booksLibrary.length > 0 ? (
-        <section className="w-full py-20 sm:p-20 px-10 text-3xl flex flex-col gap-5 items-start">
-          <h2 className="text-3xl text-white text-center sm:text-start">
+        <section className="w-full py-20 sm:pl-28 px-10 text-3xl flex flex-col gap-5">
+          <h2 className="text-3xl text-white flex gap-1 justify-center items-center sm:justify-start  text-center sm:text-start">
             <span>Mi</span> Biblioteca
           </h2>
           <div className="w-80 sm:w-[80%] h-[1px] bg-gradient-to-r from-orange-500 via-orange-500 to-orange-500/0"></div>

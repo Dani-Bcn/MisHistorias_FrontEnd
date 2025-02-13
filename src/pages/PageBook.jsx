@@ -259,7 +259,7 @@ export default function PageBook() {
               <h3>Comentarios</h3>
               <div className="w-80 sm:w-[92%]  h-[1px] bg-gradient-to-r from-orange-500 via-orange-500 to-orange-500/0 "></div>
               {book.comments.map((comentarios, indice) => (
-                <div key={indice} className="bg-indigo-400/50 rounded-lg p-3">
+                <div key={indice} className="bg-indigo-400/25 rounded-lg p-3 flex flex-col gap-2">
                   <p>
                     {comentarios.user} {comentarios.lastName}
                   </p>
@@ -270,7 +270,10 @@ export default function PageBook() {
                         value={editedComment}
                         onChange={(e) => setEditedComment(e.target.value)}
                       />
-                      <button onClick={() => handleSave(indice)}>
+                      <button 
+                      onClick={() => handleSave(indice)}
+                        className="text-white w-24 border border-indigo-400 rounded-lg text-2xs text-center"
+                      >
                         Guardar
                       </button>
                     </>
@@ -285,11 +288,13 @@ export default function PageBook() {
                     <div className="flex gap-5">
                       <button
                         onClick={() => handleEdit(indice, comentarios.text)}
+                          className="text-white w-24 border border-indigo-400 rounded-lg text-2xs text-center"
                       >
                         Editar
                       </button>
                       <button
                         onClick={() => handleRemove(indice, comentarios.text)}
+                          className="text-white w-24 border border-indigo-400 rounded-lg text-2xs text-center"
                       >
                         Eliminar
                       </button>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { booksUser, logout, profile } from "./api/auth";
+import { profile, logout } from "./api/auth";
 import gsap from "gsap";
 import Cookies from "js-cookie";
 
@@ -8,8 +8,9 @@ export default function Navbar() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [cerrarSesion, setCerrarSesion] = useState(false);
-  const [desplegable, setDesplegable] = useState(false);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const [showGenres, setShowGenres] = useState(false);
+  const genres = ["Aventuras", "Acción", "Infantil", "Terror", "Clásico", "Thriller", "Policial", "Romántico", "Comedia"]
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -24,6 +25,14 @@ export default function Navbar() {
     fetchUser();
   }, []);
 
+  useEffect(() => {
+    gsap.to(".generos", {
+      opacity: showGenres ? 1 : 0,
+      display: showGenres ? "flex" : "none",
+      duration: 0.5,
+    });
+  }, [showGenres]);
+
   const handleLogout = async () => {
     await logout();
     Cookies.remove("token");
@@ -32,66 +41,59 @@ export default function Navbar() {
     navigate("/allbooks");
   };
 
-  desplegable
-    ? gsap.to(".generos", { opacity: 1, display: "flex", duration: 0.5 })
-    : gsap.to(".generos", { opacity: 0, display: "none", duration: 0.5 });
-
-
-    const generos=((e)=>{
-        console.log(e.target.innerText)
-        localStorage.setItem("genero",e.target.innerText)
-        navigate("/allbooks")
-    })
-
-  const avisoCerrarSesion = () => {
-    return (
-      <div className="fixed z-[100] text-2xl  mt-56 w-96 p-5 h-40 bg-indigo-400  text-white flex flex-col justify-around items-center rounded-lg">
-        <h3>¿ Ya te vas ?</h3>
-        <div className="w-full   flex justify-around">
-          <button
-            className="hover:text-orange-200"
-            onClick={() => {
-              handleLogout(), setCerrarSesion(true);
-            }}
-          >
-            Si, decidido!
-          </button>
-          <button
-            className="hover:text-orange-200"
-            onClick={() => setCerrarSesion(false)}
-          >
-            No, aún no!
-          </button>
-        </div>
-      </div>
-    );
+  const handleGenreClick = (e) => {
+    localStorage.setItem("genero", e.target.innerText);
+    navigate("/allbooks");
+    setShowGenres(false);
   };
 
+  const LogoutModal = () => (
+    <div className="fixed z-[100] w-10/12 text-2xl mt-56 sm:w-96 p-5 h-40 bg-indigo-400 text-white flex flex-col justify-around items-center rounded-lg">
+      <h3>¿Ya te vas?</h3>
+      <div className="w-full flex justify-around">
+        <button className="hover:text-orange-200" onClick={handleLogout}>
+          Sí, decidido!
+        </button>
+        <button
+          className="hover:text-orange-200"
+          onClick={() => setShowLogoutModal(false)}
+        >
+          No, aún no!
+        </button>
+      </div>
+    </div>
+  );
+
   return (
-    <main className="fixed  bg-red-300/0  backdrop-blur-xl z-[100] w-screen h-16 flex items-center  justify-around  text-indigo-400 ">
-      <button onClick={() => {navigate("/allbooks") , localStorage.setItem("genero" , "Libros")}}>Libros</button>
+    <main className="fixed bg-red-300/0 backdrop-blur-xl z-[100] w-screen h-16 flex items-center justify-around text-indigo-400">
+      <button
+        onClick={() => {
+          navigate("/allbooks");
+          localStorage.setItem("genero", "Libros");
+        }}
+      >
+        Libros
+      </button>
       <div className="z-[200]">
         <button
-          onMouseOver={() => setDesplegable(true)}
-          onMouseOut={() => setDesplegable(false)}
+          onMouseOver={() => {setShowGenres(true),setShowLogoutModal(false)}}
+          onMouseOut={() => setShowGenres(false)}
         >
           Géneros
         </button>
         <ul
-          onMouseOver={() => setDesplegable(true)}
-          onMouseOut={() => setDesplegable(false)}
-          className="flex-col opacity-0 generos opacity-1  absolute  text-white  bg-indigo-600/85 p-5 rounded-xl"
-          onClick={(e) => {generos(e), setDesplegable(false)}}
+          onMouseOver={() => {setShowGenres(true)}}
+          onMouseOut={() => setShowGenres(false)}
+          className="flex-col gap-2 opacity-0 generos absolute text-white bg-indigo-600/85 p-5 rounded-lg"
+          onClick={handleGenreClick}
         >
-          <li>Aventuras</li>
-          <li>Acción</li>
-          <li>Infantil </li>
-          <li>Terror</li>
-          <li>Clásico</li>
-          <li>Thriller</li>
-          <li>Policial</li>
-          <li>Romántico</li>
-          <li>Comedia</li>
+          {genres.map(
+            (genre) => (
+              <li 
+              className="border py-1 px-2 rounded-lg"
+              key={genre}>{genre}</li>
+            )
+          )}
         </ul>
       </div>
       {isAuthenticated ? (
@@ -99,17 +101,11 @@ export default function Navbar() {
           <img
             onClick={() => navigate("/profile")}
             src={user.imageUserUrl}
-            alt=""
-            className="w-10 h-10 object-cover rounded-[100%]  border-2 border-orange-400 cursor-pointer"
+            alt="User"
+            className="w-10 h-10 object-cover rounded-[100%] border-2 border-orange-400 cursor-pointer"
           />
-          <button
-            onClick={() => {
-              setCerrarSesion(true);
-            }}
-          >
-            Cerrar sesión
-          </button>
-          {cerrarSesion ? avisoCerrarSesion() : null}
+          <button onClick={() => setShowLogoutModal(true)}>Cerrar sesión</button>
+          {showLogoutModal && <LogoutModal />}
         </>
       ) : (
         <>
