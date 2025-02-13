@@ -28,7 +28,7 @@ export default function Profile() {
 
   useEffect(() => {
     getUser();
-  }, [isLibrary, isPublicated]);
+  }, []);
 
   const removeImg = async (values) => {
     await deleteImg({ imgLibro: values });
@@ -37,12 +37,14 @@ export default function Profile() {
   const handlePublish = (book) => {
     book.published = true;
     editBook(book._id, book);
+    getUser()
    
   };
 
   const handleRemovePublish = (book) => {
     book.published = false;
     editBook(book._id, book);
+    getUser()
    
   };
 
