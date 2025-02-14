@@ -84,13 +84,13 @@ export default function Navbar() {
         <ul
           onMouseOver={() => {setShowGenres(true)}}
           onMouseOut={() => setShowGenres(false)}
-          className="flex-col gap-2 opacity-0 generos absolute text-white bg-indigo-600/85 p-5 rounded-lg"
+          className="flex-col gap-2 opacity-0 generos absolute  p-5 rounded-lg"
           onClick={handleGenreClick}
         >
           {genres.map(
             (genre) => (
               <li 
-              className="border py-1 px-2 rounded-lg"
+              className="border border-indigo-400 py-1 px-3 rounded-[20px] bg-indigo-400 text-white hover:bg-white hover:text-indigo-400"
               key={genre}>{genre}</li>
             )
           )}
