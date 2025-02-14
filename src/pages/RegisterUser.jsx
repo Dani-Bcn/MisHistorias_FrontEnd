@@ -46,9 +46,10 @@ export default function RegisterUser() {
 
       if (!res.data.message) {
         navigate("/profile");
-        location.reload();
+       
       } else {
         setErrorInput(true);
+        navigate("/profile");
       }
     } catch (error) {
       console.error("Error al registrar el usuario:", error);
