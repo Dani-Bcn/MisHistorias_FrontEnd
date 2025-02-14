@@ -53,17 +53,8 @@ export default function AllBooks() {
           {title}
         </h1>
         <div className="w-[80%] h-[0.5px] bg-gradient-to-r from-indigo-500/0 via-purple-500 to-pink-500/0">
-
         </div>
       </div>
-
-
-
-
-
-
-
-
       <section className="w-[72%] xl:w-[90%]  flex flex-wrap gap-10 sm:gap-5">
         {loading ? (
           Array.from({ length: 6 }).map((_, index) => (

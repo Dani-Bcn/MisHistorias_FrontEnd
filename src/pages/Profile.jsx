@@ -58,7 +58,7 @@ export default function Profile() {
   };
 
   return (
-    <main className=" h-min-screen w-screen mt-32 mb-20 text-slate-200 flex flex-col items-center">
+    <main className=" h-min-screen w-screen mt-24 mb-20 text-slate-200 flex flex-col items-center">
       {user ? (
         <section className="relative flex flex-col gap-5 justify-center items-center">
           <h2 className="text-4xl xl:text-7xl flex gap-2">
