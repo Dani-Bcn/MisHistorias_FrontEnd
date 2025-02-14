@@ -10,7 +10,7 @@ export default function Navbar() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
   const [showGenres, setShowGenres] = useState(false);
-  const genres = ["Aventuras", "Acción", "Infantil", "Terror", "Clásico", "Thriller", "Policial", "Romántico", "Comedia"]
+  const genres = ["Aventuras", "Acción", "Infantil", "Terror", "Clásico", "Thriller", "Policial", "Romántico", "Comedia","Cuentos"]
 
   useEffect(() => {
     const fetchUser = async () => {

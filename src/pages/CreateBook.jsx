@@ -2,23 +2,39 @@ import React, { useState } from "react";
 import { createBook } from "../api/auth";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { arrayGenres } from "../components/Images_Genres";
+
 import { uploadImg } from "../api/auth";
 
 export default function CreateBook() {
   window.scrollTo(0, 0);
   const navigate = useNavigate();
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const [imageUrl, setImageUrl] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isImageUploaded, setIsImageUploaded] = useState(false);
+
+ const arrayGenres = [
+    { genre: "Aventuras" },
+    { genre: "Acción" },
+    { genre: "Infantil" },
+    { genre: "Terror" },
+    { genre: "Clásico" },
+    { genre: "Thriller" },
+    { genre: "Policial" },
+    { genre: "Romántico" },
+    { genre: "Comedia" },
+    { genre: "Cuentos" },
+  ];
 
   // Función para manejar la subida de imagen
   const handleImage = async (e) => {
     try {
       const formData = new FormData();
       formData.append("imageUrl", e.target.files[0]);
-      
 
       setIsLoading(true);
       const res = await uploadImg(formData);
@@ -45,7 +61,7 @@ export default function CreateBook() {
       navigate("/profile");
       location.reload();
     } catch (error) {
-      console.error("Error al crear el libro:", error); 
+      console.error("Error al crear el libro:", error);
     }
   });
 
@@ -63,18 +79,24 @@ export default function CreateBook() {
               {...register("title", { required: "El título es obligatorio" })}
               className="h-7 rounded-md"
             />
-            {errors.title && <p className="text-red-500">{errors.title.message}</p>}
+            {errors.title && (
+              <p className="text-red-500">{errors.title.message}</p>
+            )}
           </div>
 
           <div className="flex flex-col">
             <label className="p-2">Descripción</label>
-            <textarea 
-            maxLength={220}
-            placeholder="Máximo 220 caracteres"
-              {...register("description", { required: "La descripción es obligatoria" })}
+            <textarea
+              maxLength={220}
+              placeholder="Máximo 220 caracteres"
+              {...register("description", {
+                required: "La descripción es obligatoria",
+              })}
               className="h-7 rounded-md"
             />
-            {errors.description && <p className="text-red-500">{errors.description.message}</p>}
+            {errors.description && (
+              <p className="text-red-500">{errors.description.message}</p>
+            )}
           </div>
 
           <div className="flex flex-col justify-center">
@@ -89,7 +111,9 @@ export default function CreateBook() {
                 </option>
               ))}
             </select>
-            {errors.genre && <p className="text-red-500">{errors.genre.message}</p>}
+            {errors.genre && (
+              <p className="text-red-500">{errors.genre.message}</p>
+            )}
           </div>
 
           <input
@@ -111,4 +135,3 @@ export default function CreateBook() {
     </main>
   );
 }
-

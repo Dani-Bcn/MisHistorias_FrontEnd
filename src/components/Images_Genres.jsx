@@ -24,4 +24,5 @@ export const arrayGenres = [
   { genre: "Policial", image: images.policial },
   { genre: "Romántico", image: images.romantico },
   { genre: "Comedia", image: images.comedia },
+  { genre: "Cuentos"},
 ];
