@@ -46,11 +46,10 @@ export default function AllBooks() {
   );
 
   return (
-    <main className=" w-screen my-20 text-slate-200 flex flex-col items-center">
-      
+    <main className=" w-screen my-20 text-slate-200 flex flex-col items-center">      
       <div className="w-screen mb-5 flex flex-col items-center justify-center">
         <h1 className="text-4xl my-5 font-bold text-center text-orange-400">
-          {title}
+          {selectedGenre}
         </h1>
         <div className="w-[80%] h-[0.5px] bg-gradient-to-r from-indigo-500/0 via-purple-500 to-pink-500/0">
         </div>
