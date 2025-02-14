@@ -47,10 +47,10 @@ export default function AllBooks() {
 
   return (
     <main className="h-min-screen my-20 text-slate-200 flex flex-col items-center">
-      <h2 className="w-screen flex text-enter justify-center sm:w-[92%] my-5 xl:my-10 h-[1px] text-2xl xl:text-4xl ">{selectedGenre}</h2>
+      <h2 className=" flex text-enter justify-center sm:w-[92%] my-5 xl:my-10 h-[1px] text-2xl xl:text-4xl ">{selectedGenre}</h2>
       <div className="w-screen sm:w-[92%] my-5 h-[1px] bg-gradient-to-r from-orange-500/0 via-orange-500 to-orange-500/0 mb-10"></div>
 
-      <section className="w-[72%] lg:w-[90%] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-10">
+      <section className="flex flex-wrap gap-5 mx-16" >
         {loading ? (
           Array.from({ length: 6 }).map((_, index) => (
             <SkeletonLoader key={index} />
@@ -59,7 +59,7 @@ export default function AllBooks() {
           filteredBooks.map((book, index) => (
             <div
               key={index}
-              className="relative h-[450px]   p-5 bg-black hover:shadow-none transition-all duration-500 shadow-black/50 rounded-lg shadow-lg flex flex-col items-around justify-between"
+              className="relative w-72 h-96 sm:w-60 xl:w-72  p-5 bg-black hover:shadow-none transition-all duration-500 shadow-black/50 rounded-lg shadow-lg flex flex-col items-around justify-between"
             >
               <img
                 src={book.imageUrl}

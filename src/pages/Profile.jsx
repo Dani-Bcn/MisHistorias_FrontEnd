@@ -184,7 +184,7 @@ export default function Profile() {
                   </button>
                   {isDeleteBook === book._id ? (
                     <div className="flex gap-5">
-                      <div
+                      <button
                         onClick={() => {
                           deleteBooks(book._id);
                           getUser();
@@ -192,13 +192,13 @@ export default function Profile() {
                         className="w-18 text-white p-1 border border-indigo-400 rounded-lg text-xs text-center"
                       >
                         Confirmar
-                      </div>
-                      <div
+                      </button>
+                      <button
                         onClick={() => setIsDeleteBook(false)}
                         className="w-18 text-white p-1 border border-indigo-400 rounded-lg text-xs text-center"
                       >
                         Cancelar
-                      </div>
+                      </button>
                     </div>
                   ) : null}
                 </div>
