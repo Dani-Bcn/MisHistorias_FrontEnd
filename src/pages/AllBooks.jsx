@@ -46,11 +46,25 @@ export default function AllBooks() {
   );
 
   return (
-    <main className="h-min-screen my-20 text-slate-200 flex flex-col items-center">
-      <h2 className=" flex text-enter justify-center sm:w-[92%] my-5 xl:my-10 h-[1px] text-2xl xl:text-4xl ">{selectedGenre}</h2>
-      <div className="w-screen sm:w-[92%] my-5 h-[1px] bg-gradient-to-r from-orange-500/0 via-orange-500 to-orange-500/0 mb-10"></div>
+    <main className=" w-screen my-20 text-slate-200 flex flex-col items-center">
+      
+      <div className="w-screen mb-5 flex flex-col items-center justify-center">
+        <h1 className="text-4xl my-5 font-bold text-center text-orange-400">
+          {title}
+        </h1>
+        <div className="w-[80%] h-[0.5px] bg-gradient-to-r from-indigo-500/0 via-purple-500 to-pink-500/0">
 
-      <section className="flex flex-wrap gap-5 mx-16" >
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+      <section className="w-[72%] xl:w-[90%]  flex flex-wrap gap-10 sm:gap-5">
         {loading ? (
           Array.from({ length: 6 }).map((_, index) => (
             <SkeletonLoader key={index} />
@@ -59,14 +73,14 @@ export default function AllBooks() {
           filteredBooks.map((book, index) => (
             <div
               key={index}
-              className="relative w-72 h-96 sm:w-60 xl:w-72  p-5 bg-black hover:shadow-none transition-all duration-500 shadow-black/50 rounded-lg shadow-lg flex flex-col items-around justify-between"
+              className="relative h-[400px] w-72 sm:w-56 xl:w-62 p-5 bg-black hover:shadow-none transition-all duration-500 shadow-black/50 rounded-lg shadow-lg flex flex-col"
             >
               <img
                 src={book.imageUrl}
                 alt="Book Cover"
-                className="opacity-50 -m-5 w-full h-96 sm:h-full absolute z-0 mask object-cover rounded-lg"
+                className="opacity-40  -m-5 w-full h-96 sm:h-full absolute z-0 mask  object-cover rounded-lg"
               />
-              <h3 className="z-10 text-xl font-bold text-center text-orange-300">
+              <h3 className="w-full  h-96 text-xl  font-bold text-center text-orange-400 flex items-center justify-center">
                 {book.title}
               </h3>
               <div className="flex justify-end text-xl flex-col items-center">
@@ -76,11 +90,6 @@ export default function AllBooks() {
                     {book.dataUser.lastName}
                   </p>
                 </div>
-                <img
-                  src={book.dataUser.imageUserUrl}
-                  alt={book.dataUser.userName}
-                  className="w-14 h-14 rounded-full border-2 border-orange-400 mt-2 object-cover"
-                />
               </div>
               <div className="mt-4 text-sm text-white gap-1 flex flex-col rounded-xl">
                 <p>
@@ -90,11 +99,11 @@ export default function AllBooks() {
                 <p>
                   <span>Capítulos :</span> {book.chapters.length}
                 </p>
-                <p>
+                <p className="h-40 sm:text-[12px] ">
                   <span>Sipnosis :</span> {book.description}
                 </p>
               </div>
-              <div className="mt-4 flex items-center justify-between">
+              <div className=" flex items-center justify-between">
                 <div className="flex items-center gap-2">
                   <p className="w-10 h-10 flex justify-center items-center rounded-full border border-indigo-500">
                     {book.rating}

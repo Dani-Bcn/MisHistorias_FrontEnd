@@ -58,7 +58,7 @@ export default function Profile() {
   };
 
   return (
-    <main className=" h-min-screen mt-32 mb-20 text-slate-200 flex flex-col items-center">
+    <main className=" h-min-screen w-screen mt-32 mb-20 text-slate-200 flex flex-col items-center">
       {user ? (
         <section className="relative flex flex-col gap-5 justify-center items-center">
           <h2 className="text-4xl xl:text-7xl flex gap-2">
@@ -104,11 +104,7 @@ export default function Profile() {
                       {book.dataUser.lastName}
                     </p>
                   </div>
-                  <img
-                    src={book.dataUser.imageUserUrl}
-                    alt={book.dataUser.userName}
-                    className="w-14 h-14 rounded-full border-2 border-orange-400 mt-2 object-cover"
-                  />
+                 
                 </div>
                 <div className="mt-4 text-sm text-white gap-1 flex flex-col rounded-xl">
                   <p>

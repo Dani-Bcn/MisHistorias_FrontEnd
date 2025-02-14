@@ -29,28 +29,12 @@ export default function ReadBook() {
   }, [bookId]);
 
   if (!book) return null;
+  console.log(user?.imageUserUrl)
 
   return (
-    <section className="w-screen p-5 flex flex-col lg:flex-row gap-5">
-    
-    <nav className="fixed text-red-50  w-full backdrop-blur-lg mt-5 z-20 ">
-        <ul className="flex gap-5 justify-center text-xl">
-          <li
-            onClick={() => navigate("/pageBook")}
-            className="cursor-pointer hover:underline"
-          >
-            <span className="font-bold">I</span>nfo
-          </li>
-          {user && user._id === book.dataUser?.userId && (
-            <li
-              onClick={() => navigate("/editBook")}
-              className="cursor-pointer hover:underline"
-            >
-              <span className="font-bold">E</span>ditar
-            </li>
-          )}
-        </ul>
-      </nav>
+    <main className="w-screen p-5 flex flex-col lg:flex-row gap-5 mt-20">
+
+      <img src={user?.imageUserUrl} alt="" />
     {book.chapters?.length > 0 && (
       <aside className="text-red-50 lg:w-56 w-full bg-gray-800 bg-opacity-70 rounded-xl p-5 lg:fixed lg:top-20 mt-10">
         <h3 className="text-xl border-b border-gray-500 mb-3">
@@ -92,7 +76,7 @@ export default function ReadBook() {
         </article>
       ))}
     </div>
-  </section>
+  </main>
   
   );
 }

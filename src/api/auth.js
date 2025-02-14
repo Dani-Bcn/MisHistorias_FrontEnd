@@ -1,9 +1,10 @@
 import axios from "axios";
 
 const axxios = axios.create({
-  baseURL: process.env.NODE_ENV === "production"
-    ? "https://mis-historias-back-end.vercel.app"
-    : "http://localhost:8000",
+  baseURL:
+    process.env.NODE_ENV === "production"
+      ? "https://mis-historias-back-end.vercel.app"
+      : "http://localhost:8000",
   withCredentials: true,
 });
 
@@ -41,7 +42,6 @@ export const addBook = async (objectIds) =>
 export const uploadImg = async (values, imageUrl) =>
   await axxios.post(`/api/uploadImg`, values, imageUrl);
 export const deleteImg = async (url) => {
-  await axxios.post(`/api/deleteImg`, url);
-};
+  await axxios.post(`/api/deleteImg`, url)};
 export const removeChapter = async (values) =>
   await axxios.delete(`/api/removeChapter/${values}`);
