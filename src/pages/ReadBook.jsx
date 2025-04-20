@@ -36,8 +36,7 @@ export default function ReadBook() {
 
   return (
     <main className="w-screen  text-white p-5 flex flex-col  items-center justify-start gap-5 mt-10">
-      <img src={book?.imageUrl} alt={book?.dataUser.imageUserUrl} 
-      className="z-0 w-screen h-screen object-contain absolute"/>
+     
       <header className="w-screen flex flex-col items-center gap-2 p-5">
         <h2 className="text-2xl xl:text-5xl mb-5">
           <span>{book?.dataUser.userName} </span>
