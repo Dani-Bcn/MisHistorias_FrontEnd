@@ -5,6 +5,8 @@ import gsap from "gsap";
 import { use } from "react";
 
 const RatingStars = ({ user, book, handleVote }) => {
+
+  window.scrollTo(0, 0);
   const stars = Array.from({ length: 10 }, (_, i) => ({
     num: i + 1,
     text: `star-${i + 1}`,

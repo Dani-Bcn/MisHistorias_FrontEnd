@@ -10,7 +10,18 @@ export default function Navbar() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [showLogoutModal, setShowLogoutModal] = useState(false);
   const [showGenres, setShowGenres] = useState(false);
-  const genres = ["Aventuras", "Acción", "Infantil", "Terror", "Clásico", "Thriller", "Policial", "Romántico", "Comedia","Cuentos"]
+  const genres = [
+    "Aventuras",
+    "Acción",
+    "Infantil",
+    "Terror",
+    "Clásico",
+    "Thriller",
+    "Policial",
+    "Romántico",
+    "Comedia",
+    "Cuentos",
+  ];
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -48,14 +59,17 @@ export default function Navbar() {
   };
 
   const LogoutModal = () => (
-    <div className="fixed z-[100] w-10/12 text-2xl mt-56 sm:w-96 p-5 h-40 bg-indigo-400 text-white flex flex-col justify-around items-center rounded-lg">
+    <div className="fixed z-[100] w-10/12 text-2xl mt-56 sm:w-96  h-40 bg-indigo-400/90 text-white flex flex-col justify-around items-center rounded-lg">
       <h3>¿Ya te vas?</h3>
       <div className="w-full flex justify-around">
-        <button className="hover:text-orange-200" onClick={handleLogout}>
+        <button
+          className="border-2 text-xl hover:bg-orange-200 hover:text-slate-400 bg-slate-400 border-orange-200 hover:border-slate-500 rounded-lg px-3 py-1"
+          onClick={handleLogout}
+        >
           Sí, decidido!
         </button>
         <button
-          className="hover:text-orange-200"
+          className="border-2 text-xl hover:bg-orange-200 hover:text-slate-400 bg-slate-400 border-orange-200 hover:border-slate-500 rounded-lg px-3 py-1"
           onClick={() => setShowLogoutModal(false)}
         >
           No, aún no!
@@ -76,24 +90,29 @@ export default function Navbar() {
       </button>
       <div className="z-[200]">
         <button
-          onMouseOver={() => {setShowGenres(true),setShowLogoutModal(false)}}
+          onMouseOver={() => {
+            setShowGenres(true), setShowLogoutModal(false);
+          }}
           onMouseOut={() => setShowGenres(false)}
         >
           Géneros
         </button>
         <ul
-          onMouseOver={() => {setShowGenres(true)}}
+          onMouseOver={() => {
+            setShowGenres(true);
+          }}
           onMouseOut={() => setShowGenres(false)}
           className="flex-col gap-2 opacity-0 generos absolute  p-5 rounded-lg"
           onClick={handleGenreClick}
         >
-          {genres.map(
-            (genre) => (
-              <li 
+          {genres.map((genre) => (
+            <li
               className="border border-indigo-400 py-1 px-3 rounded-[20px] bg-indigo-400 text-white hover:bg-white hover:text-indigo-400"
-              key={genre}>{genre}</li>
-            )
-          )}
+              key={genre}
+            >
+              {genre}
+            </li>
+          ))}
         </ul>
       </div>
       {isAuthenticated ? (
@@ -104,7 +123,9 @@ export default function Navbar() {
             alt="User"
             className="w-10 h-10 object-cover rounded-[100%] border-2 border-orange-400 cursor-pointer"
           />
-          <button onClick={() => setShowLogoutModal(true)}>Cerrar sesión</button>
+          <button onClick={() => setShowLogoutModal(true)}>
+            Cerrar sesión
+          </button>
           {showLogoutModal && <LogoutModal />}
         </>
       ) : (

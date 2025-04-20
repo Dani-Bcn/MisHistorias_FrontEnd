@@ -32,6 +32,8 @@ export default function ReadBook() {
 
   if (!book) return null;
 
+  console.log(user._id, book?.dataUser.userId);
+
   return (
     <main className="w-screen  text-white p-5 flex flex-col  items-center justify-start gap-5 mt-10">
       <header className="w-screen flex flex-col items-center gap-2 p-5">
@@ -75,7 +77,14 @@ export default function ReadBook() {
             </p>
           </article>
         ))}
-        <h1> los caracoles me divierten</h1>
+
+     
+        <button
+          className="border-2 text-sm hover:bg-orange-200 hover:text-slate-400 bg-slate-400 border-orange-200 hover:border-slate-500 rounded-lg px-3 py-1"
+          onClick={() => navigate("/pageBook")}
+        >
+          Info
+        </button>
       </div>
     </main>
   );
