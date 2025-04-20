@@ -42,7 +42,7 @@ export default function ReadBook() {
           {book?.dataUser.lastName}
         </h2>
         <img
-          onClick={() => navigate("/profile")}
+         
           src= {book?.dataUser.imageUserUrl}
           alt="User"
           className="w-14 h-14 xl:w-40 xl:h-40 object-cover rounded-[100%] border-2 border-orange-400 cursor-pointer"
