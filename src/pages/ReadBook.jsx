@@ -31,7 +31,6 @@ export default function ReadBook() {
   }, [bookId]);
 
   if (!book) return null;
-  console.log(book);
 
   return (
     <main className="w-screen  text-white p-5 flex flex-col  items-center justify-start gap-5 mt-10">

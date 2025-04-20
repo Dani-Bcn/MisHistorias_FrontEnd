@@ -79,10 +79,6 @@ export default function PageBook() {
     );
   },[resultsLibrary,user]);
 
-  console.log(user?.booksLibrary);
-  console.log(book);
-  console.log(resultsLibrary);
-
   const handleVote = (rating) => {
     if (!book.idUserVote.includes(user._id)) {
       const updatedBook = {
