@@ -9,6 +9,7 @@ import {
 import { useNavigate } from "react-router-dom";
 
 export default function Profile() {
+  window.scrollTo(0, 0);
   const navigate = useNavigate();
   const [user, setUser] = useState();
   const [isLibrary, setIsLibrary] = useState(true);

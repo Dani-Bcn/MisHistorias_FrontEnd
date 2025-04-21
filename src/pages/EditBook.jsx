@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { profile } from "../api/auth";
 
 export default function EditBook() {
+  window.scrollTo(0, 0);
+  const [bookpublished, setBookPublished] = useState();
   const [booksUser, setBooksUser] = useState([]);
   const [verifyDelete, setVerifyDelete] = useState({
     verify: false,
@@ -63,6 +65,11 @@ export default function EditBook() {
     const updatedChapters = book.chapters.filter((_, i) => i !== index);
     updateBook({ ...book, chapters: updatedChapters });
     setVerifyDelete({ verify: false, chapterIndex: null });
+  };
+
+  const handleChaptersPublished = (index) => {
+    console.log(index)
+    updateBook({ ...book, chaptersPublished: index +1 });
   };
 
   const handleDescriptionUpdate = (e) => {
@@ -136,6 +143,10 @@ export default function EditBook() {
                   >
                     Eliminar
                   </button>
+                  <button
+                    onClick={()=>handleChaptersPublished(index)}
+                    className="text-sm border-[0.5px] border-indigo-400 rounded-2xl py-1 px-2 "
+                  >Publicar hasta aquí</button>
                 </div>
                 {verifyDelete.verify && verifyDelete.chapterIndex === index && (
                   <div className="absolute flex items-center gap-5 z-50 bg-slate-700 p-2 rounded-full">

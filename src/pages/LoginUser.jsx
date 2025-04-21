@@ -21,6 +21,7 @@ const ErrorMessage = ({ message }) => (
 );
 
 export default function LoginUser() {
+  window.scrollTo(0, 0);
   const navigate = useNavigate();
   const {
     register,

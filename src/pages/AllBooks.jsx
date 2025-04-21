@@ -3,6 +3,9 @@ import { getAllBooks, profile } from "../api/auth";
 import { useNavigate } from "react-router-dom";
 
 export default function AllBooks() {
+  window.scrollTo(0, 0);
+  
+
   const navigate = useNavigate();
   const [books, setBooks] = useState([]);
   const [user, setUser] = useState(null);
@@ -44,6 +47,7 @@ export default function AllBooks() {
       book.published &&
       (book.genre === selectedGenre || selectedGenre === "Libros")
   );
+ 
 
   return (
     <main className=" w-screen my-20 text-slate-200 flex flex-col items-center">      
@@ -59,6 +63,7 @@ export default function AllBooks() {
           Array.from({ length: 6 }).map((_, index) => (
             <SkeletonLoader key={index} />
           ))
+        
         ) : filteredBooks.length > 0 ? (
           filteredBooks.map((book, index) => (
             <div

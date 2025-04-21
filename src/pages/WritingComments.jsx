@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { getBook, editBook, profile } from "../api/auth";
 
 export default function WritingComments() {
+  window.scrollTo(0, 0);
   const [getText, setGetText] = useState("");
   const [book, setBook] = useState(null);
   const [user, setUser] = useState(null);

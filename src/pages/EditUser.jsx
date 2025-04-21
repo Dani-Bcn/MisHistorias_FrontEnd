@@ -10,6 +10,7 @@ export default function EditUser() {
 
   // Función para obtener el usuario
   const getUser = async () => {
+    window.scrollTo(0, 0);
     try {
       window.scrollTo(0, 0);
       const res = await profile();

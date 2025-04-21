@@ -3,6 +3,7 @@ import { getBook, editBook, profile } from "../api/auth";
 import { useNavigate } from "react-router-dom";
 
 export default function ReadComments() {
+  window.scrollTo(0, 0);
   const [book, setBook] = useState();
   const [user, setUser] = useState();
   const [activeEdit, setActiveEdit] = useState(null); // Mantiene el índice del comentario en edición

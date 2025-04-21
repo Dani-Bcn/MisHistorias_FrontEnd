@@ -32,7 +32,6 @@ export default function ReadBook() {
 
   if (!book) return null;
 
- 
 
   return (
     <main className="w-screen  text-white p-5 flex flex-col  items-center justify-start gap-5 mt-10">
@@ -62,6 +61,10 @@ export default function ReadBook() {
 
       <div className="lg:w-2/4 w-full mx-auto text-red-50">
         {book.chapters?.map((chapter, i) => (
+
+
+          i < book.chaptersPublished &&
+          
           <article
             id={chapter.title}
             key={i}
