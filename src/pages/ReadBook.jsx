@@ -32,7 +32,7 @@ export default function ReadBook() {
 
   if (!book) return null;
 
-  console.log(user._id, book?.dataUser.userId);
+ 
 
   return (
     <main className="w-screen  text-white p-5 flex flex-col  items-center justify-start gap-5 mt-10">
