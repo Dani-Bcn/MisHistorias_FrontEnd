@@ -114,6 +114,9 @@ export default function Navbar() {
             </li>
           ))}
         </ul>
+     {/*    <button
+        onClick={() => navigate("/sendMail")}
+        >Send Mail</button> */}
       </div>
       {isAuthenticated ? (
         <>
