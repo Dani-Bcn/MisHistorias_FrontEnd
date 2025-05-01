@@ -9,7 +9,7 @@ import {
 import { useNavigate } from "react-router-dom";
 
 export default function Profile() {
-  window.scrollTo(0, 0);
+   window.scrollTo(0, 0); 
   const navigate = useNavigate();
   const [user, setUser] = useState();
   const [isLibrary, setIsLibrary] = useState(true);
@@ -234,7 +234,7 @@ export default function Profile() {
                           navigate("/readBook");
                         }}
                       >
-                        <span>L </span> eer
+                        <span className="text-indigo-400">L </span> eer
                       </button>
                       <button
                         className="btn  flex items-center justify-center hover:text-orange-300 hover:bg-indigo-400 bg-orange-300/75 rounded-[4px] px-4 py-1"
@@ -243,14 +243,14 @@ export default function Profile() {
                           navigate("/PageBook");
                         }}
                       >
-                        <span>I</span>nfo
+                        <span className="text-indigo-400">I</span>nfo
                       </button>
                       <button
                         type="button"
                         onClick={() => deleteBookLibrary(book._id)}
                         className="btn  flex items-center justify-center hover:text-orange-300 hover:bg-indigo-400 bg-orange-300/75 rounded-[4px] px-4 py-1"
                       >
-                        <span>-&nbsp;</span>bliblioteca
+                        <span className="font-black text-indigo-600">- </span> bliblioteca
                       </button>
                     </div>
                   </div>
