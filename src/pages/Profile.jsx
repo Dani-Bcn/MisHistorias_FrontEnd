@@ -9,7 +9,7 @@ import {
 import { useNavigate } from "react-router-dom";
 
 export default function Profile() {
-   window.scrollTo(0, 0); 
+  window.scrollTo(0, 0);
   const navigate = useNavigate();
   const [user, setUser] = useState();
   const [isLibrary, setIsLibrary] = useState(true);
@@ -105,7 +105,6 @@ export default function Profile() {
                       {book.dataUser.lastName}
                     </p>
                   </div>
-                 
                 </div>
                 <div className="mt-4 text-sm text-white gap-1 flex flex-col rounded-xl">
                   <p>
@@ -229,16 +228,16 @@ export default function Profile() {
                     </p>
                     <div className="text-xl flex flex-col gap-2 rounded-l-none rounded-b-xl p-5">
                       <button
-                        className="btn  flex items-center justify-center hover:text-orange-300 hover:bg-indigo-400 bg-orange-500 rounded-[4px] px-4 py-1"
+                        className="btn  flex items-center justify-center hover:text-orange-300 hover:bg-indigo-400 bg-orange-300/75 rounded-[4px] px-4 py-1"
                         onClick={() => {
                           localStorage.setItem("bookId", book._id);
                           navigate("/readBook");
                         }}
                       >
-                        <span >L </span> eer
+                        <span>L </span> eer
                       </button>
                       <button
- className="btn  flex items-center justify-center hover:text-orange-300 hover:bg-indigo-400 bg-orange-500 rounded-[4px] px-4 py-1"
+                        className="btn  flex items-center justify-center hover:text-orange-300 hover:bg-indigo-400 bg-orange-300/75 rounded-[4px] px-4 py-1"
                         onClick={() => {
                           localStorage.setItem("bookId", book._id);
                           navigate("/PageBook");
@@ -249,7 +248,7 @@ export default function Profile() {
                       <button
                         type="button"
                         onClick={() => deleteBookLibrary(book._id)}
- className="btn  flex items-center justify-center hover:text-orange-300 hover:bg-indigo-400 bg-orange-500 rounded-[4px] px-4 py-1"
+                        className="btn  flex items-center justify-center hover:text-orange-300 hover:bg-indigo-400 bg-orange-300/75 rounded-[4px] px-4 py-1"
                       >
                         <span>-&nbsp;</span>bliblioteca
                       </button>
