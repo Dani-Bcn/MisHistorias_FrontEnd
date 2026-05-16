@@ -34,14 +34,15 @@ export default function EnviarCorreo() {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="mt-40 p-4 flex flex-col gap-2 max-w-md mx-auto">
+    <form onSubmit={handleSubmit} className="section-card mx-auto mt-32 flex max-w-md flex-col gap-4">
+      <h1 className="text-center text-3xl font-bold text-white">Enviar correo</h1>
       <input
         name="to"
         type="email"
         placeholder="Correo destino"
         onChange={handleChange}
         required
-        className="border p-2 rounded"
+        className="bg-slate-950/60"
       />
       <input
         name="subject"
@@ -49,16 +50,16 @@ export default function EnviarCorreo() {
         placeholder="Asunto"
         onChange={handleChange}
         required
-        className="border p-2 rounded"
+        className="bg-slate-950/60"
       />
       <textarea
         name="text"
         placeholder="Mensaje"
         onChange={handleChange}
         required
-        className="border p-2 rounded min-h-[100px]"
+        className="min-h-[120px] bg-slate-950/60"
       />
-      <button type="submit" className="bg-blue-600 text-white p-2 rounded hover:bg-blue-700">
+      <button type="submit" className="btn-primary">
         Enviar correo
       </button>
     </form>

@@ -48,13 +48,17 @@ export default function WritingPage() {
   if (!book) return null; // Espera que el libro cargue
 
   return (
-    <main className="w-screen mt-16 flex justify-center items-center px-4">
-      <section className="w-full max-w-4xl p-4 bg-white rounded-lg shadow-md">
+    <main className="page-shell flex items-center justify-center">
+      <section className="section-card w-full max-w-4xl">
         {book.chapters && (
           <form onSubmit={saveChapter} className="flex flex-col gap-4">
+            <div className="mb-2 text-center">
+              <h1 className="text-3xl font-bold text-white">Editar capítulo</h1>
+              <p className="mt-2 text-sm text-slate-300">Cuida el título y el texto antes de guardar los cambios.</p>
+            </div>
             <input
               placeholder="Título del capítulo"
-              className="w-full h-12 p-3 text-lg border border-indigo-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="text-lg"
               name="title"
               type="text"
               onChange={handleChange}
@@ -65,7 +69,7 @@ export default function WritingPage() {
               name="text"
               type="text"
               placeholder="Texto"
-              className="w-full h-80 md:h-96 p-3 text-lg border border-indigo-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+              className="h-80 resize-none text-lg md:h-96"
               value={chapter.text}
               onChange={handleChange}
             />
@@ -73,7 +77,7 @@ export default function WritingPage() {
             {chapter.title && chapter.text ? (
               <button
                 type="submit"
-                      className="border-[0.5px] border-indigo-400 w-56 rounded-2xl py-1 px-2 ">
+                className="btn-primary w-full sm:w-fit">
                 Guardar capítulo
               </button>
             ) : (

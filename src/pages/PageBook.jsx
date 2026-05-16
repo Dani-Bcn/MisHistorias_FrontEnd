@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getBook, editBook, profile, addBook } from "../api/auth";
 import gsap from "gsap";
-import { use } from "react";
 
 const RatingStars = ({ user, book, handleVote }) => {
 
@@ -30,18 +29,18 @@ const RatingStars = ({ user, book, handleVote }) => {
 };
 
 const ChaptersList = ({ chapters, toggleChapters }) => (
-  <section className="absolute mt-5 ml-5 text-sm sm:text-base bg-white shadow-lg p-4 rounded max-w-xs sm:max-w-sm">
+  <section className="absolute z-30 mt-5 max-w-xs rounded-2xl border border-white/10 bg-slate-950/95 p-4 text-sm text-slate-100 shadow-2xl shadow-black/40 backdrop-blur-xl sm:max-w-sm sm:text-base">
     {chapters.map((chapter, index) => (
       <div key={index} className="flex items-center gap-2 py-1">
-        <span className="w-6 sm:w-8 text-center font-bold">{index + 1}</span>
-        <button className="text-blue-500 hover:underline text-sm sm:text-base">
+        <span className="w-6 text-center font-bold text-orange-200 sm:w-8">{index + 1}</span>
+        <button className="text-sm text-indigo-200 hover:text-orange-200 sm:text-base">
           {chapter.title}
         </button>
       </div>
     ))}
     <button
       onClick={toggleChapters}
-      className="mt-2 text-red-500 hover:underline text-sm"
+      className="mt-2 text-sm text-red-300 hover:text-red-200"
     >
       Cerrar
     </button>
@@ -147,40 +146,42 @@ export default function PageBook() {
   };
 
   return (
-    <main className="w-screen flex justify-center px-4">
+    <main className="page-shell">
       {book && (
-        <section className="max-w-4xl m-10 text-gray-100  ">
-          <h2 className="text-3xl p-5 sm:text-3xl font-bold text-gray-100">
+        <section className="page-container">
+          <h2 className="page-title">
             <span>{book.title[0]}</span>
             {book.title.slice(1)}
           </h2>
-          <div className="p-5 flex flex-col sm:flex-row gap-5">
-            <div className="w-16 h-16 absolute mt-3 ml-3 z-10 bg-blue-800/50  rounded-full border-[3px] border-indigo-400 flex justify-center items-center">
-              <p className="text-5xl text-indigo-200">{book.rating}</p>
+          <div className="section-card mt-8 grid gap-8 lg:grid-cols-[280px_1fr]">
+            <div className="relative mx-auto w-full max-w-[280px]">
+              <div className="absolute left-4 top-4 z-10 flex h-20 w-20 items-center justify-center rounded-full border border-orange-300 bg-slate-950/80 shadow-xl shadow-black/40">
+                <p className="text-3xl font-black text-orange-200">{book.rating}</p>
+              </div>
+              <img
+                src={book.imageUrl}
+                alt={`Cover of ${book.title}`}
+                className="h-[430px] w-full rounded-3xl object-cover shadow-2xl shadow-black/40"
+              />
             </div>
-            <img
-              src={book.imageUrl}
-              alt={`Cover of ${book.title}`}
-              className="w-52 h-96 lg:max-w-sm  object-cover rounded shadow-lg"
-            />
             <div className="flex flex-col gap-4">
-              <h2 className="text-xl sm:text-3xl font-semibold">
+              <h2 className="text-2xl font-semibold text-white sm:text-3xl">
                 <span>{book.dataUser.userName}</span> {book.dataUser.lastName}
               </h2>
-              <p className="text-base sm:text-lg">
+              <p className="text-base text-slate-200 sm:text-lg">
                 <span className="font-semibold">Género:</span> {book.genre}
               </p>
-              <p className="text-base sm:text-lg">
+              <p className="text-base text-slate-200 sm:text-lg">
                 <span className="font-semibold">Capítulos : </span>
                 <span
-                  className="cursor-pointer text-blue-500 hover:underline"
+                  className="cursor-pointer text-indigo-200 hover:text-orange-200"
                 >
                   {book.chapters.length}
                 </span>
               </p>
-              <div className="w-80">
+              <div className="glass-card p-5 text-slate-200">
                 <span>Descripción :</span>
-                <p>{book.description}</p>
+                <p className="mt-2 leading-7">{book.description}</p>
               </div>
               {showChapters && (
                 <ChaptersList
@@ -196,7 +197,7 @@ export default function PageBook() {
                 <span>Votos : </span>
                 {book.idUserVote.length}
               </p>
-              <div className="flex flex-col justify-start items-start gap-4">
+              <div className="flex flex-col items-start justify-start gap-4">
                 <p>
                   <span>Creado : </span>
                   {book.createdAt.slice(0, 10).split("-").reverse().join("-")}
@@ -206,10 +207,10 @@ export default function PageBook() {
                   <span>Modificado : </span>
                   {book.updatedAt.slice(0, 10).split("-").reverse().join("-")}
                 </p>
-                <div className="flex gap-5 my-2">
+                <div className="my-2 flex flex-wrap gap-3">
                   <button
                     onClick={() => handleNavigate("/readBook", book._id)}
-                    className="text-white w-16 border border-indigo-400 rounded-lg text-2xs text-center"
+                    className="btn-primary"
                   >
                     Leer
                   </button>
@@ -217,7 +218,7 @@ export default function PageBook() {
                     !   user?.booksLibrary.some((obj) => Object.values(obj).includes(bookId))  ? (
                       <button
                         onClick={() => {handleAddBook(book._id), setResultsLibrary(true)}}
-                        className="text-white w-24 border border-indigo-400 rounded-lg text-2xs text-center"
+                        className="btn-secondary"
                       >
                         + Blilioteca
                       </button>
@@ -233,6 +234,7 @@ export default function PageBook() {
                   Object.values(obj).includes(bookId)
                 ) ? (
                   <button
+                    className="btn-secondary"
                     onClick={() => {
                       localStorage.setItem("token", user._id),
                         navigate("/writingComments");
@@ -253,46 +255,46 @@ export default function PageBook() {
             </div>
           </div>
           {book.comments.length > 0 ? (
-            <div className="flex flex-col gap-3 px-2">
-              <h3>Comentarios</h3>
-              <div className="w-80 sm:w-[92%]  h-[1px] bg-gradient-to-r from-orange-500 via-orange-500 to-orange-500/0 "></div>
+            <div className="mt-8 flex flex-col gap-4 px-2">
+              <h3 className="text-2xl font-bold">Comentarios</h3>
+              <div className="divider-glow max-w-3xl"></div>
               {book.comments.map((comentarios, indice) => (
-                <div key={indice} className="bg-indigo-400/25 rounded-lg p-3 flex flex-col gap-2">
-                  <p>
+                <div key={indice} className="glass-card flex flex-col gap-3 p-5">
+                  <p className="font-semibold text-indigo-100">
                     {comentarios.user} {comentarios.lastName}
                   </p>
                   {editingIndex === indice ? (
                     <>
                       <textarea
-                        className="w-full p-2 border rounded"
+                        className="min-h-32 w-full"
                         value={editedComment}
                         onChange={(e) => setEditedComment(e.target.value)}
                       />
                       <button 
                       onClick={() => handleSave(indice)}
-                        className="text-white w-24 border border-indigo-400 rounded-lg text-2xs text-center"
+                        className="btn-primary w-fit"
                       >
                         Guardar
                       </button>
                     </>
                   ) : (
-                    <p>{comentarios.text}</p>
+                    <p className="leading-7 text-slate-200">{comentarios.text}</p>
                   )}
-                  <div className="flex">
+                  <div className="flex text-sm text-slate-400">
                     <p>{comentarios.update.month}&nbsp;/&nbsp;</p>
                     <p>{comentarios.update.year}</p>
                   </div>
                   {comentarios.userId === user?._id && (
-                    <div className="flex gap-5">
+                    <div className="flex gap-3">
                       <button
                         onClick={() => handleEdit(indice, comentarios.text)}
-                          className="text-white w-24 border border-indigo-400 rounded-lg text-2xs text-center"
+                          className="btn-secondary"
                       >
                         Editar
                       </button>
                       <button
                         onClick={() => handleRemove(indice, comentarios.text)}
-                          className="text-white w-24 border border-indigo-400 rounded-lg text-2xs text-center"
+                          className="btn-danger"
                       >
                         Eliminar
                       </button>

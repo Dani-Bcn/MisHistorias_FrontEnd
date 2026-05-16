@@ -28,7 +28,7 @@ function App() {
   }, []);
 
   return (
-    <main className="absolute">
+    <main className="min-h-screen w-full overflow-x-hidden">
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -46,7 +46,7 @@ function App() {
         <Route path="/readComments" element={<ReadComments />} />    
         <Route path="/sendMail" element={<SendMail />} />           
       </Routes>
-  {/*     <Footer/> */}
+      {/*     <Footer/> */}
     </main>
   );
 }

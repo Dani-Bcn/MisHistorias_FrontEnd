@@ -59,83 +59,82 @@ export default function Profile() {
   };
 
   return (
-    <main className=" h-min-screen w-screen mt-24 mb-20 text-slate-200 flex flex-col items-center">
+    <main className="page-shell">
       {user ? (
-        <section className="relative flex flex-col gap-5 justify-center items-center">
-          <h2 className="text-4xl xl:text-7xl flex gap-2">
+        <section className="page-container section-card flex flex-col items-center gap-6 text-center">
+          <h2 className="page-title flex flex-wrap justify-center gap-3">
             <span className="font-bold">{user.userName}</span>
             {user.lastName}
           </h2>
-          <div className="relative flex gap-72 justify-center items-center text-white z-10">
+          <p className="page-subtitle">Tu espacio para escribir, publicar y organizar las historias que quieres leer.</p>
+          <div className="relative z-10 flex justify-center text-white">
             <button
-              className="btn text-2xl"
+              className="btn-primary text-base sm:text-lg"
               onClick={() => navigate("/createBook")}
             >
-              <h3>
-                <span>C</span>rea una nueva historia
-              </h3>
+              Crea una nueva historia
             </button>
           </div>
         </section>
       ) : null}
       {user && user.books ? (
-        <section className="sm:w-[90%] sm:ml-20 flex flex-col items-center sm:items-start gap-5">
-          <h2 className="mt-5 lg:mt-10 text-3xl lg:text-4xl">
+        <section className="page-container mt-12 flex flex-col gap-5">
+          <h2 className="text-center text-3xl font-bold lg:text-4xl sm:text-left">
             <span>Mis</span> libros
           </h2>
-          <div className="w-80 sm:w-[80%] h-[1px] bg-gradient-to-r from-orange-500/0 sm:from-orange-500 sm:via-orange-500/50 via-orange-500 to-orange-500/0"></div>
-          <section className="w-[72%] lg:w-[90%] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-10 sm:gap-32 xl:gap-56">
+          <div className="divider-glow"></div>
+          <section className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {user.books.map((book, i) => (
               <div
                 key={i}
-                className="w-56 aspect-auto relative p-5 bg-black hover:shadow-none transition-all duration-500 shadow-black/50 rounded-lg shadow-lg flex flex-col items-around justify-between"
+                className="book-card group min-h-[360px]"
               >
                 <img
                   src={book.imageUrl}
                   alt="Book Cover"
-                  className="opacity-50 -m-5 w-full h-full absolute z-0 mask object-cover rounded-lg"
+                  className="book-cover-bg mask"
                 />
-                <h3 className="z-10 text-xl font-bold text-center text-orange-300">
-                  {book.title}
-                </h3>
-                <div className="flex justify-end text-xl flex-col items-center">
-                  <div className="flex gap-2 items-center justify-center">
-                    <span className="font-bold">{book.dataUser.userName}</span>
-                    <p className="text-center text-transform: capitalize">
-                      {book.dataUser.lastName}
-                    </p>
-                  </div>
-                </div>
-                <div className="mt-4 text-sm text-white gap-1 flex flex-col rounded-xl">
-                  <p>
-                    <span>Género :</span> {book.genre}
-                  </p>
-                  <p>
-                    <span>Capítulos :</span> {book.chapters.length}
-                  </p>
-                </div>
-                <div className="my-4 flex items-center justify-between">
-                  <div className="flex items-center gap-2">
-                    <p className="w-10 h-10 flex justify-center items-center rounded-full border border-orange-400">
-                      {book.rating}
-                    </p>
-                    <div className="flex items-center justify-center mt-2 gap-2">
-                      <img
-                        src="https://res.cloudinary.com/nneodani/image/upload/v1737915966/a1bbhiqtuctaocvffdhg.png"
-                        alt="Rating Icon"
-                        className="w-4"
-                      />
-                      <p>{book.numVotes}</p>
+                <div className="relative z-10 flex h-full flex-col justify-between">
+                  <div>
+                    <h3 className="text-2xl font-bold leading-tight text-white">
+                      {book.title}
+                    </h3>
+                    <div className="mt-3 flex flex-wrap gap-2 text-sm text-slate-200">
+                      <span className="font-bold text-indigo-200">{book.dataUser.userName}</span>
+                      <p className="capitalize">{book.dataUser.lastName}</p>
+                    </div>
+                    <div className="mt-5 flex flex-col gap-1 rounded-xl text-sm text-white">
+                      <p>
+                        <span>Género :</span> {book.genre}
+                      </p>
+                      <p>
+                        <span>Capítulos :</span> {book.chapters.length}
+                      </p>
                     </div>
                   </div>
-                </div>
-                <div className="flex flex-wrap gap-2">
+                  <div>
+                    <div className="my-4 flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <p className="flex h-10 w-10 items-center justify-center rounded-full border border-orange-400 bg-slate-950/70">
+                          {book.rating}
+                        </p>
+                        <div className="flex items-center justify-center gap-2">
+                          <img
+                            src="https://res.cloudinary.com/nneodani/image/upload/v1737915966/a1bbhiqtuctaocvffdhg.png"
+                            alt="Rating Icon"
+                            className="w-4"
+                          />
+                          <p>{book.numVotes}</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
                   <button
                     onClick={() => {
                       localStorage.setItem("bookId", book._id);
                       navigate("/PageBook");
                     }}
-                    className="w-14 text-white p-1 border border-indigo-400 rounded-lg text-xs text-center"
+                    className="btn-secondary px-3 py-1.5 text-xs"
                   >
                     Info
                   </button>
@@ -144,7 +143,7 @@ export default function Profile() {
                       localStorage.setItem("bookId", book._id);
                       navigate("/ReadBook");
                     }}
-                    className="w-14 text-white p-1 border border-indigo-400 rounded-lg text-xs text-center"
+                    className="btn-primary px-3 py-1.5 text-xs"
                   >
                     Leer
                   </button>
@@ -153,50 +152,52 @@ export default function Profile() {
                       localStorage.setItem("bookId", book._id);
                       navigate("/editBook");
                     }}
-                    className="w-14 text-white p-1 border border-indigo-400 rounded-lg text-xs text-center"
+                    className="btn-secondary px-3 py-1.5 text-xs"
                   >
                     Editar
                   </button>
                   {!book?.published ? (
                     <button
                       onClick={() => handlePublish(book._id, true)}
-                      className="w-14 text-white p-1 border border-indigo-400 rounded-lg text-xs text-center"
+                      className="btn-secondary px-3 py-1.5 text-xs"
                     >
                       Publicar
                     </button>
                   ) : (
                     <button
                       onClick={() => handlePublish(book._id, false)}
-                      className="w-16 text-white p-1 border border-indigo-400 rounded-lg text-xs text-center"
+                      className="btn-secondary px-3 py-1.5 text-xs"
                     >
                       - publicar
                     </button>
                   )}
                   <button
                     onClick={() => handleDeleteBook(book._id)}
-                    className="w-14 text-white p-1 border border-indigo-400 rounded-lg text-xs text-center"
+                    className="btn-danger px-3 py-1.5 text-xs"
                   >
                     Eliminar
                   </button>
                   {isDeleteBook === book._id ? (
-                    <div className="flex gap-5">
+                    <div className="flex gap-2">
                       <button
                         onClick={() => {
                           deleteBooks(book._id);
                           getUser();
                         }}
-                        className="w-18 text-white p-1 border border-indigo-400 rounded-lg text-xs text-center"
+                        className="btn-danger px-3 py-1.5 text-xs"
                       >
                         Confirmar
                       </button>
                       <button
                         onClick={() => setIsDeleteBook(false)}
-                        className="w-18 text-white p-1 border border-indigo-400 rounded-lg text-xs text-center"
+                        className="btn-secondary px-3 py-1.5 text-xs"
                       >
                         Cancelar
                       </button>
                     </div>
                   ) : null}
+                    </div>
+                  </div>
                 </div>
               </div>
             ))}
@@ -204,53 +205,53 @@ export default function Profile() {
         </section>
       ) : null}
       {user && user.booksLibrary.length > 0 ? (
-        <section className="w-full py-20 sm:pl-28 px-10 text-3xl flex flex-col gap-5">
-          <h2 className="text-3xl text-white flex gap-1 justify-center items-center sm:justify-start  text-center sm:text-start">
+        <section className="page-container py-16 text-3xl flex flex-col gap-5">
+          <h2 className="text-center text-3xl font-bold text-white sm:text-left">
             <span>Mi</span> Biblioteca
           </h2>
-          <div className="w-80 sm:w-[80%] h-[1px] bg-gradient-to-r from-orange-500 via-orange-500 to-orange-500/0"></div>
-          <div className="flex gap-5 flex-wrap">
+          <div className="divider-glow"></div>
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
             {user.booksLibrary.map((book, i) => (
-              <div key={i}>
-                <div className="w-full relative">
-                  <h2 className="text-xl py-3 font-semibold">
+              <div key={i} className="glass-card p-4">
+                <div className="relative">
+                  <h2 className="pb-3 text-xl font-semibold">
                     <span>{book.title[0]}</span>
                     {book.title.slice(1)}
                   </h2>
-                  <div className="flex">
+                  <div className="flex gap-4">
                     <img
                       src={book.imageUrl}
                       alt={book.title}
-                      className="w-32 h-52 object-cover"
+                      className="h-52 w-32 rounded-2xl object-cover"
                     />
-                    <p className="absolute w-10 h-10 flex justify-center items-center m-2 text-xl text-orange-300 z-[100] border-[3px] border-indigo-600 rounded-full bg-black/70">
+                    <p className="absolute m-2 flex h-10 w-10 items-center justify-center rounded-full border border-orange-300 bg-black/70 text-xl text-orange-200">
                       {book.rating}
                     </p>
-                    <div className="text-xl flex flex-col gap-2 rounded-l-none rounded-b-xl p-5">
+                    <div className="flex flex-col gap-2 rounded-b-xl rounded-l-none text-xl">
                       <button
-                        className="btn  flex items-center justify-center hover:text-orange-300 hover:bg-indigo-400 bg-orange-300/75 rounded-[4px] px-4 py-1"
+                        className="btn-primary"
                         onClick={() => {
                           localStorage.setItem("bookId", book._id);
                           navigate("/readBook");
                         }}
                       >
-                        <span className="text-indigo-400">L </span> eer
+                        Leer
                       </button>
                       <button
-                        className="btn  flex items-center justify-center hover:text-orange-300 hover:bg-indigo-400 bg-orange-300/75 rounded-[4px] px-4 py-1"
+                        className="btn-secondary"
                         onClick={() => {
                           localStorage.setItem("bookId", book._id);
                           navigate("/PageBook");
                         }}
                       >
-                        <span className="text-indigo-400">I</span>nfo
+                        Info
                       </button>
                       <button
                         type="button"
                         onClick={() => deleteBookLibrary(book._id)}
-                        className="btn  flex items-center justify-center hover:text-orange-300 hover:bg-indigo-400 bg-orange-300/75 rounded-[4px] px-4 py-1"
+                        className="btn-danger"
                       >
-                        <span className="font-black text-indigo-600">- </span> bliblioteca
+                        Quitar
                       </button>
                     </div>
                   </div>

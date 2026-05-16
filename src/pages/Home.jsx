@@ -74,20 +74,22 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="absolute w-screen h-screen z-[50] flex flex-col justify-center items-center overflow-hidden  bg-slate-950">
-      <img src={img} alt="img-back-home" className="absolute brightness-[0.3] object-cover" />
-      <div className="z-[50] w-screen -mt-72 ml-5 h-screen flex justify-center items-center text-white text-[0.4em] lg:text-[1em]">
-        <h1 id="box" className="text-xl mt-[400px] z-[10]">¿ Creamos &nbsp;</h1>
-        <h1 id="box1" className="text-xl mt-[-600px] text-white opacity-0">una &nbsp;</h1>
-        <h1 id="box2" className="text-2xl text-white ml-[-400px] mt-[-200px] opacity-0">historia &nbsp;</h1>
-        <h1 id="box3" className="text-xl text-white ml-[390px] mt-[-200px] opacity-0">? &nbsp;</h1>
+    <main className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-slate-950 px-4">
+      <img src={img} alt="img-back-home" className="absolute inset-0 h-full w-full object-cover opacity-30" />
+      <div className="absolute inset-0 bg-gradient-to-b from-slate-950/60 via-slate-950/70 to-slate-950"></div>
+      <div className="pointer-events-none absolute h-96 w-96 rounded-full bg-orange-500/20 blur-3xl"></div>
+      <div className="z-[50] flex h-screen w-full items-center justify-center text-[0.42em] font-black text-white sm:text-[0.62em] lg:text-[1em]">
+        <h1 id="box" className="mt-[400px] text-xl drop-shadow-2xl">¿ Creamos &nbsp;</h1>
+        <h1 id="box1" className="mt-[-600px] text-xl text-white opacity-0 drop-shadow-2xl">una &nbsp;</h1>
+        <h1 id="box2" className="ml-[-400px] mt-[-200px] text-2xl text-white opacity-0 drop-shadow-2xl">historia &nbsp;</h1>
+        <h1 id="box3" className="ml-[390px] mt-[-200px] text-xl text-white opacity-0 drop-shadow-2xl">? &nbsp;</h1>
       </div>
-      <div className="text-3xl text-white flex -ml-48 text-[1.3em] -mt-72 gap-5">
-        <h3 id="text" className="opacity-0">Crea</h3>
-        <h3 id="text1" className="opacity-0">Comparte</h3>
-        <h3 id="text2" className="opacity-0">Lee</h3>
-        <h3 id="text3" className="opacity-0">Opina</h3>
-        <h3 id="text4" className="opacity-0">Puntúa</h3>
+      <div className="z-[60] -mt-72 flex flex-wrap justify-center gap-3 text-[1.05em] font-semibold text-slate-100 sm:gap-5 sm:text-3xl">
+        <h3 id="text" className="rounded-full border border-white/10 bg-white/10 px-4 py-2 opacity-0 backdrop-blur">Crea</h3>
+        <h3 id="text1" className="rounded-full border border-white/10 bg-white/10 px-4 py-2 opacity-0 backdrop-blur">Comparte</h3>
+        <h3 id="text2" className="rounded-full border border-white/10 bg-white/10 px-4 py-2 opacity-0 backdrop-blur">Lee</h3>
+        <h3 id="text3" className="rounded-full border border-white/10 bg-white/10 px-4 py-2 opacity-0 backdrop-blur">Opina</h3>
+        <h3 id="text4" className="rounded-full border border-white/10 bg-white/10 px-4 py-2 opacity-0 backdrop-blur">Puntúa</h3>
       </div>
     </main>
   );

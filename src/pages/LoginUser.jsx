@@ -15,7 +15,7 @@ const BackgroundEffects = () => (
 
 // Componente para mostrar mensajes de error
 const ErrorMessage = ({ message }) => (
-  <div className="text-red-500 text-xl">
+  <div className="rounded-2xl border border-red-300/30 bg-red-500/10 px-4 py-2 text-sm text-red-200">
     <p>{message}</p>
   </div>
 );
@@ -65,17 +65,18 @@ export default function LoginUser() {
   }, [navigate, setError]);
 
   return (
-    <main className="overflow-hidden relative w-screen h-screen text-white flex justify-center items-center flex-col">
+    <main className="relative flex min-h-screen w-full flex-col items-center justify-start overflow-hidden px-4 pb-10 pt-28 text-white sm:justify-center sm:pt-32">
       <BackgroundEffects />
       <form
-        className="backdrop-blur-100 z-[50] flex flex-col justify-around items-center rounded-xl transition-all gap-5"
+        className="section-card z-[50] flex w-full max-w-md flex-col items-center gap-5"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <h2 className="text-2xl">
+        <h2 className="text-3xl font-bold">
           <span>A</span>cceder
         </h2>
+        <p className="text-center text-sm text-slate-300">Entra en tu cuenta para continuar escribiendo y leyendo tus historias.</p>
         <input
-          className="bg-black/0 border-2 border-indigo-400 p-2 rounded-3xl"
+          className="bg-slate-950/60"
           type="email"
           {...register("email", {
             required: "Correo electrónico es obligatorio",
@@ -91,7 +92,7 @@ export default function LoginUser() {
           <ErrorMessage message={errors.email.message} />
         )}
         <input
-          className="bg-black/0 border-2 border-indigo-400  p-2 rounded-3xl"
+          className="bg-slate-950/60"
           type="password"
           {...register("password", {
             required: "La contraseña es obligatoria",
@@ -107,7 +108,7 @@ export default function LoginUser() {
           <ErrorMessage message={errors.password.message} />
         )}
         <button
-          className="btn border-2 border-orange-400 shadow-sm shadow-black hover:shadow-none transition-all duration-300 rounded-full px-5 py-2"
+          className="btn-primary w-full"
           type="submit"
         >
           <span>E</span>nviar

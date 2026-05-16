@@ -89,8 +89,8 @@ export default function EditBook() {
   };
 
   return (
-    <main className="w-screen  flex justify-center text-white ">
-      <section className=" mt-14 ">
+    <main className="page-shell text-white">
+      <section className="page-container">
         {/* Background effects */}
         <div className="fixed w-72 h-10 left-1/2 transform -translate-x-1/2 rounded-full bg-blue-600/5 mt-20 blur-xl"></div>
         <div className="fixed w-72 h-10 top-40 left-10 rounded-full bg-red-600/10 blur-xl"></div>
@@ -98,7 +98,7 @@ export default function EditBook() {
 
         {/* Book title */}
         {book?.title && (
-          <h2 className="text-white text-3xl sm:text-4xl lg:text-5xl text-center mb-5 lg:mb-10">
+          <h2 className="page-title mb-8">
             <span>{book.title[0]}</span>
             {book.title.slice(1)}
           </h2>
@@ -106,32 +106,34 @@ export default function EditBook() {
 
         {/* Chapters list */}
         {book?.chapters?.length > 0 && (
-          <main className="p-5">
-            <div className="flex flex-wrap justify-between items-center text-white bg-gradient-to-r p-5 rounded-xl sm:rounded-3xl from-indigo-600/[0.5]">
+          <main className="section-card">
+            <div className="grid grid-cols-[64px_1fr] items-center gap-4 rounded-2xl border border-indigo-300/20 bg-indigo-500/15 p-4 text-white sm:grid-cols-[80px_1fr_200px_1fr]">
               <h3 className="w-1/3 sm:w-20 ">Nº</h3>
-              <h3 className="w-full sm:w-1/2 lg:w-96  text-center sm:text-left">
+              <h3 className="text-left">
                 Capítulo
               </h3>
+              <h3 className="hidden sm:block">Actualizado</h3>
+              <h3 className="hidden text-right sm:block">Acciones</h3>
             </div>
             {book.chapters.map((chapter, index) => (
               <div
                 key={index}
-                className="flex flex-wrap justify-between items-center text-white bg-gradient-to-r px-5 py-2 my-5 rounded-xl sm:rounded-3xl from-slate-600/[0.5]"
+                className="glass-card my-4 grid grid-cols-[64px_1fr] items-center gap-4 p-4 text-white sm:grid-cols-[80px_1fr_200px_1fr]"
               >
                 <h3 className="w-1/3 sm:w-20 ">{`#${index + 1}`}</h3>
-                <h3 className="w-full sm:w-1/2 lg:w-96 text-center sm:text-left ">
+                <h3 className="text-left font-semibold">
                   {chapter.title}
                 </h3>
-                <h3 className="hidden sm:block w-1/4 sm:w-52 ">
+                <h3 className="hidden text-sm text-slate-300 sm:block">
                   {new Date(book.updatedAt).toLocaleDateString("es-ES")}
                 </h3>
-                <div className="flex gap-2 sm:gap-5 w-full sm:w-auto justify-center mt-2 sm:mt-0">
+                <div className="col-span-2 flex flex-wrap justify-center gap-2 sm:col-span-1 sm:justify-end">
                   <button
                     onClick={() => {
                       localStorage.setItem("numChapter", index + 1);
                       navigate("/writingPage");
                     }}
-                    className="border-[0.5px] border-indigo-400 rounded-2xl py-1 px-2 "
+                    className="btn-secondary px-3 py-1.5"
                   >
                     Editar
                   </button>
@@ -139,21 +141,21 @@ export default function EditBook() {
                     onClick={() =>
                       setVerifyDelete({ verify: true, chapterIndex: index })
                     }
-                    className="border-[0.5px] border-indigo-400 rounded-2xl py-1 px-2 "
+                    className="btn-danger px-3 py-1.5"
                   >
                     Eliminar
                   </button>
                   <button
                     onClick={()=>handleChaptersPublished(index)}
-                    className="text-sm border-[0.5px] border-indigo-400 rounded-2xl py-1 px-2 "
+                    className="btn-secondary px-3 py-1.5 text-xs"
                   >Publicar hasta aquí</button>
                 </div>
                 {verifyDelete.verify && verifyDelete.chapterIndex === index && (
-                  <div className="absolute flex items-center gap-5 z-50 bg-slate-700 p-2 rounded-full">
+                  <div className="absolute z-50 flex items-center gap-3 rounded-full border border-white/10 bg-slate-950/95 p-3 shadow-2xl shadow-black/40">
                     <span className="text-red-400 ">Confirmar</span>
                     <button
                       onClick={() => handleDeleteChapter(index)}
-                      className="border-[0.5px] border-green-400 rounded-2xl py-1 px-2 "
+                      className="btn-danger px-3 py-1.5"
                     >
                       Confirmar
                     </button>
@@ -161,7 +163,7 @@ export default function EditBook() {
                       onClick={() =>
                         setVerifyDelete({ verify: false, chapterIndex: null })
                       }
-                      className="border-[0.5px] border-red-400 rounded-2xl py-1 px-2 "
+                      className="btn-secondary px-3 py-1.5"
                     >
                       Cancelar
                     </button>
@@ -173,51 +175,51 @@ export default function EditBook() {
         )}
 
         {/* Actions */}
-        <div className="flex flex-wrap gap-5 justify-start items-start sm:justify-start h-56 pl-5 ">
+        <div className="mt-8 flex flex-wrap items-start justify-center gap-3 sm:justify-start">
           <button
             onClick={handleAddChapter}
-            className="border-[0.5px] border-indigo-400 w-32 rounded-2xl py-1 px-2 "
+            className="btn-primary"
           >
             Añadir Capítulo
           </button>
           <button
             onClick={() => navigate("/pageBook")}
-            className="border-[0.5px] border-indigo-400 w-32 rounded-2xl py-1 px-2 "
+            className="btn-secondary"
           >
             Ver Libro
           </button>
           <button
             onClick={() => navigate("/readBook")}
-            className="border-[0.5px] border-indigo-400 w-32 rounded-2xl py-1 px-2 "
+            className="btn-secondary"
           >
             Leer Libro
           </button>
           <button
             onClick={() => setIsEditingDescription(true)}
-            className="border-[0.5px] border-indigo-400 w-40 rounded-2xl py-1 px-2 "
+            className="btn-secondary"
           >
             Editar Descripción
           </button>
 
           {/* Edit description */}
           {isEditingDescription && (
-            <form onSubmit={handleDescriptionUpdate}>
+            <form className="glass-card w-full max-w-md p-4" onSubmit={handleDescriptionUpdate}>
               <textarea
                 name="description"
                 maxLength={150}
                 minLength={25}
-                className="w-72 h-40 rounded-md bg-slate-800 text-white p-2"
+                className="h-40"
                 placeholder={book.description}
               />
-              <div className="flex gap-5 justify-center mt-5">
+              <div className="mt-5 flex justify-center gap-3">
                 <button
                   type="button"
                   onClick={() => setIsEditingDescription(false)}
-                  className="text-red-600 font-bold"
+                  className="btn-danger"
                 >
                   Cancelar
                 </button>
-                <button type="submit" className="text-green-600 font-bold">
+                <button type="submit" className="btn-primary">
                   Guardar
                 </button>
               </div>

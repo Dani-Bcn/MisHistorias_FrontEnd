@@ -75,12 +75,12 @@ export default function WritingComments() {
   };
 
   return (
-    <main className="w-screen flex justify-center">
-      <section className="w-full flex flex-col items-center mt-40 sm:mt-16 text-white text-4xl">
-        <h3 className="text-xl py-5">
+    <main className="page-shell flex justify-center">
+      <section className="section-card flex w-full max-w-3xl flex-col items-center text-center text-white">
+        <h3 className="py-5 text-xl">
           <span>E</span>scribe tu comentario sobre la obra de
         </h3>
-        <h2>
+        <h2 className="text-4xl font-bold">
           <span>{book?.title[0]}</span>
           {book?.title.slice(1)}
         </h2>
@@ -89,15 +89,15 @@ export default function WritingComments() {
           id="cooc"
           value={getText}
           onChange={(e) => setGetText(e.target.value)}
-          className="w-3/4 h-40 my-10 text-xl rounded-md "
+          className="my-8 h-44 text-xl"
         />
-        <button onClick={handleClick} className="text-sm">
+        <button onClick={handleClick} className="btn-primary">
           Guardar
         </button>
         {verifyText && (
           <h3
             onClick={() => setVerifyText(false)}
-            className="text-red-600 text-xl my-5 cursor-pointer"
+            className="my-5 cursor-pointer rounded-2xl border border-red-300/30 bg-red-500/10 px-4 py-2 text-xl text-red-200"
           >
             El comentario debe tener un mínimo de 5 carácteres
           </h3>

@@ -40,31 +40,32 @@ export default function EditUser() {
 
   // Renderizado condicional mientras se carga o si hay error
   if (loading) {
-    return <div className="text-center text-white">Cargando...</div>;
+    return <div className="page-shell text-center text-white">Cargando...</div>;
   }
 
   if (error) {
-    return <div className="text-center text-red-500">{error}</div>;
+    return <div className="page-shell text-center text-red-300">{error}</div>;
   }
 
   return (
-    <main className="w-screen h-96 mt-20 items-center flex">
+    <main className="page-shell flex items-center">
       {user ? (
-        <section className="w-full flex flex-col gap-5 justify-center items-center text-white text-3xl">
+        <section className="section-card mx-auto flex w-full max-w-2xl flex-col items-center justify-center gap-5 text-center text-white">
           <img
-            className="rounded-full border-8 border-indigo-400"
+            className="h-40 w-40 rounded-full border-4 border-orange-300 object-cover shadow-2xl shadow-orange-500/20"
             src={user.imageUserUrl}
             alt="image_user"
           />
-          <h2 className="text-5xl">
+          <h2 className="text-5xl font-bold">
             <span>{user.userName[0]}</span>{user.userName.slice(1)}
           </h2>
-          <h3 className="text-5xl">
+          <h3 className="text-4xl text-slate-200">
             <span>{user.lastName[0]}</span>{user.lastName.slice(1)}
           </h3>
-          <h4>Miembro desde</h4>
-          <p>{user.createdAt.slice(0, 10)}</p>
-          <h3>Historias</h3>
+          <div className="divider-glow"></div>
+          <h4 className="text-sm uppercase tracking-[0.25em] text-orange-200">Miembro desde</h4>
+          <p className="text-slate-300">{user.createdAt.slice(0, 10)}</p>
+          <h3 className="text-2xl font-semibold">Historias</h3>
         </section>
       ) : (
         <div>No se encontraron datos del usuario.</div>

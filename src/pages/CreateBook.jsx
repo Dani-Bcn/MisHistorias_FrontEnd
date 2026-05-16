@@ -66,18 +66,21 @@ export default function CreateBook() {
   });
 
   return (
-    <main className="w-screen h-screen text-white flex flex-col items-center">
-      <section className="relative flex flex-col items-center mt-28">
+    <main className="page-shell flex items-center justify-center">
+      <section className="page-container flex max-w-xl flex-col items-center">
         <div className="absolute bg-indigo-700/25 blur-3xl w-96 h-96"></div>
+        <div className="mb-8 text-center">
+          <h1 className="page-title">Nueva historia</h1>
+          <p className="page-subtitle">Añade la portada, el género y una sinopsis breve para empezar a construir tu libro.</p>
+        </div>
         <form
-          className="relative w-72 flex flex-col gap-5 text-xl"
+          className="section-card relative flex w-full flex-col gap-5 text-base"
           onSubmit={onSubmit}
         >
           <div className="flex flex-col">
-            <label className="p-2">Título</label>
+            <label className="field-label">Título</label>
             <input
               {...register("title", { required: "El título es obligatorio" })}
-              className="h-7 rounded-md"
             />
             {errors.title && (
               <p className="text-red-500">{errors.title.message}</p>
@@ -85,14 +88,14 @@ export default function CreateBook() {
           </div>
 
           <div className="flex flex-col">
-            <label className="p-2">Descripción</label>
+            <label className="field-label">Descripción</label>
             <textarea
               maxLength={220}
               placeholder="Máximo 220 caracteres"
               {...register("description", {
                 required: "La descripción es obligatoria",
               })}
-              className="h-7 rounded-md"
+              className="min-h-28"
             />
             {errors.description && (
               <p className="text-red-500">{errors.description.message}</p>
@@ -100,10 +103,10 @@ export default function CreateBook() {
           </div>
 
           <div className="flex flex-col justify-center">
-            <label className="p-2">Género</label>
+            <label className="field-label">Género</label>
             <select
               {...register("genre", { required: "Selecciona un género" })}
-              className="h-10 rounded-md text-[18px]"
+              className="text-base"
             >
               {arrayGenres.map((e, i) => (
                 <option key={i} value={e.genre}>
@@ -118,7 +121,7 @@ export default function CreateBook() {
 
           <input
             type="file"
-            className="my-10 h-10 bg-transparent"
+            className="bg-slate-950/60 text-sm text-indigo-200"
             onChange={handleImage}
             disabled={isLoading}
           />
@@ -126,8 +129,8 @@ export default function CreateBook() {
           {isLoading && <p className="text-yellow-500">Cargando imagen...</p>}
 
           {isImageUploaded && (
-            <button className="btn text-2xl" type="submit">
-              <span>C</span>rear libro
+            <button className="btn-primary w-full" type="submit">
+              Crear libro
             </button>
           )}
         </form>

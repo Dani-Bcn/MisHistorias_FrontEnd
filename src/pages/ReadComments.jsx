@@ -55,64 +55,64 @@ export default function ReadComments() {
   };
 
   return (
-    <main className="w-screen flex">
-      <section className="w-full flex flex-col flex-wrap items-center mt-20 text-white text-4xl">
+    <main className="page-shell flex">
+      <section className="page-container flex flex-col flex-wrap items-center text-white">
         {book && (
-          <h2 className="text-6xl mb-10">
+          <h2 className="page-title mb-4">
             <span>{book.title[0]}</span>
             {book.title.slice(1)}
           </h2>
         )}
-        <h3>
+        <h3 className="mb-8 text-3xl font-bold">
           <span>C</span>omentarios
         </h3>
-        <div className="w-full flex flex-wrap p-20 gap-20">
+        <div className="grid w-full grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
           {book &&
             book.comments.map((comment, index) => (
               <div
                 key={index}
-                className="w-96 p-5 flex flex-col gap-5 flex-wrap bg-slate-800/50 rounded-xl"
+                className="glass-card flex flex-col gap-5 p-5"
               >
-                <h3 className="text-2xl">{comment.user}</h3>
-                <p className="w-80 leading-5 text-[18px] flex flex-wrap overflow-auto bg-slate-600/50 rounded-md p-5">
+                <h3 className="text-2xl font-semibold text-indigo-100">{comment.user}</h3>
+                <p className="max-h-60 overflow-auto rounded-2xl bg-slate-950/50 p-5 text-[18px] leading-7 text-slate-200">
                   {comment.text}
                 </p>
-                <div className="flex text-xl gap-2">
+                <div className="flex flex-wrap items-center gap-2 text-sm text-slate-300">
                   <p>{comment.update.day}</p>
                   <p>/</p>
                   <p>{comment.update.month}</p>
                   <p>/</p>
                   <p>{comment.update.year}</p>
                   {user && book.idUserComments[index] === user._id && (
-                    <div className="flex w-96">
+                    <div className="flex">
                       <button
                         onClick={() => setActiveEdit(index)}
-                        className="btn text-xl mx-20 bg-slate-600 rounded-md px-5"
+                        className="btn-secondary ml-3"
                       >
-                        <span>E</span>ditar
+                        Editar
                       </button>
                       {activeEdit === index && (
-                        <div className="absolute w-[450px] h-60 bg-slate-800 mx-20 rounded-md -mt-44 flex flex-col items-center gap-5">
+                        <div className="fixed left-1/2 top-1/2 z-[120] flex w-[90vw] max-w-lg -translate-x-1/2 -translate-y-1/2 flex-col items-center gap-5 rounded-3xl border border-white/10 bg-slate-950/95 p-5 shadow-2xl shadow-black/50 backdrop-blur-xl">
                           <textarea
                             placeholder="Escribe aquí tu comentario."
-                            className="rounded-md h-40 w-[95%] mt-5"
+                            className="h-40"
                             type="text"
                             value={editText}
                             onChange={handleChange}
                           />
-                          <div className="flex w-[80%] justify-center gap-10">
+                          <div className="flex w-[80%] justify-center gap-4">
                             <div
-                              className="text-3xl font-black hover:text-red-600 transition-all cursor-pointer"
+                              className="btn-danger cursor-pointer"
                               onClick={() => setActiveEdit(null)}
                             >
-                              X
+                              Cancelar
                             </div>
                             {activeButton && (
                               <div
-                                className="text-3xl font-black hover:text-green-600 transition-all cursor-pointer"
+                                className="btn-primary cursor-pointer"
                                 onClick={() => handleSubmit(index)}
                               >
-                                V
+                                Guardar
                               </div>
                             )}
                           </div>

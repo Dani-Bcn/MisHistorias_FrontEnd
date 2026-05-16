@@ -58,39 +58,41 @@ export default function RegisterUser() {
   });
 
   return (
-    <main className="w-screen h-screen flex flex-col items-center justify-center overflow-hidden">
+    <main className="relative flex min-h-screen w-full flex-col items-center justify-start overflow-hidden px-4 pb-10 pt-28 sm:justify-center sm:pt-32">
       <img
-        className="absolute w-full h-full opacity-10 z-[-1]"
+        className="absolute inset-0 h-full w-full object-cover opacity-20"
         src="/images/sky-books.jpeg"
         alt="Background"
       />
+      <div className="absolute inset-0 bg-slate-950/75"></div>
       <form
-        className="flex flex-col lg:gap-5  items-center justify-center transition-all"
+        className="section-card relative z-10 flex w-full max-w-lg flex-col items-center justify-center"
         onSubmit={onSubmit}
       >
-        <h2 className="text-3xl lg:text-5xl text-white my-4"><span>R</span>egistro</h2>
+        <h2 className="text-4xl font-bold text-white lg:text-5xl"><span>R</span>egistro</h2>
+        <p className="page-subtitle mb-6">Crea tu perfil de autor y lector para publicar historias y guardar tu biblioteca.</p>
 
-        <div className="flex flex-col sm:gap-2 lg:gap-6 gap-6 text-white justify-center items-center">
+        <div className="flex w-full flex-col gap-4 text-white">
           <input
-            className="bg-transparent border-2 border-indigo-400 p-1 lg:p-3"
+            className="bg-slate-950/60"
             type="text"
             placeholder="Nombre"
             {...register("userName", { required: true })}
           />
           <input
-            className="bg-transparent border-2 border-indigo-400 p-1 lg:p-3"
+            className="bg-slate-950/60"
             type="text"
             placeholder="Apellido"
             {...register("lastName", { required: true })}
           />
           <input
-            className="bg-transparent border-2 border-indigo-400 p-1 lg:p-3"
+            className="bg-slate-950/60"
             type="email"
             placeholder="Correo electrónico"
             {...register("email", { required: true })}
           />
           <input
-            className="bg-transparent border-2 border-indigo-400 p-1 lg:p-3"
+            className="bg-slate-950/60"
             type="password"
             placeholder="Contraseña"
             {...register("password", { required: true })}
@@ -99,11 +101,11 @@ export default function RegisterUser() {
             type="file"
             id="file-upload-button"
             onChange={handleImage}
-            className="w-48 h-8 text-indigo-400 text-xs "
+            className="text-xs text-indigo-200"
           />
           {imageUrl && (
             <button
-              className="btn w-40 p-2 text-2xl m-auto mt-5"
+              className="btn-primary mt-2 w-full"
               type="submit"
             >
               Enviar
@@ -112,12 +114,12 @@ export default function RegisterUser() {
         </div>
 
         {errorInput && (
-          <div className="text-red-500 text-xl mt-10 flex flex-col items-center">
+          <div className="mt-6 flex flex-col items-center rounded-2xl border border-red-300/30 bg-red-500/10 p-4 text-center text-red-200">
             <p>{response?.message || "Ocurrió un error. Intenta nuevamente."}</p>
             <p>¿Ya tienes cuenta?</p>
             <button
               type="button"
-              className="btn w-40 h-10 text-2xl mt-5 text-black"
+              className="btn-secondary mt-5"
               onClick={() => navigate("/login")}
             >
               Acceder

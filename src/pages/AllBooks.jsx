@@ -50,15 +50,21 @@ export default function AllBooks() {
  
 
   return (
-    <main className=" w-screen my-20 text-slate-200 flex flex-col items-center">      
-      <div className="w-screen mb-5 flex flex-col items-center justify-center">
-        <h1 className="text-4xl my-5 font-bold text-center text-orange-400">
+    <main className="page-shell">      
+      <div className="page-container mb-10 flex flex-col items-center justify-center">
+        <p className="mb-3 rounded-full border border-orange-300/30 bg-orange-400/10 px-4 py-1 text-sm font-semibold uppercase tracking-[0.25em] text-orange-200">
+          Biblioteca
+        </p>
+        <h1 className="page-title">
           {selectedGenre}
         </h1>
-        <div className="w-[80%] h-[0.5px] bg-gradient-to-r from-indigo-500/0 via-purple-500 to-pink-500/0">
+        <p className="page-subtitle">
+          Descubre historias publicadas por la comunidad, guarda tus favoritas y empieza a leer desde cualquier género.
+        </p>
+        <div className="divider-glow mt-6 max-w-3xl">
         </div>
       </div>
-      <section className="w-[72%] xl:w-[90%]  flex flex-wrap gap-10 sm:gap-5">
+      <section className="page-container grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {loading ? (
           Array.from({ length: 6 }).map((_, index) => (
             <SkeletonLoader key={index} />
@@ -68,42 +74,40 @@ export default function AllBooks() {
           filteredBooks.map((book, index) => (
             <div
               key={index}
-              className="relative h-[400px] w-72 sm:w-56 xl:w-62 p-5 bg-black hover:shadow-none transition-all duration-500 shadow-black/50 rounded-lg shadow-lg flex flex-col"
+              className="book-card group"
             >
               <img
                 src={book.imageUrl}
                 alt="Book Cover"
-                className="opacity-40  -m-5 w-full h-96 sm:h-full absolute z-0 mask  object-cover rounded-lg"
+                className="book-cover-bg mask"
               />
-              <h3 className="w-full  h-96 text-xl  font-bold text-center text-orange-400 flex items-center justify-center">
-                {book.title}
-              </h3>
-              <div className="flex justify-end text-xl flex-col items-center">
-                <div className="flex gap-2 items-center justify-center">
-                  <span className="font-bold">{book.dataUser.userName}</span>
-                  <p className="text-center text-transform: capitalize">
-                    {book.dataUser.lastName}
-                  </p>
+              <div className="relative z-10 flex h-full w-full flex-col justify-between">
+                <div>
+                  <span className="rounded-full border border-orange-300/40 bg-orange-400/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-orange-200">
+                    {book.genre}
+                  </span>
+                  <h3 className="mt-8 text-2xl font-bold leading-tight text-white">
+                    {book.title}
+                  </h3>
+                  <div className="mt-3 flex flex-wrap items-center gap-2 text-sm text-slate-200">
+                    <span className="font-bold text-indigo-200">{book.dataUser.userName}</span>
+                    <p className="capitalize">{book.dataUser.lastName}</p>
+                  </div>
+                  <div className="mt-5 flex flex-col gap-2 text-sm text-slate-200">
+                    <p>
+                      <span>Capítulos :</span> {book.chapters.length}
+                    </p>
+                    <p className="line-clamp-5 leading-6">
+                      <span>Sipnosis :</span> {book.description}
+                    </p>
+                  </div>
                 </div>
-              </div>
-              <div className="mt-4 text-sm text-white gap-1 flex flex-col rounded-xl">
-                <p>
-                  <span>Género :</span> {book.genre}
-                </p>
-
-                <p>
-                  <span>Capítulos :</span> {book.chapters.length}
-                </p>
-                <p className="h-40 sm:text-[12px] ">
-                  <span>Sipnosis :</span> {book.description}
-                </p>
-              </div>
-              <div className=" flex items-center justify-between">
+                <div className="mt-6 flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <p className="w-10 h-10 flex justify-center items-center rounded-full border border-indigo-500">
+                  <p className="flex h-11 w-11 items-center justify-center rounded-full border border-orange-300/70 bg-slate-950/70 font-bold text-orange-200">
                     {book.rating}
                   </p>
-                  <div className="flex flex-col items-center justify-center mt-2">
+                  <div className="flex flex-col items-center justify-center">
                     <img
                       src="https://res.cloudinary.com/nneodani/image/upload/v1737915966/a1bbhiqtuctaocvffdhg.png"
                       alt="Rating Icon"
@@ -115,23 +119,24 @@ export default function AllBooks() {
                 <div className="flex gap-2">
                   <button
                     onClick={() => handleNavigate("/PageBook", book._id)}
-                    className="text-white px-2 border border-indigo-400 rounded-lg text-xs text-center"
+                    className="btn-secondary px-3 py-1.5 text-xs"
                   >
                     Info
                   </button>
                   <button
                     onClick={() => handleNavigate("/readBook", book._id)}
-                    className="text-white px-2 py-2 border border-indigo-400 rounded-lg text-xs text-center"
+                    className="btn-primary px-3 py-1.5 text-xs"
                   >
                     Leer
                   </button>
+                </div>
                 </div>
               </div>
             </div>
           ))
         ) : (
        
-            <p className="text-xl">
+            <p className="col-span-full rounded-3xl border border-white/10 bg-white/[0.06] p-10 text-center text-xl text-slate-200">
               No se encontraron libros del género {selectedGenre.toLowerCase()}.
             </p>
          
@@ -144,24 +149,24 @@ export default function AllBooks() {
 // Componente Skeleton Loader
 const SkeletonLoader = () => {
   return (
-    <div className="relative p-5 bg-gray-800 rounded-lg shadow-lg flex flex-col animate-pulse">
-      <div className="w-full h-96 bg-gray-700 rounded-lg"></div>
-      <h3 className="mt-4 h-6 w-3/4 bg-gray-700 rounded"></h3>
+    <div className="glass-card min-h-[420px] p-5 animate-pulse">
+      <div className="h-56 w-full rounded-2xl bg-slate-700/70"></div>
+      <h3 className="mt-4 h-6 w-3/4 rounded bg-slate-700/70"></h3>
       <div className="flex justify-center items-center gap-2 mt-2">
-        <div className="h-6 w-16 bg-gray-700 rounded"></div>
-        <div className="h-6 w-10 bg-gray-700 rounded"></div>
+        <div className="h-6 w-16 rounded bg-slate-700/70"></div>
+        <div className="h-6 w-10 rounded bg-slate-700/70"></div>
       </div>
-      <div className="w-14 h-14 rounded-full bg-gray-700 border-2 border-orange-400 mt-2"></div>
+      <div className="mt-4 h-14 w-14 rounded-full border-2 border-orange-400 bg-slate-700/70"></div>
       <div className="mt-4 space-y-2">
-        <div className="h-4 w-3/4 bg-gray-700 rounded"></div>
-        <div className="h-4 w-1/2 bg-gray-700 rounded"></div>
-        <div className="h-4 w-full bg-gray-700 rounded"></div>
+        <div className="h-4 w-3/4 rounded bg-slate-700/70"></div>
+        <div className="h-4 w-1/2 rounded bg-slate-700/70"></div>
+        <div className="h-4 w-full rounded bg-slate-700/70"></div>
       </div>
       <div className="mt-4 flex justify-between">
-        <div className="h-10 w-10 bg-gray-700 rounded-full"></div>
+        <div className="h-10 w-10 rounded-full bg-slate-700/70"></div>
         <div className="flex gap-2">
-          <div className="h-8 w-14 bg-gray-700 rounded"></div>
-          <div className="h-8 w-14 bg-gray-700 rounded"></div>
+          <div className="h-8 w-14 rounded bg-slate-700/70"></div>
+          <div className="h-8 w-14 rounded bg-slate-700/70"></div>
         </div>
       </div>
     </div>
