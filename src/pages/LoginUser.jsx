@@ -7,9 +7,9 @@ import { useForm } from "react-hook-form";
 // Componente para los efectos de fondo
 const BackgroundEffects = () => (
   <>
-    <div className="absolute w-[900px] h-[900px] rounded-full bg-blue-600/5 -mt-[400px] -ml-[1200px] blur-xl"></div>
-    <div className="absolute w-[900px] h-[900px] rounded-full bg-red-600/10 mt-[400px] ml-[1200px] blur-xl"></div>
-    <div className="absolute w-[350px] h-[450px] mt-20 bg-gradient-to-b from-green-600/15 blur-xl"></div>
+    <div className="absolute -left-40 -top-40 h-[420px] w-[420px] rounded-full bg-blue-600/10 blur-3xl sm:h-[900px] sm:w-[900px]"></div>
+    <div className="absolute -bottom-48 -right-40 h-[420px] w-[420px] rounded-full bg-red-600/10 blur-3xl sm:h-[900px] sm:w-[900px]"></div>
+    <div className="absolute h-[320px] w-[260px] bg-gradient-to-b from-green-600/15 blur-3xl sm:h-[450px] sm:w-[350px]"></div>
   </>
 );
 

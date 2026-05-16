@@ -64,7 +64,7 @@ export default function AllBooks() {
         <div className="divider-glow mt-6 max-w-3xl">
         </div>
       </div>
-      <section className="page-container grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <section className="page-container grid grid-cols-1 gap-6 min-[520px]:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {loading ? (
           Array.from({ length: 6 }).map((_, index) => (
             <SkeletonLoader key={index} />
@@ -102,7 +102,7 @@ export default function AllBooks() {
                     </p>
                   </div>
                 </div>
-                <div className="mt-6 flex items-center justify-between">
+                <div className="mt-6 flex flex-col gap-4 min-[360px]:flex-row min-[360px]:items-center min-[360px]:justify-between">
                 <div className="flex items-center gap-2">
                   <p className="flex h-11 w-11 items-center justify-center rounded-full border border-orange-300/70 bg-slate-950/70 font-bold text-orange-200">
                     {book.rating}
@@ -116,7 +116,7 @@ export default function AllBooks() {
                     <p>{book.numVotes}</p>
                   </div>
                 </div>
-                <div className="flex gap-2">
+                <div className="flex flex-wrap gap-2">
                   <button
                     onClick={() => handleNavigate("/PageBook", book._id)}
                     className="btn-secondary px-3 py-1.5 text-xs"

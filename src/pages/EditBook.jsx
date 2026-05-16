@@ -107,27 +107,27 @@ export default function EditBook() {
         {/* Chapters list */}
         {book?.chapters?.length > 0 && (
           <main className="section-card">
-            <div className="grid grid-cols-[64px_1fr] items-center gap-4 rounded-2xl border border-indigo-300/20 bg-indigo-500/15 p-4 text-white sm:grid-cols-[80px_1fr_200px_1fr]">
-              <h3 className="w-1/3 sm:w-20 ">Nº</h3>
+            <div className="grid grid-cols-[48px_1fr] items-center gap-3 rounded-2xl border border-indigo-300/20 bg-indigo-500/15 p-4 text-white lg:grid-cols-[80px_1fr_160px_220px]">
+              <h3>Nº</h3>
               <h3 className="text-left">
                 Capítulo
               </h3>
-              <h3 className="hidden sm:block">Actualizado</h3>
-              <h3 className="hidden text-right sm:block">Acciones</h3>
+              <h3 className="hidden lg:block">Actualizado</h3>
+              <h3 className="hidden text-right lg:block">Acciones</h3>
             </div>
             {book.chapters.map((chapter, index) => (
               <div
                 key={index}
-                className="glass-card my-4 grid grid-cols-[64px_1fr] items-center gap-4 p-4 text-white sm:grid-cols-[80px_1fr_200px_1fr]"
+                className="glass-card relative my-4 grid grid-cols-[48px_1fr] items-center gap-3 p-4 text-white lg:grid-cols-[80px_1fr_160px_220px]"
               >
-                <h3 className="w-1/3 sm:w-20 ">{`#${index + 1}`}</h3>
-                <h3 className="text-left font-semibold">
+                <h3>{`#${index + 1}`}</h3>
+                <h3 className="min-w-0 break-words text-left font-semibold">
                   {chapter.title}
                 </h3>
-                <h3 className="hidden text-sm text-slate-300 sm:block">
+                <h3 className="hidden text-sm text-slate-300 lg:block">
                   {new Date(book.updatedAt).toLocaleDateString("es-ES")}
                 </h3>
-                <div className="col-span-2 flex flex-wrap justify-center gap-2 sm:col-span-1 sm:justify-end">
+                <div className="col-span-2 flex flex-wrap justify-center gap-2 lg:col-span-1 lg:justify-end">
                   <button
                     onClick={() => {
                       localStorage.setItem("numChapter", index + 1);
@@ -151,7 +151,7 @@ export default function EditBook() {
                   >Publicar hasta aquí</button>
                 </div>
                 {verifyDelete.verify && verifyDelete.chapterIndex === index && (
-                  <div className="absolute z-50 flex items-center gap-3 rounded-full border border-white/10 bg-slate-950/95 p-3 shadow-2xl shadow-black/40">
+                  <div className="fixed left-1/2 top-1/2 z-[120] flex w-[90vw] max-w-sm -translate-x-1/2 -translate-y-1/2 flex-wrap items-center justify-center gap-3 rounded-3xl border border-white/10 bg-slate-950/95 p-4 shadow-2xl shadow-black/40">
                     <span className="text-red-400 ">Confirmar</span>
                     <button
                       onClick={() => handleDeleteChapter(index)}

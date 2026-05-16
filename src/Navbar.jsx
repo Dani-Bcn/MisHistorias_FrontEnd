@@ -79,7 +79,7 @@ export default function Navbar() {
   );
 
   return (
-    <main className="fixed left-1/2 top-4 z-[100] flex w-[calc(100%-1.5rem)] max-w-6xl -translate-x-1/2 items-center justify-between gap-2 rounded-full border border-white/10 bg-slate-950/70 px-3 py-2 text-sm text-slate-100 shadow-2xl shadow-black/30 backdrop-blur-xl sm:px-6 sm:text-base">
+    <main className="fixed left-1/2 top-3 z-[100] flex w-[calc(100%-1rem)] max-w-6xl -translate-x-1/2 flex-wrap items-center justify-center gap-2 rounded-3xl border border-white/10 bg-slate-950/80 px-2 py-2 text-xs text-slate-100 shadow-2xl shadow-black/30 backdrop-blur-xl sm:top-4 sm:w-[calc(100%-1.5rem)] sm:justify-between sm:rounded-full sm:px-6 sm:text-base">
       <button
         className="btn-secondary px-3 py-1.5"
         onClick={() => {
@@ -104,7 +104,7 @@ export default function Navbar() {
             setShowGenres(true);
           }}
           onMouseOut={() => setShowGenres(false)}
-          className="generos absolute mt-4 hidden min-w-44 flex-col gap-2 rounded-3xl border border-white/10 bg-slate-950/95 p-4 opacity-0 shadow-2xl shadow-black/40 backdrop-blur-xl"
+          className="generos absolute left-1/2 mt-3 hidden max-h-[70vh] min-w-44 -translate-x-1/2 flex-col gap-2 overflow-auto rounded-3xl border border-white/10 bg-slate-950/95 p-4 opacity-0 shadow-2xl shadow-black/40 backdrop-blur-xl sm:left-auto sm:translate-x-0"
           onClick={handleGenreClick}
         >
           {genres.map((genre) => (
@@ -126,7 +126,7 @@ export default function Navbar() {
             onClick={() => navigate("/profile")}
             src={user.imageUserUrl}
             alt="User"
-            className="h-11 w-11 cursor-pointer rounded-full border-2 border-orange-300 object-cover shadow-lg shadow-orange-500/20"
+            className="h-10 w-10 cursor-pointer rounded-full border-2 border-orange-300 object-cover shadow-lg shadow-orange-500/20 sm:h-11 sm:w-11"
           />
           <button className="hidden font-semibold text-slate-200 hover:text-orange-200 sm:block" onClick={() => setShowLogoutModal(true)}>
             Cerrar sesión
@@ -135,7 +135,7 @@ export default function Navbar() {
         </>
       ) : (
         <>
-          <button className="font-semibold text-slate-200 hover:text-orange-200" onClick={() => navigate("/login")}>Iniciar sesión</button>
+          <button className="rounded-full px-2 py-1 font-semibold text-slate-200 hover:bg-white/10 hover:text-orange-200 sm:px-3" onClick={() => navigate("/login")}>Iniciar sesión</button>
           <button className="btn-primary px-3 py-1.5" onClick={() => navigate("/register")}>Registrarse</button>
         </>
       )}

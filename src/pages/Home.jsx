@@ -12,58 +12,58 @@ export default function Home() {
       const tl = gsap.timeline();
 
       tl.to("#box", { 
-        y: -300, 
-        fontSize: "5em", 
+        y: 0, 
+        fontSize: "clamp(2.5rem, 10vw, 5rem)", 
         opacity: 1, 
         ease: "expo.in"
       })
       .to("#box1", { 
-        y: 200, 
-        fontSize: "5em", 
+        y: 0, 
+        fontSize: "clamp(2.5rem, 10vw, 5rem)", 
         opacity: 1, 
         delay: -0.5, 
         duration: 0.5
       })
       .to("#box2", { 
-        x: 400, 
-        fontSize: "5em", 
+        x: 0, 
+        fontSize: "clamp(2.5rem, 10vw, 5rem)", 
         opacity: 1, 
         ease: "expo.in", 
         duration: 0.5
       })
       .to("#box3", { 
-        fontSize: "5em", 
+        fontSize: "clamp(2.5rem, 10vw, 5rem)", 
         rotateY: 360, 
         opacity: 1, 
         duration: 1
       })
       .to("#text", { 
         opacity: 1, 
-        x: 100, 
+        x: 0, 
         ease: "expo.out", 
         delay: -0.2
       })
       .to("#text1", { 
         opacity: 1, 
-        x: 100, 
+        x: 0, 
         ease: "expo.out", 
         delay: -0.2
       })
       .to("#text2", { 
         opacity: 1, 
-        x: 100, 
+        x: 0, 
         ease: "expo.out", 
         delay: -0.2
       })
       .to("#text3", { 
         opacity: 1, 
-        x: 100, 
+        x: 0, 
         ease: "expo.out", 
         delay: -0.2
       })
       .to("#text4", { 
         opacity: 1, 
-        x: 100, 
+        x: 0, 
         ease: "expo.out", 
         delay: -0.2
       });
@@ -74,17 +74,17 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-slate-950 px-4">
+    <main className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden bg-slate-950 px-4 pb-12 pt-28 sm:pt-24">
       <img src={img} alt="img-back-home" className="absolute inset-0 h-full w-full object-cover opacity-30" />
       <div className="absolute inset-0 bg-gradient-to-b from-slate-950/60 via-slate-950/70 to-slate-950"></div>
       <div className="pointer-events-none absolute h-96 w-96 rounded-full bg-orange-500/20 blur-3xl"></div>
-      <div className="z-[50] flex h-screen w-full items-center justify-center text-[0.42em] font-black text-white sm:text-[0.62em] lg:text-[1em]">
-        <h1 id="box" className="mt-[400px] text-xl drop-shadow-2xl">¿ Creamos &nbsp;</h1>
-        <h1 id="box1" className="mt-[-600px] text-xl text-white opacity-0 drop-shadow-2xl">una &nbsp;</h1>
-        <h1 id="box2" className="ml-[-400px] mt-[-200px] text-2xl text-white opacity-0 drop-shadow-2xl">historia &nbsp;</h1>
-        <h1 id="box3" className="ml-[390px] mt-[-200px] text-xl text-white opacity-0 drop-shadow-2xl">? &nbsp;</h1>
+      <div className="z-[50] flex w-full flex-wrap items-center justify-center text-center font-black leading-none text-white">
+        <h1 id="box" className="text-5xl opacity-0 drop-shadow-2xl sm:text-6xl lg:text-7xl">¿ Creamos&nbsp;</h1>
+        <h1 id="box1" className="text-5xl text-white opacity-0 drop-shadow-2xl sm:text-6xl lg:text-7xl">una&nbsp;</h1>
+        <h1 id="box2" className="text-5xl text-white opacity-0 drop-shadow-2xl sm:text-6xl lg:text-7xl">historia&nbsp;</h1>
+        <h1 id="box3" className="text-5xl text-white opacity-0 drop-shadow-2xl sm:text-6xl lg:text-7xl">?&nbsp;</h1>
       </div>
-      <div className="z-[60] -mt-72 flex flex-wrap justify-center gap-3 text-[1.05em] font-semibold text-slate-100 sm:gap-5 sm:text-3xl">
+      <div className="z-[60] mt-10 flex max-w-3xl flex-wrap justify-center gap-3 text-base font-semibold text-slate-100 sm:gap-5 sm:text-3xl">
         <h3 id="text" className="rounded-full border border-white/10 bg-white/10 px-4 py-2 opacity-0 backdrop-blur">Crea</h3>
         <h3 id="text1" className="rounded-full border border-white/10 bg-white/10 px-4 py-2 opacity-0 backdrop-blur">Comparte</h3>
         <h3 id="text2" className="rounded-full border border-white/10 bg-white/10 px-4 py-2 opacity-0 backdrop-blur">Lee</h3>

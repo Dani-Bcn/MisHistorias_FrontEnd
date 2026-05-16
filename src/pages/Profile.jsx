@@ -83,7 +83,7 @@ export default function Profile() {
             <span>Mis</span> libros
           </h2>
           <div className="divider-glow"></div>
-          <section className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <section className="grid grid-cols-1 gap-6 min-[520px]:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {user.books.map((book, i) => (
               <div
                 key={i}
@@ -128,74 +128,74 @@ export default function Profile() {
                         </div>
                       </div>
                     </div>
-                    <div className="flex flex-wrap gap-2">
-                  <button
-                    onClick={() => {
-                      localStorage.setItem("bookId", book._id);
-                      navigate("/PageBook");
-                    }}
-                    className="btn-secondary px-3 py-1.5 text-xs"
-                  >
-                    Info
-                  </button>
-                  <button
-                    onClick={() => {
-                      localStorage.setItem("bookId", book._id);
-                      navigate("/ReadBook");
-                    }}
-                    className="btn-primary px-3 py-1.5 text-xs"
-                  >
-                    Leer
-                  </button>
-                  <button
-                    onClick={() => {
-                      localStorage.setItem("bookId", book._id);
-                      navigate("/editBook");
-                    }}
-                    className="btn-secondary px-3 py-1.5 text-xs"
-                  >
-                    Editar
-                  </button>
-                  {!book?.published ? (
-                    <button
-                      onClick={() => handlePublish(book._id, true)}
-                      className="btn-secondary px-3 py-1.5 text-xs"
-                    >
-                      Publicar
-                    </button>
-                  ) : (
-                    <button
-                      onClick={() => handlePublish(book._id, false)}
-                      className="btn-secondary px-3 py-1.5 text-xs"
-                    >
-                      - publicar
-                    </button>
-                  )}
-                  <button
-                    onClick={() => handleDeleteBook(book._id)}
-                    className="btn-danger px-3 py-1.5 text-xs"
-                  >
-                    Eliminar
-                  </button>
-                  {isDeleteBook === book._id ? (
-                    <div className="flex gap-2">
+                    <div className="grid grid-cols-2 gap-2">
                       <button
                         onClick={() => {
-                          deleteBooks(book._id);
-                          getUser();
+                          localStorage.setItem("bookId", book._id);
+                          navigate("/PageBook");
                         }}
-                        className="btn-danger px-3 py-1.5 text-xs"
-                      >
-                        Confirmar
-                      </button>
-                      <button
-                        onClick={() => setIsDeleteBook(false)}
                         className="btn-secondary px-3 py-1.5 text-xs"
                       >
-                        Cancelar
+                        Info
                       </button>
-                    </div>
-                  ) : null}
+                      <button
+                        onClick={() => {
+                          localStorage.setItem("bookId", book._id);
+                          navigate("/ReadBook");
+                        }}
+                        className="btn-primary px-3 py-1.5 text-xs"
+                      >
+                        Leer
+                      </button>
+                      <button
+                        onClick={() => {
+                          localStorage.setItem("bookId", book._id);
+                          navigate("/editBook");
+                        }}
+                        className="btn-secondary px-3 py-1.5 text-xs"
+                      >
+                        Editar
+                      </button>
+                      {!book?.published ? (
+                        <button
+                          onClick={() => handlePublish(book._id, true)}
+                          className="btn-secondary px-3 py-1.5 text-xs"
+                        >
+                          Publicar
+                        </button>
+                      ) : (
+                        <button
+                          onClick={() => handlePublish(book._id, false)}
+                          className="btn-secondary px-3 py-1.5 text-xs"
+                        >
+                          Ocultar
+                        </button>
+                      )}
+                      <button
+                        onClick={() => handleDeleteBook(book._id)}
+                        className="btn-danger px-3 py-1.5 text-xs"
+                      >
+                        Eliminar
+                      </button>
+                      {isDeleteBook === book._id ? (
+                        <>
+                          <button
+                            onClick={() => {
+                              deleteBooks(book._id);
+                              getUser();
+                            }}
+                            className="btn-danger px-3 py-1.5 text-xs"
+                          >
+                            Confirmar
+                          </button>
+                          <button
+                            onClick={() => setIsDeleteBook(false)}
+                            className="btn-secondary col-span-2 px-3 py-1.5 text-xs"
+                          >
+                            Cancelar
+                          </button>
+                        </>
+                      ) : null}
                     </div>
                   </div>
                 </div>
@@ -218,7 +218,7 @@ export default function Profile() {
                     <span>{book.title[0]}</span>
                     {book.title.slice(1)}
                   </h2>
-                  <div className="flex gap-4">
+                  <div className="flex flex-col gap-4 min-[420px]:flex-row">
                     <img
                       src={book.imageUrl}
                       alt={book.title}
@@ -227,7 +227,7 @@ export default function Profile() {
                     <p className="absolute m-2 flex h-10 w-10 items-center justify-center rounded-full border border-orange-300 bg-black/70 text-xl text-orange-200">
                       {book.rating}
                     </p>
-                    <div className="flex flex-col gap-2 rounded-b-xl rounded-l-none text-xl">
+                    <div className="flex w-full flex-col gap-2 rounded-b-xl rounded-l-none text-xl min-[420px]:w-auto">
                       <button
                         className="btn-primary"
                         onClick={() => {

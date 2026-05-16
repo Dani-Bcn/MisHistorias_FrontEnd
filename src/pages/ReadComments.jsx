@@ -87,7 +87,7 @@ export default function ReadComments() {
                     <div className="flex">
                       <button
                         onClick={() => setActiveEdit(index)}
-                        className="btn-secondary ml-3"
+                        className="btn-secondary ml-0 sm:ml-3"
                       >
                         Editar
                       </button>
@@ -100,7 +100,7 @@ export default function ReadComments() {
                             value={editText}
                             onChange={handleChange}
                           />
-                          <div className="flex w-[80%] justify-center gap-4">
+                          <div className="flex w-full flex-wrap justify-center gap-4">
                             <div
                               className="btn-danger cursor-pointer"
                               onClick={() => setActiveEdit(null)}

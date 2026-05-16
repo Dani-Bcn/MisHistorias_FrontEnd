@@ -153,15 +153,15 @@ export default function PageBook() {
             <span>{book.title[0]}</span>
             {book.title.slice(1)}
           </h2>
-          <div className="section-card mt-8 grid gap-8 lg:grid-cols-[280px_1fr]">
-            <div className="relative mx-auto w-full max-w-[280px]">
-              <div className="absolute left-4 top-4 z-10 flex h-20 w-20 items-center justify-center rounded-full border border-orange-300 bg-slate-950/80 shadow-xl shadow-black/40">
-                <p className="text-3xl font-black text-orange-200">{book.rating}</p>
+          <div className="section-card mt-8 grid gap-6 lg:grid-cols-[280px_1fr] lg:gap-8">
+            <div className="relative mx-auto w-full max-w-[240px] sm:max-w-[280px]">
+              <div className="absolute left-3 top-3 z-10 flex h-16 w-16 items-center justify-center rounded-full border border-orange-300 bg-slate-950/80 shadow-xl shadow-black/40 sm:left-4 sm:top-4 sm:h-20 sm:w-20">
+                <p className="text-2xl font-black text-orange-200 sm:text-3xl">{book.rating}</p>
               </div>
               <img
                 src={book.imageUrl}
                 alt={`Cover of ${book.title}`}
-                className="h-[430px] w-full rounded-3xl object-cover shadow-2xl shadow-black/40"
+                className="h-[340px] w-full rounded-3xl object-cover shadow-2xl shadow-black/40 sm:h-[430px]"
               />
             </div>
             <div className="flex flex-col gap-4">
@@ -207,7 +207,7 @@ export default function PageBook() {
                   <span>Modificado : </span>
                   {book.updatedAt.slice(0, 10).split("-").reverse().join("-")}
                 </p>
-                <div className="my-2 flex flex-wrap gap-3">
+                <div className="my-2 flex w-full flex-wrap gap-3">
                   <button
                     onClick={() => handleNavigate("/readBook", book._id)}
                     className="btn-primary"
@@ -234,7 +234,7 @@ export default function PageBook() {
                   Object.values(obj).includes(bookId)
                 ) ? (
                   <button
-                    className="btn-secondary"
+                    className="btn-secondary w-full sm:w-auto"
                     onClick={() => {
                       localStorage.setItem("token", user._id),
                         navigate("/writingComments");
@@ -255,11 +255,11 @@ export default function PageBook() {
             </div>
           </div>
           {book.comments.length > 0 ? (
-            <div className="mt-8 flex flex-col gap-4 px-2">
+            <div className="mt-8 flex flex-col gap-4">
               <h3 className="text-2xl font-bold">Comentarios</h3>
               <div className="divider-glow max-w-3xl"></div>
               {book.comments.map((comentarios, indice) => (
-                <div key={indice} className="glass-card flex flex-col gap-3 p-5">
+                <div key={indice} className="glass-card flex flex-col gap-3 p-4 sm:p-5">
                   <p className="font-semibold text-indigo-100">
                     {comentarios.user} {comentarios.lastName}
                   </p>
@@ -271,8 +271,8 @@ export default function PageBook() {
                         onChange={(e) => setEditedComment(e.target.value)}
                       />
                       <button 
-                      onClick={() => handleSave(indice)}
-                        className="btn-primary w-fit"
+                        onClick={() => handleSave(indice)}
+                        className="btn-primary w-full sm:w-fit"
                       >
                         Guardar
                       </button>
@@ -285,7 +285,7 @@ export default function PageBook() {
                     <p>{comentarios.update.year}</p>
                   </div>
                   {comentarios.userId === user?._id && (
-                    <div className="flex gap-3">
+                    <div className="flex flex-wrap gap-3">
                       <button
                         onClick={() => handleEdit(indice, comentarios.text)}
                           className="btn-secondary"
